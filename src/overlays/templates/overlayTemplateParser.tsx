@@ -20,7 +20,6 @@ const templateMap: { [key: string]: JSX.Element } = {
 const OverlayTemplateParser: React.FC<OverlayTemplateParserProps> = () => {
   const { templateId } = useDataContext();
 
-  // return <h1>pop</h1>;
   return templateMap[templateId];
 };
 

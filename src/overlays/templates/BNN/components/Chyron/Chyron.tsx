@@ -57,8 +57,8 @@ const Chyron: React.FC = () => {
     <Styled.ChyronWrapper>
       <Styled.Chyron>
         <NetworkTab />
-        <LogoBox image={topics?.[currentTopic]?.img} />
-        <InfoBox topic={topics?.[currentTopic]} />
+        <LogoBox />
+        <InfoBox />
         <NewsFeed />
       </Styled.Chyron>
     </Styled.ChyronWrapper>

@@ -1,15 +1,18 @@
 import * as React from "react";
+import { useDataContext } from "../../../../../../context";
+import { useSimpleTopic } from "../../../../../../hooks";
 import * as Styled from "./LogoBox.styles";
 
-interface IntLogoBox {
-  image?: string;
-}
+interface IntLogoBox {}
 
-const LogoBox: React.FC<IntLogoBox> = ({ image }) => {
+const LogoBox: React.FC<IntLogoBox> = () => {
+  const { topics } = useDataContext();
+  const topic = useSimpleTopic(topics);
+
   return (
     <Styled.LogoBox>
-      {image ? (
-        <img src={`${process.env.REACT_APP_CLOUD_IMAGES_USER}${image}`} />
+      {topic?.image ? (
+        <img src={`${process.env.REACT_APP_CLOUD_IMAGES_USER}${topic.image}`} />
       ) : (
         <span>GMT</span>
       )}
