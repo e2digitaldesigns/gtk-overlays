@@ -1,0 +1,28 @@
+{
+  "DEFAULT_SCROLLER_SPEED": {
+    "CLOCK": 15000,
+    "TOPIC_DESCRIPTION": 15000,
+    "NEWS": 20000,
+    "SOCIALS": 30000,
+    "SPONSORS": 44000,
+    "LEADERBOARD": 25000
+  },
+  "TIME_ZONES": [
+    {
+      "zone": "EST",
+      "hours": 0
+    },
+    {
+      "zone": "CT",
+      "hours": 1
+    },
+    {
+      "zone": "MT",
+      "hours": 2
+    },
+    {
+      "zone": "PT",
+      "hours": 3
+    }
+  ]
+}

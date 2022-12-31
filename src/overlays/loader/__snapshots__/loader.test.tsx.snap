@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loader should match snapshots 1`] = `
+<div>
+  <div
+    class="sc-bdvvtL dfAnzF"
+  >
+    <div
+      class="sc-gsDKAQ edMtDB"
+    >
+      <div />
+      <div />
+      <div />
+      <div />
+      <div />
+      <div />
+      <div />
+      <div />
+    </div>
+  </div>
+</div>
+`;
