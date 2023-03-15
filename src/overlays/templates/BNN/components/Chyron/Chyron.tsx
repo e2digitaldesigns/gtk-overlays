@@ -1,6 +1,5 @@
 import React from "react";
 import { useParams } from "../../../../../hooks";
-import { Sections } from "../../../../../hooks/useParamsHook/types";
 import * as Styled from "./Chyron.styles";
 import InfoBox from "./InfoBox/InfoBox";
 import LogoBox from "./LogoBox/LogoBox";
@@ -9,7 +8,7 @@ import NewsFeed from "./NewsFeed/NewsFeed";
 
 import socketServices from "../../../../../services/socketServices";
 import { useDataContext } from "../../../../../context";
-import { TopicActions } from "../../../../../types";
+import { SectionsBNN, TopicActions } from "../../../../../types";
 
 const Chyron: React.FC = () => {
   const { showSection } = useParams();
@@ -51,7 +50,7 @@ const Chyron: React.FC = () => {
     };
   }, [nextTopic, prevTopic]);
 
-  if (!showSection(Sections.BnnChyron)) return null;
+  if (!showSection(SectionsBNN.Chyron)) return null;
 
   return (
     <Styled.ChyronWrapper>

@@ -13,7 +13,7 @@ export const ContentBoxTemplate = styled.div`
   grid-template-rows: 35px 1fr;
 
   overflow: hidden;
-  background-color: #111;
+  /* background-color: #111; */
 
   filter: drop-shadow(0 0 0.75rem rgba(0, 0, 0, 0.5));
 
@@ -44,16 +44,22 @@ export const ContentBoxTemplate = styled.div`
   }
 `;
 
-export const ContentBox_1 = styled(ContentBoxTemplate)`
-  top: 30px;
-`;
+interface IntContentBox {
+  bgImg?: string;
+  position: number;
+}
 
-export const ContentBox_2 = styled(ContentBoxTemplate)`
-  top: 240px;
-`;
+const positions: string[] = ["30px", "240px", "450px"];
 
-export const ContentBox_3 = styled(ContentBoxTemplate)`
-  top: 450px;
+export const ContentBox = styled(ContentBoxTemplate)<IntContentBox>`
+  top: ${props => positions[props.position]};
+  background-image: url(${props => props.bgImg});
+  background-size: cover;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(220, 20, 20, 0),
+    rgba(20, 20, 20, 0.75)
+  );
 `;
 
 export const TopicName = styled.div`
@@ -71,4 +77,24 @@ export const TopicName = styled.div`
 
   overflow: hidden;
   text-overflow: ellipsis;
+`;
+
+export const TopicText = styled.div`
+  height: 60px;
+  width: 300px;
+  display: flex;
+  align-items: flex-end;
+
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 0 8px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  position: absolute;
+  bottom: 2px;
+  right: 0;
 `;

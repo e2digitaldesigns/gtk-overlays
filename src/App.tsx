@@ -13,7 +13,8 @@ enum Suffix {
 
 enum RequestType {
   Episode = "eid",
-  Template = "tid"
+  Template = "tid",
+  UserId = "uid"
 }
 
 const App: React.FC = () => {
@@ -32,14 +33,17 @@ const App: React.FC = () => {
         const queryParams = new URLSearchParams(window.location.search);
         const eid = queryParams.get(RequestType.Episode);
         const tid = queryParams.get(RequestType.Template);
+        const uid = queryParams.get(RequestType.UserId);
 
         if (eid) {
-          suffix = `${Suffix.Episode}/${tid}/${eid}`;
+          suffix = `${Suffix.Episode}/${uid}/${eid}`;
           urlString = `${process.env.REACT_APP_REST_SERVICE}${suffix}`;
         } else {
-          suffix = `${Suffix.Template}/${tid}`;
+          suffix = `${Suffix.Template}/${uid}/${tid}`;
           urlString = `${process.env.REACT_APP_REST_SERVICE}${suffix}`;
         }
+
+        // console.log({ urlString });
 
         const { data } = await axios.get(urlString);
         if (data && stillHere) {
@@ -78,3 +82,5 @@ const App: React.FC = () => {
 };
 
 export default App;
+
+// http://localhost:3001/?tid=615de8a8b587713cb80b01af&uid=640bef8f88f7663004024d65&demo=1

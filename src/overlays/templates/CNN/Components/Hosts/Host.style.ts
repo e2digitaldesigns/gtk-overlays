@@ -19,24 +19,24 @@ export const HostBoxTemplate = styled.div`
   background: green;
 `;
 
-export const HostBox_2_1 = styled(HostBoxTemplate)`
+export const HostBox21 = styled(HostBoxTemplate)`
   left: 80px;
 `;
 
-export const HostBox_2_2 = styled(HostBoxTemplate)`
+export const HostBox22 = styled(HostBoxTemplate)`
   left: 854px;
 `;
 
-export const HostBox_3_1 = styled(HostBoxTemplate)`
+export const HostBox31 = styled(HostBoxTemplate)`
   left: 80px;
   width: 520px;
 `;
 
-export const HostBox_3_2 = styled(HostBox_3_1)`
+export const HostBox32 = styled(HostBox31)`
   left: 596px;
 `;
 
-export const HostBox_3_3 = styled(HostBox_3_1)`
+export const HostBox33 = styled(HostBox31)`
   left: 1112px;
 `;
 
@@ -56,23 +56,23 @@ export const Tabs = styled.div`
   font-weight: bold;
 `;
 
-export const TabHostName_2_1 = styled(Tabs)`
+export const TabHostName21 = styled(Tabs)`
   left: 100px;
 `;
 
-export const TabHostName_2_2 = styled(Tabs)`
+export const TabHostName22 = styled(Tabs)`
   left: 874px;
 `;
 
-export const TabHostName_3_1 = styled(Tabs)`
+export const TabHostName31 = styled(Tabs)`
   left: 100px;
 `;
 
-export const TabHostName_3_2 = styled(Tabs)`
+export const TabHostName32 = styled(Tabs)`
   left: 616px;
 `;
 
-export const TabHostName_3_3 = styled(Tabs)`
+export const TabHostName33 = styled(Tabs)`
   left: 1132px;
 `;
 

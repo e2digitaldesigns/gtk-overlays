@@ -1,15 +1,6 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { TopicStates } from "./types";
 
-const images = {
-  active:
-    "https://mg-show-assets.s3.us-east-1.amazonaws.com/images/template-images/615cac89b26a27ffe0b100b8/topic-active.png",
-  clicked:
-    "https://mg-show-assets.s3.us-east-1.amazonaws.com/images/template-images/615cac89b26a27ffe0b100b8/topic-clicked.png",
-  normal:
-    "https://mg-show-assets.s3.us-east-1.amazonaws.com/images/template-images/615cac89b26a27ffe0b100b8/topic-normal.png",
-  time: "https://mg-show-assets.s3.us-east-1.amazonaws.com/images/template-images/615cac89b26a27ffe0b100b8/topic-time.png"
-};
 const cssParser = (object1: object) => {
   let str = "";
 
@@ -98,11 +89,16 @@ const Li = styled.li`
   width: 100%;
   display: flex;
   align-items: center;
-  padding-left: 8px;
-  padding-right: 8px;
+  padding-left: 12px;
+  padding-right: 12px;
 
   position: relative;
+
+  white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.8);
 `;
 
 interface IntClockDiv {
@@ -155,7 +151,7 @@ const stateParser = (state: TopicStates, bgColors: IntBgColors | undefined) => {
 
   if (state === TopicStates.Clicked) {
     if (bgColors?.clicked) str += `background-color: ${bgColors.clicked};`;
-    str += `opacity: .5;`;
+    str += `opacity: .9;`;
   }
 
   return str;

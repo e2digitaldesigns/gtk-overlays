@@ -6,7 +6,7 @@ import * as Styled from "./InfoBox.styles";
 interface IntInfoBox {}
 const InfoBox: React.FC<IntInfoBox> = () => {
   const { topics } = useDataContext();
-  const topic = useSimpleTopic(topics);
+  const { topic } = useSimpleTopic(topics);
 
   return (
     <>

@@ -2,9 +2,11 @@ import React from "react";
 import TimeClock from "./TimeClock/TimeClock";
 import TimerCount from "./TimeCount/TimeCount";
 import * as Styled from "./Topic.styles";
-import { IntTopic, IntCss, TopicStates } from "./types";
+import { IntTopic, TopicStates } from "./types";
 import { imageParser } from "./Utils/imageParser";
 import { setTopicLiState } from "./Utils/setTopicLiState";
+import socketServices from "../../services/socketServices";
+import { TopicActions } from "../../types";
 
 interface IntTopicsProps {
   data: IntTopic[];
@@ -67,7 +69,9 @@ const GTK_TopicComponent: React.FC<IntTopicsProps> = ({
   imageShow = true,
   imageHeight,
   imageDefault,
-  imageBaseUrl
+  imageBaseUrl = process.env.REACT_APP_CLOUD_IMAGES_USER,
+
+  setTopicDescription
 }) => {
   const containerRef = React.useRef<any>();
   const listItemRef = React.useRef(new Array());
@@ -81,8 +85,41 @@ const GTK_TopicComponent: React.FC<IntTopicsProps> = ({
     React.useState<number>(transitionSpeed);
 
   const [currentTopicState, setCurrentTopicState] = React.useState<IntTopic>();
-
   const [counter, setCounter] = React.useState<number>(0);
+
+  React.useEffect(() => {
+    let stillHere = true;
+
+    socketServices.subscribeOverlayActions(
+      (err: unknown, data: { action: string }) => {
+        switch (data.action as TopicActions) {
+          case TopicActions.TopicPrevious:
+            stillHere && handlePrevTopic();
+            break;
+
+          case TopicActions.TopicNext:
+            stillHere && handleNextTopic();
+            break;
+
+          case TopicActions.TimerResume:
+            stillHere && setIsTimerPaused(false);
+            break;
+
+          case TopicActions.TimerPause:
+            stillHere && setIsTimerPaused(true);
+            break;
+
+          default:
+            break;
+        }
+      }
+    );
+
+    return () => {
+      stillHere = false;
+      socketServices.unSubscribeOverlayActions();
+    };
+  }, [activeTopicIndex, activeChildIndex]);
 
   const sizingParser = (topicCount: number) => {
     const theHeight = height
@@ -198,22 +235,35 @@ const GTK_TopicComponent: React.FC<IntTopicsProps> = ({
       data[activeTopicIndex]?.isParent ? data[activeTopicIndex]._id : ""
     );
 
-    setCurrentTopicState(data[activeTopicIndex + activeChildIndex + 1]);
+    const currentTopic = data[activeTopicIndex + activeChildIndex + 1];
+
+    setCurrentTopicState(currentTopic);
+
+    if (setTopicDescription) {
+      setTopicDescription(currentTopic?.desc || "");
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTopicIndex, activeChildIndex]);
 
   React.useEffect(() => {
+    if (data.length <= viewableTopicCount) return;
+
     const maxUlTop =
       (data.length - viewableTopicCount) * adjustedSizes.topicLiHeight;
     const newUlTopAbs = counter * adjustedSizes.topicLiHeight;
     const newUlTop = 0 - newUlTopAbs;
+
     const diff = ulTop - newUlTop;
     const speed = Math.abs(diff / adjustedSizes.topicLiHeight) || 1;
 
     setLiTransitionSpeed(speed * transitionSpeed);
 
-    if (maxUlTop >= newUlTopAbs) setUlTop(newUlTop);
+    if (maxUlTop >= newUlTopAbs) {
+      setUlTop(newUlTop);
+    } else {
+      setUlTop(-maxUlTop);
+    }
   }, [counter]);
 
   return (
@@ -301,9 +351,13 @@ const GTK_TopicComponent: React.FC<IntTopicsProps> = ({
                     clicked: bgColorClicked
                   }}
                 >
-                  <div>
-                    {index} - {topic.name} - {listItemState}
-                  </div>
+                  {isDemoMode ? (
+                    <div>
+                      {index} - {topic.name}- {listItemState}
+                    </div>
+                  ) : (
+                    <div>{topic.name}</div>
+                  )}
                 </Styled.TopicListItem>
               );
             })}

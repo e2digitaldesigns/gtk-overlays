@@ -26,6 +26,8 @@ interface IntScrollerProps {
   textStyle?: IntStyle;
   timer?: number;
   sx?: IntCss;
+  callBack?: (item: IntScrollerListItem) => void;
+  showTitle?: boolean;
 }
 
 enum TickerStatus {
@@ -43,11 +45,14 @@ const GTK_Scroller: React.FC<IntScrollerProps> = ({
   titleStyle,
   textStyle,
   timer = 3,
-  sx
+  sx,
+  showTitle = true,
+  callBack
 }) => {
   const [activeIndex, setActiveIndex] = React.useState<number>(-1);
   const [oldIndex, setOldIndex] = React.useState<number>(-1);
   const theTimer = (timer && timer > 2 ? timer : 3) * 1000;
+
   const length = data
     ? data.length
     : children
@@ -65,6 +70,12 @@ const GTK_Scroller: React.FC<IntScrollerProps> = ({
       setOldIndex(activeIndex);
       setActiveIndex(newIndex);
     }, theTimer);
+  }, [activeIndex]);
+
+  React.useEffect(() => {
+    if (callBack && data) {
+      callBack(data[activeIndex]);
+    }
   }, [activeIndex]);
 
   const setClassName = (index: number) => {
@@ -99,7 +110,7 @@ const GTK_Scroller: React.FC<IntScrollerProps> = ({
                 fontSize={fontSize}
               >
                 <>
-                  {m.title && (
+                  {m.title && showTitle && (
                     <Styled.ListItemDivTitle
                       titleStyle={titleStyle}
                       sx={sx?.title}

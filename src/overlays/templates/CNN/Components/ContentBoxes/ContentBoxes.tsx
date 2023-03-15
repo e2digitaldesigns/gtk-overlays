@@ -1,34 +1,46 @@
 import React from "react";
+import { useDataContext } from "../../../../../context";
 import { useParams } from "../../../../../hooks";
-import { SectionsCNN } from "../../../../../hooks/useParamsHook/types";
+import { SectionsCNN } from "../../../../../types";
 import * as Styled from "./ContentBoxes.style";
 
 const ContentBoxes: React.FC = () => {
   const { showSection } = useParams();
+  const { contentBoxes } = useDataContext();
 
-  const showContentBox1 = showSection(SectionsCNN.ContentBox1);
-  const showContentBox2 = showSection(SectionsCNN.ContentBox2);
-  const showContentBox3 = showSection(SectionsCNN.ContentBox3);
+  console.log(11, contentBoxes);
+
+  const showContentBoxes = [
+    showSection(SectionsCNN.ContentBox1),
+    showSection(SectionsCNN.ContentBox2),
+    showSection(SectionsCNN.ContentBox3)
+  ];
+
+  const imgParser = (img: string | undefined) => {
+    if (!img) return undefined;
+
+    return process.env.REACT_APP_CLOUD_IMAGES_USER + img;
+  };
 
   return (
     <>
-      {showContentBox1 && (
-        <Styled.ContentBox_1>
-          <Styled.TopicName>Tuesday 4pm EST</Styled.TopicName>
-        </Styled.ContentBox_1>
-      )}
+      {showContentBoxes.map((isVisible: boolean, index: number) => (
+        <>
+          {isVisible && (
+            <Styled.ContentBox
+              key={index}
+              position={index}
+              bgImg={imgParser(contentBoxes?.[index]?.img)}
+            >
+              <Styled.TopicName>
+                {contentBoxes?.[index]?.title}
+              </Styled.TopicName>
 
-      {showContentBox2 && (
-        <Styled.ContentBox_2>
-          <Styled.TopicName>Tuesday 4pm EST</Styled.TopicName>
-        </Styled.ContentBox_2>
-      )}
-
-      {showContentBox3 && (
-        <Styled.ContentBox_3>
-          <Styled.TopicName>Tuesday 4pm EST</Styled.TopicName>
-        </Styled.ContentBox_3>
-      )}
+              <Styled.TopicText>{contentBoxes?.[index]?.text}</Styled.TopicText>
+            </Styled.ContentBox>
+          )}
+        </>
+      ))}
     </>
   );
 };

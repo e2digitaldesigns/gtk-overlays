@@ -7,13 +7,13 @@ import * as Styled from "./Chyron.style";
 import { socialToScrollerUtil } from "../../../../../globalComponents/Utils/socailToScroller";
 
 import CONFIG from "../../config.json";
-import { SectionsCNN } from "../../../../../hooks/useParamsHook/types";
+import { SectionsCNN } from "../../../../../types";
 
 const Chyron: React.FC = () => {
   const { showSection } = useParams();
   const { socialNetworks, ticker, topics } = useDataContext();
   const socialNetworksData = socialToScrollerUtil(socialNetworks, true);
-  const topic = useSimpleTopic(topics);
+  const { topic } = useSimpleTopic(topics);
 
   if (!showSection(SectionsCNN.Chyron)) return null;
 
@@ -42,7 +42,6 @@ const Chyron: React.FC = () => {
         <Scroller
           data={socialNetworksData}
           sx={{
-            title: { padding: "0 .5rem 0 0" },
             text: { "font-weight": "bold" }
           }}
           timer={CONFIG.scrollTimers.socialNetworks}

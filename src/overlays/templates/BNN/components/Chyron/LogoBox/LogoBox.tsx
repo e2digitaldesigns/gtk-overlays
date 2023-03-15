@@ -7,12 +7,12 @@ interface IntLogoBox {}
 
 const LogoBox: React.FC<IntLogoBox> = () => {
   const { topics } = useDataContext();
-  const topic = useSimpleTopic(topics);
+  const { topic } = useSimpleTopic(topics);
 
   return (
     <Styled.LogoBox>
-      {topic?.image ? (
-        <img src={`${process.env.REACT_APP_CLOUD_IMAGES_USER}${topic.image}`} />
+      {topic?.img ? (
+        <img src={`${process.env.REACT_APP_CLOUD_IMAGES_USER}${topic.img}`} />
       ) : (
         <span>GMT</span>
       )}

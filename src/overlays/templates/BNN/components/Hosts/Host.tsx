@@ -1,23 +1,23 @@
 import * as React from "react";
 import * as Styled from "./Host.style";
 import { useParams } from "../../../../../hooks";
-import { Sections } from "../../../../../hooks/useParamsHook/types";
 
 import { useDataContext } from "./../../../../../context";
+import { SectionsBNN } from "../../../../../types";
 
 const Host: React.FC = () => {
   const { showSection } = useParams();
   const { hosts: data } = useDataContext();
 
-  const showHost_2_1 = showSection(Sections.BnnHost_2_1);
-  const showHost_2_2 = showSection(Sections.BnnHost_2_2);
+  const showHost_2_1 = showSection(SectionsBNN.Host_2_1);
+  const showHost_2_2 = showSection(SectionsBNN.Host_2_2);
 
-  const showVideo_2_host = showSection(Sections.BnnVideo_2_host);
-  const showVideo_2_video = showSection(Sections.BnnVideo_2_video);
+  const showVideo_2_host = showSection(SectionsBNN.Video_2_host);
+  const showVideo_2_video = showSection(SectionsBNN.Video_2_video);
 
-  const showVideo_3_host_1 = showSection(Sections.BnnVideo_3_host_1);
-  const showVideo_3_host_2 = showSection(Sections.BnnVideo_3_host_2);
-  const showVideo_3_video = showSection(Sections.BnnVideo_3_video);
+  const showVideo_3_host_1 = showSection(SectionsBNN.Video_3_host_1);
+  const showVideo_3_host_2 = showSection(SectionsBNN.Video_3_host_2);
+  const showVideo_3_video = showSection(SectionsBNN.Video_3_video);
 
   return (
     <>

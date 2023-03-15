@@ -2,19 +2,16 @@ import React from "react";
 import { useDataContext } from "../../context";
 import OverlayBNN from "./BNN/BNN";
 import OverlayCNN from "./CNN/CNN";
-// import OverlayPTI from "./PTI/PTI";
+import OverlayPTI from "./PTI/PTI";
+import OverlayWM from "./WM/WM";
 
 interface OverlayTemplateParserProps {}
 
-// const templateMap: { [key: string]: JSX.Element } = {
-//   bnn: <OverlayBNN />,
-//   "615de8a8b587713cb80b01af": <OverlayCNN />,
-//   "615cac89b26a27ffe0b100b8": <OverlayPTI />
-// };
-
 const templateMap: { [key: string]: JSX.Element } = {
-  bnn: <OverlayBNN />,
-  "615de8a8b587713cb80b01af": <OverlayCNN />
+  "640cb609fe1bde3d9ae9ded5": <OverlayBNN />,
+  "640cb609fe1bde3d9ae9ded4": <OverlayCNN />,
+  "640cb609fe1bde3d9ae9ded3": <OverlayPTI />,
+  "640cb609fe1bde3d9ae9ded6": <OverlayWM />
 };
 
 const OverlayTemplateParser: React.FC<OverlayTemplateParserProps> = () => {

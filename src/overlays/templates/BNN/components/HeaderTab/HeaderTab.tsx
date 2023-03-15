@@ -2,14 +2,14 @@ import * as React from "react";
 import { useDataContext } from "../../../../../context";
 import { Scroller, socialToScroller } from "../../../../../globalComponents";
 import { useParams } from "../../../../../hooks";
-import { Sections } from "../../../../../hooks/useParamsHook/types";
 import * as Styled from "./HeaderTab.style";
 import CONFIG from "../../config.json";
+import { SectionsBNN } from "../../../../../types";
 
 const HeaderTab: React.FC = () => {
   const { showSection } = useParams();
   const { socialNetworks } = useDataContext();
-  if (!showSection(Sections.BnnHeader)) return null;
+  if (!showSection(SectionsBNN.Header)) return null;
 
   const data = socialToScroller(socialNetworks, true);
 

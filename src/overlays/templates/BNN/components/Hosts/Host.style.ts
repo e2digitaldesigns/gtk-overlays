@@ -159,7 +159,7 @@ export const NameTagVideo = styled(NameTag1)`
 `;
 
 const videoBoxSmallerWidth = "1080px";
-const videoBoxSmallerHeight = 1080 * 0.5625 + "px";
+// const videoBoxSmallerHeight = 1080 * 0.5625 + "px";
 
 export const VideoBoxSmaller = styled.div`
   width: ${videoBoxSmallerWidth};

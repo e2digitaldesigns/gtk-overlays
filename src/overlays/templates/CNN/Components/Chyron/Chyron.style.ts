@@ -29,6 +29,9 @@ export const TopicDescriptionWrapper = styled.div`
   overflow: hidden;
   border-left: 10px solid #c90003;
   display: block;
+
+  white-space: pre-wrap;
+  text-overflow: ellipsis;
 `;
 
 export const TopicDescription = styled.div`

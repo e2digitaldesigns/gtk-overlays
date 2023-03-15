@@ -1,8 +1,8 @@
 import React from "react";
 import * as Styled from "./Host.style";
 import { useDataContext } from "../../../../../context";
-import { SectionsCNN } from "../../../../../hooks/useParamsHook/types";
 import { useParams } from "../../../../../hooks";
+import { SectionsCNN } from "../../../../../types";
 
 const CamHolders: React.FC = () => {
   const { showSection } = useParams();
@@ -24,46 +24,36 @@ const CamHolders: React.FC = () => {
       <Styled.Guide />
       {showHost_2_1 && (
         <>
-          <Styled.HostBox_2_1 />
-          <Styled.TabHostName_2_1>
-            {hosts?.[0].name || ""}
-          </Styled.TabHostName_2_1>
+          <Styled.HostBox21 />
+          <Styled.TabHostName21>{hosts?.[0].name || ""}</Styled.TabHostName21>
         </>
       )}
 
       {showHost_2_2 && (
         <>
-          <Styled.HostBox_2_2 />
-          <Styled.TabHostName_2_2>
-            {hosts?.[1].name || ""}
-          </Styled.TabHostName_2_2>
+          <Styled.HostBox22 />
+          <Styled.TabHostName22>{hosts?.[1].name || ""}</Styled.TabHostName22>
         </>
       )}
 
       {showHost_3_1 && (
         <>
-          <Styled.HostBox_3_1 />
-          <Styled.TabHostName_3_1>
-            {hosts?.[0]?.name || ""}
-          </Styled.TabHostName_3_1>
+          <Styled.HostBox31 />
+          <Styled.TabHostName31>{hosts?.[0]?.name || ""}</Styled.TabHostName31>
         </>
       )}
 
       {showHost_3_2 && (
         <>
-          <Styled.HostBox_3_2 />
-          <Styled.TabHostName_3_2>
-            {hosts?.[1]?.name || ""}
-          </Styled.TabHostName_3_2>
+          <Styled.HostBox32 />
+          <Styled.TabHostName32>{hosts?.[1]?.name || ""}</Styled.TabHostName32>
         </>
       )}
 
       {showHost_3_3 && (
         <>
-          <Styled.HostBox_3_3 />
-          <Styled.TabHostName_3_3>
-            {hosts?.[2]?.name || ""}
-          </Styled.TabHostName_3_3>
+          <Styled.HostBox33 />
+          <Styled.TabHostName33>{hosts?.[2]?.name || ""}</Styled.TabHostName33>
         </>
       )}
     </>

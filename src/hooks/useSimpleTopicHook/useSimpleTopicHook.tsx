@@ -1,10 +1,11 @@
 import React from "react";
+import { IntTopic } from "../../globalComponents/Topics/types";
 import socketServices from "../../services/socketServices";
 import { TopicActions } from "../../types";
 
-const useSimpleTopicHook = (data: any) => {
-  const [topics, setTopics] = React.useState(data);
-  const [currentTopicIndex, setCurrentTopicIndex] = React.useState(0);
+const useSimpleTopicHook = (data: IntTopic[], loop: boolean = false) => {
+  const [topics, setTopics] = React.useState<IntTopic[]>(data);
+  const [currentTopicIndex, setCurrentTopicIndex] = React.useState<number>(0);
 
   React.useEffect(() => {
     let stillHere = true;
@@ -15,15 +16,16 @@ const useSimpleTopicHook = (data: any) => {
     };
 
     const nextTopic = () => {
+      const atLimit = loop ? 0 : topics.length - 1;
       const index =
         currentTopicIndex >= topics.length - 1
-          ? topics.length - 1
+          ? atLimit
           : currentTopicIndex + 1;
+
       setCurrentTopicIndex(index);
     };
 
     socketServices.subscribeOverlayActions((err: any, data: any) => {
-      console.log(23, data);
       switch (data.action) {
         case TopicActions.TopicPrevious:
           stillHere && prevTopic();
@@ -42,9 +44,9 @@ const useSimpleTopicHook = (data: any) => {
       stillHere = false;
       socketServices.unSubscribeOverlayActions();
     };
-  }, []);
+  }, [currentTopicIndex]);
 
-  return topics?.[currentTopicIndex];
+  return { topic: topics?.[currentTopicIndex], index: currentTopicIndex };
 };
 
 export default useSimpleTopicHook;
