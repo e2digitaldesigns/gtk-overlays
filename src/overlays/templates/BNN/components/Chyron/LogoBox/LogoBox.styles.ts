@@ -16,10 +16,5 @@ export const LogoBox = styled.div`
   justify-content: center;
   align-items: center;
 
-  font-size: 6rem;
-  font-weight: bolder;
-
-  color: #555;
-
   overflow: hidden;
 `;

@@ -14,7 +14,7 @@ const OverlayTopics: React.FC<TopicsProps> = ({
   setTopicDescription,
   setTopicVideoId
 }) => {
-  const { topics: data } = useDataContext();
+  const { topics: data, logo } = useDataContext();
   const { showSection } = useParams();
 
   return (
@@ -28,9 +28,9 @@ const OverlayTopics: React.FC<TopicsProps> = ({
         height={860}
         width={399}
         gradient="left"
+        imageDefault={logo}
         imageShow={true}
         imageHeight={220}
-        imageDefault="b1b105cd-5b5c-4cfc-b8aa-80f0c9d47998.jpg"
         setTopicDescription={setTopicDescription}
         viewableTopicCount={7}
       />

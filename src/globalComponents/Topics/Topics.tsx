@@ -3,10 +3,11 @@ import TimeClock from "./TimeClock/TimeClock";
 import TimerCount from "./TimeCount/TimeCount";
 import * as Styled from "./Topic.styles";
 import { IntTopic, TopicStates } from "./types";
-import { imageParser } from "./Utils/imageParser";
+
 import { setTopicLiState } from "./Utils/setTopicLiState";
 import socketServices from "../../services/socketServices";
 import { TopicActions } from "../../types";
+import TopicImage from "./Utils/imageParser";
 
 interface IntTopicsProps {
   data: IntTopic[];
@@ -87,11 +88,17 @@ const GTK_TopicComponent: React.FC<IntTopicsProps> = ({
   const [currentTopicState, setCurrentTopicState] = React.useState<IntTopic>();
   const [counter, setCounter] = React.useState<number>(0);
 
+  const queryParams = new URLSearchParams(window.location.search);
+
   React.useEffect(() => {
     let stillHere = true;
 
     socketServices.subscribeOverlayActions(
-      (err: unknown, data: { action: string }) => {
+      (err: unknown, data: { action: string; uid: string }) => {
+        console.log(96, data);
+
+        if (data?.uid !== queryParams.get("uid")) return;
+
         switch (data.action as TopicActions) {
           case TopicActions.TopicPrevious:
             stillHere && handlePrevTopic();
@@ -279,14 +286,11 @@ const GTK_TopicComponent: React.FC<IntTopicsProps> = ({
             compHeight={adjustedSizes.theImageHeight}
             sx={imageSx}
           >
-            <img
-              alt="GTK"
-              src={imageParser(
-                imageShow,
-                imageBaseUrl,
-                imageDefault,
-                currentTopicState
-              )}
+            <TopicImage
+              imageShow={imageShow}
+              imageBaseUrl={imageBaseUrl}
+              imageDefault={imageDefault}
+              currentTopicState={currentTopicState}
             />
           </Styled.TopicImageWrapper>
         )}

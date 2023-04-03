@@ -7,6 +7,17 @@ import { Scroller, socialToScroller } from "../../../../../globalComponents";
 import { useDataContext } from "../../../../../context";
 import CONFIG from "../../config.json";
 
+import IconType, {
+  BsDiscord,
+  BsFacebook,
+  BsInstagram,
+  BsSnapchat,
+  BsTiktok,
+  BsTwitch,
+  BsTwitter,
+  BsYoutube
+} from "react-icons/bs";
+
 export interface IntDisplayIcon {
   color?: string;
   icon: string;
@@ -29,16 +40,33 @@ const DisplayIcon: React.FC<IntDisplayIcon> = ({
 type IColors = { [key: string]: string };
 
 const colors: IColors = {
+  discord: "#7289DA",
+  facebook: "#3B5998",
   instagram: "#c42b8f",
+  snapchat: "yellow",
+  tiktok: "black",
   twitch: "purple",
   twitter: "#1D9BF9",
   youtube: "red"
 };
 
+type IconMapType = { [key: string]: any };
+
+const IconMap: IconMapType = {
+  discord: BsDiscord,
+  facebook: BsFacebook,
+  instagram: BsInstagram,
+  snapchat: BsSnapchat,
+  tiktok: BsTiktok,
+  twitch: BsTwitch,
+  twitter: BsTwitter,
+  youtube: BsYoutube
+};
+
 const Socials: React.FC = () => {
   const { socialNetworks } = useDataContext();
   const [socialNetworkIcon, setSocialNetworkIcon] =
-    React.useState<string>("Home");
+    React.useState<string>("discord");
 
   const [bgColor, setBgColor] = React.useState<string>("black");
 
@@ -49,20 +77,18 @@ const Socials: React.FC = () => {
 
   const handleCallBack = (data: any) => {
     if (!data?.title) return;
-
-    const site: string =
-      data.title.toLowerCase() === "tweet" ? "Twitter" : data.title;
-    setSocialNetworkIcon(site);
-
-    const theColor: string = colors[site.toLowerCase()];
+    setSocialNetworkIcon(data.title.toLowerCase());
+    const theColor: string = colors[data.title.toLowerCase()];
     setBgColor(theColor);
   };
+
+  const Icon = IconMap[socialNetworkIcon];
 
   return (
     <>
       <Styled.Socials>
         <Styled.IconHolder bgColor={bgColor}>
-          <DisplayIcon icon={socialNetworkIcon} size={36} />
+          <Icon size={36} color="white" />
         </Styled.IconHolder>
         <Styled.TextHolder>
           <Scroller

@@ -11,6 +11,7 @@ import { useDataContext } from "../../../../../context";
 import { SectionsBNN, TopicActions } from "../../../../../types";
 
 const Chyron: React.FC = () => {
+  const queryParams = new URLSearchParams(window.location.search);
   const { showSection } = useParams();
   const { topics: data } = useDataContext();
   const [topics, setTopics] = React.useState(data);
@@ -30,6 +31,8 @@ const Chyron: React.FC = () => {
   React.useEffect(() => {
     let stillHere = true;
     socketServices.subscribeOverlayActions((err: any, data: any) => {
+      if (data?.uid !== queryParams.get("uid")) return;
+
       switch (data.action) {
         case TopicActions.TopicPrevious:
           stillHere && prevTopic();

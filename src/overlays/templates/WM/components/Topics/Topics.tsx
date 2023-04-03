@@ -11,7 +11,10 @@ const TopicsWM: React.FC = () => {
   return (
     <Styled.TopicWrapper>
       {topics.map((topic: IntTopic) => (
-        <Styled.TopicGrid isActive={currentTopic._id === topic._id}>
+        <Styled.TopicGrid
+          isActive={currentTopic._id === topic._id}
+          key={topic._id}
+        >
           <div>{topic?.name || ""}</div>
           <div>{topic?.desc || ""}</div>
         </Styled.TopicGrid>

@@ -4,6 +4,7 @@ import socketServices from "../../services/socketServices";
 import { TopicActions } from "../../types";
 
 const useSimpleTopicHook = (data: IntTopic[], loop: boolean = false) => {
+  const queryParams = new URLSearchParams(window.location.search);
   const [topics, setTopics] = React.useState<IntTopic[]>(data);
   const [currentTopicIndex, setCurrentTopicIndex] = React.useState<number>(0);
 
@@ -26,6 +27,8 @@ const useSimpleTopicHook = (data: IntTopic[], loop: boolean = false) => {
     };
 
     socketServices.subscribeOverlayActions((err: any, data: any) => {
+      if (data?.uid !== queryParams.get("uid")) return;
+
       switch (data.action) {
         case TopicActions.TopicPrevious:
           stillHere && prevTopic();
