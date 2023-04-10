@@ -5,6 +5,7 @@ import "./scss/styles.scss";
 import { DataContext } from "./context/dataContext";
 import Loader from "./overlays/loader/loader";
 import OverlayTemplateParser from "./overlays/templates/overlayTemplateParser";
+import socketServices from "./services/socketServices";
 
 enum Suffix {
   Episode = "episode",
@@ -56,6 +57,34 @@ const App: React.FC = () => {
     };
 
     fetchData();
+
+    return () => {
+      stillHere = false;
+    };
+  }, []);
+
+  React.useEffect(() => {
+    let stillHere = true;
+
+    const queryParams = new URLSearchParams(window.location.search);
+
+    socketServices.subscribeOverlayActions(
+      (err: unknown, data: { action: string; uid: string }) => {
+        console.log(74, data);
+
+        if (data?.uid !== queryParams.get(RequestType.UserId)) return;
+
+        switch (data.action) {
+          case "overlay-reset":
+            console.log("reset");
+            stillHere && window.location.reload();
+            break;
+
+          default:
+            break;
+        }
+      }
+    );
 
     return () => {
       stillHere = false;

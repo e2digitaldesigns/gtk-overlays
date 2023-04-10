@@ -1,0 +1,10 @@
+{
+  "scrollTimers": {
+    "clock": 30,
+    "headerTab": 15,
+    "networkTab": 3,
+    "newsFeed": 20,
+    "socialNetworks": 30,
+    "sponsors": 30
+  }
+}

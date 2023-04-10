@@ -1,0 +1,35 @@
+{
+  "_id": {
+    "$oid": "642b676a3d3324192e538f6b"
+  },
+  "urlKey": "sas",
+  "name": "SAS: Stephen A Smith",
+  "maxHosts": 1,
+  "tickerType": "simple",
+  "topicType": "multi",
+  "hasSponsor": true,
+  "hasContentBox": false,
+  "images": {
+    "contentBox": {
+      "amount": 0,
+      "width": 0,
+      "height": 0
+    },
+    "logo": {
+      "amount": 1,
+      "width": 280,
+      "height": 180
+    },
+    "sponsors": {
+      "amount": 5,
+      "width": 435,
+      "height": 130
+    },
+    "topic": {
+      "amount": 0,
+      "width": 190,
+      "height": 190
+    }
+  },
+  "linkArray": []
+}
