@@ -28,6 +28,7 @@ const useSimpleTopicHook = (data: IntTopic[], loop: boolean = false) => {
 
     socketServices.subscribeOverlayActions((err: any, data: any) => {
       if (data?.uid !== queryParams.get("uid")) return;
+      if (data?.tid && data.tid !== queryParams.get("tid")) return;
 
       switch (data.action) {
         case TopicActions.TopicPrevious:

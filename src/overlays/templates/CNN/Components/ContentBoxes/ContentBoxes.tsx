@@ -8,8 +8,6 @@ const ContentBoxes: React.FC = () => {
   const { showSection } = useParams();
   const { contentBoxes } = useDataContext();
 
-  console.log(11, contentBoxes);
-
   const showContentBoxes = [
     showSection(SectionsCNN.ContentBox1),
     showSection(SectionsCNN.ContentBox2),

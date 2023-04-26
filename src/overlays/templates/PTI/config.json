@@ -2,6 +2,7 @@
   "scrollTimers": {
     "clock": 30,
     "headerTab": 15,
+    "hostLabels": 25,
     "networkTab": 3,
     "newsFeed": 20,
     "socialNetworks": 30,

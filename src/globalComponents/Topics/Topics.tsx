@@ -94,10 +94,11 @@ const GTK_TopicComponent: React.FC<IntTopicsProps> = ({
     let stillHere = true;
 
     socketServices.subscribeOverlayActions(
-      (err: unknown, data: { action: string; uid: string }) => {
+      (err: unknown, data: { action: string; uid: string; tid?: string }) => {
         console.log(96, data);
 
         if (data?.uid !== queryParams.get("uid")) return;
+        if (data?.tid && data.tid !== queryParams.get("tid")) return;
 
         switch (data.action as TopicActions) {
           case TopicActions.TopicPrevious:

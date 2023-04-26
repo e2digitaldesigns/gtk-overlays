@@ -5,17 +5,12 @@ import "./scss/styles.scss";
 import { DataContext } from "./context/dataContext";
 import Loader from "./overlays/loader/loader";
 import OverlayTemplateParser from "./overlays/templates/overlayTemplateParser";
-import socketServices from "./services/socketServices";
+import { ApplicationSocket } from "./AppReset";
+import { RequestType } from "./types";
 
 enum Suffix {
   Episode = "episode",
   Template = "template"
-}
-
-enum RequestType {
-  Episode = "eid",
-  Template = "tid",
-  UserId = "uid"
 }
 
 const App: React.FC = () => {
@@ -44,8 +39,6 @@ const App: React.FC = () => {
           urlString = `${process.env.REACT_APP_REST_SERVICE}${suffix}`;
         }
 
-        // console.log({ urlString });
-
         const { data } = await axios.get(urlString);
         if (data && stillHere) {
           setIsLoaded(true);
@@ -63,34 +56,6 @@ const App: React.FC = () => {
     };
   }, []);
 
-  React.useEffect(() => {
-    let stillHere = true;
-
-    const queryParams = new URLSearchParams(window.location.search);
-
-    socketServices.subscribeOverlayActions(
-      (err: unknown, data: { action: string; uid: string }) => {
-        console.log(74, data);
-
-        if (data?.uid !== queryParams.get(RequestType.UserId)) return;
-
-        switch (data.action) {
-          case "overlay-reset":
-            console.log("reset");
-            stillHere && window.location.reload();
-            break;
-
-          default:
-            break;
-        }
-      }
-    );
-
-    return () => {
-      stillHere = false;
-    };
-  }, []);
-
   if (!isLoaded && !isError) {
     return <Loader />;
   }
@@ -102,6 +67,7 @@ const App: React.FC = () => {
   return (
     <>
       <DataContext.Provider value={dataContextValue}>
+        <ApplicationSocket />
         <div className="main-stage">
           {state?.templateId && <OverlayTemplateParser />}
         </div>

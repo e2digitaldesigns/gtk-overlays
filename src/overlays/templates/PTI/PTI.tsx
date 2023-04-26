@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./theme/theme";
 
@@ -9,10 +9,11 @@ import Sponsors from "./sponsors/sponsors";
 import Topics from "./topics/topics";
 import Hosts from "./hosts/Host";
 import HostLabels from "./labels/Label";
+import { ShowChatPTI } from "./ShowChatPTI/ShowChatPTI";
 
 const OverlayPTI: React.FC = () => {
-  const [topicDescription, setTopicDescription] = useState<string>("");
-  const [topicVideoId, setTopicVideoId] = useState<string>("");
+  const [topicDescription, setTopicDescription] = React.useState<string>("");
+  const [topicVideoId, setTopicVideoId] = React.useState<string>("");
 
   return (
     <>
@@ -27,6 +28,8 @@ const OverlayPTI: React.FC = () => {
           setTopicDescription={setTopicDescription}
           setTopicVideoId={setTopicVideoId}
         />
+
+        <ShowChatPTI />
 
         <Hosts />
       </ThemeProvider>

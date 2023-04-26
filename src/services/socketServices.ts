@@ -2,28 +2,44 @@ import io from "socket.io-client";
 const socket = io(process.env.REACT_APP_PUSH_SERVICE || "");
 
 const socketServices = {
+  subscribeApplicationActions(cb: any) {
+    socket.on("gtkApplicationAction", (data: any) => cb(null, data));
+  },
+
+  unSubscribeApplicationActions() {
+    socket.removeAllListeners("gtkApplicationAction");
+  },
+
   subscribeOverlayActions(cb: any) {
-    socket.on("mgOverlayActions", (data: any) => cb(null, data));
+    socket.on("gtkOverlayAction", (data: any) => cb(null, data));
   },
 
   unSubscribeOverlayActions() {
-    socket.removeAllListeners("mgOverlayActions");
+    socket.removeAllListeners("gtkOverlayAction");
   },
 
   sendOverlayActions(data: any) {
-    socket.emit("mgOverlayActions", data);
+    socket.emit("gtkOverlayAction", data);
   },
 
   subscribeHostVoting(cb: any) {
-    socket.on("mgVoting", (data: any) => cb(null, data));
+    socket.on("gtkVoting", (data: any) => cb(null, data));
   },
 
   unSubscribeHostVoting() {
-    socket.removeAllListeners("mgVoting");
+    socket.removeAllListeners("gtkVoting");
   },
 
   sendVotingData(data: any) {
-    socket.emit("mgVoting", data);
+    socket.emit("gtkVoting", data);
+  },
+
+  subscribeChatDisplay(cb: any) {
+    socket.on("gtkChatDisplay", (data: any) => cb(null, data));
+  },
+
+  unSubscribeChatDisplay() {
+    socket.removeAllListeners("gtkChatDisplay");
   }
 };
 

@@ -55,4 +55,13 @@ export enum SectionsPTI {
   Label_3_Host_3 = "label_3_host_3"
 }
 
-export type OverlaySections = SectionsBNN | SectionsCNN | SectionsPTI;
+export enum SectionsSAS {
+  ChatDisplay = "chatDisplay",
+  Chyron = "chyron"
+}
+
+export type OverlaySections =
+  | SectionsBNN
+  | SectionsCNN
+  | SectionsPTI
+  | SectionsSAS;
