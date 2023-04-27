@@ -75,7 +75,7 @@ const GTK_TopicComponent: React.FC<IntTopicsProps> = ({
   setTopicDescription
 }) => {
   const containerRef = React.useRef<any>();
-  const listItemRef = React.useRef(new Array());
+  const listItemRef = React.useRef<any>([]);
 
   const [activeChildIndex, setActiveChildIndex] = React.useState<number>(-1);
   const [activeTopicIndex, setActiveTopicIndex] = React.useState<number>(0);
@@ -127,6 +127,8 @@ const GTK_TopicComponent: React.FC<IntTopicsProps> = ({
       stillHere = false;
       socketServices.unSubscribeOverlayActions();
     };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTopicIndex, activeChildIndex]);
 
   const sizingParser = (topicCount: number) => {
@@ -272,6 +274,7 @@ const GTK_TopicComponent: React.FC<IntTopicsProps> = ({
     } else {
       setUlTop(-maxUlTop);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [counter]);
 
   return (
@@ -348,6 +351,7 @@ const GTK_TopicComponent: React.FC<IntTopicsProps> = ({
                   data-index={index}
                   gradient={gradient}
                   listItemState={listItemState}
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
                   ref={element => (listItemRef.current[index] = element)}
                   sx={sxTopicLi}
                   bgColors={{

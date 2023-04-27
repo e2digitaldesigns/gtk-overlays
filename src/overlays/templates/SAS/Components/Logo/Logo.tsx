@@ -43,7 +43,10 @@ const LogoSAS: React.FC = () => {
     <>
       <LogoDiv>
         {theLogo && (
-          <img src={process.env.REACT_APP_CLOUD_IMAGES_USER + logo} />
+          <img
+            src={process.env.REACT_APP_CLOUD_IMAGES_USER + logo}
+            alt="logo"
+          />
         )}
       </LogoDiv>
 

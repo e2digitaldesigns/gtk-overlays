@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { useDataContext } from "../../../../context";
 import { useParams } from "../../../../hooks";
 import { SectionsPTI } from "../../../../types";
 
@@ -22,15 +21,12 @@ export const LogoDiv = styled.div`
 `;
 
 const Logo: React.FC = () => {
-  const { logo } = useDataContext();
   const { showSection } = useParams();
   if (!showSection(SectionsPTI.Logo)) return null;
 
   return (
     <>
-      <LogoDiv>
-        {/* {logo && <img src={process.env.REACT_APP_CLOUD_IMAGES_USER + logo} />} */}
-      </LogoDiv>
+      <LogoDiv></LogoDiv>
     </>
   );
 };

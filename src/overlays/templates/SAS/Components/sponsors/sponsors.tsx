@@ -13,7 +13,10 @@ const SponsorsSAS: React.FC = () => {
       <Scroller timer={CONFIG.scrollTimers.sponsors}>
         {sponsorImages.map((image: string) => (
           <div key={image}>
-            <img src={process.env.REACT_APP_CLOUD_IMAGES_USER + image} />
+            <img
+              src={process.env.REACT_APP_CLOUD_IMAGES_USER + image}
+              alt="sponsors"
+            />
           </div>
         ))}
       </Scroller>

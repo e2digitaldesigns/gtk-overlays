@@ -14,6 +14,8 @@ const Chyron: React.FC = () => {
   const queryParams = new URLSearchParams(window.location.search);
   const { showSection } = useParams();
   const { topics: data } = useDataContext();
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [topics, setTopics] = React.useState(data);
   const [currentTopic, setCurrentTopic] = React.useState(0);
 
@@ -52,6 +54,8 @@ const Chyron: React.FC = () => {
       stillHere = false;
       socketServices.unSubscribeOverlayActions();
     };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nextTopic, prevTopic]);
 
   if (!showSection(SectionsBNN.Chyron)) return null;

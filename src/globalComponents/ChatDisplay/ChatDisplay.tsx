@@ -1,4 +1,4 @@
-import React, { Children } from "react";
+import React from "react";
 
 import * as Styled from "./ShowChat.style";
 import { RequestType } from "../../types";
@@ -122,6 +122,8 @@ const ChatDisplay: React.FC<ShowChatProps> = ({
     }
 
     setNextMessage(undefined);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nextMessage, message]);
 
   React.useEffect(() => {
@@ -152,6 +154,8 @@ const ChatDisplay: React.FC<ShowChatProps> = ({
       stillHere = false;
       socketServices.unSubscribeChatDisplay();
     };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryParams]);
 
   const theMessage = React.useMemo(() => {
@@ -161,6 +165,8 @@ const ChatDisplay: React.FC<ShowChatProps> = ({
       ...message,
       msg: <MessageParser message={message.msg as string} />
     };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [message]);
 
   return (
@@ -181,7 +187,7 @@ const ChatDisplay: React.FC<ShowChatProps> = ({
               shape={imageShape}
               size={imageSize}
             >
-              {message?.url && <img src={message.url} alt="user-image" />}
+              {message?.url && <img src={message.url} alt="users" />}
             </Styled.ShowChatImage>
 
             <Styled.MessageWrapper font={font} inline={messageInline}>

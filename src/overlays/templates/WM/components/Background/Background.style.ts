@@ -26,10 +26,6 @@ export const Background = styled.div`
   z-index: 5;
 `;
 
-interface IBackgroundBorder {
-  color?: string;
-}
-
 export const BackgroundBorder = styled(Background)`
   left: 200px;
   background-color: ${props => props.color || props.theme.colors.accent1};

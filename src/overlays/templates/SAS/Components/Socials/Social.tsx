@@ -1,13 +1,10 @@
 import React from "react";
 import * as Styled from "./Socials.style";
-import * as RFIcon from "react-feather";
-import _find from "lodash/find";
-import _startCase from "lodash/startCase";
 import { Scroller, socialToScroller } from "../../../../../globalComponents";
 import { useDataContext } from "../../../../../context";
 import CONFIG from "../../config.json";
 
-import IconType, {
+import {
   BsDiscord,
   BsFacebook,
   BsInstagram,
@@ -23,19 +20,6 @@ export interface IntDisplayIcon {
   icon: string;
   size?: number | string;
 }
-
-const DisplayIcon: React.FC<IntDisplayIcon> = ({
-  icon,
-  color = "white",
-  size = 24
-}): React.ReactElement => {
-  const TheIcon = _find(
-    RFIcon,
-    (f: RFIcon.Icon) => f.displayName === _startCase(icon)
-  );
-
-  return <>{!TheIcon ? null : <TheIcon color={color} size={size} />}</>;
-};
 
 type IColors = { [key: string]: string };
 

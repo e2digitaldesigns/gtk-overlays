@@ -13,6 +13,8 @@ const GTK_TimeItem: React.FC<IntTimeItem> = ({ hour, zone }) => {
       const theTime = moment().subtract(hour, "hours").format("h:mm A");
       setTime(theTime);
     }, 28000);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

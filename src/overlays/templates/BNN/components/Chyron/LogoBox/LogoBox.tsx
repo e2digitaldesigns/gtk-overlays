@@ -9,7 +9,9 @@ const LogoBox: React.FC<IntLogoBox> = () => {
 
   return (
     <Styled.LogoBox>
-      {logo && <img src={process.env.REACT_APP_CLOUD_IMAGES_USER + logo} />}
+      {logo && (
+        <img src={process.env.REACT_APP_CLOUD_IMAGES_USER + logo} alt="logo" />
+      )}
     </Styled.LogoBox>
   );
 };

@@ -5,6 +5,8 @@ import { TopicActions } from "../../types";
 
 const useSimpleTopicHook = (data: IntTopic[], loop: boolean = false) => {
   const queryParams = new URLSearchParams(window.location.search);
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [topics, setTopics] = React.useState<IntTopic[]>(data);
   const [currentTopicIndex, setCurrentTopicIndex] = React.useState<number>(0);
 
@@ -48,6 +50,8 @@ const useSimpleTopicHook = (data: IntTopic[], loop: boolean = false) => {
       stillHere = false;
       socketServices.unSubscribeOverlayActions();
     };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentTopicIndex]);
 
   return { topic: topics?.[currentTopicIndex], index: currentTopicIndex };

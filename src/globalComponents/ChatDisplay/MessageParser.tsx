@@ -11,7 +11,7 @@ export const MessageParser: React.FC<MessageParserProps> = ({ message }) => {
 
   const renderedContent = parts.map((part, index) => {
     if (part.match(urlRegex)) {
-      return <img key={index} src={part} alt={`Image ${index}`} />;
+      return <img key={index} src={part} alt={`emotes ${index}`} />;
     }
 
     return <span key={index}>{part}</span>;

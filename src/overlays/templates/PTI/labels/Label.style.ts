@@ -43,16 +43,6 @@ interface HostProps {
   seat: string;
 }
 
-type help = { [key: number]: string };
-
-const seaterObj: help = {
-  "1": "20px",
-  "22": "785px",
-  "23": "785px",
-  "32": "530px",
-  "33": "1040px"
-};
-
 export const Host = styled(DefaultLabel)<HostProps>`
   left: ${props =>
     props.seat === "1"

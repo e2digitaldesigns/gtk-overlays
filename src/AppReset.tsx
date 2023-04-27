@@ -27,6 +27,8 @@ export const ApplicationSocket: React.FC = () => {
       stillHere = false;
       socketServices.unSubscribeApplicationActions();
     };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return null;

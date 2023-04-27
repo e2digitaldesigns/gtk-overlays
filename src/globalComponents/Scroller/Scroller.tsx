@@ -62,6 +62,8 @@ const GTK_Scroller: React.FC<IntScrollerProps> = ({
   React.useEffect(() => {
     setOldIndex(activeIndex);
     setActiveIndex(activeIndex < length - 1 ? activeIndex + 1 : 0);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   React.useEffect(() => {
@@ -70,12 +72,16 @@ const GTK_Scroller: React.FC<IntScrollerProps> = ({
       setOldIndex(activeIndex);
       setActiveIndex(newIndex);
     }, theTimer);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeIndex]);
 
   React.useEffect(() => {
     if (callBack && data) {
       callBack(data[activeIndex]);
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeIndex]);
 
   const setClassName = (index: number) => {
