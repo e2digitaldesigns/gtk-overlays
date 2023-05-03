@@ -16,10 +16,10 @@ export const ShowChatPTI: React.FC = () => {
         imageBorder="1px solid #100727"
         imageShape="square"
         imageSize="6.25rem"
-        msgFontSize="1.8rem"
+        msgFontSize="2.75rem"
         messageInline={true}
         nameFontColor="#ffffff"
-        nameFontSize="2rem"
+        nameFontSize="2.75rem"
         nameFontWeight="normal"
       />
     </Styled.ShowChatWrapper>
