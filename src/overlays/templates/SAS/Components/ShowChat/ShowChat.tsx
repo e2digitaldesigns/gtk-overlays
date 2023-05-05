@@ -15,6 +15,8 @@ const ShowChatSAS: React.FC = () => {
         <ChatDisplay
           borderBottom="3px solid #a0941c"
           defaultTransition="LeftToRight"
+          font="Bebas Neue"
+          msgFontSize="1.875rem"
         />
       </Styled.ShowChatWrapper>
     </>
