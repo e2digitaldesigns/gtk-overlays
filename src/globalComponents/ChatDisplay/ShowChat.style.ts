@@ -9,6 +9,7 @@ export const ShowChatWrapper = styled.div`
   height: 100%;
   overflow: hidden;
 `;
+
 interface IShowChatInner {
   isActive?: boolean;
   transition: string;
@@ -32,7 +33,7 @@ interface IEntireChatWrapper {
 
 export const EntireChatWrapper = styled.div<IEntireChatWrapper>`
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   background-color: ${props => props.bgColor};
   overflow: hidden;
   padding: 10px;

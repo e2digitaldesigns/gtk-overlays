@@ -179,6 +179,7 @@ const ChatDisplay: React.FC<ShowChatProps> = ({
           transitionTime={transitionTime}
         >
           <Styled.EntireChatWrapper
+            data-testid="YYYYY"
             bgColor={bgColor}
             borderBottom={borderBottom}
           >
@@ -197,7 +198,7 @@ const ChatDisplay: React.FC<ShowChatProps> = ({
                 weight={nameFontWeight}
               >
                 {message?.name}
-                {messageInline && ":"}{" "}
+                {messageInline && ": "}
               </Styled.MessageName>
               <Styled.MessageText
                 color={msgFontColor}
