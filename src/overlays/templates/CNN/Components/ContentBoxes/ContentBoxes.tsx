@@ -17,7 +17,7 @@ const ContentBoxes: React.FC = () => {
   const imgParser = (img: string | undefined) => {
     if (!img) return undefined;
 
-    return process.env.REACT_APP_CLOUD_IMAGES_USER + img;
+    return img;
   };
 
   return (

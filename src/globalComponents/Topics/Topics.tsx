@@ -70,7 +70,7 @@ const GTK_TopicComponent: React.FC<IntTopicsProps> = ({
   imageShow = true,
   imageHeight,
   imageDefault,
-  imageBaseUrl = process.env.REACT_APP_CLOUD_IMAGES_USER,
+  imageBaseUrl,
 
   setTopicDescription
 }) => {

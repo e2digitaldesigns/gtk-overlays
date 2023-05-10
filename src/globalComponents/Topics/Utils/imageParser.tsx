@@ -14,9 +14,10 @@ const TopicImage: React.FC<IntTopicImageProps> = ({
   imageDefault,
   currentTopicState
 }) => {
-  const defaultImage = imageDefault && `${imageBaseUrl}${imageDefault}`;
+  const baseUrl = imageBaseUrl || "";
+  const defaultImage = imageDefault && `${baseUrl}${imageDefault}`;
   const topicImage =
-    currentTopicState?.img && `${imageBaseUrl}${currentTopicState.img}`;
+    currentTopicState?.img && `${baseUrl}${currentTopicState.img}`;
 
   const image = topicImage || defaultImage;
 

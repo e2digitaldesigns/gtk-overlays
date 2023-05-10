@@ -8,11 +8,7 @@ const LogoBox: React.FC<IntLogoBox> = () => {
   const { logo } = useDataContext();
 
   return (
-    <Styled.LogoBox>
-      {logo && (
-        <img src={process.env.REACT_APP_CLOUD_IMAGES_USER + logo} alt="logo" />
-      )}
-    </Styled.LogoBox>
+    <Styled.LogoBox>{logo && <img src={logo} alt="logo" />}</Styled.LogoBox>
   );
 };
 

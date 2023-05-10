@@ -41,14 +41,7 @@ const LogoSAS: React.FC = () => {
 
   return (
     <>
-      <LogoDiv>
-        {theLogo && (
-          <img
-            src={process.env.REACT_APP_CLOUD_IMAGES_USER + logo}
-            alt="logo"
-          />
-        )}
-      </LogoDiv>
+      <LogoDiv>{theLogo && <img src={logo} alt="logo" />}</LogoDiv>
 
       <WedgeDiv data-testid="xxx" />
     </>
