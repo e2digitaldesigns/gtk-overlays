@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import bg from "../../../../assets/images/1520x20-desc-gradient.png";
 
+const bgColor = "#a15004";
 interface IDescription {
   isVisible: boolean;
 }
@@ -20,8 +20,27 @@ export const DescriptionDiv = styled.div<IDescription>`
   white-space: pre-wrap;
   width: 1520px;
   background-size: cover;
-  background-color: #a15004;
-  background-image: url(${bg});
+  background-color: ${bgColor};
+
+  &:before {
+    position: absolute;
+    content: "";
+    inset: 0;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.33),
+      rgba(255, 255, 255, 0) 60%
+    );
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: ${bgColor};
+    height: 400%;
+    clip-path: ellipse(77% 19% at 73% 24%);
+  }
 
   opacity: ${props => (props.isVisible ? "1" : "0")};
 `;

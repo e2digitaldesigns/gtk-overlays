@@ -30,10 +30,6 @@ const socketServices = {
     socket.removeAllListeners("gtkVoting");
   },
 
-  sendVotingData(data: any) {
-    socket.emit("gtkVoting", data);
-  },
-
   subscribeChatDisplay(cb: any) {
     socket.on("gtkChatDisplay", (data: any) => cb(null, data));
   },
