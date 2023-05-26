@@ -58,6 +58,7 @@ export const TheHostLabel: React.FC<ITheHostLabel> = ({
       }
     );
     setComponents([...components, clonedComponent]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   React.useEffect(() => {
@@ -74,6 +75,7 @@ export const TheHostLabel: React.FC<ITheHostLabel> = ({
         setComponents(newState);
       }, 4500);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handleAddComponent, hostNum, votes, seat]);
 
   return showSection(section) ? (
