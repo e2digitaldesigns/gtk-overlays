@@ -2,7 +2,7 @@ import React from "react";
 import TimeClock from "./TimeClock/TimeClock";
 import TimerCount from "./TimeCount/TimeCount";
 import * as Styled from "./Topic.styles";
-import { IntTopic, TopicStates } from "./types";
+import { IntTopic } from "./types";
 
 import { setTopicLiState } from "./Utils/setTopicLiState";
 import socketServices from "../../services/socketServices";
@@ -76,7 +76,7 @@ const GTK_TopicComponent: React.FC<IntTopicsProps> = ({
 }) => {
   const containerRef = React.useRef<any>();
   const [activeTopicIndex, setActiveTopicIndex] = React.useState<number>(0);
-  const [activeParentName, setActiveParentName] = React.useState<string>("");
+  const [activeParentTopic, setActiveParentTopic] = React.useState<IntTopic>();
   const [isTimerPaused, setIsTimerPaused] = React.useState<boolean>(false);
   const [ulTop, setUlTop] = React.useState<number>(0);
   const [currentTopicState, setCurrentTopicState] = React.useState<IntTopic>();
@@ -167,18 +167,23 @@ const GTK_TopicComponent: React.FC<IntTopicsProps> = ({
     setTopicDescription && setTopicDescription(currentTopic?.desc || "");
 
     const parentId = currentTopic?.parentId;
-    const parentName = data.find(topic => topic._id === parentId)?.name;
-    setActiveParentName(parentName || "");
+    setActiveParentTopic(data.find(topic => topic._id === parentId));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTopicIndex]);
 
   React.useEffect(() => {
-    if (data.length <= viewableTopicCount) return;
+    const topicCount = data.length;
+    if (topicCount <= viewableTopicCount) return;
+
+    let thisCount = counter;
+    if (activeParentTopic) {
+      thisCount = data.findIndex(topic => topic._id === activeParentTopic._id);
+    }
 
     const maxUlTop =
-      (data.length - viewableTopicCount) * adjustedSizes.topicLiHeight;
-    const newUlTopAbs = counter * adjustedSizes.topicLiHeight;
+      (topicCount - viewableTopicCount) * adjustedSizes.topicLiHeight;
+    const newUlTopAbs = thisCount * adjustedSizes.topicLiHeight;
     const newUlTop = 0 - newUlTopAbs;
 
     if (maxUlTop >= newUlTopAbs) {
@@ -234,23 +239,6 @@ const GTK_TopicComponent: React.FC<IntTopicsProps> = ({
           </Styled.ClockDiv>
         )}
 
-        <Styled.TopicListItemParent
-          compHeight={adjustedSizes.topicLiHeight}
-          gradient={gradient}
-          listItemState={TopicStates.Active}
-          sx={sxTopicLi}
-          isViewable={
-            !!currentTopicState?.isChild && !!currentTopicState?.parentId
-          }
-          bgColors={{
-            active: bgColorActive,
-            normal: bgColorNormal,
-            clicked: bgColorClicked
-          }}
-        >
-          <div>{activeParentName}</div>
-        </Styled.TopicListItemParent>
-
         <Styled.TopicUlWrapper compHeight={adjustedSizes.topicUlHeight}>
           <Styled.TopicUl
             compHeight={adjustedSizes.topicUlHeight}
@@ -265,7 +253,13 @@ const GTK_TopicComponent: React.FC<IntTopicsProps> = ({
                 compHeight={adjustedSizes.topicLiHeight}
                 data-index={index}
                 gradient={gradient}
-                listItemState={setTopicLiState(activeTopicIndex, index)}
+                listItemState={setTopicLiState(
+                  data,
+                  activeParentTopic,
+                  activeTopicIndex,
+                  viewableTopicCount,
+                  index
+                )}
                 sx={sxTopicLi}
                 bgColors={{
                   active: bgColorActive,
@@ -276,7 +270,13 @@ const GTK_TopicComponent: React.FC<IntTopicsProps> = ({
                 {isDemoMode ? (
                   <div>
                     {index} - {topic.name}-{" "}
-                    {setTopicLiState(activeTopicIndex, index)}
+                    {setTopicLiState(
+                      data,
+                      activeParentTopic,
+                      activeTopicIndex,
+                      viewableTopicCount,
+                      index
+                    )}
                   </div>
                 ) : (
                   <div>{topic.name}</div>

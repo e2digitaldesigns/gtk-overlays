@@ -138,7 +138,8 @@ const stateParser = (state: TopicStates, bgColors: IntBgColors | undefined) => {
   let str = "";
 
   if (state === TopicStates.Hidden) {
-    if (bgColors?.clicked) str += `background-color: ${bgColors.clicked};`;
+    // if (bgColors?.clicked) str += `background-color: ${bgColors.clicked};`;
+    str += `height: 0; border-bottom: none;`;
   }
 
   if (state === TopicStates.Active) {
@@ -169,7 +170,8 @@ export const TopicListItem = styled(Li)<IntTopicLi>`
     ${props => props?.gradient && gradientParser(props.gradient)}
   }
 
-  transition: background-color 0.55s ease-in-out;
+  transition: background-color 0.5s ease-in-out;
+  transition: background-color 0.5s ease-in-out, height 0.5s ease-in-out;
 `;
 
 const gradientParser = (value: string) => {
@@ -201,6 +203,4 @@ interface IntTopicItemParent extends IntTopicLi {
 export const TopicListItemParent = styled(TopicListItem)<IntTopicItemParent>`
   height: ${props => (props.isViewable ? props?.compHeight : 0)};
   border-bottom-width: ${props => (props.isViewable ? "1px" : 0)};
-
-  transition: border 0.25s ease-in-out, height 0.5s ease-in-out;
 `;

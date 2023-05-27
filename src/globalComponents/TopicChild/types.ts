@@ -8,14 +8,14 @@ export enum TopicStates {
 
 export interface IntTopic {
   _id: string;
-  order: number;
-  name: string;
   desc: string;
-  timer: number;
-  isParent: boolean;
-  isChild: boolean;
-  parentId: string;
   img: string;
+  isChild: boolean;
+  isParent: boolean;
+  name: string;
+  order: number;
+  parentId: string;
+  timer: number;
 }
 
 export interface IntCss {
