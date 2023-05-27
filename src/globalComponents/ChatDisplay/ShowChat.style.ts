@@ -79,7 +79,7 @@ export const MessageWrapper = styled.div<IMessageWrapper>`
   color: white;
   margin-bottom: 50px;
 
-  text-shadow: 0.5px 0.5px rgba(0, 0, 0, 0.5);
+  text-shadow: 1px 2px #000;
 `;
 
 interface IMessageNameProps {

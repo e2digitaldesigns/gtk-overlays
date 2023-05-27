@@ -10,9 +10,15 @@ const Description: React.FC<DescriptionProps> = ({ topicDescription }) => {
   const { showSection } = useParams();
 
   return (
-    <Styled.DescriptionDiv isVisible={showSection(SectionsPTI.Description)}>
-      {topicDescription}
-    </Styled.DescriptionDiv>
+    <>
+      <Styled.DescriptionDivBacker
+        isVisible={showSection(SectionsPTI.Description)}
+      />
+
+      <Styled.DescriptionDiv isVisible={showSection(SectionsPTI.Description)}>
+        {topicDescription}
+      </Styled.DescriptionDiv>
+    </>
   );
 };
 

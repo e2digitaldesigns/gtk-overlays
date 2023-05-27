@@ -19,6 +19,11 @@ export const DescriptionDiv = styled.div<IDescription>`
   top: 860px;
   white-space: pre-wrap;
   width: 1520px;
+  background-color: transparent;
+  opacity: ${props => (props.isVisible ? "1" : "0")};
+`;
+
+export const DescriptionDivBacker = styled(DescriptionDiv)<IDescription>`
   background-size: cover;
   background-color: ${bgColor};
 
@@ -28,7 +33,7 @@ export const DescriptionDiv = styled.div<IDescription>`
     inset: 0;
     background-image: linear-gradient(
       to bottom,
-      rgba(255, 255, 255, 0.33),
+      rgba(255, 255, 255, 0.25),
       rgba(255, 255, 255, 0) 60%
     );
   }
@@ -41,6 +46,4 @@ export const DescriptionDiv = styled.div<IDescription>`
     height: 400%;
     clip-path: ellipse(77% 19% at 73% 24%);
   }
-
-  opacity: ${props => (props.isVisible ? "1" : "0")};
 `;
