@@ -36,6 +36,14 @@ const socketServices = {
 
   unSubscribeChatDisplay() {
     socket.removeAllListeners("gtkChatDisplay");
+  },
+
+  subscribeOverlaysEmojis(cb: any) {
+    socket.on("gtkOverlayEmojis", (data: any) => cb(null, data));
+  },
+
+  unSubscribeOverlaysEmojis() {
+    socket.removeAllListeners("gtkOverlayEmojis");
   }
 };
 

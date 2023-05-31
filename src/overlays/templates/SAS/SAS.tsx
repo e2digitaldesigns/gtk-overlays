@@ -7,9 +7,12 @@ import TickerSAS from "./Components/Ticker/Ticker";
 import Topics from "./Components/Topics/Topics";
 import ShowChatSAS from "./Components/ShowChat/ShowChat";
 
+import { EmojiSAS } from "./Components/Emoji/Emoji";
+
 const OverlaySAS: React.FC = () => {
   return (
     <>
+      <EmojiSAS />
       <Logo />
       <Topics />
       <SocialsSAS />
