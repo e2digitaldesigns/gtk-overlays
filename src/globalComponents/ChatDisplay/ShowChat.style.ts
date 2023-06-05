@@ -106,7 +106,7 @@ export const MessageText = styled.span<IMessageTextProps>`
   word-break: break-word;
 
   img {
-    height: 1rem;
+    height: 1.5rem;
   }
 `;
 

@@ -8,10 +8,13 @@ import Topics from "./Components/Topics/Topics";
 import ShowChatSAS from "./Components/ShowChat/ShowChat";
 
 import { EmojiSAS } from "./Components/Emoji/Emoji";
+import ChatRankingsSAS from "./Components/ChatRankings/ChatRakings";
 
 const OverlaySAS: React.FC = () => {
   return (
     <>
+      <ChatRankingsSAS />
+
       <EmojiSAS />
       <Logo />
       <Topics />

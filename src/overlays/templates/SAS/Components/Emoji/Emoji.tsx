@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { EmojiWrapper } from "../../../../../globalComponents/EmoteDisplay/Emotes";
+import { EmojiFloat } from "../../../../../globalComponents";
 
 const StyledEmojiSAS = styled.div`
   width: 1750px;
-  height: 830px;
+  height: 820px;
   position: absolute;
 
   top: 0;
@@ -15,7 +15,7 @@ const StyledEmojiSAS = styled.div`
 export const EmojiSAS: React.FC = () => {
   return (
     <StyledEmojiSAS>
-      <EmojiWrapper />
+      <EmojiFloat />
     </StyledEmojiSAS>
   );
 };

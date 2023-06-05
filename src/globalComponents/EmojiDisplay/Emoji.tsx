@@ -1,6 +1,5 @@
 import React from "react";
-import _cloneDeep from "lodash/cloneDeep";
-import * as Styled from "./Emotes.styles";
+import * as Styled from "./Emoji.styles";
 import socketServices from "../../services/socketServices";
 import { RequestType } from "../../types";
 
@@ -14,13 +13,13 @@ const Emoji: React.FC<IEmoji> = ({ emoji }) => {
     speedMin = 5,
     speedMax = 8;
 
-  const left = Math.floor(Math.random() * (leftMax - padding) + padding);
-  const speed = Math.random() * (speedMax - speedMin) + speedMin;
+  const left = Math.floor(Math.random() * (leftMax - padding) + padding) + "%";
+  const speed = Math.random() * (speedMax - speedMin) + speedMin + "s";
 
   return (
-    <Styled.EmoteDiv left={`${left}%`} speed={speed}>
+    <Styled.EmojiDiv left={left} speed={speed}>
       {emoji}
-    </Styled.EmoteDiv>
+    </Styled.EmojiDiv>
   );
 };
 
@@ -47,8 +46,10 @@ interface IEmojiReturn {
   uid: string;
 }
 
-export const EmojiWrapper: React.FC<IEmojiWrapper> = ({ isDemo = false }) => {
+const EmojiWrapper: React.FC<IEmojiWrapper> = ({ isDemo = false }) => {
   const [emojiState, setEmojiState] = React.useState<IEmojiData[]>([]);
+  const emojiArr = ["🤣", "😁", "🙌", "❤️", "😍", "👌", "💕", "😘", "😒", "👍"];
+  const MAX_TIME = 10;
 
   React.useEffect(() => {
     let stillHere = true;
@@ -59,19 +60,17 @@ export const EmojiWrapper: React.FC<IEmojiWrapper> = ({ isDemo = false }) => {
         if (data?.uid !== queryParams.get(RequestType.UserId)) return;
         if (data?.tid !== queryParams.get(RequestType.Template)) return;
 
-        switch (data.action) {
-          case "showEmoji":
-            if (!stillHere) return;
-            setEmojiState(prevState => [...prevState, ...data.emojis]);
-
-            setTimeout(() => {
-              if (!stillHere) return;
-              setEmojiState(prevState => {
-                return prevState.filter(emoji => emoji._id !== data._id);
-              });
-            }, 10000);
-            break;
-        }
+        if (!stillHere) return;
+        setEmojiState(prevState => [
+          ...prevState.filter(item => {
+            const currentTime = new Date();
+            const itemTime = new Date(item.date);
+            const differenceInSeconds =
+              (currentTime.getTime() - itemTime.getTime()) / 1000;
+            return differenceInSeconds < MAX_TIME;
+          }),
+          ...data.emojis
+        ]);
       }
     );
 
@@ -83,34 +82,28 @@ export const EmojiWrapper: React.FC<IEmojiWrapper> = ({ isDemo = false }) => {
   }, []);
 
   const handleAddEmoji = () => {
-    const newState = _cloneDeep(emojiState);
-    newState.push({
+    const obj = {
       _id: Math.random().toString(),
       date: new Date(),
-      emoji: "💕"
-    });
-    setEmojiState(newState);
-  };
-
-  const handleRemoveEmoji = () => {
-    const newState = _cloneDeep(emojiState);
-    const newArray = newState.slice(1);
-    setEmojiState(newArray);
+      emoji: emojiArr[Math.floor(Math.random() * emojiArr.length)]
+    };
+    setEmojiState(prev => [...prev, ...[obj]]);
   };
 
   return (
-    <Styled.EmoteWrapper>
+    <Styled.EmojiWrapper>
       {isDemo && (
         <>
-          <h1>Emojis: {emojiState.length}</h1>
-          <button onClick={() => handleAddEmoji()}>Add Component</button>
-          <button onClick={() => handleRemoveEmoji()}>Delete</button>
+          <h1>Total Emojis: {emojiState.length}</h1>
+          <button onClick={handleAddEmoji}>Add Emoji</button>
         </>
       )}
 
       {emojiState.map((data: IEmojiData, index: number) => (
-        <MemoizedEmoji key={index} emoji={data.emoji} />
+        <MemoizedEmoji key={data._id} emoji={data.emoji} />
       ))}
-    </Styled.EmoteWrapper>
+    </Styled.EmojiWrapper>
   );
 };
+
+export default EmojiWrapper;

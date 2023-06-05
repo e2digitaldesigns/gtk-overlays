@@ -44,6 +44,14 @@ const socketServices = {
 
   unSubscribeOverlaysEmojis() {
     socket.removeAllListeners("gtkOverlayEmojis");
+  },
+
+  subscribeOverlaysChatRanks(cb: any) {
+    socket.on("gtkOverlayChatRanks", (data: any) => cb(null, data));
+  },
+
+  unSubscribeOverlaysChatRanks() {
+    socket.removeAllListeners("gtkOverlayChatRanks");
   }
 };
 

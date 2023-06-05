@@ -33,10 +33,10 @@ const App: React.FC = () => {
 
         if (eid) {
           suffix = `${Suffix.Episode}/${uid}/${eid}`;
-          urlString = `${process.env.REACT_APP_REST_SERVICE}${suffix}`;
+          urlString = `${process.env.REACT_APP_REST_SERVICE}shows/${suffix}`;
         } else {
           suffix = `${Suffix.Template}/${uid}/${tid}`;
-          urlString = `${process.env.REACT_APP_REST_SERVICE}${suffix}`;
+          urlString = `${process.env.REACT_APP_REST_SERVICE}shows/${suffix}`;
         }
 
         const { data } = await axios.get(urlString);
