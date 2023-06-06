@@ -10,7 +10,7 @@ interface HostProps {
 }
 
 export const HostWrapper = styled.div<HostProps>`
-  width: 350px;
+  width: 400px;
   height: 40px;
 
   display: grid;
