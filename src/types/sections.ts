@@ -36,6 +36,7 @@ export enum SectionsCNN {
 export enum SectionsPTI {
   Chyron = "chyron",
   Description = "description",
+  Emojis = "emojis",
   Header = "header",
   Logo = "logo",
   Sponsors = "sponsors",

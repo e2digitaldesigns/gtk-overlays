@@ -10,6 +10,7 @@ import Topics from "./topics/topics";
 import Hosts from "./hosts/Host";
 import HostLabels from "./labels/Label";
 import { ShowChatPTI } from "./ShowChatPTI/ShowChatPTI";
+import { EmojiPTI } from "./emoji/Emoji";
 
 const OverlayPTI: React.FC = () => {
   const [topicDescription, setTopicDescription] = React.useState<string>("");
@@ -19,6 +20,7 @@ const OverlayPTI: React.FC = () => {
   return (
     <>
       <ThemeProvider theme={theme}>
+        <EmojiPTI />
         <Chyron />
         <Description topicDescription={topicDescription} />
         <Logo />
