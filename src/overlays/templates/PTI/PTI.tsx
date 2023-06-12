@@ -11,15 +11,18 @@ import Hosts from "./hosts/Host";
 import HostLabels from "./labels/Label";
 import { ShowChatPTI } from "./ShowChatPTI/ShowChatPTI";
 import { EmojiPTI } from "./emoji/Emoji";
+import ChatRankingsPTI from "./ChatRankings/ChatRakings";
 
 const OverlayPTI: React.FC = () => {
   const [topicDescription, setTopicDescription] = React.useState<string>("");
   const [topicVideoId, setTopicVideoId] = React.useState<string>("");
+
   console.log({ topicVideoId });
 
   return (
     <>
       <ThemeProvider theme={theme}>
+        <ChatRankingsPTI />
         <EmojiPTI />
         <Chyron />
         <Description topicDescription={topicDescription} />

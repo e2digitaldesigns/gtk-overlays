@@ -34,6 +34,7 @@ export enum SectionsCNN {
 }
 
 export enum SectionsPTI {
+  ChatRank = "chatRank",
   Chyron = "chyron",
   Description = "description",
   Emojis = "emojis",
