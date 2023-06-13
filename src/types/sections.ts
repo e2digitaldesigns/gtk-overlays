@@ -62,8 +62,15 @@ export enum SectionsSAS {
   Chyron = "chyron"
 }
 
+export enum SectionsCHL {
+  Header = "header",
+  Chyron = "chyron",
+  Host = "host"
+}
+
 export type OverlaySections =
   | SectionsBNN
+  | SectionsCHL
   | SectionsCNN
   | SectionsPTI
   | SectionsSAS;
