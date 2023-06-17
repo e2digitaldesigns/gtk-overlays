@@ -7,9 +7,9 @@ interface IVotingState {
   [key: string]: number;
 }
 
-interface IVotes {
+export interface IVotes {
   _id: string;
-  action: "add" | "clear";
+  action: "add" | "remove";
   username: string;
   channel: string;
   host: string;

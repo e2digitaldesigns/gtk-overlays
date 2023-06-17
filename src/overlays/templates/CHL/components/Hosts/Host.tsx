@@ -8,6 +8,7 @@ import { useDataContext } from "./../../../../../context";
 import { SectionsCHL } from "../../../../../types";
 
 import CONFIG from "../../config.json";
+import { HostVote } from "./HostVote";
 
 const Host: React.FC = () => {
   const { showSection } = useParams();
@@ -34,6 +35,7 @@ const Host: React.FC = () => {
               </Styled.NameTag>
             </Styled.HostBoxInner>
 
+            <HostVote seatNum={host.seatNum} />
             <Styled.VoteCount>{voting[host.seatNum]}</Styled.VoteCount>
           </Styled.HostBox>
         </Styled.HostBoxWrapper>
