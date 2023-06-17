@@ -96,6 +96,8 @@ export const VoteCount = styled.div`
   padding: 0 0.625rem;
   background-color: ${props => props.theme.colors.bg1};
 
+  border-bottom: 3px solid ${props => props.theme.colors.accent1};
+
   position: absolute;
   bottom: 20px;
   right: 20px;
@@ -140,4 +142,13 @@ export const HostBoxInner = styled.div<IntHostBoxInner>`
     top: calc(${borderSize} / 2);
     left: calc(${borderSize} / 2);
   }
+`;
+
+export const FireWrapper = styled.div`
+  width: 590px;
+  height: 330px;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  overflow: hidden;
 `;

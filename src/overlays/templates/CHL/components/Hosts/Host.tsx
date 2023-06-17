@@ -9,19 +9,22 @@ import { SectionsCHL } from "../../../../../types";
 
 import CONFIG from "../../config.json";
 import { HostVote } from "./HostVote";
+import { FireHost } from "./FireHost";
 
 const Host: React.FC = () => {
   const { showSection } = useParams();
-  const { hosts: data } = useDataContext();
 
+  const { hosts: data } = useDataContext();
   const { voting } = useVotingHook();
   const showHost = showSection(SectionsCHL.Host);
+
+  React.useEffect(() => {}, []);
 
   if (!showHost) return null;
 
   return (
     <>
-      {data.map((host: any, index: number) => (
+      {data.map((host: any) => (
         <Styled.HostBoxWrapper key={host.seatNum} position={host.seatNum}>
           <Styled.HostBoxStroke />
           <Styled.HostBox>
@@ -36,6 +39,11 @@ const Host: React.FC = () => {
             </Styled.HostBoxInner>
 
             <HostVote seatNum={host.seatNum} />
+
+            <Styled.FireWrapper>
+              <FireHost fireCount={5} seatNum={host.seatNum} />
+            </Styled.FireWrapper>
+
             <Styled.VoteCount>{voting[host.seatNum]}</Styled.VoteCount>
           </Styled.HostBox>
         </Styled.HostBoxWrapper>

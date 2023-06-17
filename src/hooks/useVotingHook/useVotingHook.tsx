@@ -22,22 +22,27 @@ const initState: IVotingState = {
   "2": 0,
   "3": 0,
   "4": 0,
-  "5": 0
+  "5": 0,
+  "6": 0
 };
 
 const useVotingHook = () => {
-  const STORAGE_KEY = "@gtk/voting-tally";
+  const STORAGE_KEY = {
+    TALLY: "@gtk/voting-tally"
+  };
+
   const [voting, setVoting] = React.useState<IVotingState>(initState);
   const [votes, setVotes] = React.useState<IVotes[]>([]);
 
   const queryParams = new URLSearchParams(window.location.search);
 
   React.useEffect(() => {
-    const data = window.localStorage.getItem(STORAGE_KEY);
+    const data = window.localStorage.getItem(STORAGE_KEY.TALLY);
 
     if (data) {
       JSON.parse(data) && setVoting(JSON.parse(data));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleAddVote = React.useCallback(
@@ -55,8 +60,10 @@ const useVotingHook = () => {
 
       const newState = _cloneDeep(voting);
       const hostNum = vote.host as keyof IVotingState;
+
       newState[hostNum] =
         type === "add" ? newState[hostNum] + 1 : newState[hostNum] - 1;
+
       setVoting(newState);
     },
     [handleAddVote, voting]
@@ -66,7 +73,6 @@ const useVotingHook = () => {
     let stillHere = true;
 
     socketServices.subscribeHostVoting((err: any, data: any) => {
-      console.log(data);
       if (data?.uid !== queryParams.get("uid")) return;
       if (!data?.tid || data?.tid !== queryParams.get("tid")) return;
 
@@ -103,8 +109,13 @@ const useVotingHook = () => {
 
         switch (data.action) {
           case "clear-votes":
+            window.localStorage.setItem(
+              STORAGE_KEY.TALLY,
+              JSON.stringify(initState)
+            );
+
             stillHere && setVoting(initState);
-            window.localStorage.setItem(STORAGE_KEY, JSON.stringify(initState));
+            stillHere && setVotes([]);
             break;
 
           default:
@@ -123,8 +134,8 @@ const useVotingHook = () => {
 
   React.useEffect(() => {
     if (_isEqual(initState, voting)) return;
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(voting));
-  }, [voting]);
+    window.localStorage.setItem(STORAGE_KEY.TALLY, JSON.stringify(voting));
+  }, [STORAGE_KEY.TALLY, voting]);
 
   return {
     votes,
