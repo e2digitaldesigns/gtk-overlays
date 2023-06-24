@@ -4,103 +4,39 @@ import { useParams } from "../../../../../hooks";
 
 import { useDataContext } from "./../../../../../context";
 import { SectionsBNN } from "../../../../../types";
+import TheHost from "./TheHost";
 
 const Host: React.FC = () => {
   const { showSection } = useParams();
-  const { hosts: data } = useDataContext();
+  const { hosts } = useDataContext();
 
-  const showHost_2_1 = showSection(SectionsBNN.Host_2_1);
-  const showHost_2_2 = showSection(SectionsBNN.Host_2_2);
-
-  const showVideo_2_host = showSection(SectionsBNN.Video_2_host);
-  const showVideo_2_video = showSection(SectionsBNN.Video_2_video);
-
-  const showVideo_3_host_1 = showSection(SectionsBNN.Video_3_host_1);
-  const showVideo_3_host_2 = showSection(SectionsBNN.Video_3_host_2);
-  const showVideo_3_video = showSection(SectionsBNN.Video_3_video);
+  const showHost2Up = showSection(SectionsBNN.Hosts_2_up);
+  const showHost_1_video_1 = showSection(SectionsBNN.Host_1_video_1);
+  const showHost_2_video_1 = showSection(SectionsBNN.Host_2_video_1);
 
   return (
     <>
-      {showHost_2_1 && (
-        <>
-          <Styled.HostBoxStroke1 />
-          <Styled.HostBox position={1}>
-            <Styled.HostBoxInner>
-              {data?.[0]?.name && (
-                <Styled.NameTag1>{data[0].name}</Styled.NameTag1>
-              )}
-            </Styled.HostBoxInner>
-          </Styled.HostBox>
-        </>
+      {showHost2Up && (
+        <Styled.HostBoxWrapperPlater seats={hosts.length}>
+          {hosts.map((host: any) => (
+            <TheHost key={host.seatNum} seatNumber={host.seatNum} />
+          ))}
+        </Styled.HostBoxWrapperPlater>
       )}
 
-      {showHost_2_2 && (
-        <>
-          <Styled.HostBoxStroke2 />
-          <Styled.HostBox position={2}>
-            <Styled.HostBoxInner>
-              {data?.[1]?.name && (
-                <Styled.NameTag2>{data[1].name}</Styled.NameTag2>
-              )}
-            </Styled.HostBoxInner>
-          </Styled.HostBox>
-        </>
+      {showHost_1_video_1 && (
+        <Styled.HostBoxWrapper1HostAndVideo>
+          <TheHost seatNumber={1} />
+          <TheHost type="video" />
+        </Styled.HostBoxWrapper1HostAndVideo>
       )}
 
-      {showVideo_2_host && (
-        <>
-          <Styled.HostBoxThinStroke />
-          <Styled.HostBoxThin>
-            {data?.[0]?.name && (
-              <Styled.NameTagThin>{data[0].name}</Styled.NameTagThin>
-            )}
-            <Styled.HostBoxInner />
-          </Styled.HostBoxThin>
-        </>
-      )}
-
-      {showVideo_2_video && (
-        <>
-          <Styled.VideoBoxStroke />
-          <Styled.VideoBox>
-            {/* <Styled.NameTagVideo>Host Name Video 2</Styled.NameTagVideo> */}
-            <Styled.VideoBoxInner />
-          </Styled.VideoBox>
-        </>
-      )}
-
-      {showVideo_3_host_1 && (
-        <>
-          <Styled.HostVideoBoxThinLeftStroke />
-          <Styled.HostVideoBoxThinLeft>
-            {data?.[0]?.name && (
-              <Styled.NameTagThin>{data[0].name}</Styled.NameTagThin>
-            )}
-            <Styled.HostBoxInner />
-          </Styled.HostVideoBoxThinLeft>
-        </>
-      )}
-
-      {showVideo_3_video && (
-        <>
-          <Styled.VideoBoxSmallerStroke />
-          <Styled.VideoBoxSmaller>
-            {/* <Styled.NameTagVideo>Host Name Video 3</Styled.NameTagVideo> */}
-            <Styled.VideoBoxInner />
-          </Styled.VideoBoxSmaller>
-        </>
-      )}
-
-      {showVideo_3_host_2 && (
-        <>
-          <Styled.HostVideoBoxThinRightStroke />
-          <Styled.HostVideoBoxThinRight>
-            {data?.[1]?.name && (
-              <Styled.NameTagThin>{data[1].name}</Styled.NameTagThin>
-            )}
-            <Styled.HostBoxInner />
-          </Styled.HostVideoBoxThinRight>
-        </>
+      {showHost_2_video_1 && (
+        <Styled.HostBoxWrapper2HostAndVideo>
+          <TheHost seatNumber={1} />
+          <TheHost type="video" />
+          <TheHost seatNumber={2} />
+        </Styled.HostBoxWrapper2HostAndVideo>
       )}
     </>
   );

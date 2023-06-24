@@ -8,7 +8,6 @@ import Logo from "./logo/logo";
 import Sponsors from "./sponsors/sponsors";
 import Topics from "./topics/topics";
 import Hosts from "./hosts/Host";
-import HostLabels from "./labels/Label";
 import { ShowChatPTI } from "./ShowChatPTI/ShowChatPTI";
 import { EmojiPTI } from "./emoji/Emoji";
 import ChatRankingsPTI from "./ChatRankings/ChatRakings";
@@ -28,7 +27,6 @@ const OverlayPTI: React.FC = () => {
         <Description topicDescription={topicDescription} />
         <Logo />
         <Sponsors />
-        <HostLabels />
 
         <Topics
           setTopicDescription={setTopicDescription}

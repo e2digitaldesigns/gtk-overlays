@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "../../../../hooks";
 import { SectionsPTI } from "../../../../types";
 import * as Styled from "./Host.style";
+import { TheHostLabel } from "../labels/TheLabel";
 
 const Hosts: React.FC = () => {
   const { showSection } = useParams();
@@ -19,23 +20,17 @@ const Hosts: React.FC = () => {
     };
   }, []);
 
-  const host2Up = showSection(SectionsPTI.Host_2_Divider);
-  const host3Up = showSection(SectionsPTI.Host_3_Divider);
+  const showDivider = showSection(SectionsPTI.Host_Divider);
+  const showHostLabel1 = showSection(SectionsPTI.Host_label_1);
+  const showHostLabel2 = showSection(SectionsPTI.Host_label_2);
 
-  if (host2Up) {
-    return <Styled.Host2Up bgColor={bgColor}></Styled.Host2Up>;
-  }
-
-  if (host3Up) {
-    return (
-      <>
-        <Styled.Host3Up section={1} bgColor={bgColor}></Styled.Host3Up>
-        <Styled.Host3Up section={2} bgColor={bgColor}></Styled.Host3Up>
-      </>
-    );
-  }
-
-  return null;
+  return (
+    <>
+      {showDivider && <Styled.Divider bgColor={bgColor}></Styled.Divider>}
+      {showHostLabel1 && <TheHostLabel seatNumber={1} />}
+      {showHostLabel2 && <TheHostLabel seatNumber={2} />}
+    </>
+  );
 };
 
 export default Hosts;

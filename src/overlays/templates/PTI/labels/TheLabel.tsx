@@ -1,35 +1,28 @@
 import React from "react";
 import * as Styled from "./Label.style";
 import { Scroller } from "../../../../globalComponents";
-import { useParams } from "../../../../hooks";
-import { SectionsPTI } from "../../../../types";
 
 import CONFIG from "../config.json";
 import useVotingHook from "../../../../hooks/useVotingHook/useVotingHook";
+import { useDataContext } from "../../../../context";
 
 interface ITheHostLabel {
-  hostNum: string;
-  seat: string;
-  section: SectionsPTI;
-  tickerArr: string[];
+  seatNumber: number;
 }
 
-export const TheHostLabel: React.FC<ITheHostLabel> = ({
-  hostNum,
-  seat,
-  section,
-  tickerArr
-}) => {
-  const { showSection } = useParams();
+export const TheHostLabel: React.FC<ITheHostLabel> = ({ seatNumber }) => {
+  const { hosts } = useDataContext();
   const { voting } = useVotingHook();
 
-  return showSection(section) ? (
+  const host = hosts.find((host: any) => host.seatNum === seatNumber);
+
+  return host ? (
     <>
-      <Styled.HostWrapper seat={seat}>
-        <Styled.Vote>{voting[hostNum]}</Styled.Vote>
+      <Styled.HostWrapper seat={seatNumber}>
+        <Styled.Vote>{voting[host.seatNum]}</Styled.Vote>
         <Styled.Host>
           <Scroller timer={CONFIG.scrollTimers.hostLabels}>
-            {tickerArr?.map((ticker: string, index: number) => (
+            {host.ticker?.map((ticker: string, index: number) => (
               <div key={index}>{ticker}</div>
             ))}
           </Scroller>

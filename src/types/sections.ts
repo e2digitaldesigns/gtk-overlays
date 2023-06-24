@@ -8,13 +8,10 @@ export enum TopicActionssssssss {
 export enum SectionsBNN {
   Header = "header",
   Chyron = "chyron",
-  Host_2_1 = "host_2_1",
-  Host_2_2 = "host_2_2",
-  Video_2_host = "video_2_host",
-  Video_2_video = "video_2_video",
-  Video_3_host_1 = "video_3_host_1",
-  Video_3_host_2 = "video_3_host_2",
-  Video_3_video = "video_3_video"
+
+  Hosts_2_up = "hosts_2_up",
+  Host_1_video_1 = "host_1_video_1",
+  Host_2_video_1 = "host_2_video_1"
 }
 
 export enum SectionsCNN {
@@ -43,18 +40,9 @@ export enum SectionsPTI {
   Sponsors = "sponsors",
   Topics = "topics",
 
-  Host_2_Divider = "host_2_divider",
-  Host_3_Divider = "host_3_divider",
-
-  Label_1_Host_1 = "label_1_host_1",
-  Label_1_Host_2 = "label_1_host_2",
-  Label_1_Host_3 = "label_1_host_3",
-
-  Label_2_Host_2 = "label_2_host_2",
-  Label_2_Host_3 = "label_2_host_3",
-
-  Label_3_Host_2 = "label_3_host_2",
-  Label_3_Host_3 = "label_3_host_3"
+  Host_Divider = "host_divider",
+  Host_label_1 = "host_label_1",
+  Host_label_2 = "host_label_2"
 }
 
 export enum SectionsSAS {

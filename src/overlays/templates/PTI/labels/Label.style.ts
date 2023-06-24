@@ -6,7 +6,7 @@ const fadeOutAnimation = keyframes`
 `;
 
 interface HostProps {
-  seat: string;
+  seat: number;
 }
 
 export const HostWrapper = styled.div<HostProps>`
@@ -18,16 +18,7 @@ export const HostWrapper = styled.div<HostProps>`
 
   position: absolute;
   top: 750px;
-  left: ${props =>
-    props.seat === "1"
-      ? "20px"
-      : props.seat === "22"
-      ? "785px"
-      : props.seat === "23"
-      ? "785px"
-      : props.seat === "32"
-      ? "530px"
-      : "1040px"};
+  left: ${props => (props.seat === 1 ? "20px" : "785px")};
 `;
 
 export const Vote = styled.div`
