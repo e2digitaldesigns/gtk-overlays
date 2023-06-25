@@ -9,11 +9,13 @@ import useVotingHook from "../../../../../hooks/useVotingHook/useVotingHook";
 interface ITheHostProps {
   type?: string;
   seatNumber?: number;
+  votePosition?: string;
 }
 
 const TheHost: React.FC<ITheHostProps> = ({
   type = "host",
-  seatNumber = 0
+  seatNumber = 0,
+  votePosition = "br"
 }) => {
   const { hosts } = useDataContext();
   const { voting } = useVotingHook();
@@ -36,7 +38,9 @@ const TheHost: React.FC<ITheHostProps> = ({
                     ))}
                   </Scroller>
                 </Styled.NameTag>
-                <Styled.HostVote>{voting[host.seatNum]}</Styled.HostVote>{" "}
+                <Styled.HostVote votePosition={votePosition}>
+                  {voting[host.seatNum]}
+                </Styled.HostVote>{" "}
               </>
             )}
           </Styled.HostBoxInner>

@@ -20,9 +20,26 @@ export const HostBoxWrapperPlater = styled(HostBoxWrapperPlaterDefaults)`
 `;
 
 export const HostBoxWrapper1HostAndVideo = styled(HostBoxWrapperPlaterDefaults)`
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 400px 1380px;
+
+  > div:first-child {
+    margin-top: 55px;
+    height: 500px;
+  }
+
+  > div:last-child {
+    margin-top: -30px;
+    height: 680px;
+  }
 `;
 
 export const HostBoxWrapper2HostAndVideo = styled(HostBoxWrapperPlaterDefaults)`
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 1fr 1080px 1fr;
+  gap: 20px;
+
+  > div:first-child,
+  > div:last-child {
+    margin-top: 55px;
+    height: 400px;
+  }
 `;

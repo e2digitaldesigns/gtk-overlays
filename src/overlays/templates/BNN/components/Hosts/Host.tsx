@@ -26,16 +26,16 @@ const Host: React.FC = () => {
 
       {showHost_1_video_1 && (
         <Styled.HostBoxWrapper1HostAndVideo>
-          <TheHost seatNumber={1} />
+          <TheHost seatNumber={1} votePosition="tl" />
           <TheHost type="video" />
         </Styled.HostBoxWrapper1HostAndVideo>
       )}
 
       {showHost_2_video_1 && (
         <Styled.HostBoxWrapper2HostAndVideo>
-          <TheHost seatNumber={1} />
+          <TheHost seatNumber={1} votePosition="tl" />
           <TheHost type="video" />
-          <TheHost seatNumber={2} />
+          <TheHost seatNumber={2} votePosition="tr" />
         </Styled.HostBoxWrapper2HostAndVideo>
       )}
     </>

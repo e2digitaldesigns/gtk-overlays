@@ -49,11 +49,11 @@ export const HostBoxInner = styled.div`
       transparent 120deg
     );
     height: 200%;
-    width: 200%;
+    width: 150%;
     position: absolute;
     left: -50%;
     top: -50%;
-    animation: ${rotate} 30s infinite linear;
+    animation: ${rotate} 60s infinite;
   }
 
   :after {
@@ -68,7 +68,7 @@ export const HostBoxInner = styled.div`
 `;
 
 export const NameTag = styled.div`
-  width: 320px;
+  width: 300px;
   height: 40px;
 
   font-size: 1.25rem;
@@ -86,7 +86,18 @@ export const NameTag = styled.div`
   z-index: 50;
 `;
 
-export const HostVote = styled.div`
+interface IntHostHostVote {
+  votePosition: string;
+}
+
+const setPosition: { [key: string]: string } = {
+  tr: "top: 20px; right: 20px;",
+  tl: "top: 20px; left: 20px;",
+  br: "bottom: 20px; right: 20px;",
+  bl: "bottom: 20px; left: 20px;"
+};
+
+export const HostVote = styled.div<IntHostHostVote>`
   width: 60px;
   height: 40px;
 
@@ -104,4 +115,6 @@ export const HostVote = styled.div`
   bottom: 20px;
   right: 20px;
   z-index: 50;
+
+  ${props => setPosition[props.votePosition as string]};
 `;
