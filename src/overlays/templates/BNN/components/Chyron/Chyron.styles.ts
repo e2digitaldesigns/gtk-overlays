@@ -5,8 +5,7 @@ export const ChyronWrapper = styled.div`
   height: 225px;
 
   position: absolute;
-  top: 780px;
-  top: 805px;
+  bottom: 20px;
   left: 50px;
 `;
 

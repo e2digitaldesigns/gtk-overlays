@@ -20,16 +20,21 @@ export const HostBoxWrapperPlater = styled(HostBoxWrapperPlaterDefaults)`
 `;
 
 export const HostBoxWrapper1HostAndVideo = styled(HostBoxWrapperPlaterDefaults)`
-  grid-template-columns: 400px 1380px;
+  top: 80px;
+  grid-template-columns: 450px 1fr 1325px;
+  gap: 0px;
+  height: 745px;
 
   > div:first-child {
-    margin-top: 55px;
-    height: 500px;
+    grid-column: 1;
+    margin-top: 45px;
+    height: 400px;
   }
 
   > div:last-child {
-    margin-top: -30px;
-    height: 680px;
+    grid-column: 3;
+    justify-content: right;
+    text-align: right;
   }
 `;
 

@@ -71,7 +71,7 @@ export const NameTag = styled.div`
   width: 300px;
   height: 40px;
 
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   text-transform: uppercase;
 
   display: flex;
