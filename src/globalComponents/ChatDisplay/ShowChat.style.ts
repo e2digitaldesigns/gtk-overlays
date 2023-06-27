@@ -37,6 +37,7 @@ export const EntireChatWrapper = styled.div<IEntireChatWrapper>`
   background-color: ${props => props.bgColor};
   overflow: hidden;
   padding: 10px;
+  box-sizing: border-box;
 
   display: grid;
   grid-template-columns: auto 1fr;

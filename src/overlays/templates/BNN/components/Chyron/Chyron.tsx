@@ -9,6 +9,7 @@ import NewsFeed from "./NewsFeed/NewsFeed";
 import socketServices from "../../../../../services/socketServices";
 import { useDataContext } from "../../../../../context";
 import { SectionsBNN, TopicActions } from "../../../../../types";
+import { ShowChatBNN } from "./ShowChatBNN/ShowChatBNN";
 
 const Chyron: React.FC = () => {
   const queryParams = new URLSearchParams(window.location.search);
@@ -63,6 +64,7 @@ const Chyron: React.FC = () => {
   return (
     <Styled.ChyronWrapper>
       <Styled.Chyron>
+        <ShowChatBNN />
         <NetworkTab />
         <LogoBox />
         <InfoBox />
