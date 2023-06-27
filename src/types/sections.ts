@@ -6,8 +6,9 @@ export enum TopicActionssssssss {
 }
 
 export enum SectionsBNN {
-  Header = "header",
   Chyron = "chyron",
+  Emojis = "emojis",
+  Header = "header",
 
   Hosts_2_up = "hosts_2_up",
   Host_1_video_1 = "host_1_video_1",
