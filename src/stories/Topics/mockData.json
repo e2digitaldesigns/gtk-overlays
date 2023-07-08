@@ -8,7 +8,8 @@
     "isParent": true,
     "isChild": false,
     "parentId": "",
-    "img": "80207845-a10a-4f61-8f50-f9689ec574e2.jpg"
+    "img": "80207845-a10a-4f61-8f50-f9689ec574e2.jpg",
+    "video": ""
   },
   {
     "_id": "d6fa9e56-9ed7-47bc-a995-bebaf91533f6",
@@ -19,7 +20,8 @@
     "isParent": false,
     "isChild": true,
     "parentId": "30dcde66-8784-46d6-9458-d33a9fd6a3f4",
-    "img": "abcdddddd.jpg"
+    "img": "abcdddddd.jpg",
+    "video": ""
   },
   {
     "_id": "b151ae05-0842-4424-b1cd-7c37a5f7defd",
@@ -30,7 +32,8 @@
     "isParent": false,
     "isChild": false,
     "parentId": "",
-    "img": ""
+    "img": "",
+    "video": ""
   },
   {
     "_id": "5b7c365c-7097-4453-938d-b2de1d9fd405",
@@ -41,7 +44,8 @@
     "isParent": true,
     "isChild": false,
     "parentId": "",
-    "img": ""
+    "img": "",
+    "video": ""
   },
   {
     "_id": "dfd3143d-bd1a-4afa-a0c6-20f179546556",
@@ -52,7 +56,8 @@
     "isParent": false,
     "isChild": true,
     "parentId": "5b7c365c-7097-4453-938d-b2de1d9fd405",
-    "img": ""
+    "img": "",
+    "video": ""
   },
   {
     "_id": "8505c00d-3d2f-45ee-b44f-85c9bdfda819",
@@ -63,7 +68,8 @@
     "isParent": false,
     "isChild": true,
     "parentId": "5b7c365c-7097-4453-938d-b2de1d9fd405",
-    "img": ""
+    "img": "",
+    "video": ""
   },
   {
     "_id": "262e376f-edf3-4818-9b36-7ff523356583",
@@ -74,7 +80,8 @@
     "isParent": false,
     "isChild": true,
     "parentId": "5b7c365c-7097-4453-938d-b2de1d9fd405",
-    "img": ""
+    "img": "",
+    "video": ""
   },
   {
     "_id": "05a227c5-4bc0-49c7-a0ec-05fa6ee5ce74",
@@ -85,7 +92,8 @@
     "isParent": false,
     "isChild": true,
     "parentId": "5b7c365c-7097-4453-938d-b2de1d9fd405",
-    "img": ""
+    "img": "",
+    "video": ""
   },
   {
     "_id": "d843244a-c268-472d-bf43-0c1e294562ce",
@@ -96,7 +104,8 @@
     "isParent": false,
     "isChild": false,
     "parentId": "",
-    "img": ""
+    "img": "",
+    "video": ""
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9",
@@ -107,7 +116,8 @@
     "isParent": false,
     "isChild": false,
     "parentId": "",
-    "img": ""
+    "img": "",
+    "video": ""
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9A",
@@ -118,7 +128,8 @@
     "isParent": false,
     "isChild": false,
     "parentId": "",
-    "img": ""
+    "img": "",
+    "video": ""
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9B",
@@ -129,7 +140,8 @@
     "isParent": false,
     "isChild": false,
     "parentId": "",
-    "img": ""
+    "img": "",
+    "video": ""
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9C",
@@ -140,7 +152,8 @@
     "isParent": false,
     "isChild": false,
     "parentId": "",
-    "img": ""
+    "img": "",
+    "video": ""
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9D",
@@ -151,7 +164,8 @@
     "isParent": false,
     "isChild": false,
     "parentId": "",
-    "img": ""
+    "img": "",
+    "video": ""
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9E",
@@ -162,7 +176,8 @@
     "isParent": false,
     "isChild": false,
     "parentId": "",
-    "img": ""
+    "img": "",
+    "video": ""
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9F",
@@ -173,7 +188,8 @@
     "isParent": false,
     "isChild": false,
     "parentId": "",
-    "img": ""
+    "img": "",
+    "video": ""
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9G",
@@ -184,7 +200,8 @@
     "isParent": false,
     "isChild": false,
     "parentId": "",
-    "img": ""
+    "img": "",
+    "video": ""
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9H",
@@ -195,7 +212,8 @@
     "isParent": false,
     "isChild": false,
     "parentId": "",
-    "img": ""
+    "img": "",
+    "video": ""
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9I",
@@ -206,7 +224,8 @@
     "isParent": false,
     "isChild": false,
     "parentId": "",
-    "img": ""
+    "img": "",
+    "video": ""
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9J",
@@ -217,6 +236,7 @@
     "isParent": false,
     "isChild": false,
     "parentId": "",
-    "img": ""
+    "img": "",
+    "video": ""
   }
 ]

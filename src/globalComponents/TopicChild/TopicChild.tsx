@@ -38,8 +38,7 @@ interface IntTopicsProps {
 
   isDemoMode?: boolean;
 
-  setTopicDescription?: (string: string) => void;
-  setTopicVideoId?: (string: string) => void;
+  setTopicState?: React.Dispatch<React.SetStateAction<IntTopic | undefined>>;
   topicNext?: () => void;
   topicPrev?: () => void;
 }
@@ -72,7 +71,7 @@ const GTK_TopicComponent: React.FC<IntTopicsProps> = ({
   imageDefault,
   imageBaseUrl,
 
-  setTopicDescription
+  setTopicState
 }) => {
   const containerRef = React.useRef<any>();
   const [activeTopicIndex, setActiveTopicIndex] = React.useState<number>(0);
@@ -164,7 +163,7 @@ const GTK_TopicComponent: React.FC<IntTopicsProps> = ({
 
     const currentTopic = data[activeTopicIndex];
     setCurrentTopicState(currentTopic);
-    setTopicDescription && setTopicDescription(currentTopic?.desc || "");
+    setTopicState && setTopicState(currentTopic);
 
     const parentId = currentTopic?.parentId;
     setActiveParentTopic(data.find(topic => topic._id === parentId));

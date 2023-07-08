@@ -52,6 +52,14 @@ const socketServices = {
 
   unSubscribeOverlaysChatRanks() {
     socket.removeAllListeners("gtkOverlayChatRanks");
+  },
+
+  subscribeOverlaysVideoPlayer(cb: any) {
+    socket.on("gtkOverlayVideoPlayer", (data: any) => cb(null, data));
+  },
+
+  unSubscribeOverlaysVideoPlayer() {
+    socket.removeAllListeners("gtkOverlayVideoPlayer");
   }
 };
 

@@ -16,6 +16,7 @@ export interface IntTopic {
   order: number;
   parentId: string;
   timer: number;
+  video: string;
 }
 
 export interface IntCss {

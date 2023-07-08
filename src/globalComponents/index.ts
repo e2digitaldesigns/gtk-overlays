@@ -5,3 +5,5 @@ export { default as TimeItem } from "./TimeItem/TimeItem";
 export { default as TopChatRank } from "./TopChat/TopChat";
 export { default as Topics } from "./TopicChild/TopicChild";
 export { socialToScrollerUtil as socialToScroller } from "./Utils/socailToScroller";
+
+export { default as VideoPlayer } from "./VideoPlayer/VideoPlayer";

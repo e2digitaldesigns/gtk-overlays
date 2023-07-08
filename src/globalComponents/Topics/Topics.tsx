@@ -38,8 +38,7 @@ interface IntTopicsProps {
 
   isDemoMode?: boolean;
 
-  setTopicDescription?: (string: string) => void;
-  setTopicVideoId?: (string: string) => void;
+  setTopicState?: React.Dispatch<React.SetStateAction<IntTopic | undefined>>;
   topicNext?: () => void;
   topicPrev?: () => void;
 }
@@ -72,7 +71,7 @@ const GTK_TopicComponent: React.FC<IntTopicsProps> = ({
   imageDefault,
   imageBaseUrl,
 
-  setTopicDescription
+  setTopicState
 }) => {
   const containerRef = React.useRef<any>();
   const listItemRef = React.useRef<any>([]);
@@ -249,8 +248,8 @@ const GTK_TopicComponent: React.FC<IntTopicsProps> = ({
 
     setCurrentTopicState(currentTopic);
 
-    if (setTopicDescription) {
-      setTopicDescription(currentTopic?.desc || "");
+    if (setTopicState) {
+      setTopicState(currentTopic);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

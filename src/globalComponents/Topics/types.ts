@@ -16,6 +16,7 @@ export interface IntTopic {
   isChild: boolean;
   parentId: string;
   img: string;
+  video: string;
 }
 
 export interface IntCss {

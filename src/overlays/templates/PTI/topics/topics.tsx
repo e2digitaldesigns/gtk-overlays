@@ -5,15 +5,13 @@ import { Topics } from "../../../../globalComponents";
 import { useParams } from "../../../../hooks";
 import { SectionsPTI } from "../../../../types";
 
+import { IntTopic } from "../../../../globalComponents/Topics/types";
+
 interface TopicsProps {
-  setTopicDescription: (string: string) => void;
-  setTopicVideoId?: (string: string) => void;
+  setTopicState: React.Dispatch<React.SetStateAction<IntTopic | undefined>>;
 }
 
-const OverlayTopics: React.FC<TopicsProps> = ({
-  setTopicDescription,
-  setTopicVideoId
-}) => {
+const OverlayTopics: React.FC<TopicsProps> = ({ setTopicState }) => {
   const { topics: data, logo } = useDataContext();
   const { showSection } = useParams();
 
@@ -31,7 +29,7 @@ const OverlayTopics: React.FC<TopicsProps> = ({
         imageDefault={logo}
         imageShow={true}
         imageHeight={220}
-        setTopicDescription={setTopicDescription}
+        setTopicState={setTopicState}
         viewableTopicCount={7}
       />
     </Styled.TopicWrapper>

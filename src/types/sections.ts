@@ -43,7 +43,9 @@ export enum SectionsPTI {
 
   Host_Divider = "host_divider",
   Host_label_1 = "host_label_1",
-  Host_label_2 = "host_label_2"
+  Host_label_2 = "host_label_2",
+
+  Video = "video"
 }
 
 export enum SectionsSAS {
