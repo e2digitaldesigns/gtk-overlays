@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
 
 interface TopicTimerProps {
-  timer: number;
+  activeTopicIndex: number;
   paused: boolean;
+  timer: number;
 }
 
-const TimerCount: React.FC<TopicTimerProps> = ({ timer, paused }) => {
+const TimerCount: React.FC<TopicTimerProps> = ({
+  activeTopicIndex,
+  paused,
+  timer
+}) => {
   const [counter, setCounter] = useState<number>(0);
 
   useEffect(() => {
     setCounter(timer);
-  }, [timer]);
+  }, [activeTopicIndex, timer]);
 
   useEffect(() => {
     let pausedAmount: number = paused === true ? 0 : 1;

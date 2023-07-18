@@ -229,8 +229,9 @@ const GTK_TopicComponent: React.FC<IntTopicsProps> = ({
             )}
             {currentTopicState?.timer ? (
               <TimerCount
-                timer={currentTopicState.timer}
+                activeTopicIndex={activeTopicIndex}
                 paused={isTimerPaused}
+                timer={currentTopicState.timer}
               />
             ) : (
               <TimeClock />
