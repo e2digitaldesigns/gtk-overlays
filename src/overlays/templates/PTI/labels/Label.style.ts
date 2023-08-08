@@ -21,6 +21,19 @@ export const HostWrapper = styled.div<HostProps>`
   left: ${props => (props.seat === 1 ? "20px" : "785px")};
 `;
 
+export const HostWrapper3 = styled.div<HostProps>`
+  width: 400px;
+  height: 40px;
+
+  display: grid;
+  grid-template-columns: 50px auto;
+
+  position: absolute;
+  top: 750px;
+  left: ${props =>
+    props.seat === 1 ? "20px" : props.seat === 2 ? "544px" : "1030px"};
+`;
+
 export const Vote = styled.div`
   width: 100%;
   height: 100%;

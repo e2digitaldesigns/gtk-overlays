@@ -42,8 +42,10 @@ export enum SectionsPTI {
   Topics = "topics",
 
   Host_Divider = "host_divider",
+  Host_Divider2 = "host_divider2",
   Host_label_1 = "host_label_1",
   Host_label_2 = "host_label_2",
+  Host_label_3 = "host_label_3",
 
   Video = "video"
 }

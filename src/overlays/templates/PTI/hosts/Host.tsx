@@ -21,14 +21,30 @@ const Hosts: React.FC = () => {
   }, []);
 
   const showDivider = showSection(SectionsPTI.Host_Divider);
+  const showDivider2 = showSection(SectionsPTI.Host_Divider2);
   const showHostLabel1 = showSection(SectionsPTI.Host_label_1);
   const showHostLabel2 = showSection(SectionsPTI.Host_label_2);
+  const showHostLabel3 = showSection(SectionsPTI.Host_label_3);
 
   return (
     <>
       {showDivider && <Styled.Divider bgColor={bgColor}></Styled.Divider>}
       {showHostLabel1 && <TheHostLabel seatNumber={1} />}
       {showHostLabel2 && <TheHostLabel seatNumber={2} />}
+
+      {showHostLabel3 && (
+        <>
+          <TheHostLabel seatNumber={1} threeUp={true} />
+          <TheHostLabel seatNumber={2} threeUp={true} />
+          <TheHostLabel seatNumber={3} threeUp={true} />
+        </>
+      )}
+
+      {showDivider2 && (
+        <>
+          <Styled.Divider2 bgColor={bgColor}></Styled.Divider2>
+        </>
+      )}
     </>
   );
 };

@@ -16,4 +16,14 @@ export const Divider = styled.div<IDivider>`
   background-color: ${props => props.bgColor};
 `;
 
+export const Divider2 = styled.div<IDivider>`
+  transition: all 5s;
+  position: absolute;
+  left: 514px;
+  width: 496px;
+  height: 860px;
+  border-left: 10px solid ${props => props.bgColor};
+  border-right: 10px solid ${props => props.bgColor};
+`;
+
 export const Label = styled.div``;
