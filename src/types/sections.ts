@@ -56,8 +56,9 @@ export enum SectionsSAS {
 }
 
 export enum SectionsCHL {
-  Header = "header",
   Chyron = "chyron",
+  Emojis = "emojis",
+  Header = "header",
   Host = "host"
 }
 

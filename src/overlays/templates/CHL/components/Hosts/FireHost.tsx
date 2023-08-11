@@ -1,58 +1,49 @@
 import React from "react";
 import styled from "styled-components";
 
-import useVotingHook from "../../../../../hooks/useVotingHook/useVotingHook";
+import { IVoteStreaks } from "../../../../../hooks/useVotingHook/useVotingHook";
 
-const videoFire =
-  "https://mg-show-assets.s3.us-east-1.amazonaws.com/images/fire.mp4";
+const videoFireGif =
+  "https://mg-show-assets.s3.us-east-1.amazonaws.com/images/fire.gif";
 
 interface IFireHostProps {
   fireCount?: number;
   seatNum: number;
+  votingStreak: IVoteStreaks;
 }
 
-const StyledFirePlayer = styled.video`
+const StyledFirePlayer = styled.div`
   width: 100%;
   position: absolute;
   bottom: 0px;
   left: 0px;
   opacity: 0;
   transition: opacity 1.5s ease-in-out;
+  img {
+    width: 100%;
+    position: absolute;
+    bottom: -50px;
+  }
 `;
 
 export const FireHost: React.FC<IFireHostProps> = ({
   fireCount = 3,
-  seatNum
+  seatNum,
+  votingStreak
 }) => {
-  const { votes } = useVotingHook();
-  const videoRef = React.useRef<HTMLVideoElement>(null);
+  const fireRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    const lastFiveElements = votes.slice(-fireCount);
-    const sameHost = lastFiveElements.every(
-      item => item.host === String(seatNum) && item.action === "add"
-    );
-
-    const playFire = sameHost && lastFiveElements.length === fireCount;
-
-    if (!videoRef.current) return;
-
-    if (playFire) {
-      videoRef.current.play();
-      videoRef.current.style.opacity = "1";
-    } else {
-      setTimeout(() => {
-        videoRef.current && videoRef.current.pause();
-      }, 1500);
-      videoRef.current.style.opacity = "0";
-    }
+    const playFire = votingStreak[seatNum]?.add >= fireCount;
+    if (!fireRef.current) return;
+    fireRef.current.style.opacity = playFire ? "1" : "0";
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [seatNum, votes]);
+  }, [seatNum, votingStreak]);
 
   return (
-    <StyledFirePlayer muted loop ref={videoRef}>
-      <source src={videoFire} type="video/mp4" />
+    <StyledFirePlayer ref={fireRef}>
+      <img src={videoFireGif} alt="fire" />
     </StyledFirePlayer>
   );
 };

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { EmojiFloat } from "../../../../../globalComponents";
 import { useParams } from "../../../../../hooks";
-import { SectionsPTI } from "../../../../../types";
+import { SectionsCHL } from "../../../../../types";
 
 const StyledEmojiCHL = styled.div`
   width: 1860px;
@@ -17,7 +17,7 @@ const StyledEmojiCHL = styled.div`
 export const EmojiCHL: React.FC = () => {
   const { showSection } = useParams();
 
-  if (!showSection(SectionsPTI.Emojis)) return null;
+  if (!showSection(SectionsCHL.Emojis)) return null;
 
   return (
     <StyledEmojiCHL>

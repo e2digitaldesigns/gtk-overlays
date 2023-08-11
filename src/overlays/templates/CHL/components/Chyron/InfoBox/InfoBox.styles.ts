@@ -10,14 +10,7 @@ export const InfoBox = styled.div`
   background-color: rgba(0, 0, 0, 0.98);
   padding: 10px;
   display: flex;
-  align-items: center;
-`;
-
-export const Title = styled.div`
+  white-space: pre-wrap;
   font-size: 42px;
   text-transform: uppercase;
-`;
-
-export const SubTitle = styled(Title)`
-  font-size: 28px;
 `;

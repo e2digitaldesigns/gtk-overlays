@@ -4,12 +4,13 @@ import { Scroller, socialToScroller } from "../../../../../globalComponents";
 import { useParams } from "../../../../../hooks";
 import * as Styled from "./HeaderTab.style";
 import CONFIG from "../../config.json";
-import { SectionsBNN } from "../../../../../types";
+import { SectionsCHL } from "../../../../../types";
 
 const HeaderTab: React.FC = () => {
   const { showSection } = useParams();
   const { socialNetworks } = useDataContext();
-  if (!showSection(SectionsBNN.Header)) return null;
+
+  if (!showSection(SectionsCHL.Header)) return null;
 
   const data = socialToScroller(socialNetworks, true);
 
@@ -21,8 +22,8 @@ const HeaderTab: React.FC = () => {
             data={data}
             timer={CONFIG.scrollTimers.headerTab}
             sx={{
-              title: { padding: "0 .25rem" },
-              text: { "font-weight": "bold" }
+              title: { "font-size": "18px", padding: "0 .25rem" },
+              text: { "font-size": "24px", "font-weight": "bold" }
             }}
           />
         </Styled.Location>

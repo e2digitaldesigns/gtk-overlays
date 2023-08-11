@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const NetworkTab = styled.div`
   height: 45px;
-  width: 375px;
+  width: 875px;
   position: absolute;
   top: 0;
   left: 0px;
