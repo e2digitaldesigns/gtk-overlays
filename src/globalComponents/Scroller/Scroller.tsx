@@ -19,7 +19,7 @@ interface IntCss {
 }
 
 interface IntScrollerProps {
-  children?: React.ReactElement[];
+  children?: React.ReactElement[] | React.ReactElement;
   data?: IntScrollerListItem[];
   fontSize?: number;
   titleStyle?: IntStyle;

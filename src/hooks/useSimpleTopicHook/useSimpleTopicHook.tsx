@@ -9,6 +9,7 @@ const useSimpleTopicHook = (data: IntTopic[], loop: boolean = false) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [topics, setTopics] = React.useState<IntTopic[]>(data);
   const [currentTopicIndex, setCurrentTopicIndex] = React.useState<number>(0);
+  const [isTimerPaused, setIsTimerPaused] = React.useState<boolean>(true);
 
   React.useEffect(() => {
     let stillHere = true;
@@ -28,17 +29,31 @@ const useSimpleTopicHook = (data: IntTopic[], loop: boolean = false) => {
       setCurrentTopicIndex(index);
     };
 
-    socketServices.subscribeOverlayActions((err: any, data: any) => {
+    socketServices.subscribeOverlayActions((err: unknown, data: any) => {
       if (data?.uid !== queryParams.get("uid")) return;
       if (data?.tid && data.tid !== queryParams.get("tid")) return;
 
       switch (data.action) {
         case TopicActions.TopicPrevious:
-          stillHere && prevTopic();
+          if (stillHere) {
+            prevTopic();
+            setIsTimerPaused(true);
+          }
           break;
 
         case TopicActions.TopicNext:
-          stillHere && nextTopic();
+          if (stillHere) {
+            nextTopic();
+            setIsTimerPaused(true);
+          }
+          break;
+
+        case TopicActions.TimerResume:
+          stillHere && setIsTimerPaused(false);
+          break;
+
+        case TopicActions.TimerPause:
+          stillHere && setIsTimerPaused(true);
           break;
 
         default:
@@ -54,7 +69,11 @@ const useSimpleTopicHook = (data: IntTopic[], loop: boolean = false) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentTopicIndex]);
 
-  return { topic: topics?.[currentTopicIndex], index: currentTopicIndex };
+  return {
+    topic: topics?.[currentTopicIndex],
+    index: currentTopicIndex,
+    isTimerPaused
+  };
 };
 
 export default useSimpleTopicHook;

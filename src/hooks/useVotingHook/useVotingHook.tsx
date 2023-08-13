@@ -70,8 +70,6 @@ const useVotingHook = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(votingStreak);
-
   const handleAddVote = React.useCallback(
     (data: IVotes) => {
       const state = _cloneDeep(votes);

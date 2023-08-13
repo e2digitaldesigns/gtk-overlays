@@ -1,15 +1,17 @@
 import styled from "styled-components";
 
-export const NetworkTab = styled.div`
+export const TimingWrapper = styled.div`
   height: 45px;
-  width: 875px;
+  width: 200px;
   position: absolute;
   top: 0;
-  left: 200px;
+  left: 0;
   background-color: ${props => props.theme.colors.accent1};
+  border-right: 3px solid ${props => props.theme.colors.accent2};
 
   display: flex;
   align-items: center;
+  justify-content: center;
   font-size: 1.75rem;
   font-weight: bold;
   text-transform: uppercase;

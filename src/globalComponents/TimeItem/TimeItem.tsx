@@ -6,7 +6,9 @@ interface IntTimeItem {
   zone: string;
 }
 const GTK_TimeItem: React.FC<IntTimeItem> = ({ hour, zone }) => {
-  const [time, setTime] = React.useState("0:00");
+  const [time, setTime] = React.useState(() =>
+    moment().subtract(hour, "hours").format("h:mm A")
+  );
 
   React.useEffect(() => {
     setInterval(() => {
@@ -18,9 +20,9 @@ const GTK_TimeItem: React.FC<IntTimeItem> = ({ hour, zone }) => {
   }, []);
 
   return (
-    <div>
+    <span>
       {time} {zone}
-    </div>
+    </span>
   );
 };
 
