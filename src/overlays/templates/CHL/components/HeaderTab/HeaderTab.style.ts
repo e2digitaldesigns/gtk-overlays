@@ -11,6 +11,7 @@ export const HeaderTab = styled.div`
   position: absolute;
   top: 45px;
   left: 1360px;
+  z-index: 10000;
 `;
 
 export const Location = styled.div`

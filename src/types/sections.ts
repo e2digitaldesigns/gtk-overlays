@@ -59,7 +59,8 @@ export enum SectionsCHL {
   Chyron = "chyron",
   Emojis = "emojis",
   Header = "header",
-  Host = "host"
+  Host = "host",
+  Video = "video"
 }
 
 export type OverlaySections =

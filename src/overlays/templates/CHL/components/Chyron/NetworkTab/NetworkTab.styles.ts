@@ -5,7 +5,7 @@ export const NetworkTab = styled.div`
   width: 875px;
   position: absolute;
   top: 0;
-  left: 200px;
+  left: 220px;
   background-color: ${props => props.theme.colors.accent1};
 
   display: flex;

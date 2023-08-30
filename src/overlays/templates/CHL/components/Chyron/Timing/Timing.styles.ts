@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const TimingWrapper = styled.div`
   height: 45px;
-  width: 200px;
+  width: 220px;
   position: absolute;
   top: 0;
   left: 0;

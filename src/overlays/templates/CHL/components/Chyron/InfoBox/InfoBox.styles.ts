@@ -7,7 +7,7 @@ export const InfoBox = styled.div`
   position: absolute;
   top: 45px;
   left: 0px;
-  background-color: rgba(0, 0, 0, 0.98);
+  background-color: rgba(0, 0, 0, 0.9);
   padding: 10px;
   display: flex;
   white-space: pre-wrap;

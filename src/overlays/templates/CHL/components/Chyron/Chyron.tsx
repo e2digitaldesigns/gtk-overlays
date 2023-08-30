@@ -9,13 +9,23 @@ import NewsFeed from "./NewsFeed/NewsFeed";
 import { useDataContext } from "../../../../../context";
 import { SectionsCHL } from "../../../../../types";
 import { Timing } from "./Timing/Timing";
+import { IntTopic } from "../../../../../globalComponents/Topics/types";
 
-const Chyron: React.FC = () => {
+interface ChyronProps {
+  setTopicState: React.Dispatch<React.SetStateAction<IntTopic | undefined>>;
+}
+
+const Chyron: React.FC<ChyronProps> = ({ setTopicState }) => {
   const { showSection } = useParams();
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { topics } = useDataContext();
   const { isTimerPaused, topic } = useSimpleTopic(topics);
+
+  React.useEffect(() => {
+    setTopicState(topic);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topic]);
 
   if (!showSection(SectionsCHL.Chyron)) return null;
 
