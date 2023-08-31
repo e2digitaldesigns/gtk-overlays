@@ -27,15 +27,17 @@ const Host: React.FC = () => {
         <Styled.HostBoxWrapper key={host.seatNum} position={host.seatNum}>
           <Styled.HostBoxStroke />
           <Styled.HostBox>
-            <Styled.HostBoxInner position={host.seatNum}>
-              <Styled.NameTag>
-                <Scroller timer={CONFIG.scrollTimers.hostLabels}>
-                  {host.ticker?.map((ticker: string, index: number) => (
-                    <div key={index}>{ticker}</div>
-                  ))}
-                </Scroller>
-              </Styled.NameTag>
-            </Styled.HostBoxInner>
+            <Styled.HostBoxInner position={host.seatNum} />
+          </Styled.HostBox>
+
+          <Styled.HostBoxDefault>
+            <Styled.NameTag>
+              <Scroller timer={CONFIG.scrollTimers.hostLabels}>
+                {host.ticker?.map((ticker: string, index: number) => (
+                  <div key={index}>{ticker}</div>
+                ))}
+              </Scroller>
+            </Styled.NameTag>
 
             <FireCountDisplay
               seatNum={host.seatNum}
@@ -53,7 +55,7 @@ const Host: React.FC = () => {
             </Styled.FireWrapper>
 
             <Styled.VoteCount>{voting[host.seatNum]}</Styled.VoteCount>
-          </Styled.HostBox>
+          </Styled.HostBoxDefault>
         </Styled.HostBoxWrapper>
       ))}
     </>

@@ -52,6 +52,6 @@ export const VoteFloat = styled.div<VoteFloatProps>`
   right: 20px;
   z-index: 150;
 
-  animation: ${props => upAndAway(props.numberStr)} 4s ease-in-out;
+  animation: ${props => upAndAway(props.numberStr)} 7s ease-in-out;
   animation-fill-mode: forwards;
 `;

@@ -42,7 +42,7 @@ export const HostBoxWrapper = styled.div<IntHostBoxWrapper>`
   bottom: 310px;
   width: 610px;
   height: 545px;
-  ${props => hostBoxPosition(props.position)}
+  ${props => hostBoxPosition(props.position)};
 `;
 
 const DefaultBoxStroke = styled.div`
@@ -57,16 +57,6 @@ export const HostBoxStroke = styled(DefaultBoxStroke)`
   height: calc(100% - ${borderSize});
   top: calc(${borderSize} / 2);
   left: calc(${borderSize} / 2);
-`;
-
-export const HostBox = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: #1c1b29;
-  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.5);
-  position: absolute;
-  top: 0px;
-  left: 0;
 `;
 
 export const NameTag = styled.div`
@@ -104,9 +94,36 @@ export const VoteCount = styled.div`
   z-index: 50;
 `;
 
+export const HostBoxDefault = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0;
+
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.5);
+`;
+
+export const HostBox = styled(HostBoxDefault)`
+  background-color: #1c1b29;
+
+  clip-path: polygon(
+    0% 0%,
+    0 100%,
+    10px calc(100% - 10px),
+    10px 10px,
+    calc(100% - 10px) 10px,
+    calc(100% - 10px) calc(100% - 10px),
+    0 calc(100% - 10px),
+    0 100%,
+    100% 100%,
+    100% 0%
+  );
+`;
 interface IntHostBoxInner {
   position: number;
 }
+
 export const HostBoxInner = styled.div<IntHostBoxInner>`
   width: 100%;
   height: 100%;

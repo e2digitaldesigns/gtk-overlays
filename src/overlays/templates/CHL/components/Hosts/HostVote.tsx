@@ -19,7 +19,7 @@ export const HostVote: React.FC<IHostVoteProps> = ({ seatNum, votes }) => {
 
     setTimeout(() => {
       setHostVote(prev => prev.filter(vote => vote._id !== lastElement._id));
-    }, 5000);
+    }, 10000);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [seatNum, votes]);
