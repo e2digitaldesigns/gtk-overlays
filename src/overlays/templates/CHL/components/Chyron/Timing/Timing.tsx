@@ -7,12 +7,12 @@ import { IntTopic } from "../../../../../../globalComponents/Topics/types";
 
 interface IntTiming {
   isTimerPaused: boolean;
-  topic: IntTopic;
+  topic: IntTopic | undefined;
 }
 export const Timing: React.FC<IntTiming> = ({ isTimerPaused, topic }) => {
   return (
     <Styled.TimingWrapper>
-      {topic.timer ? (
+      {topic?.timer ? (
         <TimerItem isTimerPaused={isTimerPaused} topic={topic} />
       ) : (
         <Scroller timer={33}>

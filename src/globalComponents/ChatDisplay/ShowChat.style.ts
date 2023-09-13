@@ -33,7 +33,7 @@ interface IEntireChatWrapper {
 
 export const EntireChatWrapper = styled.div<IEntireChatWrapper>`
   width: 100%;
-  max-height: 100%;
+  height: 100%;
   background-color: ${props => props.bgColor};
   overflow: hidden;
   padding: 10px;

@@ -2,6 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { EmojiFloat } from "../../../../../globalComponents";
 
+import { useParams } from "../../../../../hooks";
+import { SectionsSAS } from "../../../../../types";
+
 const StyledEmojiSAS = styled.div`
   width: 1750px;
   height: 820px;
@@ -13,6 +16,9 @@ const StyledEmojiSAS = styled.div`
 `;
 
 export const EmojiSAS: React.FC = () => {
+  const { showSection } = useParams();
+  if (!showSection(SectionsSAS.Emojis)) return null;
+
   return (
     <StyledEmojiSAS>
       <EmojiFloat />

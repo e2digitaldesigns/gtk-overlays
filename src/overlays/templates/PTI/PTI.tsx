@@ -4,7 +4,6 @@ import { theme } from "./theme/theme";
 
 import Chyron from "./chyron/chyron";
 import Description from "./description/description";
-import Logo from "./logo/logo";
 import Sponsors from "./sponsors/sponsors";
 import Topics from "./topics/topics";
 import Hosts from "./hosts/Host";
@@ -25,7 +24,6 @@ const OverlayPTI: React.FC = () => {
         <EmojiPTI />
         <Chyron />
         <Description topicDescription={topicState?.desc || ""} />
-        <Logo />
         <Sponsors />
 
         <Topics setTopicState={setTopicState} />

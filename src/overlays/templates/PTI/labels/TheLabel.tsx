@@ -8,13 +8,9 @@ import { useDataContext } from "../../../../context";
 
 interface ITheHostLabel {
   seatNumber: number;
-  threeUp?: boolean;
 }
 
-export const TheHostLabel: React.FC<ITheHostLabel> = ({
-  seatNumber,
-  threeUp = false
-}) => {
+export const TheHostLabel: React.FC<ITheHostLabel> = ({ seatNumber }) => {
   const { hosts } = useDataContext();
   const { voting } = useVotingHook();
 
@@ -22,31 +18,16 @@ export const TheHostLabel: React.FC<ITheHostLabel> = ({
 
   return host ? (
     <>
-      {threeUp && (
-        <Styled.HostWrapper3 seat={seatNumber}>
-          <Styled.Vote>{voting[host.seatNum]}</Styled.Vote>
-          <Styled.Host>
-            <Scroller timer={CONFIG.scrollTimers.hostLabels}>
-              {host.ticker?.map((ticker: string, index: number) => (
-                <div key={index}>{ticker}</div>
-              ))}
-            </Scroller>
-          </Styled.Host>
-        </Styled.HostWrapper3>
-      )}
-
-      {!threeUp && (
-        <Styled.HostWrapper seat={seatNumber}>
-          <Styled.Vote>{voting[host.seatNum]}</Styled.Vote>
-          <Styled.Host>
-            <Scroller timer={CONFIG.scrollTimers.hostLabels}>
-              {host.ticker?.map((ticker: string, index: number) => (
-                <div key={index}>{ticker}</div>
-              ))}
-            </Scroller>
-          </Styled.Host>
-        </Styled.HostWrapper>
-      )}
+      <Styled.HostWrapper seat={seatNumber}>
+        <Styled.Vote>{voting[host.seatNum]}</Styled.Vote>
+        <Styled.Host>
+          <Scroller timer={CONFIG.scrollTimers.hostLabels}>
+            {host.ticker?.map((ticker: string, index: number) => (
+              <div key={index}>{ticker}</div>
+            ))}
+          </Scroller>
+        </Styled.Host>
+      </Styled.HostWrapper>
     </>
   ) : null;
 };

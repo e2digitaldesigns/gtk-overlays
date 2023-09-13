@@ -17,47 +17,53 @@ const Host: React.FC = () => {
 
   const { hosts: data } = useDataContext();
   const { voting, votes, votingStreak } = useVotingHook();
-  const showHost = showSection(SectionsCHL.Host);
 
-  if (!showHost) return null;
+  const showHosts: { [key: string]: boolean } = {
+    1: showSection(SectionsCHL.Host1),
+    2: showSection(SectionsCHL.Host2),
+    3: showSection(SectionsCHL.Host3)
+  };
 
   return (
     <>
-      {data.map((host: any) => (
-        <Styled.HostBoxWrapper key={host.seatNum} position={host.seatNum}>
-          <Styled.HostBoxStroke />
-          <Styled.HostBox>
-            <Styled.HostBoxInner position={host.seatNum} />
-          </Styled.HostBox>
+      {data.map((host: any, index: number) => {
+        if (!showHosts[host.seatNum]) return null;
+        return (
+          <Styled.HostBoxWrapper key={host.seatNum} position={host.seatNum}>
+            <Styled.HostBoxStroke />
+            <Styled.HostBox>
+              <Styled.HostBoxInner position={host.seatNum} />
+            </Styled.HostBox>
 
-          <Styled.HostBoxDefault>
-            <Styled.NameTag>
-              <Scroller timer={CONFIG.scrollTimers.hostLabels}>
-                {host.ticker?.map((ticker: string, index: number) => (
-                  <div key={index}>{ticker}</div>
-                ))}
-              </Scroller>
-            </Styled.NameTag>
+            <Styled.HostBoxDefault>
+              <Styled.NameTag>
+                <Scroller timer={CONFIG.scrollTimers.hostLabels}>
+                  {host.ticker?.map((ticker: string, index: number) => (
+                    <div key={index}>{ticker}</div>
+                  ))}
+                </Scroller>
+              </Styled.NameTag>
 
-            <FireCountDisplay
-              seatNum={host.seatNum}
-              votingStreak={votingStreak}
-            />
-
-            <HostVote seatNum={host.seatNum} votes={votes} />
-
-            <Styled.FireWrapper>
-              <FireHost
-                fireCount={CONFIG.fireHostCount}
+              <FireCountDisplay
                 seatNum={host.seatNum}
                 votingStreak={votingStreak}
               />
-            </Styled.FireWrapper>
 
-            <Styled.VoteCount>{voting[host.seatNum]}</Styled.VoteCount>
-          </Styled.HostBoxDefault>
-        </Styled.HostBoxWrapper>
-      ))}
+              <HostVote seatNum={host.seatNum} votes={votes} />
+
+              <Styled.FireWrapper>
+                <FireHost
+                  fireCount={CONFIG.fireHostCount}
+                  seatNum={host.seatNum}
+                  votingStreak={votingStreak}
+                />
+              </Styled.FireWrapper>
+
+              <Styled.VoteCount>{voting[host.seatNum]}</Styled.VoteCount>
+            </Styled.HostBoxDefault>
+          </Styled.HostBoxWrapper>
+        );
+      })}
     </>
   );
 };

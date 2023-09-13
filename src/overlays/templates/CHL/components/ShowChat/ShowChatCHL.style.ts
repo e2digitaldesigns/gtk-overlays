@@ -3,11 +3,11 @@ import styled from "styled-components";
 export const ShowChatWrapper = styled.div`
   position: absolute;
 
-  left: 50px;
-  top: 45px;
+  left: 40px;
+  top: 40px;
 
-  height: 120px;
-  width: 1120px;
+  height: 125px;
+  width: 1218px;
   overflow: hidden;
   padding: 10px 20px;
 `;

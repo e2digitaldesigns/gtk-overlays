@@ -1,25 +1,10 @@
 import styled, { keyframes } from "styled-components";
 
 const rotate1 = keyframes`
-  100% {
+  50% {
     transform: rotate(-360deg);
   }
-`;
 
-const rotate2 = keyframes`
-
-  50% {
-   
-    transform: rotate(-180deg);
-  }
-
-  100% {
-  
-    transform: rotate(180deg);
-  }
-`;
-
-const rotate3 = keyframes`
   100% {
     transform: rotate(360deg);
   }
@@ -32,15 +17,15 @@ interface IntHostBoxWrapper {
 const borderSize = "18px";
 
 const hostBoxPosition = (position: number) => {
-  if (position === 1) return "left: 30px;";
-  if (position === 2) return "left: 655px;";
-  if (position === 3) return "right: 30px;";
+  if (position === 1) return "left: 40px;";
+  if (position === 2) return "left: 663px;";
+  if (position === 3) return "right: 40px;";
 };
 
 export const HostBoxWrapper = styled.div<IntHostBoxWrapper>`
   position: absolute;
   bottom: 310px;
-  width: 610px;
+  width: 595px;
   height: 545px;
   ${props => hostBoxPosition(props.position)};
 `;
@@ -136,18 +121,15 @@ export const HostBoxInner = styled.div<IntHostBoxInner>`
       ${props => props.theme.colors.accent1} 20deg,
       transparent 120deg
     );
-    height: 150%;
+    height: 200%;
     width: 200%;
     position: absolute;
     left: -50%;
     top: -50%;
-    animation: ${props =>
-        props.position === 1
-          ? rotate1
-          : props.position === 2
-          ? rotate2
-          : rotate3}
-      40s infinite linear;
+    animation: ${rotate1} infinite ease-in-out;
+
+    animation-delay: ${props => (props.position === 2 ? "3s" : "0")};
+    animation-duration: ${props => (props.position === 2 ? "80s" : "70s")};
   }
 
   :after {

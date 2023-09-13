@@ -1,14 +1,20 @@
 import React from "react";
 import * as Styled from "./ShowChatCHL.style";
 import { ChatDisplay } from "../../../../../globalComponents";
+import { SectionsCHL } from "../../../../../types";
 
 import { theme } from "../../Theme/GlobalTheme";
+import { useParams } from "../../../../../hooks";
 
 export interface ChatDisplayChildProps {
   message?: any;
 }
 
 export const ShowChatCHL: React.FC = () => {
+  const { showSection } = useParams();
+
+  if (!showSection(SectionsCHL.ChatMessage)) return null;
+
   return (
     <Styled.ShowChatWrapper>
       <ChatDisplay
@@ -23,7 +29,7 @@ export const ShowChatCHL: React.FC = () => {
         nameFontColor="#ffffff"
         nameFontSize="2rem"
         nameFontWeight="normal"
-        borderBottom={`3px solid ${theme.colors.accent1}`}
+        borderBottom={`.25rem solid ${theme.colors.accent1}`}
       />
     </Styled.ShowChatWrapper>
   );

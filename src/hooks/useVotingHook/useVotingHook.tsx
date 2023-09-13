@@ -121,7 +121,7 @@ const useVotingHook = () => {
   React.useEffect(() => {
     let stillHere = true;
 
-    socketServices.subscribeHostVoting((err: any, data: any) => {
+    socketServices.subscribeHostVoting((err: unknown, data: any) => {
       if (data?.uid !== queryParams.get("uid")) return;
       if (!data?.tid || data?.tid !== queryParams.get("tid")) return;
 

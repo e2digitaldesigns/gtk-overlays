@@ -32,34 +32,34 @@ export enum SectionsCNN {
 }
 
 export enum SectionsPTI {
-  ChatRank = "chatRank",
+  ChatRank = "chat_rank",
   Chyron = "chyron",
   Description = "description",
   Emojis = "emojis",
-  Header = "header",
-  Logo = "logo",
   Sponsors = "sponsors",
   Topics = "topics",
-
   Host_Divider = "host_divider",
-  Host_Divider2 = "host_divider2",
   Host_label_1 = "host_label_1",
   Host_label_2 = "host_label_2",
-  Host_label_3 = "host_label_3",
-
   Video = "video"
 }
 
 export enum SectionsSAS {
-  ChatDisplay = "chatDisplay",
-  Chyron = "chyron"
+  ChatMessage = "chat_message",
+  ChatRank = "chat_rank",
+  Chyron = "chyron",
+  Emojis = "emojis"
 }
 
 export enum SectionsCHL {
+  ChatMessage = "chat_message",
   Chyron = "chyron",
   Emojis = "emojis",
   Header = "header",
-  Host = "host",
+  Host1 = "host_1",
+  Host2 = "host_2",
+  Host3 = "host_3",
+  UpNext = "up_next",
   Video = "video"
 }
 

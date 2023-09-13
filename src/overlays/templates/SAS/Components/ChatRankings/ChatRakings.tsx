@@ -1,7 +1,13 @@
 import React from "react";
 import { TopChatRank } from "../../../../../globalComponents";
+import { useParams } from "../../../../../hooks";
+import { SectionsSAS } from "../../../../../types";
 
 const ChatRankingsSAS: React.FC = () => {
+  const { showSection } = useParams();
+
+  if (!showSection(SectionsSAS.ChatRank)) return null;
+
   return (
     <>
       <div

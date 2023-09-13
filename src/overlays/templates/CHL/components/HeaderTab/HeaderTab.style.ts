@@ -2,19 +2,20 @@ import styled from "styled-components";
 
 export const HeaderTab = styled.div`
   height: 3.125rem;
-  width: 31.875rem;
+  width: 32.1875rem;
   display: grid;
   grid-template-columns: 1fr 5.3125rem;
   background-color: ${props => props.theme.colors.bg1};
-  border-left: 0.3125rem solid ${props => props.theme.colors.accent1};
+  border-left: 0.25rem solid ${props => props.theme.colors.accent1};
 
   position: absolute;
-  top: 45px;
-  left: 1360px;
+  top: 2.5rem;
+  right: 2.5rem;
   z-index: 10000;
 `;
 
 export const Location = styled.div`
+  height: 3.125rem;
   display: flex;
   align-items: center;
   padding-left: 0.625rem;

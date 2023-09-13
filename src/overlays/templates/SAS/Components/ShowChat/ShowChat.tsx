@@ -1,4 +1,6 @@
 import React from "react";
+import { useParams } from "../../../../../hooks";
+import { SectionsSAS } from "../../../../../types";
 
 import * as Styled from "./ShowChat.style";
 
@@ -9,6 +11,9 @@ export interface ChatDisplayChildProps {
 }
 
 const ShowChatSAS: React.FC = () => {
+  const { showSection } = useParams();
+
+  if (!showSection(SectionsSAS.ChatMessage)) return null;
   return (
     <>
       <Styled.ShowChatWrapper>
