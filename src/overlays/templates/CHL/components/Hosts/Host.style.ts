@@ -144,7 +144,7 @@ export const HostBoxInner = styled.div<IntHostBoxInner>`
 `;
 
 export const FireWrapper = styled.div`
-  width: 590px;
+  width: calc(100% - ${borderSize});
   height: 330px;
   position: absolute;
   bottom: 10px;

@@ -57,7 +57,7 @@ const App: React.FC = () => {
   }, []);
 
   if (!isLoaded && !isError) {
-    return <Loader />;
+    return <Loader bgColor="#222" />;
   }
 
   if (isError) {
@@ -77,5 +77,3 @@ const App: React.FC = () => {
 };
 
 export default App;
-
-// http://localhost:3001/?tid=615de8a8b587713cb80b01af&uid=640bef8f88f7663004024d65&demo=1

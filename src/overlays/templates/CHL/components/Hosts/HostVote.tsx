@@ -31,27 +31,28 @@ export const HostVote: React.FC<IHostVoteProps> = ({ seatNum, votes }) => {
     return Number(number);
   };
 
-  const emojiParser = (_id: string, action: "add" | "remove") => {
+  const emojiParser = (_id: string, action: "add" | "remove" | "super") => {
     const number = String(numberFromId(_id));
 
     type EmojiSet = {
       [key: string]: {
         add: string;
         remove: string;
+        super?: string;
       };
     };
 
     const emojiSet: EmojiSet = {
-      "0": { add: "👍", remove: "👎" },
-      "1": { add: "😂", remove: "😵" },
-      "2": { add: "💕", remove: "🤢" },
-      "3": { add: "🫠", remove: "😒" },
-      "4": { add: "🔥", remove: "🤮" },
-      "5": { add: "🥳", remove: "🤐" },
-      "6": { add: "🙌", remove: "🧊" },
-      "7": { add: "😘", remove: "🤬" },
-      "8": { add: "😍", remove: "👿" },
-      "9": { add: "🥰", remove: "👺" }
+      "0": { add: "👍", remove: "👎", super: "😘" },
+      "1": { add: "😂", remove: "😵", super: "😘" },
+      "2": { add: "💕", remove: "🤢", super: "😘" },
+      "3": { add: "🫠", remove: "😒", super: "😘" },
+      "4": { add: "🔥", remove: "🤮", super: "😘" },
+      "5": { add: "🥳", remove: "🤐", super: "😘" },
+      "6": { add: "🙌", remove: "🧊", super: "😘" },
+      "7": { add: "😘", remove: "🤬", super: "😘" },
+      "8": { add: "😍", remove: "👿", super: "😘" },
+      "9": { add: "🥰", remove: "👺", super: "😘" }
     };
 
     const emoji = emojiSet[number][action];

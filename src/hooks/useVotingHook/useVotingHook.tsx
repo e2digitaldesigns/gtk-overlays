@@ -2,6 +2,8 @@ import React from "react";
 import socketServices from "../../services/socketServices";
 import _cloneDeep from "lodash/cloneDeep";
 import _isEqual from "lodash/isEqual";
+import _includes from "lodash/includes";
+import { STORAGE_KEY } from "../../types";
 
 interface IVotingState {
   [key: string]: number;
@@ -9,7 +11,7 @@ interface IVotingState {
 
 export interface IVotes {
   _id: string;
-  action: "add" | "remove";
+  action: "add" | "remove" | "super";
   username: string;
   channel: string;
   host: string;
@@ -43,11 +45,6 @@ const initVotingStreakState: IVoteStreaks = {
 };
 
 const useVotingHook = () => {
-  const STORAGE_KEY = {
-    TALLY: "@gtk/voting-tally",
-    STREAK: "@gtk/voting-steaks"
-  };
-
   const [voting, setVoting] = React.useState<IVotingState>(initVotingState);
   const [votingStreak, setVotingStreak] = React.useState<IVoteStreaks>(
     initVotingStreakState
@@ -88,6 +85,15 @@ const useVotingHook = () => {
         });
       }
 
+      if (data.action === "super") {
+        Object.keys(streak).forEach(key => {
+          streak[key].add = key === data.host ? streak[key].add + 5 : 0;
+          if (key === data.host) {
+            streak[key].remove = 0;
+          }
+        });
+      }
+
       if (data.action === "remove") {
         Object.keys(streak).forEach(key => {
           streak[key].remove = key === data.host ? streak[key].remove + 1 : 0;
@@ -104,14 +110,18 @@ const useVotingHook = () => {
   );
 
   const handleVoting = React.useCallback(
-    (vote: IVotes, type: "add" | "remove") => {
+    (vote: IVotes, type: "add" | "remove" | "super") => {
       handleAddVote(vote);
 
       const newState = _cloneDeep(voting);
       const hostNum = vote.host as keyof IVotingState;
 
       newState[hostNum] =
-        type === "add" ? newState[hostNum] + 1 : newState[hostNum] - 1;
+        type === "add"
+          ? newState[hostNum] + 1
+          : type === "super"
+          ? newState[hostNum] + 5
+          : newState[hostNum] - 1;
 
       setVoting(newState);
     },
@@ -130,6 +140,40 @@ const useVotingHook = () => {
           if (stillHere) {
             handleVoting(data, "add");
           }
+          break;
+
+        case "super":
+          const topicVoteCount = window.localStorage.getItem(
+            STORAGE_KEY.TOPIC_VOTING_COUNT
+          );
+
+          const currentTopicId = window.localStorage.getItem(
+            STORAGE_KEY.CURRENT_TOPIC
+          );
+
+          if (topicVoteCount && currentTopicId) {
+            const voting = JSON.parse(topicVoteCount);
+            const currentTopic = JSON.parse(currentTopicId);
+
+            if (
+              !voting?.[currentTopic] ||
+              !_includes(voting?.[currentTopic], data.username)
+            ) {
+              if (!voting?.[currentTopic]) {
+                voting[currentTopic] = [];
+              }
+
+              voting[currentTopic].push(data.username);
+
+              window.localStorage.setItem(
+                STORAGE_KEY.TOPIC_VOTING_COUNT,
+                JSON.stringify(voting)
+              );
+
+              handleVoting(data, "super");
+            }
+          }
+
           break;
 
         case "remove":
@@ -168,6 +212,11 @@ const useVotingHook = () => {
               JSON.stringify(initVotingStreakState)
             );
 
+            window.localStorage.setItem(
+              STORAGE_KEY.TOPIC_VOTING_COUNT,
+              JSON.stringify({})
+            );
+
             stillHere && setVoting(initVotingState);
             stillHere && setVotingStreak(initVotingStreakState);
             stillHere && setVotes([]);
@@ -190,7 +239,7 @@ const useVotingHook = () => {
   React.useEffect(() => {
     if (_isEqual(initVotingState, voting)) return;
     window.localStorage.setItem(STORAGE_KEY.TALLY, JSON.stringify(voting));
-  }, [STORAGE_KEY.TALLY, voting]);
+  }, [voting]);
 
   React.useEffect(() => {
     if (_isEqual(initVotingStreakState, votingStreak)) return;
@@ -198,7 +247,7 @@ const useVotingHook = () => {
       STORAGE_KEY.STREAK,
       JSON.stringify(votingStreak)
     );
-  }, [STORAGE_KEY.STREAK, votingStreak]);
+  }, [votingStreak]);
 
   return {
     votes,

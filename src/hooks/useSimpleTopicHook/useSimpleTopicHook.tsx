@@ -1,7 +1,7 @@
 import React from "react";
 import { IntTopic } from "../../globalComponents/Topics/types";
 import socketServices from "../../services/socketServices";
-import { TopicActions } from "../../types";
+import { STORAGE_KEY, TopicActions } from "../../types";
 
 const useSimpleTopicHook = (data: IntTopic[], loop: boolean = false) => {
   const queryParams = new URLSearchParams(window.location.search);
@@ -10,6 +10,41 @@ const useSimpleTopicHook = (data: IntTopic[], loop: boolean = false) => {
   const [topics, setTopics] = React.useState<IntTopic[]>(data);
   const [currentTopicIndex, setCurrentTopicIndex] = React.useState<number>(0);
   const [isTimerPaused, setIsTimerPaused] = React.useState<boolean>(true);
+
+  React.useEffect(() => {
+    const value = topics[currentTopicIndex]._id;
+
+    window.localStorage.setItem(
+      STORAGE_KEY.CURRENT_TOPIC,
+      JSON.stringify(value)
+    );
+
+    const topicVoting = window.localStorage.getItem(
+      STORAGE_KEY.TOPIC_VOTING_COUNT
+    );
+
+    if (topicVoting) {
+      const voting = JSON.parse(topicVoting);
+
+      if (!voting?.[value]) {
+        const newVoting = { ...voting, [value]: [] };
+        window.localStorage.setItem(
+          STORAGE_KEY.TOPIC_VOTING_COUNT,
+          JSON.stringify(newVoting)
+        );
+      }
+    }
+
+    if (!topicVoting) {
+      const newVoting = { [value]: [] };
+      window.localStorage.setItem(
+        STORAGE_KEY.TOPIC_VOTING_COUNT,
+        JSON.stringify(newVoting)
+      );
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentTopicIndex]);
 
   React.useEffect(() => {
     let stillHere = true;

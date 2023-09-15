@@ -8,7 +8,8 @@ export const LoaderWrapper = styled.div<LoaderWrapperType>`
   display: grid;
   justify-content: center;
   align-content: center;
-  height: 100%;
+  height: 100vh;
+  width: 100vw;
   background: ${props => (props?.bgColor ? props.bgColor : "transparent")};
 `;
 
@@ -24,7 +25,7 @@ type LoaderRollerType = {
 export const LoaderRoller = styled.div<LoaderRollerType>`
   display: inline-block;
   position: relative;
-  wwidth: 80px;
+  width: 80px;
   height: 80px;
 
   div {
