@@ -50,11 +50,10 @@ export const TopicGrid = styled.div<ITopicGrid>`
   transition-property: all;
   transition-duration: 1s;
   transition-timing-function: ease-in-out;
-  font-size: 42px;
+  font-size: 36px;
   line-height: 40px;
 
   white-space: pre-wrap;
-  font-size: 42px;
   text-transform: uppercase;
   overflow: hidden;
 
