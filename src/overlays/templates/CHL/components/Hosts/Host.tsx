@@ -30,11 +30,11 @@ const Host: React.FC = () => {
         if (!showHosts[host.seatNum]) return null;
         return (
           <Styled.HostBoxWrapper key={host.seatNum} position={host.seatNum}>
+            sdfasfasfsafas
             <Styled.HostBoxStroke />
             <Styled.HostBox>
               <Styled.HostBoxInner position={host.seatNum} />
             </Styled.HostBox>
-
             <Styled.HostBoxDefault>
               <Styled.NameTag>
                 <Scroller timer={CONFIG.scrollTimers.hostLabels}>

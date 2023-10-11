@@ -94,8 +94,6 @@ const GTK_TopicComponent: React.FC<IntTopicsProps> = ({
 
     socketServices.subscribeOverlayActions(
       (err: unknown, data: { action: string; uid: string; tid?: string }) => {
-        // console.log(96, data);
-
         if (data?.uid !== queryParams.get("uid")) return;
         if (data?.tid && data.tid !== queryParams.get("tid")) return;
 

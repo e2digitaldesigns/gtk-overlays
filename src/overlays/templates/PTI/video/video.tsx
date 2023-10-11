@@ -11,7 +11,6 @@ interface VideoProps {
 
 const VideoPTI: React.FC<VideoProps> = ({ topicId, topicVideo }) => {
   const { showSection } = useParams();
-  console.log({ topicVideo });
 
   if (!showSection(SectionsPTI.Video)) return null;
 

@@ -29,9 +29,9 @@ const OverlayCHL: React.FC = () => {
       <ThemeProvider theme={theme}>
         <Styled.GlobalStyle />
         <EmojiCHL />
+        <VideoCHL topicId={topicState?._id} topicVideo={topicState?.video} />
         <Styled.Container>
           <UpNextCHL activeTopic={topic} topics={topics} />
-          <VideoCHL topicId={topicState?._id} topicVideo={topicState?.video} />
           <ShowChatCHL />
           <HeaderTab />
           <Host />

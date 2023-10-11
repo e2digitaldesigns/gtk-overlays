@@ -8,3 +8,4 @@ export { default as Topics } from "./TopicChild/TopicChild";
 export { socialToScrollerUtil as socialToScroller } from "./Utils/socailToScroller";
 
 export { default as VideoPlayer } from "./VideoPlayer/VideoPlayer";
+export { default as BGTextScroll } from "./BgTextScroller/BgTextScroller";

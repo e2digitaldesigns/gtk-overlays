@@ -27,7 +27,7 @@ export const ShowChatCHL: React.FC = () => {
         msgFontColor="#ccc"
         messageInline={true}
         nameFontColor="#ffffff"
-        nameFontSize="2rem"
+        nameFontSize="1.75rem"
         nameFontWeight="normal"
         borderBottom={`.25rem solid ${theme.colors.accent1}`}
       />

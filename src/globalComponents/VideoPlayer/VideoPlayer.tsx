@@ -11,6 +11,8 @@ type Dimensions = {
 
 interface IntVideoProps {
   topicId: string | undefined;
+  videoBorder?: string;
+  videoShadow?: boolean;
   videoUrl: string | undefined;
   dimensions: Dimensions;
 
@@ -19,6 +21,8 @@ interface IntVideoProps {
 
   allowFullScreen?: boolean;
   fullScreenDimensions?: Dimensions;
+
+  callBack?: (isVideoVisible: boolean) => void;
 }
 
 const GTK_VideoComponent: React.FC<IntVideoProps> = ({
@@ -28,7 +32,10 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
   allowFullScreen = false,
   fullScreenDimensions = undefined,
   topicId,
-  videoUrl
+  videoUrl,
+  videoBorder = "none",
+  videoShadow = false,
+  callBack = undefined
 }) => {
   const queryParams = new URLSearchParams(window.location.search);
   const videoPlayerRef = React.useRef<HTMLVideoElement>(null);
@@ -101,10 +108,9 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
         if (data?.tid && data.tid !== queryParams.get("tid")) return;
         if (!videoPlayerRef?.current) return;
 
-        console.log(99, data.action);
-
         switch (data.action) {
           case "video-play":
+            callBack && callBack(true);
             videoPlayerRef.current.style.opacity = "1";
             videoPlayerRef.current?.play();
             break;
@@ -114,6 +120,7 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
             break;
 
           case "video-stop":
+            callBack && callBack(false);
             videoPlayerRef.current?.pause();
             videoPlayerRef.current.style.opacity = "0";
             videoPlayerRef.current.currentTime = 0;
@@ -162,12 +169,13 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
             break;
 
           case "video-show-hide":
-            console.log(148, showVideoRef.current);
             showVideoRef.current = !showVideoRef.current;
 
             videoPlayerRef.current.style.opacity = showVideoRef.current
               ? "1"
               : "0";
+
+            callBack && callBack(showVideoRef.current);
             break;
 
           case "video-size-small":
@@ -213,10 +221,10 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
       left={dimensions.left}
       width={dimensions.width}
       height={dimensions.height}
+      border={videoBorder}
+      shadow={videoShadow}
     />
   ) : null;
 };
 
 export default GTK_VideoComponent;
-
-//  http://localhost:3001/?uid=640bef8f88f7663004024d65&tid=640cb609fe1bde3d9ae9ded3&chyron=1&header=1&sponsors=1&emojis=1&host_label_1=1&description=1&logo=1&host_divider=0&host_label_2=0&topics=1
