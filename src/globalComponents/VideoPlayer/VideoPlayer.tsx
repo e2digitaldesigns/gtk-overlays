@@ -43,6 +43,15 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
   const mutedVolumeRef = React.useRef(0);
   const showVideoRef = React.useRef(true);
 
+  React.useEffect(() => {
+    callBack && callBack(false);
+    if (!videoPlayerRef.current) return;
+    videoPlayerRef.current?.pause();
+    videoPlayerRef.current.style.opacity = "0";
+    videoPlayerRef.current.currentTime = 0;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topicId]);
+
   React.useEffect(
     () => {
       if (videoPlayerRef.current && videoUrl) {

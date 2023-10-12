@@ -10,12 +10,10 @@ const scroll = (width: number) => keyframes`
 
 interface ContainerProps {
   bgColor: string;
-  fontColor: string;
   isVisible: boolean;
 }
 
 export const ScrollContainer = styled.div<ContainerProps>`
-  color: ${props => props.fontColor};
   height: 1080px;
   width: 1920px;
   position: relative;

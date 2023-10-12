@@ -50,8 +50,9 @@ const VideoCHL: React.FC<VideoProps> = ({ topicId, topicVideo }) => {
 
         <BGTextScroll
           text={data?.podcastName}
-          bgColor={theme.colors.bg1}
-          fontColor={theme.colors.accent1}
+          bgColor="#000"
+          fontColor1={theme.colors.accent4}
+          fontColor2="#222"
           isVisible={isScrollBgVisible}
         />
       </div>{" "}

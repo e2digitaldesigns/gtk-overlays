@@ -3,7 +3,8 @@ import * as Styled from "./BgTextScroller.style";
 
 interface IBgTextScrollerProps {
   bgColor?: string;
-  fontColor?: string;
+  fontColor1?: string;
+  fontColor2?: string;
   speed1?: string;
   speed2?: string;
   text?: string;
@@ -14,7 +15,8 @@ interface IBgTextScrollerProps {
 
 const GTK_BgTextScroller: React.FC<IBgTextScrollerProps> = ({
   bgColor = "#ededed",
-  fontColor = "#222222",
+  fontColor1 = "#222222",
+  fontColor2 = "#222222",
   speed1 = "20s",
   speed2 = "30s",
   text = "Gamer Tool Kit",
@@ -71,7 +73,6 @@ const GTK_BgTextScroller: React.FC<IBgTextScrollerProps> = ({
       <Styled.ScrollContainer
         ref={stageRef}
         bgColor={bgColor}
-        fontColor={fontColor}
         isVisible={isVisible}
       >
         <Styled.SampleWord ref={wordRef}>{text}</Styled.SampleWord>
@@ -91,7 +92,7 @@ const GTK_BgTextScroller: React.FC<IBgTextScrollerProps> = ({
                 style={{
                   whiteSpace: "nowrap",
                   width: "fit-content",
-                  opacity: index % 2 === 0 ? ".3" : ".2"
+                  color: index % 2 === 0 ? fontColor1 : fontColor2
                 }}
               >
                 {text}

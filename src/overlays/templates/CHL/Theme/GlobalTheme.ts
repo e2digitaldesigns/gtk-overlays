@@ -4,6 +4,7 @@ export const theme = {
     bg1: "rgba(0, 0, 0, 0.98)",
     accent1: "#31aafd",
     accent2: "#2a0c52",
-    accent3: "#430e8a"
+    accent3: "#430e8a",
+    accent4: "rgba(49, 170, 253, 0.35)"
   }
 };
