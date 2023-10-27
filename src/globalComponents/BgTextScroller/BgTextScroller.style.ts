@@ -25,15 +25,17 @@ export const ScrollContainer = styled.div<ContainerProps>`
   transition: opacity, 0.5s ease-in-out;
 `;
 
-export const SampleWord = styled.div`
+export const SampleWord = styled.div<{ fontSize: string }>`
   position: absolute;
   top: -500px;
   left: -500px;
   width: fit-content;
   white-space: nowrap;
+  font-size: ${props => props.fontSize};
 `;
 
 interface ScrollItemProps {
+  fontSize: string;
   posTop?: number;
   totalWidth: number;
   gap: number;
@@ -43,6 +45,7 @@ interface ScrollItemProps {
 
 export const ScrollLine = styled.div<ScrollItemProps>`
   position: absolute;
+  font-size: ${props => props.fontSize};
   top: ${props => (props?.posTop ? props.posTop : "0")}px;
   left: 0px;
   display: flex;

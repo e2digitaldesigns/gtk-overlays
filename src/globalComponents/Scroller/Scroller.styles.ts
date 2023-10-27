@@ -50,10 +50,13 @@ enum TickerStatus {
 interface IListItem {
   state: TickerStatus;
   fontSize?: number;
+  isChildren?: boolean;
+  transition?: string;
 }
 
-export const ListItem = styled.li<IListItem>`
-  width: 100%;
+const ListItemCommon = styled.li<IListItem>`
+  font-size: ${props => (props.fontSize ? props.fontSize + "px" : "inherit")};
+  width: 100% !important;
   height: 100%;
   margin: 0;
   padding: 0;
@@ -62,27 +65,27 @@ export const ListItem = styled.li<IListItem>`
 
   position: absolute;
   top: 0;
-  opacity: 0;
-
-  font-size: ${props => (props.fontSize ? props.fontSize + "px" : "inherit")};
 
   display: ${props => (props.state === TickerStatus.hidden ? "none" : "grid")};
-  grid-template-columns: auto 1fr;
-
-  &:first-child {
-    opacity: 1;
-  }
-
-  animation-name: ${props =>
-    props.state === TickerStatus.active
-      ? animationIn
-      : props.state === TickerStatus.inactive
-      ? animationOut
-      : "none"};
+  grid-template-columns: ${props => (props.isChildren ? "1fr" : "auto 1fr")};
 
   animation-duration: 1s;
   animation-timing-function: ease-in-out;
   animation-fill-mode: forwards;
+  opacity: 1;
+`;
+
+export const ListItem = styled(ListItemCommon)<IListItem>`
+  animation-name: ${props =>
+    props.state === TickerStatus.active
+      ? props.transition === "scroll"
+        ? animationIn
+        : animationFadeIn
+      : props.state === TickerStatus.inactive
+      ? props.transition === "scroll"
+        ? animationOut
+        : animationFadeOut
+      : "none"};
 `;
 
 const animationIn = keyframes`
@@ -109,6 +112,26 @@ const animationOut = keyframes`
   }
 `;
 
+const animationFadeIn = keyframes`
+ 0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+`;
+
+const animationFadeOut = keyframes`
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+`;
+
 interface IListItemDiv {
   titleStyle?: any;
   textStyle?: any;
@@ -117,6 +140,7 @@ interface IListItemDiv {
 
 const ListItemDiv = styled.div`
   height: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
 `;

@@ -15,6 +15,7 @@ interface IntVideoProps {
   videoShadow?: boolean;
   videoUrl: string | undefined;
   dimensions: Dimensions;
+  bgColor?: string;
 
   allowSmallScreen?: boolean;
   smallScreenDimensions?: Dimensions;
@@ -27,26 +28,30 @@ interface IntVideoProps {
 
 const GTK_VideoComponent: React.FC<IntVideoProps> = ({
   dimensions,
+  bgColor = "black",
   allowSmallScreen = false,
-  smallScreenDimensions = undefined,
+  smallScreenDimensions,
   allowFullScreen = false,
-  fullScreenDimensions = undefined,
+  fullScreenDimensions,
   topicId,
   videoUrl,
   videoBorder = "none",
   videoShadow = false,
-  callBack = undefined
+  callBack
 }) => {
   const queryParams = new URLSearchParams(window.location.search);
+  const videoPlayerWrapperRef = React.useRef<HTMLDivElement>(null);
   const videoPlayerRef = React.useRef<HTMLVideoElement>(null);
   const isMutedRef = React.useRef(false);
   const mutedVolumeRef = React.useRef(0);
   const showVideoRef = React.useRef(true);
+  const [isFullscreen, setIsFullscreen] = React.useState(false);
 
   React.useEffect(() => {
     callBack && callBack(false);
-    if (!videoPlayerRef.current) return;
+    if (!videoPlayerRef.current || !videoPlayerWrapperRef.current) return;
     videoPlayerRef.current?.pause();
+    videoPlayerWrapperRef.current.style.opacity = "0";
     videoPlayerRef.current.style.opacity = "0";
     videoPlayerRef.current.currentTime = 0;
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -115,11 +120,12 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
       (err: unknown, data: { action: string; uid: string; tid?: string }) => {
         if (data?.uid !== queryParams.get("uid")) return;
         if (data?.tid && data.tid !== queryParams.get("tid")) return;
-        if (!videoPlayerRef?.current) return;
+        if (!videoPlayerRef?.current || !videoPlayerWrapperRef.current) return;
 
         switch (data.action) {
           case "video-play":
             callBack && callBack(true);
+            videoPlayerWrapperRef.current.style.opacity = "1";
             videoPlayerRef.current.style.opacity = "1";
             videoPlayerRef.current?.play();
             break;
@@ -131,6 +137,7 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
           case "video-stop":
             callBack && callBack(false);
             videoPlayerRef.current?.pause();
+            videoPlayerWrapperRef.current.style.opacity = "0";
             videoPlayerRef.current.style.opacity = "0";
             videoPlayerRef.current.currentTime = 0;
             break;
@@ -179,35 +186,43 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
 
           case "video-show-hide":
             showVideoRef.current = !showVideoRef.current;
-
-            videoPlayerRef.current.style.opacity = showVideoRef.current
-              ? "1"
-              : "0";
+            const newOpacity = showVideoRef.current ? "1" : "0";
+            videoPlayerRef.current.style.opacity = newOpacity;
+            videoPlayerWrapperRef.current.style.opacity = newOpacity;
 
             callBack && callBack(showVideoRef.current);
             break;
 
           case "video-size-small":
             if (!allowSmallScreen || !smallScreenDimensions) return;
-            videoPlayerRef.current.style.top = smallScreenDimensions.top;
-            videoPlayerRef.current.style.left = smallScreenDimensions.left;
-            videoPlayerRef.current.style.width = smallScreenDimensions.width;
-            videoPlayerRef.current.style.height = smallScreenDimensions.height;
+            setIsFullscreen(false);
+            videoPlayerWrapperRef.current.style.top = smallScreenDimensions.top;
+            videoPlayerWrapperRef.current.style.left =
+              smallScreenDimensions.left;
+            videoPlayerWrapperRef.current.style.width =
+              smallScreenDimensions.width;
+            videoPlayerWrapperRef.current.style.height =
+              smallScreenDimensions.height;
             break;
 
           case "video-size-normal":
-            videoPlayerRef.current.style.top = dimensions.top;
-            videoPlayerRef.current.style.left = dimensions.left;
-            videoPlayerRef.current.style.width = dimensions.width;
-            videoPlayerRef.current.style.height = dimensions.height;
+            setIsFullscreen(false);
+            videoPlayerWrapperRef.current.style.top = dimensions.top;
+            videoPlayerWrapperRef.current.style.left = dimensions.left;
+            videoPlayerWrapperRef.current.style.width = dimensions.width;
+            videoPlayerWrapperRef.current.style.height = dimensions.height;
             break;
 
           case "video-size-fullscreen":
+            setIsFullscreen(true);
             if (!allowFullScreen || !fullScreenDimensions) return;
-            videoPlayerRef.current.style.top = fullScreenDimensions.top;
-            videoPlayerRef.current.style.left = fullScreenDimensions.left;
-            videoPlayerRef.current.style.width = fullScreenDimensions.width;
-            videoPlayerRef.current.style.height = fullScreenDimensions.height;
+            videoPlayerWrapperRef.current.style.top = fullScreenDimensions.top;
+            videoPlayerWrapperRef.current.style.left =
+              fullScreenDimensions.left;
+            videoPlayerWrapperRef.current.style.width =
+              fullScreenDimensions.width;
+            videoPlayerWrapperRef.current.style.height =
+              fullScreenDimensions.height;
             break;
 
           default:
@@ -224,15 +239,19 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
   }, []);
 
   return videoUrl ? (
-    <Styled.VideoPlayer
-      ref={videoPlayerRef}
+    <Styled.VideoPlayerWrapper
+      ref={videoPlayerWrapperRef}
+      bgColor={bgColor}
       top={dimensions.top}
       left={dimensions.left}
       width={dimensions.width}
       height={dimensions.height}
       border={videoBorder}
       shadow={videoShadow}
-    />
+      isFullscreen={isFullscreen}
+    >
+      <Styled.VideoPlayer ref={videoPlayerRef} />
+    </Styled.VideoPlayerWrapper>
   ) : null;
 };
 

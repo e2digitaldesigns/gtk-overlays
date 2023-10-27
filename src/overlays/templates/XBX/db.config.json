@@ -1,0 +1,69 @@
+{
+  "_id": {
+    "$oid": "653679760a308f6ed2f75217"
+  },
+  "name": "XBX: XBOX One Dashboard",
+  "urlKey": "xbx",
+  "maxHosts": 2,
+  "thumbnail": "https://mg-show-assets.s3.us-east-1.amazonaws.com/images/template-images/sas.jpg",
+  "tickerConfig": {
+    "hasTitle": false
+  },
+  "topicConfig": {
+    "allowNesting": false,
+    "hasImage": true,
+    "hasVideo": true
+  },
+  "hasSponsor": true,
+  "images": {
+    "logo": {
+      "maxAmount": 1,
+      "height": 230,
+      "width": 390
+    },
+    "sponsors": {
+      "maxAmount": 5,
+      "height": 230,
+      "width": 390
+    },
+    "topic": {
+      "maxAmount": 0,
+      "height": 230,
+      "width": 390
+    }
+  },
+  "linkArray": [
+    {
+      "name": "Topics",
+      "param": "topics"
+    },
+    {
+      "name": "News Feed",
+      "param": "news_feed"
+    },
+    {
+      "name": "Sponsors",
+      "param": "sponsors"
+    },
+    {
+      "name": "Hosts 1 Up",
+      "param": "hosts_1_up"
+    },
+    {
+      "name": "Chat Message",
+      "param": "chat_message"
+    },
+    {
+      "name": "Chat Ranks",
+      "param": "chat_rank"
+    },
+    {
+      "name": "Chyron",
+      "param": "chyron"
+    },
+    {
+      "name": "Emojis",
+      "param": "emojis"
+    }
+  ]
+}

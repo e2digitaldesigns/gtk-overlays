@@ -1,0 +1,173 @@
+{
+  "_id": {
+    "$oid": "65367a7d0a308f6ed2f7521a"
+  },
+  "userId": {
+    "$oid": "640bef8f88f7663004024d65"
+  },
+  "name": "New XBox Epsiode",
+  "active": false,
+  "airDate": "2023-10-23",
+  "current": true,
+  "hosts": [
+    {
+      "seatNum": 0,
+      "_id": {
+        "$oid": "64ebde7ac1ddfefa3d7a9ad8"
+      }
+    }
+  ],
+  "number": 1,
+  "socialNetworks": [
+    {
+      "order": 1,
+      "socialId": "640c22247e30ccf4095972cb"
+    },
+    {
+      "order": 2,
+      "socialId": "64152cdead9d5f9069d72f7c"
+    }
+  ],
+  "templateId": {
+    "$oid": "653679760a308f6ed2f75217"
+  },
+  "ticker": [
+    {
+      "_id": "f77c83bb-5970-4e78-b397-c5bf9f2e5500",
+      "title": "",
+      "text": "May the Force be with you."
+    },
+    {
+      "_id": "2771d964-5ac6-4ef3-9f06-f64083718138",
+      "title": "",
+      "text": "Life is like a box of chocolates."
+    }
+  ],
+  "topics": [
+    {
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. ",
+      "img": "topics_000.jpg",
+      "isChild": false,
+      "isParent": false,
+      "name": "Assassin's Creed Miniseries",
+      "order": 1,
+      "parentId": "",
+      "timer": 0,
+      "articles": " ",
+      "video": "",
+      "_id": {
+        "$oid": "641223a80bfb820ae859bf21"
+      }
+    },
+    {
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. ",
+      "img": "topics_002.jpg",
+      "isChild": false,
+      "isParent": false,
+      "name": "Assassin's Creed Mirage",
+      "order": 2,
+      "parentId": "",
+      "timer": 0,
+      "articles": " ",
+      "video": "",
+      "_id": {
+        "$oid": "641223a80bfb820ae859bf22"
+      }
+    },
+    {
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. ",
+      "img": "topics_003.jpg",
+      "isChild": false,
+      "isParent": false,
+      "name": "Assassin's Creed Valhalla",
+      "order": 3,
+      "parentId": "",
+      "timer": 0,
+      "articles": " ",
+      "video": "",
+      "_id": {
+        "$oid": "641223a80bfb820ae859bf23"
+      }
+    },
+    {
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. ",
+      "img": "topics_004.jpg",
+      "isChild": false,
+      "isParent": false,
+      "name": "Assassin's Creed Syndicate Review",
+      "order": 4,
+      "parentId": "",
+      "timer": 0,
+      "articles": " ",
+      "video": "",
+      "_id": {
+        "$oid": "641223a80bfb820ae859bf24"
+      }
+    },
+    {
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. ",
+      "img": "topics_000.jpg",
+      "isChild": false,
+      "isParent": false,
+      "name": "Assassin's Creed Miniseries 2",
+      "order": 1,
+      "parentId": "",
+      "timer": 0,
+      "articles": " ",
+      "video": "",
+      "_id": {
+        "$oid": "641223a80bfb820ae859bf14"
+      }
+    },
+    {
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. ",
+      "img": "topics_002.jpg",
+      "isChild": false,
+      "isParent": false,
+      "name": "Assassin's Creed Mirage 2",
+      "order": 2,
+      "parentId": "",
+      "timer": 0,
+      "articles": " ",
+      "video": "",
+      "_id": {
+        "$oid": "641223a80bfb820ae859bf13"
+      }
+    },
+    {
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. ",
+      "img": "topics_003.jpg",
+      "isChild": false,
+      "isParent": false,
+      "name": "Assassin's Creed Valhalla 2",
+      "order": 3,
+      "parentId": "",
+      "timer": 0,
+      "articles": " ",
+      "video": "",
+      "_id": {
+        "$oid": "641223a80bfb820ae859bf12"
+      }
+    },
+    {
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. ",
+      "img": "topics_004.jpg",
+      "isChild": false,
+      "isParent": false,
+      "name": "Assassin's Creed Syndicate Review 2",
+      "order": 4,
+      "parentId": "",
+      "timer": 0,
+      "articles": " ",
+      "video": "",
+      "_id": {
+        "$oid": "641223a80bfb820ae859bf11"
+      }
+    }
+  ],
+  "contentBoxes": [],
+  "sponsorBoxes": [],
+  "__v": 0,
+  "sponsorImages": ["topics_001.jpg", "topics_002.jpg", "topics_003.jpg"],
+  "logo": "bc463c62-a76d-4aaa-93f2-b33ed401deda.png"
+}

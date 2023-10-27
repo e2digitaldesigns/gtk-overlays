@@ -16,6 +16,7 @@ interface IntCss {
   container?: object;
   title?: object;
   text?: object;
+  childWrapper?: object;
 }
 
 interface IntScrollerProps {
@@ -28,6 +29,8 @@ interface IntScrollerProps {
   sx?: IntCss;
   callBack?: (item: IntScrollerListItem) => void;
   showTitle?: boolean;
+
+  transition?: "scroll" | "fade";
 }
 
 enum TickerStatus {
@@ -47,7 +50,8 @@ const GTK_Scroller: React.FC<IntScrollerProps> = ({
   timer = 3,
   sx,
   showTitle = true,
-  callBack
+  callBack,
+  transition = "scroll"
 }) => {
   const [activeIndex, setActiveIndex] = React.useState<number>(-1);
   const [oldIndex, setOldIndex] = React.useState<number>(-1);
@@ -114,6 +118,7 @@ const GTK_Scroller: React.FC<IntScrollerProps> = ({
                 state={setClassName(index)}
                 key={index}
                 fontSize={fontSize}
+                transition={transition}
               >
                 <>
                   {m.title && showTitle && (
@@ -140,8 +145,14 @@ const GTK_Scroller: React.FC<IntScrollerProps> = ({
                 state={setClassName(index)}
                 key={index}
                 fontSize={fontSize}
+                data-testid={`children-list-item-${setClassName(index)}`}
+                isChildren={true}
+                transition={transition}
               >
-                <Styled.ListItemDivText>
+                <Styled.ListItemDivText
+                  sx={sx?.childWrapper}
+                  data-testid="149 - list item div text"
+                >
                   {React.cloneElement(element)}
                 </Styled.ListItemDivText>
               </Styled.ListItem>

@@ -5,6 +5,7 @@ interface IBgTextScrollerProps {
   bgColor?: string;
   fontColor1?: string;
   fontColor2?: string;
+  fontSize?: string;
   speed1?: string;
   speed2?: string;
   text?: string;
@@ -17,6 +18,7 @@ const GTK_BgTextScroller: React.FC<IBgTextScrollerProps> = ({
   bgColor = "#ededed",
   fontColor1 = "#222222",
   fontColor2 = "#222222",
+  fontSize = "1rem",
   speed1 = "20s",
   speed2 = "30s",
   text = "Gamer Tool Kit",
@@ -75,11 +77,14 @@ const GTK_BgTextScroller: React.FC<IBgTextScrollerProps> = ({
         bgColor={bgColor}
         isVisible={isVisible}
       >
-        <Styled.SampleWord ref={wordRef}>{text}</Styled.SampleWord>
+        <Styled.SampleWord ref={wordRef} fontSize={fontSize}>
+          {text}
+        </Styled.SampleWord>
 
         {lineArray.map((_, index) => (
           <Styled.ScrollLine
             key={index}
+            fontSize={fontSize}
             posTop={index * wordHeight * ySpacer}
             totalWidth={xSpacer + wordWidth}
             gap={xSpacer}

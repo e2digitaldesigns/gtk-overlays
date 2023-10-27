@@ -20,9 +20,9 @@ const GTK_TimeItem: React.FC<IntTimeItem> = ({ hour, zone }) => {
   }, []);
 
   return (
-    <span>
+    <div style={{ width: "100%" }}>
       {time} {zone}
-    </span>
+    </div>
   );
 };
 
