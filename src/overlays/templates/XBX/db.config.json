@@ -5,7 +5,7 @@
   "name": "XBX: XBOX One Dashboard",
   "urlKey": "xbx",
   "maxHosts": 2,
-  "thumbnail": "https://mg-show-assets.s3.us-east-1.amazonaws.com/images/template-images/sas.jpg",
+  "thumbnail": "https://mg-show-assets.s3.us-east-1.amazonaws.com/images/template-images/xbx.jpg",
   "tickerConfig": {
     "hasTitle": false
   },
@@ -34,22 +34,6 @@
   },
   "linkArray": [
     {
-      "name": "Topics",
-      "param": "topics"
-    },
-    {
-      "name": "News Feed",
-      "param": "news_feed"
-    },
-    {
-      "name": "Sponsors",
-      "param": "sponsors"
-    },
-    {
-      "name": "Hosts 1 Up",
-      "param": "hosts_1_up"
-    },
-    {
       "name": "Chat Message",
       "param": "chat_message"
     },
@@ -62,8 +46,35 @@
       "param": "chyron"
     },
     {
-      "name": "Emojis",
-      "param": "emojis"
+      "name": "Description",
+      "param": "description"
+    },
+
+    {
+      "name": "Hosts 1 Up",
+      "param": "host_1_up"
+    },
+
+    {
+      "name": "Hosts 2 Up (Host 1 Left)",
+      "param": "host_2_up_host_1"
+    },
+
+    {
+      "name": "Hosts 2 Up (Host 2 Right)",
+      "param": "host_2_up_host_2"
+    },
+    {
+      "name": "Sponsors",
+      "param": "sponsors"
+    },
+    {
+      "name": "Topics",
+      "param": "topics"
+    },
+    {
+      "name": "Video Player",
+      "param": "video"
     }
   ]
 }

@@ -68,13 +68,14 @@ export enum SectionsXBX {
   ChatRank = "chat_rank",
   Chyron = "chyron",
   Description = "description",
+
+  Host_1_Up = "host_1_up",
+  Host_2_Up_Host_1 = "host_2_up_host_1",
+  Host_2_Up_Host_2 = "host_2_up_host_2",
+
   Sponsors = "sponsors",
   Topics = "topics",
-  Video = "video",
-  Host_1_Up = "host_1_up",
-
-  Host_2_Up_Host_1 = "host_2_up_host_1",
-  Host_2_Up_Host_2 = "host_2_up_host_2"
+  Video = "video"
 }
 
 export type OverlaySections =
