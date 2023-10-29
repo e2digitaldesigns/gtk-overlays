@@ -197,11 +197,13 @@ const useVotingHook = () => {
 
     socketServices.subscribeOverlayActions(
       (err: unknown, data: { action: string; uid: string; tid?: string }) => {
+        console.log(200, "clear-votes");
         if (data?.uid !== queryParams.get("uid")) return;
         if (!data?.tid || data?.tid !== queryParams.get("tid")) return;
 
         switch (data.action) {
           case "clear-votes":
+            console.log(206, "clear-votes");
             window.localStorage.setItem(
               STORAGE_KEY.TALLY,
               JSON.stringify(initVotingState)

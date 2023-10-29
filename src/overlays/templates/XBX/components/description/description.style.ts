@@ -77,7 +77,7 @@ export const DescriptionWrapperMain = styled.div<IDescriptionWrapperMain>`
   text-shadow: 1px 2px #000;
   white-space: pre-wrap;
 
-  width: 870px;
+  width: 900px;
   height: 230px;
   left: 505px;
   top: 740px;

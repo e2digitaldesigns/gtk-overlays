@@ -5,7 +5,8 @@ export const UpNextWrapper = styled.div`
 
   height: 700px;
   width: 390px;
-  left: 1395px;
+  left: 1425px;
+  /* right: 105px; */
   top: 20px;
 
   overflow: hidden;

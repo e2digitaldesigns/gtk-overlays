@@ -19,6 +19,7 @@ const HeaderTab: React.FC = () => {
       <Styled.HeaderTab>
         <Styled.Location>
           <Scroller
+            transition="fade"
             data={data}
             timer={CONFIG.scrollTimers.headerTab}
             sx={{

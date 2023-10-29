@@ -6,7 +6,7 @@ export const SponsorsWrapper = styled.div`
 
   width: 390px;
   height: 230px;
-  left: 1395px;
+  left: 1425px;
   top: 740px;
   position: absolute;
   z-index: 1;

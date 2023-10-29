@@ -23,7 +23,7 @@ export const ChyronWrapper = styled.div`
   height: 50px;
   left: 170px;
   top: 1010px;
-  width: 1615px;
+  width: 1650px;
   position: absolute;
   font-family: "Roboto";
   font-size: 18px;

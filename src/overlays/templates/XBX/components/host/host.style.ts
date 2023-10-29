@@ -6,7 +6,7 @@ interface IntHost2UpWrapper {
 
 const HostWrapperDefault = styled.div`
   position: absolute;
-  width: 1270px;
+  width: 1300px;
   height: 700px;
   left: 105px;
   top: 20px;

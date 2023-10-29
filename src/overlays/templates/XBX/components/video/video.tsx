@@ -22,7 +22,7 @@ const VideoXBX: React.FC<VideoProps> = ({ topicId, topicVideo }) => {
       dimensions={{
         top: "20px",
         left: "105px",
-        width: "1270px",
+        width: "1300px",
         height: "700px"
       }}
       fullScreenDimensions={{
