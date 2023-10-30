@@ -17,9 +17,6 @@ export const TopicWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  text-transform: uppercase;
-  font-size: 1.5rem;
-  font-weight: 600;
 
   overflow: hidden;
   scroll-snap-type: y mandatory;
@@ -94,6 +91,10 @@ export const TopicLiName = styled.div<TopicLiInnerProps>`
 
   background-color: ${props => props.theme.colors.bg2};
   z-index: 2;
+
+  text-transform: uppercase;
+  font-size: 1.125rem;
+  font-weight: 400;
 `;
 
 export const TopicLiImage = styled.div<TopicLiInnerProps>`
