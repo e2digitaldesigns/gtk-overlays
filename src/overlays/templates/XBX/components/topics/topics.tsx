@@ -1,9 +1,9 @@
 import React from "react";
 import * as Styled from "./topics.style";
-import { SectionsXBX } from "../../../../types";
+import { SectionsXBX } from "../../../../../types";
 
-import { useParams, useTopicImage } from "../../../../hooks";
-import { IntTopic } from "../../../../globalComponents/Topics/types";
+import { useParams, useTopicImage } from "../../../../../hooks";
+import { IntTopic } from "../../../../../globalComponents/Topics/types";
 
 export interface UpNextCHLProps {
   activeTopic: IntTopic;

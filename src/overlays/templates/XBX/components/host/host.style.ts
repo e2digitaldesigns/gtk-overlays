@@ -18,8 +18,8 @@ const HostWrapperDefault = styled.div`
 export const Host1Up = styled(HostWrapperDefault)``;
 
 export const Host2Up = styled(HostWrapperDefault)<IntHost2UpWrapper>`
-  width: 625px;
-  left: ${props => (props.position === 1 ? "105px" : "750px")};
+  width: 640px;
+  left: ${props => (props.position === 1 ? "105px" : "765px")};
 `;
 
 export const NameTag = styled.div`

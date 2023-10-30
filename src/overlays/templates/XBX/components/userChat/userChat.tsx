@@ -1,10 +1,10 @@
 import React from "react";
 import * as Styled from "./userChat.style";
-import { ChatDisplay } from "../../../../globalComponents";
-import { SectionsXBX } from "../../../../types";
+import { ChatDisplay } from "../../../../../globalComponents";
+import { SectionsXBX } from "../../../../../types";
 
-import { theme } from "../Theme/GlobalTheme";
-import { useParams } from "../../../../hooks";
+import { theme } from "../../Theme/GlobalTheme";
+import { useParams } from "../../../../../hooks";
 
 export interface ChatDisplayChildProps {
   message?: any;
