@@ -49,17 +49,14 @@
       "name": "Description",
       "param": "description"
     },
-
     {
       "name": "Hosts 1 Up",
       "param": "host_1_up"
     },
-
     {
       "name": "Hosts 2 Up (Host 1 Left)",
       "param": "host_2_up_host_1"
     },
-
     {
       "name": "Hosts 2 Up (Host 2 Right)",
       "param": "host_2_up_host_2"

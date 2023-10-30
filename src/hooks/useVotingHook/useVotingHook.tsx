@@ -181,6 +181,30 @@ const useVotingHook = () => {
             handleVoting(data, "remove");
           }
           break;
+
+        case "clear-votes":
+          console.log(186, "clear-votes");
+          window.localStorage.setItem(
+            STORAGE_KEY.TALLY,
+            JSON.stringify(initVotingState)
+          );
+
+          window.localStorage.setItem(
+            STORAGE_KEY.STREAK,
+            JSON.stringify(initVotingStreakState)
+          );
+
+          window.localStorage.setItem(
+            STORAGE_KEY.TOPIC_VOTING_COUNT,
+            JSON.stringify({})
+          );
+
+          if (stillHere) {
+            setVoting(initVotingState);
+            setVotingStreak(initVotingStreakState);
+            setVotes([]);
+          }
+          break;
       }
     });
 
@@ -191,52 +215,6 @@ const useVotingHook = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handleVoting]);
-
-  React.useEffect(() => {
-    let stillHere = true;
-
-    socketServices.subscribeOverlayActions(
-      (err: unknown, data: { action: string; uid: string; tid?: string }) => {
-        console.log(200, "clear-votes");
-        if (data?.uid !== queryParams.get("uid")) return;
-        if (!data?.tid || data?.tid !== queryParams.get("tid")) return;
-
-        switch (data.action) {
-          case "clear-votes":
-            console.log(206, "clear-votes");
-            window.localStorage.setItem(
-              STORAGE_KEY.TALLY,
-              JSON.stringify(initVotingState)
-            );
-
-            window.localStorage.setItem(
-              STORAGE_KEY.STREAK,
-              JSON.stringify(initVotingStreakState)
-            );
-
-            window.localStorage.setItem(
-              STORAGE_KEY.TOPIC_VOTING_COUNT,
-              JSON.stringify({})
-            );
-
-            stillHere && setVoting(initVotingState);
-            stillHere && setVotingStreak(initVotingStreakState);
-            stillHere && setVotes([]);
-            break;
-
-          default:
-            break;
-        }
-      }
-    );
-
-    return () => {
-      stillHere = false;
-      socketServices.unSubscribeOverlayActions();
-    };
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   React.useEffect(() => {
     if (_isEqual(initVotingState, voting)) return;
