@@ -9,6 +9,7 @@ import { useSimpleTopic } from "../../../hooks";
 import HostFGT from "./components/Host/Host";
 import { UpNextFGT } from "./components/UpNext/UpNext";
 import { ShowChatFGT } from "./components/ShowChat/ShowChatFGT";
+import { VideoFGT } from "./Video/Video";
 
 const OverlayFGT: React.FC = () => {
   const { topics } = useDataContext();
@@ -23,6 +24,8 @@ const OverlayFGT: React.FC = () => {
         <Styled.Container>
           <ShowChatFGT />
           <UpNextFGT activeTopic={topic} topics={topics} />
+
+          <VideoFGT topicId={topic?._id} topicVideo={topic?.video} />
 
           <HostFGT seat={1} />
           <HostFGT seat={2} />
