@@ -8,22 +8,23 @@ import { IntTopic } from "../../../../../globalComponents/Topics/types";
 export interface UpNextCHLProps {
   activeTopic: IntTopic;
   topics: IntTopic[];
+  topicLiHeight?: number;
 }
 
 export const UpNextCHL: React.FC<UpNextCHLProps> = ({
   activeTopic,
-  topics
+  topics,
+  topicLiHeight = 37
 }) => {
   const { showSection } = useParams();
   const wrapperRef = React.useRef<HTMLDivElement>(null);
   const topicUlRef = React.useRef<HTMLUListElement>(null);
   const [ulTop, setUlTop] = React.useState(0);
-  const topicLiHeight = 37;
 
   React.useEffect(() => {
     const newTopp = topicLiHeight * topics.indexOf(activeTopic) * -1;
     setUlTop(newTopp);
-  }, [activeTopic, topics]);
+  }, [topicLiHeight, activeTopic, topics]);
 
   const activeTopicIndex = topics.indexOf(activeTopic);
 

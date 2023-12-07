@@ -44,6 +44,24 @@ const initVotingStreakState: IVoteStreaks = {
   "6": { add: 0, remove: 0 }
 };
 
+function getKeyWithHighestValue(obj: any): string[] {
+  let maxKeys: string[] = [];
+  let maxValue = -Infinity;
+
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      if (obj[key] > maxValue) {
+        maxKeys = [key];
+        maxValue = obj[key];
+      } else if (obj[key] === maxValue) {
+        maxKeys.push(key);
+      }
+    }
+  }
+
+  return maxKeys;
+}
+
 const useVotingHook = () => {
   const [voting, setVoting] = React.useState<IVotingState>(initVotingState);
   const [votingStreak, setVotingStreak] = React.useState<IVoteStreaks>(
@@ -232,7 +250,8 @@ const useVotingHook = () => {
   return {
     votes,
     voting,
-    votingStreak
+    votingStreak,
+    leadingSeat: getKeyWithHighestValue(voting)
   };
 };
 

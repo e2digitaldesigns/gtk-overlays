@@ -9,3 +9,7 @@ export { socialToScrollerUtil as socialToScroller } from "./Utils/socailToScroll
 
 export { default as VideoPlayer } from "./VideoPlayer/VideoPlayer";
 export { default as BGTextScroll } from "./BgTextScroller/BgTextScroller";
+
+export { default as HostVoteEmojis } from "./HostVoteEmojis/HostVoteEmojis";
+
+export { default as UpNext } from "./UpNext/UpNext";

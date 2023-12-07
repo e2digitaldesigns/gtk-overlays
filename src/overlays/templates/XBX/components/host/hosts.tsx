@@ -2,11 +2,10 @@ import * as React from "react";
 import * as Styled from "./host.style";
 import { useParams } from "../../../../../hooks";
 import useVotingHook from "../../../../../hooks/useVotingHook/useVotingHook";
-import { Scroller } from "../../../../../globalComponents";
+import { HostVoteEmojis, Scroller } from "../../../../../globalComponents";
 
 import { useDataContext } from "../../../../../context";
 import { SectionsXBX } from "../../../../../types";
-import { HostVote } from "./HostVote";
 
 import CONFIG from "../../config.json";
 
@@ -32,7 +31,7 @@ const HostXBX: React.FC = () => {
           </Scroller>
         </Styled.NameTag>
 
-        <HostVote seatNum={1} votes={votes} />
+        <HostVoteEmojis seatNum={1} votes={votes} />
 
         <Styled.VoteCount>{voting[1]}</Styled.VoteCount>
       </Styled.Host1Up>
@@ -56,7 +55,7 @@ const HostXBX: React.FC = () => {
               </Scroller>
             </Styled.NameTag>
 
-            <HostVote seatNum={host.seatNum} votes={votes} />
+            <HostVoteEmojis seatNum={host.seatNum} votes={votes} />
 
             <Styled.VoteCount>{voting[host.seatNum]}</Styled.VoteCount>
           </Styled.Host2Up>

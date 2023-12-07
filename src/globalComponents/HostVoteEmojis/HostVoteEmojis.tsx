@@ -1,13 +1,13 @@
 import React from "react";
-import * as Styled from "./HostVote.style";
-import { IVotes } from "../../../../../hooks/useVotingHook/useVotingHook";
+import * as Styled from "./HostVoteEmojis.style";
+import { IVotes } from "../../hooks/useVotingHook/useVotingHook";
 
-interface IHostVoteProps {
+interface IHostVoteEmojis {
   seatNum: number;
   votes: IVotes[];
 }
 
-export const HostVote: React.FC<IHostVoteProps> = ({ seatNum, votes }) => {
+const HostVoteEmojis: React.FC<IHostVoteEmojis> = ({ seatNum, votes }) => {
   const [hostVote, setHostVote] = React.useState<IVotes[]>([]);
 
   React.useEffect(() => {
@@ -31,15 +31,11 @@ export const HostVote: React.FC<IHostVoteProps> = ({ seatNum, votes }) => {
     return Number(number);
   };
 
-  const emojiParser = (_id: string, action: "add" | "remove" | "super") => {
+  const emojiParser = (_id: string, action: string) => {
     const number = String(numberFromId(_id));
 
     type EmojiSet = {
-      [key: string]: {
-        add: string;
-        remove: string;
-        super?: string;
-      };
+      [key: string]: { [key: string]: string };
     };
 
     const emojiSet: EmojiSet = {
@@ -62,10 +58,16 @@ export const HostVote: React.FC<IHostVoteProps> = ({ seatNum, votes }) => {
   return (
     <>
       {hostVote.map(vote => (
-        <Styled.VoteFloat key={vote._id} numberStr={numberFromId(vote._id)}>
+        <Styled.VoteFloat
+          key={vote._id}
+          numberStr={numberFromId(vote._id)}
+          type={vote.action}
+        >
           {emojiParser(vote._id, vote.action)}
         </Styled.VoteFloat>
       ))}
     </>
   );
 };
+
+export default HostVoteEmojis;

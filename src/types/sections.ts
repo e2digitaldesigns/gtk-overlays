@@ -78,10 +78,24 @@ export enum SectionsXBX {
   Video = "video"
 }
 
+export enum SectionsFGT {
+  ChatMessage = "chat_message",
+  Description = "desc",
+  Host1 = "host_1",
+  Host2 = "host_2",
+  Host3 = "host_3",
+  Host4 = "host_4",
+  NewsFeed = "news_feed",
+  Sponsors = "sponsors",
+  UpNext = "up_next",
+  Video = "video"
+}
+
 export type OverlaySections =
   | SectionsBNN
   | SectionsCHL
   | SectionsCNN
   | SectionsPTI
   | SectionsSAS
-  | SectionsXBX;
+  | SectionsXBX
+  | SectionsFGT;

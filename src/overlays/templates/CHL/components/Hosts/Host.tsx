@@ -2,13 +2,12 @@ import * as React from "react";
 import * as Styled from "./Host.style";
 import { useParams } from "../../../../../hooks";
 import useVotingHook from "../../../../../hooks/useVotingHook/useVotingHook";
-import { Scroller } from "../../../../../globalComponents";
+import { HostVoteEmojis, Scroller } from "../../../../../globalComponents";
 
 import { useDataContext } from "./../../../../../context";
 import { SectionsCHL } from "../../../../../types";
 
 import CONFIG from "../../config.json";
-import { HostVote } from "./HostVote";
 import { FireHost } from "./FireHost";
 import FireCountDisplay from "./FireCountDisplay";
 
@@ -48,7 +47,7 @@ const Host: React.FC = () => {
                 votingStreak={votingStreak}
               />
 
-              <HostVote seatNum={host.seatNum} votes={votes} />
+              <HostVoteEmojis seatNum={host.seatNum} votes={votes} />
 
               <Styled.FireWrapper>
                 <FireHost

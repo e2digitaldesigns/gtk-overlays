@@ -1,13 +1,13 @@
 {
   "_id": {
-    "$oid": "655ffce9a7fd7ac529acd471"
+    "$oid": "65367a7d0a308f6ed2f7521a"
   },
   "userId": {
     "$oid": "640bef8f88f7663004024d65"
   },
-  "name": "New For Guest Only",
+  "name": "New XBox Epsiode",
   "active": false,
-  "airDate": "2023-11-23",
+  "airDate": "2023-10-23",
   "current": true,
   "hosts": [
     {
@@ -29,7 +29,7 @@
     }
   ],
   "templateId": {
-    "$oid": "655ffc71a7fd7ac529acd46e"
+    "$oid": "653679760a308f6ed2f75217"
   },
   "ticker": [
     {

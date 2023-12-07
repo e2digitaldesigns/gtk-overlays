@@ -1,14 +1,15 @@
 import styled, { Keyframes, keyframes } from "styled-components";
 
-const upAndAway = (start: number): Keyframes => {
+const upAndAway = (start: number, type: string): Keyframes => {
   start = start > 5 ? start * 2 : 0 - start * 2;
 
   return keyframes`
  0% {
+  opacity:0;
   right: ${20 - start}px;
   }
 
-  20% {
+  10% {
     opacity:1;
   }
 
@@ -25,7 +26,7 @@ const upAndAway = (start: number): Keyframes => {
   }
 
   100% {
-    bottom: 400px;
+    bottom: ${type === "add" ? "400px" : "-200px"};
     opacity: 0;
     right: 20px;
   }
@@ -34,6 +35,7 @@ const upAndAway = (start: number): Keyframes => {
 
 interface VoteFloatProps {
   numberStr: number;
+  type: string;
 }
 export const VoteFloat = styled.div<VoteFloatProps>`
   width: 65px;
@@ -52,6 +54,6 @@ export const VoteFloat = styled.div<VoteFloatProps>`
   right: 20px;
   z-index: 150;
 
-  animation: ${props => upAndAway(props.numberStr)} 7s ease-in-out;
+  animation: ${props => upAndAway(props.numberStr, props.type)} 7s ease-in-out;
   animation-fill-mode: forwards;
 `;
