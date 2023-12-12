@@ -1,6 +1,7 @@
 import React from "react";
 import * as Styled from "./VideoPlayer.styles";
 import socketServices from "../../services/socketServices";
+import { RequestType, SocketServicesData } from "../../types";
 
 type Dimensions = {
   top: string;
@@ -117,9 +118,12 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
 
   React.useEffect(() => {
     socketServices.subscribeOverlaysVideoPlayer(
-      (err: unknown, data: { action: string; uid: string; tid?: string }) => {
-        if (data?.uid !== queryParams.get("uid")) return;
-        if (data?.tid && data.tid !== queryParams.get("tid")) return;
+      (err: unknown, data: SocketServicesData) => {
+        if (err) return;
+
+        if (data?.uid !== queryParams.get(RequestType.UserId)) return;
+        if (data?.tid && data.tid !== queryParams.get(RequestType.Template))
+          return;
         if (!videoPlayerRef?.current || !videoPlayerWrapperRef.current) return;
 
         switch (data.action) {

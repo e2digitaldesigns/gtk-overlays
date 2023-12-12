@@ -4,16 +4,21 @@ import { useParams } from "../../../../../hooks";
 import { HostVoteEmojis, Scroller } from "../../../../../globalComponents";
 
 import { useDataContext } from "./../../../../../context";
-import { SectionsCHL } from "../../../../../types";
+import {
+  IVoteStreaks,
+  IVotes,
+  IVotingState,
+  SectionsCHL
+} from "../../../../../types";
 
 import CONFIG from "../../config.json";
 import { FireHost } from "./FireHost";
 import FireCountDisplay from "./FireCountDisplay";
 
 interface IHostProps {
-  voting: any;
-  votes: any;
-  votingStreak: any;
+  voting: IVotingState;
+  votes: IVotes[];
+  votingStreak: IVoteStreaks;
 }
 
 const Host: React.FC<IHostProps> = ({ voting, votes, votingStreak }) => {
@@ -29,7 +34,7 @@ const Host: React.FC<IHostProps> = ({ voting, votes, votingStreak }) => {
 
   return (
     <>
-      {data.map((host: any, index: number) => {
+      {data.map(host => {
         if (!showHosts[host.seatNum]) return null;
         return (
           <Styled.HostBoxWrapper key={host.seatNum} position={host.seatNum}>

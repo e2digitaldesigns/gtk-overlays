@@ -3,7 +3,7 @@ import * as Styled from "./TopChat.styles";
 import _sortBy from "lodash/sortBy";
 import _cloneDeep from "lodash/cloneDeep";
 import socketServices from "../../services/socketServices";
-import { RequestType } from "../../types";
+import { ChatRanker, RequestType } from "../../types";
 import axios from "axios";
 
 interface ITopChatProps {
@@ -103,16 +103,20 @@ const TopChat: React.FC<ITopChatProps> = ({
   React.useEffect(() => {
     let stillHere = true;
 
-    socketServices.subscribeOverlaysChatRanks((err: unknown, data: any) => {
-      if (data?.uid !== queryParams.get(RequestType.UserId)) return;
-      if (data?.tid !== queryParams.get(RequestType.Template)) return;
+    socketServices.subscribeOverlaysChatRanks(
+      (err: unknown, data: ChatRanker) => {
+        if (err) return;
 
-      switch (data.action) {
-        case "chatRankUpdate":
-          stillHere && setUserState(prevState => data.messages);
-          break;
+        if (data?.uid !== queryParams.get(RequestType.UserId)) return;
+        if (data?.tid !== queryParams.get(RequestType.Template)) return;
+
+        switch (data.action) {
+          case "chatRankUpdate":
+            stillHere && setUserState(data.messages);
+            break;
+        }
       }
-    });
+    );
 
     return () => {
       stillHere = false;

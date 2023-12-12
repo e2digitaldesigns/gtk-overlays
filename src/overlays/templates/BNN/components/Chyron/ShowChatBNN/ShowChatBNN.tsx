@@ -4,10 +4,6 @@ import { ChatDisplay } from "../../../../../../globalComponents";
 
 import { theme } from "../../../Theme/GlobalTheme";
 
-export interface ChatDisplayChildProps {
-  message?: any;
-}
-
 export const ShowChatBNN: React.FC = () => {
   return (
     <Styled.ShowChatWrapper>

@@ -1,5 +1,6 @@
 import React from "react";
 import socketServices from "./services/socketServices";
+import { RequestType, SocketServicesData } from "./types";
 
 export const ApplicationSocket: React.FC = () => {
   const queryParams = new URLSearchParams(window.location.search);
@@ -8,9 +9,10 @@ export const ApplicationSocket: React.FC = () => {
     let stillHere = true;
 
     socketServices.subscribeApplicationActions(
-      (err: unknown, data: { action: string; uid: string; tid?: string }) => {
-        if (data?.uid !== queryParams.get("uid")) return;
-        if (data?.tid && data.tid !== queryParams.get("tid")) return;
+      (err: unknown, data: SocketServicesData) => {
+        if (data?.uid !== queryParams.get(RequestType.UserId)) return;
+        if (data?.tid && data.tid !== queryParams.get(RequestType.Template))
+          return;
 
         switch (data.action) {
           case "overlay-reset":

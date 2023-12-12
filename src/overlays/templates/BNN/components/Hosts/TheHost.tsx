@@ -21,9 +21,9 @@ const TheHost: React.FC<ITheHostProps> = ({
   const { voting } = useVotingHook();
 
   const host =
-    type === "host" && hosts.find((host: any) => host.seatNum === seatNumber);
+    type === "host" && hosts.find(host => host.seatNum === seatNumber);
 
-  return (
+  return host ? (
     <>
       <Styled.HostBoxWrapper>
         <Styled.HostBoxStroke />
@@ -47,7 +47,7 @@ const TheHost: React.FC<ITheHostProps> = ({
         </Styled.HostBox>
       </Styled.HostBoxWrapper>
     </>
-  );
+  ) : null;
 };
 
 export default TheHost;

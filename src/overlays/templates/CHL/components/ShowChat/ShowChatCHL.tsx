@@ -6,10 +6,6 @@ import { SectionsCHL } from "../../../../../types";
 import { theme } from "../../Theme/GlobalTheme";
 import { useParams } from "../../../../../hooks";
 
-export interface ChatDisplayChildProps {
-  message?: any;
-}
-
 export const ShowChatCHL: React.FC = () => {
   const { showSection } = useParams();
 

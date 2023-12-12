@@ -1,7 +1,7 @@
 import React from "react";
 import * as Styled from "./Emoji.styles";
 import socketServices from "../../services/socketServices";
-import { RequestType } from "../../types";
+import { IEmojiReturn, IEmojiData, RequestType } from "../../types";
 
 interface IEmoji {
   emoji: string;
@@ -27,23 +27,6 @@ const MemoizedEmoji = React.memo(Emoji);
 
 interface IEmojiWrapper {
   isDemo?: boolean;
-}
-
-interface IEmojiData {
-  _id: string;
-  date: Date;
-  emoji: string;
-}
-
-interface IEmojiReturn {
-  _id: string;
-  date: Date;
-  action: string;
-  broadcasterName: string;
-  emojis: IEmojiData[];
-  channel: string;
-  tid: string;
-  uid: string;
 }
 
 const EmojiWrapper: React.FC<IEmojiWrapper> = ({ isDemo = false }) => {

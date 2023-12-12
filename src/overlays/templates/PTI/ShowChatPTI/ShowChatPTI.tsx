@@ -2,10 +2,6 @@ import React from "react";
 import * as Styled from "./ShowChatPTI.style";
 import { ChatDisplay } from "../../../../globalComponents";
 
-export interface ChatDisplayChildProps {
-  message?: any;
-}
-
 export const ShowChatPTI: React.FC = () => {
   return (
     <Styled.ShowChatWrapper>

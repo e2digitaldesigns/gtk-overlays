@@ -10,12 +10,21 @@ import {
   IVotes,
   IVoteStreaks,
   IVotingState,
+  trueFalseVotesParsed,
   TrueFalseVotesObj
 } from "../../types";
 
 import { getKeyWithHighestValue } from "../../_utils/getKeyWithHighestValue";
 
-const useVotingHook = () => {
+interface IUseVotingHook {
+  votes: IVotes[];
+  voting: IVotingState;
+  votingStreak: IVoteStreaks;
+  leadingSeat: string[];
+  trueOrFalseVotes: trueFalseVotesParsed;
+}
+
+const useVotingHook = (): IUseVotingHook => {
   const [trueFalseState, setTrueFalseState] = React.useState<TrueFalseVotesObj>(
     {}
   );
@@ -148,7 +157,7 @@ const useVotingHook = () => {
   React.useEffect(() => {
     let stillHere = true;
 
-    socketServices.subscribeHostVoting((err: unknown, data: any) => {
+    socketServices.subscribeHostVoting((err: unknown, data: IVotes) => {
       if (data?.uid !== queryParams.get("uid")) return;
       if (!data?.tid || data?.tid !== queryParams.get("tid")) return;
 

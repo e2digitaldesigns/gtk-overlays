@@ -1,7 +1,7 @@
 import React from "react";
 
 import * as Styled from "./ShowChat.style";
-import { RequestType } from "../../types";
+import { ChatMessgeReturn, RequestType } from "../../types";
 import socketServices from "../../services/socketServices";
 import { MessageParser } from "./MessageParser";
 
@@ -14,13 +14,6 @@ type ChatMessage = {
   fontColor: string;
   showTime?: number;
   transition?: TransitionDirection;
-};
-
-type ChatMessgeReturn = {
-  action: "showChatMessage" | "hideChatMessage";
-  uid: string;
-  tid?: string;
-  message: string;
 };
 
 export interface ChatDisplayChildProps {

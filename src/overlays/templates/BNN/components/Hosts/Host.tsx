@@ -18,7 +18,7 @@ const Host: React.FC = () => {
     <>
       {showHost2Up && (
         <Styled.HostBoxWrapperPlater seats={hosts.length}>
-          {hosts.map((host: any) => (
+          {hosts.map(host => (
             <TheHost key={host.seatNum} seatNumber={host.seatNum} />
           ))}
         </Styled.HostBoxWrapperPlater>

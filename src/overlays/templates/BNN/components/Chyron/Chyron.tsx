@@ -33,23 +33,25 @@ const Chyron: React.FC = () => {
 
   React.useEffect(() => {
     let stillHere = true;
-    socketServices.subscribeOverlayActions((err: any, data: any) => {
-      if (data?.uid !== queryParams.get("uid")) return;
-      if (data?.tid && data.tid !== queryParams.get("tid")) return;
+    socketServices.subscribeOverlayActions(
+      (err: unknown, data: { uid: string; tid: string; action: string }) => {
+        if (data?.uid !== queryParams.get("uid")) return;
+        if (data?.tid && data.tid !== queryParams.get("tid")) return;
 
-      switch (data.action) {
-        case TopicActions.TopicPrevious:
-          stillHere && prevTopic();
-          break;
+        switch (data.action) {
+          case TopicActions.TopicPrevious:
+            stillHere && prevTopic();
+            break;
 
-        case TopicActions.TopicNext:
-          stillHere && nextTopic();
-          break;
+          case TopicActions.TopicNext:
+            stillHere && nextTopic();
+            break;
 
-        default:
-          break;
+          default:
+            break;
+        }
       }
-    });
+    );
 
     return () => {
       stillHere = false;

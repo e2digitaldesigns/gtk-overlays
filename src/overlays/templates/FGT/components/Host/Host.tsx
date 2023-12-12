@@ -29,14 +29,14 @@ const HostFGT: React.FC<IHostProps> = ({ voting, votes }) => {
 
   return (
     <>
-      {data.map((host: any) => {
+      {data.map(host => {
         if (!hostPermissionMap[host.seatNum]) return null;
 
         return (
           <Styled.HostWrapper
             key={host.seatNum}
             leader={false}
-            seat={host.seatNum}
+            seat={String(host.seatNum)}
           >
             <>
               {scrollDotArray.map((_, index: number) => (

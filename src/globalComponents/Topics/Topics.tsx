@@ -6,7 +6,7 @@ import { IntTopic, TopicStates } from "./types";
 
 import { setTopicLiState } from "./Utils/setTopicLiState";
 import socketServices from "../../services/socketServices";
-import { TopicActions } from "../../types";
+import { RequestType, SocketServicesData, TopicActions } from "../../types";
 import TopicImage from "./Utils/imageParser";
 
 interface IntTopicsProps {
@@ -93,9 +93,11 @@ const GTK_TopicComponent: React.FC<IntTopicsProps> = ({
     let stillHere = true;
 
     socketServices.subscribeOverlayActions(
-      (err: unknown, data: { action: string; uid: string; tid?: string }) => {
-        if (data?.uid !== queryParams.get("uid")) return;
-        if (data?.tid && data.tid !== queryParams.get("tid")) return;
+      (err: unknown, data: SocketServicesData) => {
+        console.log("data", data);
+        if (data?.uid !== queryParams.get(RequestType.UserId)) return;
+        if (data?.tid && data.tid !== queryParams.get(RequestType.Template))
+          return;
 
         switch (data.action as TopicActions) {
           case TopicActions.TopicPrevious:

@@ -6,7 +6,7 @@ import InfoBox from "./InfoBox/InfoBox";
 import NetworkTab from "./NetworkTab/NetworkTab";
 import NewsFeed from "./NewsFeed/NewsFeed";
 
-import { SectionsFGT } from "../../../../../types";
+import { SectionsFGT, trueFalseVotesParsed } from "../../../../../types";
 import { Timing } from "./Timing/Timing";
 import { IntTopic } from "../../../../../globalComponents/Topics/types";
 import SponsorsFGT from "./sponsors/sponsors";
@@ -14,7 +14,7 @@ import SponsorsFGT from "./sponsors/sponsors";
 interface ChyronProps {
   isTimerPaused: boolean;
   topic: IntTopic | undefined;
-  trueOrFalseVotes?: any;
+  trueOrFalseVotes?: trueFalseVotesParsed;
 }
 
 const Chyron: React.FC<ChyronProps> = ({

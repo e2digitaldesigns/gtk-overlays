@@ -1,4 +1,6 @@
-export function getKeyWithHighestValue(obj: any): string[] {
+export function getKeyWithHighestValue(obj: {
+  [key: string]: number;
+}): string[] {
   let maxKeys: string[] = [];
   let maxValue = -Infinity;
 

@@ -6,10 +6,6 @@ import * as Styled from "./ShowChat.style";
 
 import { ChatDisplay } from "../../../../../globalComponents";
 
-export interface ChatDisplayChildProps {
-  message?: any;
-}
-
 const ShowChatSAS: React.FC = () => {
   const { showSection } = useParams();
 

@@ -14,7 +14,7 @@ export const TheHostLabel: React.FC<ITheHostLabel> = ({ seatNumber }) => {
   const { hosts } = useDataContext();
   const { voting } = useVotingHook();
 
-  const host = hosts.find((host: any) => host.seatNum === seatNumber);
+  const host = hosts.find(host => host.seatNum === seatNumber);
 
   return host ? (
     <>

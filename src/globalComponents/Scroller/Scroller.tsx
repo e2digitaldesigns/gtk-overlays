@@ -113,7 +113,7 @@ const GTK_Scroller: React.FC<IntScrollerProps> = ({
       <Styled.List>
         {data && typeof data === "object" && (
           <>
-            {data.map((m: any, index: number) => (
+            {data.map((m, index: number) => (
               <Styled.ListItem
                 state={setClassName(index)}
                 key={index}

@@ -38,7 +38,7 @@ const HostXBX: React.FC = () => {
 
   return (
     <>
-      {data.map((host: any, index: number) => {
+      {data.map(host => {
         if (!show2UpHosts[host.seatNum]) return null;
 
         return (

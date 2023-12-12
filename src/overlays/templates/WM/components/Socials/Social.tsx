@@ -14,6 +14,7 @@ import {
   BsTwitter,
   BsYoutube
 } from "react-icons/bs";
+import { IconType } from "react-icons/lib";
 
 export interface IntDisplayIcon {
   color?: string;
@@ -34,7 +35,7 @@ const colors: IColors = {
   youtube: "red"
 };
 
-type IconMapType = { [key: string]: any };
+type IconMapType = { [key: string]: IconType };
 
 const IconMap: IconMapType = {
   discord: BsDiscord,
@@ -59,7 +60,7 @@ const Socials: React.FC = () => {
     [socialNetworks]
   );
 
-  const handleCallBack = (data: any) => {
+  const handleCallBack = (data: { title?: string }) => {
     if (!data?.title) return;
     setSocialNetworkIcon(data.title.toLowerCase());
     const theColor: string = colors[data.title.toLowerCase()];

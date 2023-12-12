@@ -15,6 +15,12 @@ export interface IVotes {
 export type TrueFalseVotes = { [key: string]: boolean };
 export type TrueFalseVotesObj = { [key: string]: TrueFalseVotes };
 
+export type trueFalseVotesParsed = {
+  fullVotes: TrueFalseVotes;
+  trueCount: number;
+  falseCount: number;
+};
+
 export interface IVoteStreaks {
   [key: string]: {
     add: number;

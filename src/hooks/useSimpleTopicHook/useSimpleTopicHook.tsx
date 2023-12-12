@@ -1,7 +1,12 @@
 import React from "react";
 import { IntTopic } from "../../globalComponents/Topics/types";
 import socketServices from "../../services/socketServices";
-import { STORAGE_KEY, TopicActions } from "../../types";
+import {
+  RequestType,
+  STORAGE_KEY,
+  SocketServicesData,
+  TopicActions
+} from "../../types";
 
 const useSimpleTopicHook = (data: IntTopic[], loop: boolean = false) => {
   const queryParams = new URLSearchParams(window.location.search);
@@ -80,37 +85,40 @@ const useSimpleTopicHook = (data: IntTopic[], loop: boolean = false) => {
       setCurrentTopicIndex(index);
     };
 
-    socketServices.subscribeOverlayActions((err: unknown, data: any) => {
-      if (data?.uid !== queryParams.get("uid")) return;
-      if (data?.tid && data.tid !== queryParams.get("tid")) return;
+    socketServices.subscribeOverlayActions(
+      (err: unknown, data: SocketServicesData) => {
+        if (data?.uid !== queryParams.get(RequestType.UserId)) return;
+        if (data?.tid && data.tid !== queryParams.get(RequestType.Template))
+          return;
 
-      switch (data.action) {
-        case TopicActions.TopicPrevious:
-          if (stillHere) {
-            prevTopic();
-            setIsTimerPaused(true);
-          }
-          break;
+        switch (data.action) {
+          case TopicActions.TopicPrevious:
+            if (stillHere) {
+              prevTopic();
+              setIsTimerPaused(true);
+            }
+            break;
 
-        case TopicActions.TopicNext:
-          if (stillHere) {
-            nextTopic();
-            setIsTimerPaused(true);
-          }
-          break;
+          case TopicActions.TopicNext:
+            if (stillHere) {
+              nextTopic();
+              setIsTimerPaused(true);
+            }
+            break;
 
-        case TopicActions.TimerResume:
-          stillHere && setIsTimerPaused(false);
-          break;
+          case TopicActions.TimerResume:
+            stillHere && setIsTimerPaused(false);
+            break;
 
-        case TopicActions.TimerPause:
-          stillHere && setIsTimerPaused(true);
-          break;
+          case TopicActions.TimerPause:
+            stillHere && setIsTimerPaused(true);
+            break;
 
-        default:
-          break;
+          default:
+            break;
+        }
       }
-    });
+    );
 
     return () => {
       stillHere = false;

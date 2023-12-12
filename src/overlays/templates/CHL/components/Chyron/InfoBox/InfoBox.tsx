@@ -3,10 +3,11 @@ import * as Styled from "./InfoBox.styles";
 import { useDataContext } from "../../../../../../context";
 import { IntTopic } from "../../../../../../globalComponents/Topics/types";
 import { trueFalseVoterParser } from "../../../../../../_utils/trueFalseVoterParser";
+import { trueFalseVotesParsed } from "../../../../../../types";
 
 interface IntInfoBox {
   currenTopicId: string;
-  trueOrFalseVotes?: any;
+  trueOrFalseVotes?: trueFalseVotesParsed;
 }
 const InfoBox: React.FC<IntInfoBox> = ({ currenTopicId, trueOrFalseVotes }) => {
   const { topics } = useDataContext();
@@ -22,19 +23,17 @@ const InfoBox: React.FC<IntInfoBox> = ({ currenTopicId, trueOrFalseVotes }) => {
   };
 
   return (
-    <>
-      <Styled.InfoBox>
-        {topics.map((topic: IntTopic, index: number) => (
-          <Styled.TopicGrid key={topic._id} linkState={setLiState(index)}>
-            {trueFalseVoterParser(
-              topic.desc,
-              trueOrFalseVotes.trueCount,
-              trueOrFalseVotes.falseCount
-            )}
-          </Styled.TopicGrid>
-        ))}
-      </Styled.InfoBox>
-    </>
+    <Styled.InfoBox>
+      {topics.map((topic: IntTopic, index: number) => (
+        <Styled.TopicGrid key={topic._id} linkState={setLiState(index)}>
+          {trueFalseVoterParser(
+            topic.desc,
+            trueOrFalseVotes?.trueCount,
+            trueOrFalseVotes?.falseCount
+          )}
+        </Styled.TopicGrid>
+      ))}
+    </Styled.InfoBox>
   );
 };
 
