@@ -4,7 +4,6 @@ export interface IVotingState {
 
 export interface IVotes {
   _id: string;
-  // action: "add" | "remove" | "super";
   action: string;
   username: string;
   channel: string;

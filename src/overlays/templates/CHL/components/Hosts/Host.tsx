@@ -1,7 +1,6 @@
 import * as React from "react";
 import * as Styled from "./Host.style";
 import { useParams } from "../../../../../hooks";
-import useVotingHook from "../../../../../hooks/useVotingHook/useVotingHook";
 import { HostVoteEmojis, Scroller } from "../../../../../globalComponents";
 
 import { useDataContext } from "./../../../../../context";
@@ -11,11 +10,16 @@ import CONFIG from "../../config.json";
 import { FireHost } from "./FireHost";
 import FireCountDisplay from "./FireCountDisplay";
 
-const Host: React.FC = () => {
+interface IHostProps {
+  voting: any;
+  votes: any;
+  votingStreak: any;
+}
+
+const Host: React.FC<IHostProps> = ({ voting, votes, votingStreak }) => {
   const { showSection } = useParams();
 
   const { hosts: data } = useDataContext();
-  const { voting, votes, votingStreak } = useVotingHook();
 
   const showHosts: { [key: string]: boolean } = {
     1: showSection(SectionsCHL.Host1),

@@ -3,16 +3,16 @@ import socketServices from "../../services/socketServices";
 import _cloneDeep from "lodash/cloneDeep";
 import _isEqual from "lodash/isEqual";
 import _includes from "lodash/includes";
-import { STORAGE_KEY } from "../../types";
-
 import {
+  STORAGE_KEY,
   initVotingState,
   initVotingStreakState,
   IVotes,
   IVoteStreaks,
   IVotingState,
   TrueFalseVotesObj
-} from "./useVotngHookTypes";
+} from "../../types";
+
 import { getKeyWithHighestValue } from "../../_utils/getKeyWithHighestValue";
 
 const useVotingHook = () => {

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { IVoteStreaks } from "../../../../../hooks/useVotingHook/useVotngHookTypes";
+import { IVoteStreaks } from "../../../../../types";
 
 const videoFireGif =
   "https://mg-show-assets.s3.us-east-1.amazonaws.com/images/fire.gif";

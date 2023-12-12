@@ -1,6 +1,6 @@
 import React from "react";
 import * as Styled from "./HostVoteEmojis.style";
-import { IVotes } from "../../hooks/useVotingHook/useVotngHookTypes";
+import { IVotes } from "../../types";
 
 interface IHostVoteEmojis {
   fontSize?: string;

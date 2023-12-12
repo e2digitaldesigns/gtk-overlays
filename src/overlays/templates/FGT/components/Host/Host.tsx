@@ -5,10 +5,7 @@ import { useParams } from "../../../../../hooks";
 import { useDataContext } from "../../../../../context";
 import { SectionsFGT } from "../../../../../types";
 import CONFIG from "../../config.json";
-import {
-  IVotes,
-  IVotingState
-} from "../../../../../hooks/useVotingHook/useVotngHookTypes";
+import { IVotes, IVotingState } from "../../../../../types";
 
 const scrollDotArray = new Array(6).fill(0);
 
@@ -34,7 +31,7 @@ const HostFGT: React.FC<IHostProps> = ({ voting, votes }) => {
     <>
       {data.map((host: any) => {
         if (!hostPermissionMap[host.seatNum]) return null;
-        // console.log(37, host);
+
         return (
           <Styled.HostWrapper
             key={host.seatNum}
