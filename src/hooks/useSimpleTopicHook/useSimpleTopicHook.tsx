@@ -23,23 +23,39 @@ const useSimpleTopicHook = (data: IntTopic[], loop: boolean = false) => {
       STORAGE_KEY.TOPIC_VOTING_COUNT
     );
 
+    const topicVotingTrueFalse = window.localStorage.getItem(
+      STORAGE_KEY.TOPIC_VOTING_TRUE_FALSE
+    );
+
     if (topicVoting) {
       const voting = JSON.parse(topicVoting);
 
       if (!voting?.[value]) {
-        const newVoting = { ...voting, [value]: [] };
         window.localStorage.setItem(
           STORAGE_KEY.TOPIC_VOTING_COUNT,
-          JSON.stringify(newVoting)
+          JSON.stringify({ ...voting, [value]: [] })
         );
       }
-    }
-
-    if (!topicVoting) {
-      const newVoting = { [value]: [] };
+    } else {
       window.localStorage.setItem(
         STORAGE_KEY.TOPIC_VOTING_COUNT,
-        JSON.stringify(newVoting)
+        JSON.stringify({ [value]: [] })
+      );
+    }
+
+    if (topicVotingTrueFalse) {
+      const voting = JSON.parse(topicVotingTrueFalse);
+
+      if (!voting?.[value]) {
+        window.localStorage.setItem(
+          STORAGE_KEY.TOPIC_VOTING_TRUE_FALSE,
+          JSON.stringify({ ...voting, [value]: {} })
+        );
+      }
+    } else {
+      window.localStorage.setItem(
+        STORAGE_KEY.TOPIC_VOTING_TRUE_FALSE,
+        JSON.stringify({ [value]: {} })
       );
     }
 

@@ -5,7 +5,7 @@ import { theme } from "./Theme/GlobalTheme";
 import Chyron from "./components/Chyron/Chyron";
 
 import { useDataContext } from "../../../context";
-import { useSimpleTopic } from "../../../hooks";
+import { useSimpleTopic, useVoting } from "../../../hooks";
 import HostFGT from "./components/Host/Host";
 import { UpNextFGT } from "./components/UpNext/UpNext";
 import { ShowChatFGT } from "./components/ShowChat/ShowChatFGT";
@@ -13,6 +13,7 @@ import { VideoFGT } from "./Video/Video";
 
 const OverlayFGT: React.FC = () => {
   const { topics } = useDataContext();
+  const { trueOrFalseVotes, voting, votes } = useVoting();
 
   const { isTimerPaused, topic } = useSimpleTopic(topics);
 
@@ -27,11 +28,12 @@ const OverlayFGT: React.FC = () => {
 
           <VideoFGT topicId={topic?._id} topicVideo={topic?.video} />
 
-          <HostFGT seat={1} />
-          <HostFGT seat={2} />
-          <HostFGT seat={3} />
-          <HostFGT seat={4} />
-          <Chyron isTimerPaused={isTimerPaused} topic={topic} />
+          <HostFGT voting={voting} votes={votes} />
+          <Chyron
+            isTimerPaused={isTimerPaused}
+            topic={topic}
+            trueOrFalseVotes={trueOrFalseVotes}
+          />
         </Styled.Container>
       </ThemeProvider>
     </>

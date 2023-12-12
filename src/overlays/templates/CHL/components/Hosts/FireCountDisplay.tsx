@@ -2,7 +2,7 @@ import * as React from "react";
 import * as Styled from "./FireCountDisplay.style";
 
 import CONFIG from "../../config.json";
-import { IVoteStreaks } from "../../../../../hooks/useVotingHook/useVotingHook";
+import { IVoteStreaks } from "../../../../../hooks/useVotingHook/useVotngHookTypes";
 
 interface FireCountDisplayProps {
   seatNum: number;

@@ -2,11 +2,13 @@ import * as React from "react";
 import * as Styled from "./InfoBox.styles";
 import { useDataContext } from "../../../../../../context";
 import { IntTopic } from "../../../../../../globalComponents/Topics/types";
+import { trueFalseVoterParser } from "../../../../../../_utils/trueFalseVoterParser";
 
 interface IntInfoBox {
   currenTopicId: string;
+  trueOrFalseVotes?: any;
 }
-const InfoBox: React.FC<IntInfoBox> = ({ currenTopicId }) => {
+const InfoBox: React.FC<IntInfoBox> = ({ currenTopicId, trueOrFalseVotes }) => {
   const { topics } = useDataContext();
 
   const currentTopicIndex = topics.findIndex(
@@ -24,7 +26,11 @@ const InfoBox: React.FC<IntInfoBox> = ({ currenTopicId }) => {
       <Styled.InfoBox>
         {topics.map((topic: IntTopic, index: number) => (
           <Styled.TopicGrid key={topic._id} linkState={setLiState(index)}>
-            {topic?.desc || ""}
+            {trueFalseVoterParser(
+              topic.desc,
+              trueOrFalseVotes.trueCount,
+              trueOrFalseVotes.falseCount
+            )}
           </Styled.TopicGrid>
         ))}
       </Styled.InfoBox>

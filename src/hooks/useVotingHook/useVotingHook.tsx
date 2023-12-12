@@ -5,64 +5,20 @@ import _isEqual from "lodash/isEqual";
 import _includes from "lodash/includes";
 import { STORAGE_KEY } from "../../types";
 
-interface IVotingState {
-  [key: string]: number;
-}
-
-export interface IVotes {
-  _id: string;
-  action: "add" | "remove" | "super";
-  username: string;
-  channel: string;
-  host: string;
-  tid: string;
-  uid: string;
-}
-
-export interface IVoteStreaks {
-  [key: string]: {
-    add: number;
-    remove: number;
-  };
-}
-
-const initVotingState: IVotingState = {
-  "1": 0,
-  "2": 0,
-  "3": 0,
-  "4": 0,
-  "5": 0,
-  "6": 0
-};
-
-const initVotingStreakState: IVoteStreaks = {
-  "1": { add: 0, remove: 0 },
-  "2": { add: 0, remove: 0 },
-  "3": { add: 0, remove: 0 },
-  "4": { add: 0, remove: 0 },
-  "5": { add: 0, remove: 0 },
-  "6": { add: 0, remove: 0 }
-};
-
-function getKeyWithHighestValue(obj: any): string[] {
-  let maxKeys: string[] = [];
-  let maxValue = -Infinity;
-
-  for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      if (obj[key] > maxValue) {
-        maxKeys = [key];
-        maxValue = obj[key];
-      } else if (obj[key] === maxValue) {
-        maxKeys.push(key);
-      }
-    }
-  }
-
-  return maxKeys;
-}
+import {
+  initVotingState,
+  initVotingStreakState,
+  IVotes,
+  IVoteStreaks,
+  IVotingState,
+  TrueFalseVotesObj
+} from "./useVotngHookTypes";
+import { getKeyWithHighestValue } from "../../_utils/getKeyWithHighestValue";
 
 const useVotingHook = () => {
+  const [trueFalseState, setTrueFalseState] = React.useState<TrueFalseVotesObj>(
+    {}
+  );
   const [voting, setVoting] = React.useState<IVotingState>(initVotingState);
   const [votingStreak, setVotingStreak] = React.useState<IVoteStreaks>(
     initVotingStreakState
@@ -71,9 +27,20 @@ const useVotingHook = () => {
 
   const queryParams = new URLSearchParams(window.location.search);
 
+  const currentTopicIdStorage = window.localStorage.getItem(
+    STORAGE_KEY.CURRENT_TOPIC
+  );
+
+  const currentTopicId = currentTopicIdStorage
+    ? JSON.parse(currentTopicIdStorage) || null
+    : null;
+
   React.useEffect(() => {
     const dataTally = window.localStorage.getItem(STORAGE_KEY.TALLY);
     const dataStreak = window.localStorage.getItem(STORAGE_KEY.STREAK);
+    const dataTrueFalse = window.localStorage.getItem(
+      STORAGE_KEY.TOPIC_VOTING_TRUE_FALSE
+    );
 
     if (dataTally) {
       JSON.parse(dataTally) && setVoting(JSON.parse(dataTally));
@@ -81,6 +48,10 @@ const useVotingHook = () => {
 
     if (dataStreak) {
       JSON.parse(dataStreak) && setVotingStreak(JSON.parse(dataStreak));
+    }
+
+    if (dataTrueFalse) {
+      JSON.parse(dataTrueFalse) && setTrueFalseState(JSON.parse(dataTrueFalse));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -146,6 +117,34 @@ const useVotingHook = () => {
     [handleAddVote, voting]
   );
 
+  const handleTrueOrFalse = (username: string, type: "true" | "false") => {
+    if (!currentTopicId) {
+      console.log("No current topic ID found. Exiting.");
+      return;
+    }
+
+    setTrueFalseState((prevState: TrueFalseVotesObj) => {
+      const newState = _cloneDeep(prevState);
+
+      if (newState.hasOwnProperty(currentTopicId)) {
+        newState[currentTopicId] = {
+          ...newState[currentTopicId],
+          [username]: type === "true" ? true : false
+        };
+      } else {
+        newState[currentTopicId] = {};
+        newState[currentTopicId][username] = type === "true" ? true : false;
+      }
+
+      window.localStorage.setItem(
+        STORAGE_KEY.TOPIC_VOTING_TRUE_FALSE,
+        JSON.stringify(newState)
+      );
+
+      return newState;
+    });
+  };
+
   React.useEffect(() => {
     let stillHere = true;
 
@@ -154,6 +153,12 @@ const useVotingHook = () => {
       if (!data?.tid || data?.tid !== queryParams.get("tid")) return;
 
       switch (data.action) {
+        case "true":
+        case "false":
+          if (stillHere) {
+            handleTrueOrFalse(data.username, data.action);
+          }
+          break;
         case "add":
           if (stillHere) {
             handleVoting(data, "add");
@@ -201,7 +206,6 @@ const useVotingHook = () => {
           break;
 
         case "clear-votes":
-          console.log(186, "clear-votes");
           window.localStorage.setItem(
             STORAGE_KEY.TALLY,
             JSON.stringify(initVotingState)
@@ -247,11 +251,29 @@ const useVotingHook = () => {
     );
   }, [votingStreak]);
 
+  const trueFalseParser = () => {
+    const topicVotes = trueFalseState?.[currentTopicId] || null;
+
+    const obj = {
+      fullVotes: topicVotes || {},
+      trueCount: topicVotes
+        ? Object.values(topicVotes).filter(value => value).length
+        : 0,
+
+      falseCount: topicVotes
+        ? Object.values(topicVotes)?.filter(value => !value).length
+        : 0
+    };
+
+    return obj;
+  };
+
   return {
     votes,
     voting,
     votingStreak,
-    leadingSeat: getKeyWithHighestValue(voting)
+    leadingSeat: getKeyWithHighestValue(voting),
+    trueOrFalseVotes: trueFalseParser()
   };
 };
 

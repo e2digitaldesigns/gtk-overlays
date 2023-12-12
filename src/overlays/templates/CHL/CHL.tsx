@@ -11,13 +11,14 @@ import { EmojiCHL } from "./components/emoji/Emoji";
 import VideoCHL from "./components/Video/Video";
 import { IntTopic } from "../../../globalComponents/Topics/types";
 import { useDataContext } from "../../../context";
-import { useSimpleTopic } from "../../../hooks";
+import { useSimpleTopic, useVoting } from "../../../hooks";
 import { UpNextCHL } from "./components/UpNext/UpNext";
 
 const OverlayCHL: React.FC = () => {
   const [topicState, setTopicState] = React.useState<IntTopic>();
   const { topics } = useDataContext();
   const { isTimerPaused, topic } = useSimpleTopic(topics);
+  const { trueOrFalseVotes } = useVoting();
 
   React.useEffect(() => {
     setTopicState(topic);
@@ -35,7 +36,11 @@ const OverlayCHL: React.FC = () => {
           <ShowChatCHL />
           <HeaderTab />
           <Host />
-          <Chyron isTimerPaused={isTimerPaused} topic={topic} />
+          <Chyron
+            isTimerPaused={isTimerPaused}
+            topic={topic}
+            trueOrFalseVotes={trueOrFalseVotes}
+          />
         </Styled.Container>
       </ThemeProvider>
     </>

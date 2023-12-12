@@ -14,9 +14,14 @@ import SponsorsFGT from "./sponsors/sponsors";
 interface ChyronProps {
   isTimerPaused: boolean;
   topic: IntTopic | undefined;
+  trueOrFalseVotes?: any;
 }
 
-const Chyron: React.FC<ChyronProps> = ({ isTimerPaused, topic }) => {
+const Chyron: React.FC<ChyronProps> = ({
+  isTimerPaused,
+  topic,
+  trueOrFalseVotes
+}) => {
   const { showSection } = useParams();
 
   return (
@@ -26,7 +31,10 @@ const Chyron: React.FC<ChyronProps> = ({ isTimerPaused, topic }) => {
           <>
             <Timing isTimerPaused={isTimerPaused} topic={topic} />
             <NetworkTab topicName={topic?.name || ""} />
-            <InfoBox currenTopicId={topic?._id || ""} />
+            <InfoBox
+              currenTopicId={topic?._id || ""}
+              trueOrFalseVotes={trueOrFalseVotes}
+            />
           </>
         )}
 
