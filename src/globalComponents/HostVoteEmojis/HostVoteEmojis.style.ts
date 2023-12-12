@@ -26,7 +26,7 @@ const upAndAway = (start: number, type: string): Keyframes => {
   }
 
   100% {
-    bottom: ${type === "add" ? "400px" : "-200px"};
+    bottom: ${type === "remove" ? "-200px" : "400px"};
     opacity: 0;
     right: 20px;
   }
@@ -34,14 +34,16 @@ const upAndAway = (start: number, type: string): Keyframes => {
 };
 
 interface VoteFloatProps {
+  fontSize: string;
   numberStr: number;
+  speed: number;
   type: string;
 }
 export const VoteFloat = styled.div<VoteFloatProps>`
   width: 65px;
   height: 40px;
 
-  font-size: 1.25rem;
+  font-size: ${props => props.fontSize};
   font-weight: ${props => props.numberStr};
 
   display: flex;
@@ -54,6 +56,7 @@ export const VoteFloat = styled.div<VoteFloatProps>`
   right: 20px;
   z-index: 150;
 
-  animation: ${props => upAndAway(props.numberStr, props.type)} 7s ease-in-out;
+  animation: ${props => upAndAway(props.numberStr, props.type)}
+    ${props => `${props.speed}s`} ease-in-out;
   animation-fill-mode: forwards;
 `;

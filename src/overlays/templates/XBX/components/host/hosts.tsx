@@ -11,7 +11,6 @@ import CONFIG from "../../config.json";
 
 const HostXBX: React.FC = () => {
   const { showSection } = useParams();
-
   const { hosts: data } = useDataContext();
   const { voting, votes } = useVotingHook();
 

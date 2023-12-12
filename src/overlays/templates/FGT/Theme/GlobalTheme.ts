@@ -1,7 +1,8 @@
 /* istanbul ignore file */
 export const theme = {
   colors: {
-    bg1: "#273039",
+    bg: "#273039",
+    bg1: "#212121",
     bg2: "#1b242b",
     bg3: "rgba(0, 0, 0, 0.95)",
     accent1: "#6136a1",

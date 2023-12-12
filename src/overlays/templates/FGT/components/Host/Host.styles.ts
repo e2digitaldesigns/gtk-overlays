@@ -25,7 +25,7 @@ export const HostWrapper = styled.div<HostWrapperProps>`
     ${props =>
       props.leader ? props.theme.colors.accent1 : props.theme.colors.bg1};
   z-index: 10;
-  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
+  /* box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5); */
 `;
 
 export const NameTag = styled.div`
@@ -35,11 +35,11 @@ export const NameTag = styled.div`
   text-transform: uppercase;
   padding: 0 0.625rem;
   background-color: ${props => props.theme.colors.bg1};
-  border-left: 2px solid ${props => props.theme.colors.accent1};
+  border-left: 3px solid ${props => props.theme.colors.accent1};
 
   position: absolute;
-  bottom: 5px;
-  left: 5px;
+  bottom: 10px;
+  left: 10px;
   z-index: 50;
 
   display: flex;
@@ -57,11 +57,11 @@ export const VoteCount = styled.div`
   justify-content: center;
   padding: 0 0.625rem;
   background-color: ${props => props.theme.colors.bg1};
-  border-right: 2px solid ${props => props.theme.colors.accent1};
+  border-right: 3px solid ${props => props.theme.colors.accent1};
 
   position: absolute;
-  bottom: 5px;
-  right: 5px;
+  bottom: 10px;
+  right: 10px;
   z-index: 50;
 `;
 
@@ -95,10 +95,14 @@ export const ScrollDot = styled.div<ScrollDotProps>`
   animation-iteration-count: infinite;
   animation-direction: alternate;
 
-  animation-delay: ${props => props.delay};
+  animation-delay: ${props => `${props.delay}s`};
 
   &:nth-child(even) {
     animation-direction: alternate;
+    box-shadow: 0px 1px 2px rgba(0, 255, 255, 0.5),
+      0px 2px 4px rgba(0, 255, 255, 0.5), 0px 4px 8px rgba(0, 255, 255, 0.5),
+      0px 8px 16px rgba(0, 255, 255, 0.5);
+    background-color: transparent;
   }
 
   &:nth-child(odd) {
