@@ -2,7 +2,7 @@ import * as React from "react";
 import * as Styled from "./Host.style";
 import { useParams } from "../../../../../hooks";
 
-import { useDataContext } from "./../../../../../context";
+import { useDataContext } from "../../../../../context";
 import { SectionsBNN } from "../../../../../types";
 import TheHost from "./TheHost";
 

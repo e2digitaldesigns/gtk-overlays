@@ -3,7 +3,7 @@ import * as Styled from "./TheHost.style";
 import { Scroller } from "../../../../../globalComponents";
 import CONFIG from "../../config.json";
 
-import { useDataContext } from "./../../../../../context";
+import { useDataContext } from "../../../../../context";
 import useVotingHook from "../../../../../hooks/useVotingHook/useVotingHook";
 
 interface ITheHostProps {

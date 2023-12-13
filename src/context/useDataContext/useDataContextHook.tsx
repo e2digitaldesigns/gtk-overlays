@@ -1,9 +1,9 @@
 import React from "react";
 import { DataContext } from "./dataContext";
 
-const useDataContext = () => {
+const useDataContextHook = () => {
   const data = React.useContext(DataContext);
   return data;
 };
 
-export default useDataContext;
+export default useDataContextHook;

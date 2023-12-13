@@ -3,7 +3,7 @@ import * as Styled from "./Host.style";
 import { useParams } from "../../../../../hooks";
 import { HostVoteEmojis, Scroller } from "../../../../../globalComponents";
 
-import { useDataContext } from "./../../../../../context";
+import { useDataContext } from "../../../../../context";
 import {
   IVoteStreaks,
   IVotes,

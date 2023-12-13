@@ -2,9 +2,9 @@ import React from "react";
 import axios from "axios";
 
 import { DataContext } from "./dataContext";
-import { GlobalDataContext, RequestType } from "../types";
+import { GlobalDataContext, RequestType } from "../../types";
 
-import Loader from "../overlays/loader/loader";
+import Loader from "../../overlays/loader/loader";
 
 enum Suffix {
   Episode = "episode",
