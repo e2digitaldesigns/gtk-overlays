@@ -1,7 +1,6 @@
 import * as React from "react";
 import * as Styled from "./host.style";
-import { useParams } from "../../../../../hooks";
-import useVotingHook from "../../../../../hooks/useVotingHook/useVotingHook";
+import { useParams, useVoting } from "../../../../../hooks";
 import { HostVoteEmojis, Scroller } from "../../../../../globalComponents";
 
 import { useDataContext } from "../../../../../context";
@@ -12,7 +11,7 @@ import CONFIG from "../../config.json";
 const HostXBX: React.FC = () => {
   const { showSection } = useParams();
   const { hosts: data } = useDataContext();
-  const { voting, votes } = useVotingHook();
+  const { voting } = useVoting();
 
   const show2UpHosts: { [key: string]: boolean } = {
     1: showSection(SectionsXBX.Host_2_Up_Host_1),
@@ -30,7 +29,7 @@ const HostXBX: React.FC = () => {
           </Scroller>
         </Styled.NameTag>
 
-        <HostVoteEmojis seatNum={1} votes={votes} />
+        <HostVoteEmojis seatNum={1} />
 
         <Styled.VoteCount>{voting[1]}</Styled.VoteCount>
       </Styled.Host1Up>
@@ -54,7 +53,7 @@ const HostXBX: React.FC = () => {
               </Scroller>
             </Styled.NameTag>
 
-            <HostVoteEmojis seatNum={host.seatNum} votes={votes} />
+            <HostVoteEmojis seatNum={host.seatNum} />
 
             <Styled.VoteCount>{voting[host.seatNum]}</Styled.VoteCount>
           </Styled.Host2Up>

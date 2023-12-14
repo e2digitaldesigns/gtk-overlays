@@ -4,7 +4,7 @@ import { Scroller } from "../../../../../globalComponents";
 import CONFIG from "../../config.json";
 
 import { useDataContext } from "../../../../../context";
-import useVotingHook from "../../../../../hooks/useVotingHook/useVotingHook";
+import { useVoting } from "../../../../../hooks";
 
 interface ITheHostProps {
   type?: string;
@@ -18,7 +18,7 @@ const TheHost: React.FC<ITheHostProps> = ({
   votePosition = "br"
 }) => {
   const { hosts } = useDataContext();
-  const { voting } = useVotingHook();
+  const { voting } = useVoting();
 
   const host =
     type === "host" && hosts.find(host => host.seatNum === seatNumber);

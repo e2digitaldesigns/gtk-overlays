@@ -8,6 +8,7 @@ import OverlayWM from "./WM/WM";
 import OverlayCHL from "./CHL/CHL";
 import OverlayXBX from "./XBX/XBX";
 import OverlayFGT from "./FGT/FGT";
+import { useGlobalVoting } from "../../hooks";
 
 interface OverlayTemplateParserProps {}
 
@@ -24,6 +25,8 @@ const templateMap: { [key: string]: JSX.Element } = {
 
 const OverlayTemplateParser: React.FC<OverlayTemplateParserProps> = () => {
   const { templateId } = useDataContext();
+
+  useGlobalVoting();
 
   return templateMap[templateId];
 };

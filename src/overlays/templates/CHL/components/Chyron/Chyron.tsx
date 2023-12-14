@@ -13,14 +13,9 @@ import { IntTopic } from "../../../../../globalComponents/Topics/types";
 interface ChyronProps {
   isTimerPaused: boolean;
   topic: IntTopic | undefined;
-  trueOrFalseVotes?: trueFalseVotesParsed;
 }
 
-const Chyron: React.FC<ChyronProps> = ({
-  isTimerPaused,
-  topic,
-  trueOrFalseVotes
-}) => {
+const Chyron: React.FC<ChyronProps> = ({ isTimerPaused, topic }) => {
   const { showSection } = useParams();
 
   if (!showSection(SectionsCHL.Chyron)) return null;
@@ -31,10 +26,7 @@ const Chyron: React.FC<ChyronProps> = ({
         <Timing isTimerPaused={isTimerPaused} topic={topic} />
         <NetworkTab topicName={topic?.name || ""} />
 
-        <InfoBox
-          currenTopicId={topic?._id || ""}
-          trueOrFalseVotes={trueOrFalseVotes}
-        />
+        <InfoBox currenTopicId={topic?._id || ""} />
         <NewsFeed />
       </Styled.Chyron>
     </Styled.ChyronWrapper>

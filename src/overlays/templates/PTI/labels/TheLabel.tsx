@@ -3,8 +3,8 @@ import * as Styled from "./Label.style";
 import { Scroller } from "../../../../globalComponents";
 
 import CONFIG from "../config.json";
-import useVotingHook from "../../../../hooks/useVotingHook/useVotingHook";
 import { useDataContext } from "../../../../context";
+import { useVoting } from "../../../../hooks";
 
 interface ITheHostLabel {
   seatNumber: number;
@@ -12,7 +12,7 @@ interface ITheHostLabel {
 
 export const TheHostLabel: React.FC<ITheHostLabel> = ({ seatNumber }) => {
   const { hosts } = useDataContext();
-  const { voting } = useVotingHook();
+  const { voting } = useVoting();
 
   const host = hosts.find(host => host.seatNum === seatNumber);
 

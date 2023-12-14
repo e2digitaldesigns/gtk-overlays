@@ -3,14 +3,16 @@ import * as Styled from "./InfoBox.styles";
 import { useDataContext } from "../../../../../../context";
 import { IntTopic } from "../../../../../../globalComponents/Topics/types";
 import { trueFalseVoterParser } from "../../../../../../_utils/trueFalseVoterParser";
-import { trueFalseVotesParsed } from "../../../../../../types";
+import { useVoting } from "../../../../../../hooks";
 
 interface IntInfoBox {
   currenTopicId: string;
-  trueOrFalseVotes?: trueFalseVotesParsed;
 }
-const InfoBox: React.FC<IntInfoBox> = ({ currenTopicId, trueOrFalseVotes }) => {
+
+const InfoBox: React.FC<IntInfoBox> = ({ currenTopicId }) => {
   const { topics } = useDataContext();
+
+  const { trueOrFalseVotes } = useVoting();
 
   const currentTopicIndex = topics.findIndex(
     (topic: IntTopic) => topic._id === currenTopicId || ""

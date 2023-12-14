@@ -2,9 +2,18 @@ export interface IVotingState {
   [key: string]: number;
 }
 
+export enum IVoteAction {
+  Add = "add",
+  Remove = "remove",
+  True = "true",
+  False = "false",
+  Super = "super",
+  ClearVotes = "clear-votes"
+}
+
 export interface IVotes {
   _id: string;
-  action: string;
+  action: string | IVoteAction;
   username: string;
   channel: string;
   host: string;

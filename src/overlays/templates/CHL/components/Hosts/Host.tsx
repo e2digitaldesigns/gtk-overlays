@@ -1,30 +1,19 @@
 import * as React from "react";
 import * as Styled from "./Host.style";
-import { useParams } from "../../../../../hooks";
+import { useParams, useVoting } from "../../../../../hooks";
 import { HostVoteEmojis, Scroller } from "../../../../../globalComponents";
 
 import { useDataContext } from "../../../../../context";
-import {
-  IVoteStreaks,
-  IVotes,
-  IVotingState,
-  SectionsCHL
-} from "../../../../../types";
+import { SectionsCHL } from "../../../../../types";
 
 import CONFIG from "../../config.json";
 import { FireHost } from "./FireHost";
 import FireCountDisplay from "./FireCountDisplay";
 
-interface IHostProps {
-  voting: IVotingState;
-  votes: IVotes[];
-  votingStreak: IVoteStreaks;
-}
-
-const Host: React.FC<IHostProps> = ({ voting, votes, votingStreak }) => {
+const Host: React.FC = () => {
   const { showSection } = useParams();
-
   const { hosts: data } = useDataContext();
+  const { voting, votingStreak } = useVoting();
 
   const showHosts: { [key: string]: boolean } = {
     1: showSection(SectionsCHL.Host1),
@@ -56,7 +45,7 @@ const Host: React.FC<IHostProps> = ({ voting, votes, votingStreak }) => {
                 votingStreak={votingStreak}
               />
 
-              <HostVoteEmojis seatNum={host.seatNum} votes={votes} />
+              <HostVoteEmojis seatNum={host.seatNum} />
 
               <Styled.FireWrapper>
                 <FireHost

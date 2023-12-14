@@ -1,20 +1,20 @@
 import React from "react";
 import * as Styled from "./HostVoteEmojis.style";
 import { IVotes } from "../../types";
+import { useVotingStore } from "../../dataStores";
 
 interface IHostVoteEmojis {
   fontSize?: string;
   seatNum: number;
   speed?: number;
-  votes: IVotes[];
 }
 
 const HostVoteEmojis: React.FC<IHostVoteEmojis> = ({
   fontSize = "18px",
   seatNum,
-  speed = 4,
-  votes
+  speed = 4
 }) => {
+  const votes = useVotingStore(state => state.votes);
   const [hostVote, setHostVote] = React.useState<IVotes[]>([]);
 
   React.useEffect(() => {

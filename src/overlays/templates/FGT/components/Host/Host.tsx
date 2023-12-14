@@ -1,22 +1,18 @@
 import * as React from "react";
 import * as Styled from "./Host.styles";
 import { HostVoteEmojis, Scroller } from "../../../../../globalComponents";
-import { useParams } from "../../../../../hooks";
+import { useParams, useVoting } from "../../../../../hooks";
 import { useDataContext } from "../../../../../context";
 import { SectionsFGT } from "../../../../../types";
 import CONFIG from "../../config.json";
-import { IVotes, IVotingState } from "../../../../../types";
 
 const scrollDotArray = new Array(6).fill(0);
 
-interface IHostProps {
-  voting: IVotingState;
-  votes: IVotes[];
-}
-
-const HostFGT: React.FC<IHostProps> = ({ voting, votes }) => {
+const HostFGT: React.FC = () => {
   const { showSection } = useParams();
   const { hosts: data } = useDataContext();
+
+  const { voting } = useVoting();
 
   const hostPermissionMap: { [key: string]: boolean } = {
     1: showSection(SectionsFGT.Host1),
@@ -58,7 +54,7 @@ const HostFGT: React.FC<IHostProps> = ({ voting, votes }) => {
               </Scroller>
             </Styled.NameTag>
 
-            <HostVoteEmojis seatNum={host.seatNum} votes={votes} />
+            <HostVoteEmojis seatNum={host.seatNum} />
             <Styled.VoteCount>{voting[host.seatNum]}</Styled.VoteCount>
           </Styled.HostWrapper>
         );
