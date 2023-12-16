@@ -80,9 +80,11 @@ const useVotingDataStore = create<IVotingDataStore>(
       },
 
       logTrueOrFlaseVote: (data: IVotes) => {
-        const currentTopicId = window.localStorage.getItem(
+        let currentTopicId = window.localStorage.getItem(
           STORAGE_KEY.CURRENT_TOPIC
         );
+
+        currentTopicId = currentTopicId && JSON.parse(currentTopicId);
 
         if (!currentTopicId) return;
 
@@ -167,9 +169,11 @@ const useVotingDataStore = create<IVotingDataStore>(
           STORAGE_KEY.TOPIC_VOTING_COUNT
         );
 
-        const currentTopicId = window.localStorage.getItem(
+        let currentTopicId = window.localStorage.getItem(
           STORAGE_KEY.CURRENT_TOPIC
         );
+
+        currentTopicId = currentTopicId && JSON.parse(currentTopicId);
 
         if (topicVoteCount && currentTopicId) {
           const voting = JSON.parse(topicVoteCount);

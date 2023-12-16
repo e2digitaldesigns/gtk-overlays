@@ -1,11 +1,14 @@
 import { STORAGE_KEY, TrueFalseVotesObj } from "../../../types";
 
 export const trueFalseParser = (trueFalseState: TrueFalseVotesObj) => {
-  const currentTopicId = window.localStorage.getItem(STORAGE_KEY.CURRENT_TOPIC);
-
+  let currentTopicId = window.localStorage.getItem(STORAGE_KEY.CURRENT_TOPIC);
+  currentTopicId = currentTopicId && JSON.parse(currentTopicId);
   if (!currentTopicId) return;
 
-  const topicVotes = trueFalseState?.[currentTopicId] || null;
+  console.log("currentTopicId", currentTopicId);
+
+  const topicVotes =
+    trueFalseState?.[currentTopicId as keyof TrueFalseVotesObj] || null;
 
   const obj = {
     fullVotes: topicVotes || {},

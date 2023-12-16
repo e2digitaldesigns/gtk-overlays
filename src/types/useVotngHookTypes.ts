@@ -46,11 +46,13 @@ export const initVotingState: IVotingState = {
   "6": 0
 };
 
-export const initVotingStreakState: IVoteStreaks = {
-  "1": { add: 0, remove: 0 },
-  "2": { add: 0, remove: 0 },
-  "3": { add: 0, remove: 0 },
-  "4": { add: 0, remove: 0 },
-  "5": { add: 0, remove: 0 },
-  "6": { add: 0, remove: 0 }
-};
+// export const initVotingStreakState: IVoteStreaks = {
+//   "1": { add: 0, remove: 0 },
+//   "2": { add: 0, remove: 0 },
+//   "3": { add: 0, remove: 0 },
+//   "4": { add: 0, remove: 0 },
+//   "5": { add: 0, remove: 0 },
+//   "6": { add: 0, remove: 0 }
+// };
+
+export const initVotingStreakState: IVoteStreaks = {};

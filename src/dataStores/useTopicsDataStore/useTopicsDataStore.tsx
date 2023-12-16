@@ -37,6 +37,8 @@ const useTopicsDataStore = create<ITopicsDataStore>(
           isTimerPaused: true,
           topics: data
         });
+
+        setStorageData(data[0]?._id);
       },
 
       topicNext: () => {
