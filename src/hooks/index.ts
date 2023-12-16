@@ -5,4 +5,5 @@ export { default as useTopicImage } from "./useTopicImageHook";
 
 export { default as useVoting } from "./useVotingHook";
 
-export { default as useGlobalVoting } from "./useGlobalVotingInitHook";
+export { default as useGlobalVotingInit } from "./useGlobalVotingInitHook";
+export { default as useGlobalTopicsInit } from "./useGlobalTopicsInitHook";

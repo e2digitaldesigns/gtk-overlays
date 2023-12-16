@@ -2,24 +2,19 @@ import React from "react";
 import * as Styled from "./UpNext.style";
 import { SectionsCHL } from "../../../../../types";
 
-import { useParams } from "../../../../../hooks";
-import { IntTopic } from "../../../../../globalComponents/Topics/types";
+import { useParams, useSimpleTopic } from "../../../../../hooks";
 
 export interface UpNextCHLProps {
-  activeTopic: IntTopic;
-  topics: IntTopic[];
   topicLiHeight?: number;
 }
 
-export const UpNextCHL: React.FC<UpNextCHLProps> = ({
-  activeTopic,
-  topics,
-  topicLiHeight = 37
-}) => {
+export const UpNextCHL: React.FC<UpNextCHLProps> = ({ topicLiHeight = 37 }) => {
   const { showSection } = useParams();
   const wrapperRef = React.useRef<HTMLDivElement>(null);
   const topicUlRef = React.useRef<HTMLUListElement>(null);
   const [ulTop, setUlTop] = React.useState(0);
+
+  const { topic: activeTopic, topics } = useSimpleTopic();
 
   React.useEffect(() => {
     const newTopp = topicLiHeight * topics.indexOf(activeTopic) * -1;

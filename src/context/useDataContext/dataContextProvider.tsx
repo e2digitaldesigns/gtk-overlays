@@ -5,6 +5,7 @@ import { DataContext } from "./dataContext";
 import { GlobalDataContext, RequestType } from "../../types";
 
 import Loader from "../../overlays/loader/loader";
+import useTopicsDataStore from "../../dataStores/useTopicsDataStore";
 
 enum Suffix {
   Episode = "episode",
@@ -21,6 +22,7 @@ export const DataContextProvider: React.FC<IDataContextProvider> = ({
   const [state, setState] = React.useState<GlobalDataContext | null>(null);
   const [isError, setIsError] = React.useState(false);
   const dataContextValue = React.useMemo(() => state, [state]);
+  const useTopicsData = useTopicsDataStore(state => state);
 
   React.useEffect(() => {
     let stillHere = true;
@@ -41,6 +43,7 @@ export const DataContextProvider: React.FC<IDataContextProvider> = ({
         const { data } = await axios.get(urlString);
         if (data && stillHere) {
           setState(data);
+          useTopicsData.hydrate(data.topics);
         }
       } catch (error) {
         setIsError(true);
@@ -52,6 +55,7 @@ export const DataContextProvider: React.FC<IDataContextProvider> = ({
     return () => {
       stillHere = false;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (isError) {

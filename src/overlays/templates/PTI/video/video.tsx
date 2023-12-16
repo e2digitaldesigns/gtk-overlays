@@ -4,12 +4,7 @@ import { SectionsPTI } from "../../../../types";
 
 import { VideoPlayer } from "../../../../globalComponents";
 
-interface VideoProps {
-  topicId: string | undefined;
-  topicVideo: string | undefined;
-}
-
-const VideoPTI: React.FC<VideoProps> = ({ topicId, topicVideo }) => {
+const VideoPTI: React.FC = () => {
   const { showSection } = useParams();
 
   if (!showSection(SectionsPTI.Video)) return null;
@@ -36,8 +31,6 @@ const VideoPTI: React.FC<VideoProps> = ({ topicId, topicVideo }) => {
         width: "400px",
         height: "220px"
       }}
-      topicId={topicId}
-      videoUrl={topicVideo}
     />
   );
 };

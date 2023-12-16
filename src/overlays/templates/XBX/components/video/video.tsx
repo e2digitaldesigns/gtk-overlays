@@ -4,12 +4,7 @@ import { SectionsXBX } from "../../../../../types";
 
 import { VideoPlayer } from "../../../../../globalComponents";
 
-interface VideoProps {
-  topicId: string | undefined;
-  topicVideo: string | undefined;
-}
-
-const VideoXBX: React.FC<VideoProps> = ({ topicId, topicVideo }) => {
+const VideoXBX: React.FC = () => {
   const { showSection } = useParams();
 
   if (!showSection(SectionsXBX.Video)) return null;
@@ -37,8 +32,6 @@ const VideoXBX: React.FC<VideoProps> = ({ topicId, topicVideo }) => {
         width: "390px",
         height: "230px"
       }}
-      topicId={topicId}
-      videoUrl={topicVideo}
     />
   );
 };

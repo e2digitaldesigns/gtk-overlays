@@ -1,7 +1,5 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
-import { useDataContext } from "../../../context";
-import { useSimpleTopic } from "../../../hooks";
 import * as Styled from "./global.styles";
 import { theme } from "./Theme/GlobalTheme";
 import ChyronXBX from "./components/chyron/chyron";
@@ -15,9 +13,6 @@ import { TimingXBX } from "./components/Timing/Timing";
 import { ShowChatXBX } from "./components/userChat/userChat";
 
 const OverlayXBX: React.FC = () => {
-  const { topics } = useDataContext();
-  const { topic } = useSimpleTopic(topics);
-
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -27,11 +22,11 @@ const OverlayXBX: React.FC = () => {
 
           <HostXBX />
 
-          <TopicsXBX topics={topics} activeTopic={topic} />
+          <TopicsXBX />
 
           <ShowChatXBX />
 
-          <DescriptionXBX activeTopic={topic} />
+          <DescriptionXBX />
 
           <SponsorsXBX />
 
@@ -39,7 +34,7 @@ const OverlayXBX: React.FC = () => {
 
           <ChatRankingsXBX />
 
-          <VideoXBX topicId={topic._id} topicVideo={topic.video} />
+          <VideoXBX />
         </Styled.Container>
       </ThemeProvider>
     </>

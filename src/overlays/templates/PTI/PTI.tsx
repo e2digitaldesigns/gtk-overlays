@@ -19,7 +19,7 @@ const OverlayPTI: React.FC = () => {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <VideoPTI topicId={topicState?._id} topicVideo={topicState?.video} />
+        <VideoPTI />
         <ChatRankingsPTI />
         <EmojiPTI />
         <Chyron />

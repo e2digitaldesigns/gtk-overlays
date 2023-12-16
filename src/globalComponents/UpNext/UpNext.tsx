@@ -2,24 +2,21 @@ import React from "react";
 import * as Styled from "./UpNext.style";
 import _range from "lodash/range";
 
-import { IntTopic } from "../Topics/types";
 import { CSSObject } from "styled-components";
+import { useSimpleTopic } from "../../hooks";
 
 export interface UpNextProps {
-  activeTopic: IntTopic;
-  topics: IntTopic[];
   titleCss?: CSSObject;
   topicCss?: CSSObject;
   numOfTopics?: number;
 }
 
 const UpNext: React.FC<UpNextProps> = ({
-  activeTopic,
-  topics,
   titleCss = {},
   topicCss = {},
   numOfTopics = 3
 }) => {
+  const { topic: activeTopic, topics } = useSimpleTopic();
   const wrapperRef = React.useRef<HTMLDivElement>(null);
   const topicUlRef = React.useRef<HTMLUListElement>(null);
   const [ulTop, setUlTop] = React.useState(0);

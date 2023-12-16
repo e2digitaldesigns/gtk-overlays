@@ -1,19 +1,12 @@
 import React from "react";
-import { IntTopic } from "../Topics/types";
+import { useSimpleTopic } from "../../hooks";
 
-interface IntTimerItem {
-  isTimerPaused: boolean;
-  topic: IntTopic;
-}
-
-const GTKTimerItem: React.FC<IntTimerItem> = ({
-  topic,
-  isTimerPaused = false
-}) => {
+const GTKTimerItem: React.FC = () => {
   const [counter, setCounter] = React.useState<number>(0);
+  const { isTimerPaused, topic } = useSimpleTopic();
 
   React.useEffect(() => {
-    setCounter(topic.timer);
+    topic?.timer && setCounter(topic.timer);
   }, [topic]);
 
   React.useEffect(() => {
@@ -34,7 +27,7 @@ const GTKTimerItem: React.FC<IntTimerItem> = ({
     };
   }, [counter, isTimerPaused]);
 
-  return <span>{timeConvert(counter)}</span>;
+  return topic?.timer ? <span>{timeConvert(counter)}</span> : null;
 };
 
 function timeConvert(seconds: number) {

@@ -1,22 +1,13 @@
 import React from "react";
 import * as Styled from "./description.style";
 import { SectionsXBX } from "../../../../../types";
-import { useParams, useTopicImage } from "../../../../../hooks";
+import { useParams, useSimpleTopic, useTopicImage } from "../../../../../hooks";
 import { IntTopic } from "../../../../../globalComponents/Topics/types";
 
-import { useDataContext } from "../../../../../context";
-
-interface DescriptionProps {
-  activeTopic: IntTopic;
-}
-const DescriptionXBX: React.FC<DescriptionProps> = ({ activeTopic }) => {
+const DescriptionXBX: React.FC = () => {
+  const { topics, topicIndex: currentTopicIndex } = useSimpleTopic();
   const { showSection } = useParams();
-  const { topics } = useDataContext();
   const { topicImage } = useTopicImage();
-
-  const currentTopicIndex = topics.findIndex(
-    (topic: IntTopic) => topic._id === activeTopic._id || ""
-  );
 
   const setLiState = (index: number) => {
     if (index < currentTopicIndex) return "visited";

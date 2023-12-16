@@ -6,7 +6,7 @@ import * as Styled from "./Topics.style";
 
 const TopicsSAS: React.FC = () => {
   const { topics } = useDataContext();
-  const { topic: currentTopic } = useSimpleTopic(topics, true);
+  const { topic: currentTopic } = useSimpleTopic();
 
   return (
     <Styled.TopicWrapper>

@@ -66,9 +66,8 @@ const socketServices = {
   subscribeOverlaysVideoPlayer(
     cb: (err: unknown, data: SocketServicesData) => void
   ) {
-    socket.on(
-      "gtkOverlayVideoPlayer",
-      (err: unknown, data: SocketServicesData) => cb(null, data)
+    socket.on("gtkOverlayVideoPlayer", (data: SocketServicesData) =>
+      cb(null, data)
     );
   },
 

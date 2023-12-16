@@ -2,6 +2,7 @@ import React from "react";
 import * as Styled from "./VideoPlayer.styles";
 import socketServices from "../../services/socketServices";
 import { RequestType, SocketServicesData } from "../../types";
+import { useSimpleTopic } from "../../hooks";
 
 type Dimensions = {
   top: string;
@@ -11,10 +12,9 @@ type Dimensions = {
 };
 
 interface IntVideoProps {
-  topicId: string | undefined;
   videoBorder?: string;
   videoShadow?: boolean;
-  videoUrl: string | undefined;
+
   dimensions: Dimensions;
   bgColor?: string;
 
@@ -34,12 +34,13 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
   smallScreenDimensions,
   allowFullScreen = false,
   fullScreenDimensions,
-  topicId,
-  videoUrl,
+
   videoBorder = "none",
   videoShadow = false,
   callBack
 }) => {
+  const { topic, topicId } = useSimpleTopic();
+  const videoUrl = topic?.video;
   const queryParams = new URLSearchParams(window.location.search);
   const videoPlayerWrapperRef = React.useRef<HTMLDivElement>(null);
   const videoPlayerRef = React.useRef<HTMLVideoElement>(null);
@@ -122,8 +123,7 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
         if (err) return;
 
         if (data?.uid !== queryParams.get(RequestType.UserId)) return;
-        if (data?.tid && data.tid !== queryParams.get(RequestType.Template))
-          return;
+        if (data?.tid !== queryParams.get(RequestType.Template)) return;
         if (!videoPlayerRef?.current || !videoPlayerWrapperRef.current) return;
 
         switch (data.action) {

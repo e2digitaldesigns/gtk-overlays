@@ -8,15 +8,9 @@ import NewsFeed from "./NewsFeed/NewsFeed";
 
 import { SectionsFGT } from "../../../../../types";
 import { Timing } from "./Timing/Timing";
-import { IntTopic } from "../../../../../globalComponents/Topics/types";
 import SponsorsFGT from "./sponsors/sponsors";
 
-interface ChyronProps {
-  isTimerPaused: boolean;
-  topic: IntTopic | undefined;
-}
-
-const Chyron: React.FC<ChyronProps> = ({ isTimerPaused, topic }) => {
+const Chyron: React.FC = () => {
   const { showSection } = useParams();
 
   return (
@@ -24,9 +18,9 @@ const Chyron: React.FC<ChyronProps> = ({ isTimerPaused, topic }) => {
       <Styled.Chyron>
         {showSection(SectionsFGT.Description) && (
           <>
-            <Timing isTimerPaused={isTimerPaused} topic={topic} />
-            <NetworkTab topicName={topic?.name || ""} />
-            <InfoBox currenTopicId={topic?._id || ""} />
+            <Timing />
+            <NetworkTab />
+            <InfoBox />
           </>
         )}
 

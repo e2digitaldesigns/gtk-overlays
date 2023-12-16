@@ -7,12 +7,7 @@ import { VideoPlayer, BGTextScroll } from "../../../../globalComponents";
 import { theme } from "../Theme/GlobalTheme";
 import { useDataContext } from "../../../../context";
 
-interface VideoProps {
-  topicId: string | undefined;
-  topicVideo: string | undefined;
-}
-
-export const VideoFGT: React.FC<VideoProps> = ({ topicId, topicVideo }) => {
+export const VideoFGT: React.FC = () => {
   const { showSection } = useParams();
   const data = useDataContext();
 
@@ -34,8 +29,6 @@ export const VideoFGT: React.FC<VideoProps> = ({ topicId, topicVideo }) => {
             width: "1280px",
             height: "720px"
           }}
-          topicId={topicId}
-          videoUrl={topicVideo}
           allowFullScreen={true}
           fullScreenDimensions={{
             top: "-10px",

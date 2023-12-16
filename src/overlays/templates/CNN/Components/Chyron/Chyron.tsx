@@ -11,9 +11,9 @@ import { SectionsCNN } from "../../../../../types";
 
 const Chyron: React.FC = () => {
   const { showSection } = useParams();
-  const { socialNetworks, ticker, topics } = useDataContext();
+  const { socialNetworks, ticker } = useDataContext();
   const socialNetworksData = socialToScrollerUtil(socialNetworks, true);
-  const { topic } = useSimpleTopic(topics);
+  const { topic } = useSimpleTopic();
 
   if (!showSection(SectionsCNN.Chyron)) return null;
 

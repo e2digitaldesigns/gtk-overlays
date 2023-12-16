@@ -17,25 +17,22 @@ const useGlobalVotingInitHook = () => {
       switch (data.action) {
         case IVoteAction.True:
         case IVoteAction.False:
-          console.log(21, data.action);
           votingDataStore.logTrueOrFlaseVote(data);
           break;
 
         case IVoteAction.Add:
-          console.log(26, data.action);
           votingDataStore.handleVoting(data, "add");
           break;
 
         case IVoteAction.Super:
+          votingDataStore.handleVotingSuper(data);
           break;
 
         case IVoteAction.Remove:
-          console.log(34, data.action);
           votingDataStore.handleVoting(data, "remove");
           break;
 
         case IVoteAction.ClearVotes:
-          console.log(39, data.action);
           votingDataStore.clearVotes();
           break;
       }

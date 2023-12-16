@@ -6,16 +6,10 @@ import InfoBox from "./InfoBox/InfoBox";
 import NetworkTab from "./NetworkTab/NetworkTab";
 import NewsFeed from "./NewsFeed/NewsFeed";
 
-import { SectionsCHL, trueFalseVotesParsed } from "../../../../../types";
+import { SectionsCHL } from "../../../../../types";
 import { Timing } from "./Timing/Timing";
-import { IntTopic } from "../../../../../globalComponents/Topics/types";
 
-interface ChyronProps {
-  isTimerPaused: boolean;
-  topic: IntTopic | undefined;
-}
-
-const Chyron: React.FC<ChyronProps> = ({ isTimerPaused, topic }) => {
+const Chyron: React.FC = () => {
   const { showSection } = useParams();
 
   if (!showSection(SectionsCHL.Chyron)) return null;
@@ -23,10 +17,10 @@ const Chyron: React.FC<ChyronProps> = ({ isTimerPaused, topic }) => {
   return (
     <Styled.ChyronWrapper>
       <Styled.Chyron>
-        <Timing isTimerPaused={isTimerPaused} topic={topic} />
-        <NetworkTab topicName={topic?.name || ""} />
+        <Timing />
+        <NetworkTab />
 
-        <InfoBox currenTopicId={topic?._id || ""} />
+        <InfoBox />
         <NewsFeed />
       </Styled.Chyron>
     </Styled.ChyronWrapper>

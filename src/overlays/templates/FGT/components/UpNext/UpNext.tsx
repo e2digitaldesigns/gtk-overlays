@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { UpNext } from "../../../../../globalComponents";
-import { IntTopic } from "../../../../../globalComponents/Topics/types";
 import { SectionsFGT } from "../../../../../types";
 import { useParams } from "../../../../../hooks";
 
@@ -24,20 +23,13 @@ const UpNextWrapper = styled.div`
   grid-template-columns: 115px 1fr;
 `;
 
-interface UpNextProps {
-  activeTopic: IntTopic;
-  topics: IntTopic[];
-}
-
-export const UpNextFGT: React.FC<UpNextProps> = ({ activeTopic, topics }) => {
+export const UpNextFGT: React.FC = () => {
   const { showSection } = useParams();
 
   if (!showSection(SectionsFGT.UpNext)) return null;
   return (
     <UpNextWrapper>
       <UpNext
-        activeTopic={activeTopic}
-        topics={topics}
         titleCss={{
           color: "white",
           fontSize: "1.5rem",

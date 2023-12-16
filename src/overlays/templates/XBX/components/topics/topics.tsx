@@ -2,18 +2,10 @@ import React from "react";
 import * as Styled from "./topics.style";
 import { SectionsXBX } from "../../../../../types";
 
-import { useParams, useTopicImage } from "../../../../../hooks";
-import { IntTopic } from "../../../../../globalComponents/Topics/types";
+import { useParams, useSimpleTopic, useTopicImage } from "../../../../../hooks";
 
-export interface UpNextCHLProps {
-  activeTopic: IntTopic;
-  topics: IntTopic[];
-}
-
-export const TopicsXBX: React.FC<UpNextCHLProps> = ({
-  activeTopic,
-  topics
-}) => {
+export const TopicsXBX: React.FC = () => {
+  const { topic: activeTopic, topics } = useSimpleTopic();
   const { showSection } = useParams();
   const { topicImage } = useTopicImage();
   const wrapperRef = React.useRef<HTMLDivElement>(null);

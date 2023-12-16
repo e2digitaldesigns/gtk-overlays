@@ -1,12 +1,10 @@
 import React from "react";
-import { useDataContext } from "../../../../../context";
 import { IntTopic } from "../../../../../globalComponents/Topics/types";
 import { useSimpleTopic } from "../../../../../hooks";
 import * as Styled from "./Topics.style";
 
 const TopicsWM: React.FC = () => {
-  const { topics } = useDataContext();
-  const { topic: currentTopic } = useSimpleTopic(topics, true);
+  const { topics, topic: currentTopic } = useSimpleTopic();
 
   return (
     <Styled.TopicWrapper>
