@@ -68,9 +68,7 @@ const useVotingDataStore = create<IVotingDataStore>(
             : initVotingStreakState
         });
 
-        const trueFalseState = dataTrueFalse
-          ? JSON.parse(dataTrueFalse)
-          : initVotingStreakState;
+        const trueFalseState = dataTrueFalse ? JSON.parse(dataTrueFalse) : {};
 
         set({
           trueFalseState
