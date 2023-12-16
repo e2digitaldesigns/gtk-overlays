@@ -5,8 +5,6 @@ export const trueFalseParser = (trueFalseState: TrueFalseVotesObj) => {
   currentTopicId = currentTopicId && JSON.parse(currentTopicId);
   if (!currentTopicId) return;
 
-  console.log("currentTopicId", currentTopicId);
-
   const topicVotes =
     trueFalseState?.[currentTopicId as keyof TrueFalseVotesObj] || null;
 

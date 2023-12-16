@@ -14,7 +14,6 @@ import {
   TrueFalseVotesObj
 } from "../../types";
 
-import { trueFalseParser } from "./utils";
 import { getKeyWithHighestValue } from "../../_utils/getKeyWithHighestValue";
 
 export interface IVotingDataStore {
@@ -74,8 +73,7 @@ const useVotingDataStore = create<IVotingDataStore>(
           : initVotingStreakState;
 
         set({
-          trueFalseState,
-          trueOrFalseVotes: trueFalseParser(trueFalseState)
+          trueFalseState
         });
       },
 
@@ -97,8 +95,7 @@ const useVotingDataStore = create<IVotingDataStore>(
 
         setStorageData(STORAGE_KEY.TOPIC_VOTING_TRUE_FALSE, newState);
         set({
-          trueFalseState: newState,
-          trueOrFalseVotes: trueFalseParser(newState)
+          trueFalseState: newState
         });
       },
 
