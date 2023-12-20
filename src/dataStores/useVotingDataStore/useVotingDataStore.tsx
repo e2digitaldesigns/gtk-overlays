@@ -25,7 +25,7 @@ export interface IVotingDataStore {
   trueOrFalseVotes: trueFalseVotesParsed;
 
   initVoting: () => void;
-  logTrueOrFlaseVote: (data: IVotes) => void;
+  logTrueOrFalseVote: (data: IVotes) => void;
   handleVoting: (vote: IVotes, type: "add" | "remove" | "super") => void;
   handleVotingSuper: (data: IVotes) => void;
   clearVotes: () => void;
@@ -75,19 +75,19 @@ const useVotingDataStore = create<IVotingDataStore>(
         });
       },
 
-      logTrueOrFlaseVote: (data: IVotes) => {
-        let currentTopicId = window.localStorage.getItem(
+      logTrueOrFalseVote: (data: IVotes) => {
+        const currentTopicId = window.localStorage.getItem(
           STORAGE_KEY.CURRENT_TOPIC
         );
 
-        currentTopicId = currentTopicId && JSON.parse(currentTopicId);
+        const currentTopic = currentTopicId && JSON.parse(currentTopicId);
 
-        if (!currentTopicId) return;
+        if (!currentTopic) return;
 
         const newState: TrueFalseVotesObj = _cloneDeep(get().trueFalseState);
 
-        newState[currentTopicId] = {
-          ...(newState?.[currentTopicId] || {}),
+        newState[currentTopic] = {
+          ...(newState?.[currentTopic] || {}),
           [data.username]: data.action === "true" ? true : false
         };
 
@@ -102,6 +102,8 @@ const useVotingDataStore = create<IVotingDataStore>(
         const newVoting = _cloneDeep(get().voting);
         const newStreak = _cloneDeep(get().votingStreak);
         const hostNum = vote.host as keyof IVotingState;
+
+        console.log("handleVoting", vote.action);
 
         //Votes
         newVotes.push(vote);
@@ -164,16 +166,14 @@ const useVotingDataStore = create<IVotingDataStore>(
           STORAGE_KEY.TOPIC_VOTING_COUNT
         );
 
-        let currentTopicId = window.localStorage.getItem(
+        const currentTopicId = window.localStorage.getItem(
           STORAGE_KEY.CURRENT_TOPIC
         );
 
-        currentTopicId = currentTopicId && JSON.parse(currentTopicId);
+        const currentTopic = currentTopicId && JSON.parse(currentTopicId);
+        const voting = topicVoteCount && JSON.parse(topicVoteCount);
 
         if (topicVoteCount && currentTopicId) {
-          const voting = JSON.parse(topicVoteCount);
-          const currentTopic = JSON.parse(currentTopicId);
-
           if (
             !voting?.[currentTopic] ||
             !_includes(voting?.[currentTopic], data.username)
