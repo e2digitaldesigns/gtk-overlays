@@ -2,17 +2,17 @@ import {
   IVotes,
   IVoteStreaks,
   IVotingState,
-  trueFalseVotesParsed
+  TopicVotesParsed
 } from "../../types";
 
 import { useTopicsStore, useVotingStore } from "../../dataStores";
 
 interface IUseVotingHook {
   votes: IVotes[];
-  voting: IVotingState;
+  votingState: IVotingState;
   votingStreak: IVoteStreaks;
   leadingSeat: string[];
-  trueOrFalseVotes: Partial<trueFalseVotesParsed>;
+  trueOrFalseVotes: Partial<TopicVotesParsed>;
 }
 
 const useVotingHook = (): IUseVotingHook => {
@@ -23,7 +23,7 @@ const useVotingHook = (): IUseVotingHook => {
     const currentTopicId = topicsDataStore?.currentTopicId;
     if (!currentTopicId) return;
 
-    const topicVotes = votingDataStore.trueFalseState[currentTopicId];
+    const topicVotes = votingDataStore.topicVotingState[currentTopicId];
     if (!topicVotes) return;
 
     return {

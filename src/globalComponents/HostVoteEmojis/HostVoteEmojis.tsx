@@ -1,6 +1,5 @@
 import React from "react";
 import * as Styled from "./HostVoteEmojis.style";
-import { IVotes } from "../../types";
 import { useVotingStore } from "../../dataStores";
 
 interface IHostVoteEmojis {
@@ -15,21 +14,12 @@ const HostVoteEmojis: React.FC<IHostVoteEmojis> = ({
   speed = 4
 }) => {
   const votes = useVotingStore(state => state.votes);
-  const [hostVote, setHostVote] = React.useState<IVotes[]>([]);
 
-  React.useEffect(() => {
-    const lastElement = votes[votes.length - 1];
-
-    if (lastElement?.host !== String(seatNum)) return;
-
-    setHostVote(prev => [...prev, lastElement]);
-
-    setTimeout(() => {
-      setHostVote(prev => prev.filter(vote => vote._id !== lastElement._id));
-    }, 10000);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [seatNum, votes]);
+  let hostVote = votes.filter(
+    vote =>
+      vote.host === String(seatNum) &&
+      new Date(vote.createdAt) > new Date(Date.now() - 10000)
+  );
 
   return (
     <>

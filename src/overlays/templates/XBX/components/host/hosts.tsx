@@ -11,7 +11,7 @@ import CONFIG from "../../config.json";
 const HostXBX: React.FC = () => {
   const { showSection } = useParams();
   const { hosts: data } = useDataContext();
-  const { voting } = useVoting();
+  const { votingState } = useVoting();
 
   const show2UpHosts: { [key: string]: boolean } = {
     1: showSection(SectionsXBX.Host_2_Up_Host_1),
@@ -31,7 +31,7 @@ const HostXBX: React.FC = () => {
 
         <HostVoteEmojis seatNum={1} />
 
-        <Styled.VoteCount>{voting[1]}</Styled.VoteCount>
+        <Styled.VoteCount>{votingState[1]}</Styled.VoteCount>
       </Styled.Host1Up>
     );
 
@@ -55,7 +55,7 @@ const HostXBX: React.FC = () => {
 
             <HostVoteEmojis seatNum={host.seatNum} />
 
-            <Styled.VoteCount>{voting[host.seatNum]}</Styled.VoteCount>
+            <Styled.VoteCount>{votingState[host.seatNum]}</Styled.VoteCount>
           </Styled.Host2Up>
         );
       })}

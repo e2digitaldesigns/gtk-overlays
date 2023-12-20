@@ -12,7 +12,7 @@ const HostFGT: React.FC = () => {
   const { showSection } = useParams();
   const { hosts: data } = useDataContext();
 
-  const { voting } = useVoting();
+  const { votingState } = useVoting();
 
   const hostPermissionMap: { [key: string]: boolean } = {
     1: showSection(SectionsFGT.Host1),
@@ -55,7 +55,7 @@ const HostFGT: React.FC = () => {
             </Styled.NameTag>
 
             <HostVoteEmojis seatNum={host.seatNum} />
-            <Styled.VoteCount>{voting[host.seatNum]}</Styled.VoteCount>
+            <Styled.VoteCount>{votingState[host.seatNum]}</Styled.VoteCount>
           </Styled.HostWrapper>
         );
       })}

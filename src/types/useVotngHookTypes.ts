@@ -8,7 +8,8 @@ export enum IVoteAction {
   True = "true",
   False = "false",
   Super = "super",
-  ClearVotes = "clear-votes"
+  ClearHostVotes = "clear-host-votes",
+  ClearTopicVotes = "clear-topic-votes"
 }
 
 export interface IVotes {
@@ -19,13 +20,14 @@ export interface IVotes {
   host: string;
   tid: string;
   uid: string;
+  createdAt: Date;
 }
 
-export type TrueFalseVotes = { [key: string]: boolean };
-export type TrueFalseVotesObj = { [key: string]: TrueFalseVotes };
+export type TopicVotes = { [key: string]: boolean };
+export type TopicVotesObj = { [key: string]: TopicVotes };
 
-export type trueFalseVotesParsed = {
-  fullVotes: TrueFalseVotes;
+export type TopicVotesParsed = {
+  fullVotes: TopicVotes;
   trueCount: number;
   falseCount: number;
 };

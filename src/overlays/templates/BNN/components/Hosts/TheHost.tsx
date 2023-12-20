@@ -18,7 +18,7 @@ const TheHost: React.FC<ITheHostProps> = ({
   votePosition = "br"
 }) => {
   const { hosts } = useDataContext();
-  const { voting } = useVoting();
+  const { votingState } = useVoting();
 
   const host =
     type === "host" && hosts.find(host => host.seatNum === seatNumber);
@@ -39,7 +39,7 @@ const TheHost: React.FC<ITheHostProps> = ({
                   </Scroller>
                 </Styled.NameTag>
                 <Styled.HostVote votePosition={votePosition}>
-                  {voting[host.seatNum]}
+                  {votingState[host.seatNum]}
                 </Styled.HostVote>{" "}
               </>
             )}

@@ -13,7 +13,7 @@ import FireCountDisplay from "./FireCountDisplay";
 const Host: React.FC = () => {
   const { showSection } = useParams();
   const { hosts: data } = useDataContext();
-  const { voting, votingStreak } = useVoting();
+  const { votingState, votingStreak } = useVoting();
 
   const showHosts: { [key: string]: boolean } = {
     1: showSection(SectionsCHL.Host1),
@@ -55,7 +55,7 @@ const Host: React.FC = () => {
                 />
               </Styled.FireWrapper>
 
-              <Styled.VoteCount>{voting[host.seatNum]}</Styled.VoteCount>
+              <Styled.VoteCount>{votingState[host.seatNum]}</Styled.VoteCount>
             </Styled.HostBoxDefault>
           </Styled.HostBoxWrapper>
         );

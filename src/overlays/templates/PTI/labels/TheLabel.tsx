@@ -12,14 +12,14 @@ interface ITheHostLabel {
 
 export const TheHostLabel: React.FC<ITheHostLabel> = ({ seatNumber }) => {
   const { hosts } = useDataContext();
-  const { voting } = useVoting();
+  const { votingState } = useVoting();
 
   const host = hosts.find(host => host.seatNum === seatNumber);
 
   return host ? (
     <>
       <Styled.HostWrapper seat={seatNumber}>
-        <Styled.Vote>{voting[host.seatNum]}</Styled.Vote>
+        <Styled.Vote>{votingState[host.seatNum]}</Styled.Vote>
         <Styled.Host>
           <Scroller timer={CONFIG.scrollTimers.hostLabels}>
             {host.ticker?.map((ticker: string, index: number) => (

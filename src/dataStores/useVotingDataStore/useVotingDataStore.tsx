@@ -1,6 +1,6 @@
 import { create, StoreApi } from "zustand";
+import { persist } from "zustand/middleware";
 import _cloneDeep from "lodash/cloneDeep";
-import _isEqual from "lodash/isEqual";
 import _includes from "lodash/includes";
 
 import {
@@ -10,200 +10,172 @@ import {
   IVotes,
   IVoteStreaks,
   IVotingState,
-  trueFalseVotesParsed,
-  TrueFalseVotesObj
+  TopicVotesParsed,
+  TopicVotesObj
 } from "../../types";
 
 import { getKeyWithHighestValue } from "../../_utils/getKeyWithHighestValue";
 
 export interface IVotingDataStore {
+  topicId: string;
   votes: IVotes[];
-  voting: IVotingState;
+  votingState: IVotingState;
   votingStreak: IVoteStreaks;
   leadingSeat: string[];
-  trueFalseState: TrueFalseVotesObj;
-  trueOrFalseVotes: trueFalseVotesParsed;
+  topicVotingState: TopicVotesObj;
+  topicVotingParsed: TopicVotesParsed;
+  superVoteLog: { [key: string]: string[] };
 
-  initVoting: () => void;
-  logTrueOrFalseVote: (data: IVotes) => void;
-  handleVoting: (vote: IVotes, type: "add" | "remove" | "super") => void;
-  handleVotingSuper: (data: IVotes) => void;
-  clearVotes: () => void;
+  setTopicId: (topicId: string) => void;
+  logTopicVote: (data: IVotes) => void;
+  handleHostVoting: (vote: IVotes, type: "add" | "remove" | "super") => void;
+  handleHostVotingSuper: (data: IVotes) => void;
+  clearHostVotes: () => void;
+  clearTopicVotes: () => void;
 }
 
-const setStorageData = (key: string, value: string | object) => {
-  window.localStorage.setItem(key, JSON.stringify(value));
-};
+const useVotingDataStore = create(
+  persist<IVotingDataStore>(
+    (
+      set: StoreApi<IVotingDataStore>["setState"],
+      get: StoreApi<IVotingDataStore>["getState"]
+    ) => {
+      return {
+        topicId: "",
+        votes: [],
+        votingState: initVotingState,
+        votingStreak: initVotingStreakState,
+        leadingSeat: [],
+        topicVotingState: {},
+        topicVotingParsed: {
+          fullVotes: {},
+          trueCount: 0,
+          falseCount: 0
+        },
+        superVoteLog: {},
 
-const useVotingDataStore = create<IVotingDataStore>(
-  (
-    set: StoreApi<IVotingDataStore>["setState"],
-    get: StoreApi<IVotingDataStore>["getState"]
-  ) => {
-    return {
-      votes: [],
-      voting: initVotingState,
-      votingStreak: initVotingStreakState,
-      leadingSeat: [],
-      trueFalseState: {},
-      trueOrFalseVotes: {
-        fullVotes: {},
-        trueCount: 0,
-        falseCount: 0
-      },
+        setTopicId: (topicId: string) => {
+          set({ topicId });
 
-      initVoting: () => {
-        const dataTally = window.localStorage.getItem(STORAGE_KEY.TALLY);
-        const dataStreak = window.localStorage.getItem(STORAGE_KEY.STREAK);
+          const superVoteLog = _cloneDeep(get().superVoteLog);
+          const newSuperVoteLog = { ...superVoteLog };
 
-        const dataTrueFalse = window.localStorage.getItem(
-          STORAGE_KEY.TOPIC_VOTING_TRUE_FALSE
-        );
-
-        set({ voting: dataTally ? JSON.parse(dataTally) : initVotingState });
-
-        set({
-          votingStreak: dataStreak
-            ? JSON.parse(dataStreak)
-            : initVotingStreakState
-        });
-
-        const trueFalseState = dataTrueFalse ? JSON.parse(dataTrueFalse) : {};
-
-        set({
-          trueFalseState
-        });
-      },
-
-      logTrueOrFalseVote: (data: IVotes) => {
-        const currentTopicId = window.localStorage.getItem(
-          STORAGE_KEY.CURRENT_TOPIC
-        );
-
-        const currentTopic = currentTopicId && JSON.parse(currentTopicId);
-
-        if (!currentTopic) return;
-
-        const newState: TrueFalseVotesObj = _cloneDeep(get().trueFalseState);
-
-        newState[currentTopic] = {
-          ...(newState?.[currentTopic] || {}),
-          [data.username]: data.action === "true" ? true : false
-        };
-
-        setStorageData(STORAGE_KEY.TOPIC_VOTING_TRUE_FALSE, newState);
-        set({
-          trueFalseState: newState
-        });
-      },
-
-      handleVoting: (vote: IVotes, type: "add" | "remove" | "super") => {
-        const newVotes = _cloneDeep(get().votes);
-        const newVoting = _cloneDeep(get().voting);
-        const newStreak = _cloneDeep(get().votingStreak);
-        const hostNum = vote.host as keyof IVotingState;
-
-        console.log("handleVoting", vote.action);
-
-        //Votes
-        newVotes.push(vote);
-
-        newVoting[hostNum] =
-          type === "add"
-            ? newVoting[hostNum] + 1
-            : type === "super"
-            ? newVoting[hostNum] + 5
-            : newVoting[hostNum] - 1;
-
-        // Streak
-        if (vote.action === "add") {
-          Object.keys(newStreak).forEach(key => {
-            newStreak[key].add = key === vote.host ? newStreak[key].add + 1 : 0;
-            if (key === vote.host) {
-              newStreak[key].remove = 0;
-            }
-          });
-        }
-
-        if (vote.action === "super") {
-          Object.keys(newStreak).forEach(key => {
-            newStreak[key].add = key === vote.host ? newStreak[key].add + 5 : 0;
-            if (key === vote.host) {
-              newStreak[key].remove = 0;
-            }
-          });
-        }
-
-        if (vote.action === "remove") {
-          Object.keys(newStreak).forEach(key => {
-            newStreak[key].remove =
-              key === vote.host ? newStreak[key].remove + 1 : 0;
-            if (key === vote.host) {
-              newStreak[key].add = 0;
-            }
-          });
-        }
-
-        //Update
-        set({
-          votes: newVotes,
-          votingStreak: newStreak,
-          voting: newVoting,
-          leadingSeat: getKeyWithHighestValue(newVoting)
-        });
-
-        if (!_isEqual(initVotingStreakState, newStreak)) {
-          setStorageData(STORAGE_KEY.STREAK, newStreak);
-        }
-
-        if (!_isEqual(initVotingState, newVoting)) {
-          setStorageData(STORAGE_KEY.TALLY, newVoting);
-        }
-      },
-
-      handleVotingSuper: (data: IVotes) => {
-        const topicVoteCount = window.localStorage.getItem(
-          STORAGE_KEY.TOPIC_VOTING_COUNT
-        );
-
-        const currentTopicId = window.localStorage.getItem(
-          STORAGE_KEY.CURRENT_TOPIC
-        );
-
-        const currentTopic = currentTopicId && JSON.parse(currentTopicId);
-        const voting = topicVoteCount && JSON.parse(topicVoteCount);
-
-        if (topicVoteCount && currentTopicId) {
-          if (
-            !voting?.[currentTopic] ||
-            !_includes(voting?.[currentTopic], data.username)
-          ) {
-            if (!voting?.[currentTopic]) {
-              voting[currentTopic] = [];
-            }
-
-            voting[currentTopic].push(data.username);
-            setStorageData(STORAGE_KEY.TOPIC_VOTING_COUNT, voting);
-            get().handleVoting(data, "super");
+          if (!newSuperVoteLog[topicId]) {
+            newSuperVoteLog[topicId] = [];
           }
+
+          set({ superVoteLog: newSuperVoteLog });
+        },
+
+        logTopicVote: (data: IVotes) => {
+          const currentTopic = get().topicId;
+
+          const newState = _cloneDeep(get().topicVotingState);
+
+          newState[currentTopic] = {
+            ...(newState?.[currentTopic] || {}),
+            [data.username]: data.action === "true" ? true : false
+          };
+
+          set({
+            topicVotingState: newState
+          });
+        },
+
+        handleHostVoting: (vote: IVotes, type: "add" | "remove" | "super") => {
+          const newVotes = _cloneDeep(get().votes);
+          const newVoting = _cloneDeep(get().votingState);
+          const newStreak = _cloneDeep(get().votingStreak);
+          const hostNum = vote.host as keyof IVotingState;
+
+          //Votes
+          newVotes.push(vote);
+
+          newVoting[hostNum] =
+            type === "add"
+              ? newVoting[hostNum] + 1
+              : type === "super"
+              ? newVoting[hostNum] + 5
+              : newVoting[hostNum] - 1;
+
+          //Streak
+          if (vote.action === "add") {
+            Object.keys(newStreak).forEach(key => {
+              newStreak[key].add =
+                key === vote.host ? newStreak[key].add + 1 : 0;
+              if (key === vote.host) {
+                newStreak[key].remove = 0;
+              }
+            });
+          }
+
+          if (vote.action === "super") {
+            Object.keys(newStreak).forEach(key => {
+              newStreak[key].add =
+                key === vote.host ? newStreak[key].add + 5 : 0;
+              if (key === vote.host) {
+                newStreak[key].remove = 0;
+              }
+            });
+          }
+
+          if (vote.action === "remove") {
+            Object.keys(newStreak).forEach(key => {
+              newStreak[key].remove =
+                key === vote.host ? newStreak[key].remove + 1 : 0;
+              if (key === vote.host) {
+                newStreak[key].add = 0;
+              }
+            });
+          }
+
+          //Update
+          set({
+            votes: newVotes,
+            votingStreak: newStreak,
+            votingState: newVoting,
+            leadingSeat: getKeyWithHighestValue(newVoting)
+          });
+        },
+
+        handleHostVotingSuper: (data: IVotes) => {
+          const currentTopic = get().topicId;
+          const newSuperVoteLog = _cloneDeep(get().superVoteLog);
+
+          if (!currentTopic) return;
+
+          if (!newSuperVoteLog[currentTopic]) {
+            newSuperVoteLog[currentTopic] = [];
+          }
+
+          if (_includes(newSuperVoteLog[currentTopic], data.username)) return;
+
+          newSuperVoteLog[currentTopic].push(data.username);
+          set({ superVoteLog: newSuperVoteLog });
+          get().handleHostVoting(data, "super");
+        },
+
+        clearHostVotes: () => {
+          set({
+            votes: [],
+            votingState: initVotingState,
+            votingStreak: initVotingStreakState,
+            superVoteLog: {}
+          });
+        },
+
+        clearTopicVotes: () => {
+          set({
+            topicVotingState: {},
+            topicVotingParsed: { fullVotes: {}, trueCount: 0, falseCount: 0 }
+          });
         }
-      },
-
-      clearVotes: () => {
-        setStorageData(STORAGE_KEY.TALLY, initVotingState);
-        setStorageData(STORAGE_KEY.STREAK, initVotingStreakState);
-        setStorageData(STORAGE_KEY.TOPIC_VOTING_TRUE_FALSE, {});
-        setStorageData(STORAGE_KEY.TOPIC_VOTING_COUNT, {});
-
-        set({
-          voting: initVotingState,
-          votingStreak: initVotingStreakState,
-          trueFalseState: {},
-          trueOrFalseVotes: { fullVotes: {}, trueCount: 0, falseCount: 0 }
-        });
-      }
-    };
-  }
+      };
+    },
+    {
+      name: STORAGE_KEY.VOTING_USER_VOTING
+    }
+  )
 );
 
 export default useVotingDataStore;

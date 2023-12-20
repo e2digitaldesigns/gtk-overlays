@@ -1,6 +1,7 @@
 import { create, StoreApi } from "zustand";
 import { IntTopic } from "../../globalComponents/TopicChild/types";
 import { setStorageData } from "./setStorageData";
+import useVotingDataStore from "../useVotingDataStore/useVotingDataStore";
 
 export interface ITopicsDataStore {
   currentTopic: IntTopic;
@@ -39,6 +40,7 @@ const useTopicsDataStore = create<ITopicsDataStore>(
         });
 
         setStorageData(data[0]?._id);
+        useVotingDataStore.getState().setTopicId(data[0]?._id);
       },
 
       topicNext: () => {
@@ -54,6 +56,7 @@ const useTopicsDataStore = create<ITopicsDataStore>(
           });
 
           setStorageData(topics[nextIndex]._id);
+          useVotingDataStore.getState().setTopicId(topics[nextIndex]._id);
         }
       },
 
@@ -70,6 +73,7 @@ const useTopicsDataStore = create<ITopicsDataStore>(
           });
 
           setStorageData(topics[prevIndex]._id);
+          useVotingDataStore.getState().setTopicId(topics[prevIndex]._id);
         }
       },
 
