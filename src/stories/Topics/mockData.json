@@ -9,7 +9,8 @@
     "isChild": false,
     "parentId": "",
     "img": "80207845-a10a-4f61-8f50-f9689ec574e2.jpg",
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "d6fa9e56-9ed7-47bc-a995-bebaf91533f6",
@@ -21,7 +22,8 @@
     "isChild": true,
     "parentId": "30dcde66-8784-46d6-9458-d33a9fd6a3f4",
     "img": "abcdddddd.jpg",
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "b151ae05-0842-4424-b1cd-7c37a5f7defd",
@@ -33,7 +35,8 @@
     "isChild": false,
     "parentId": "",
     "img": "",
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "5b7c365c-7097-4453-938d-b2de1d9fd405",
@@ -45,7 +48,8 @@
     "isChild": false,
     "parentId": "",
     "img": "",
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "dfd3143d-bd1a-4afa-a0c6-20f179546556",
@@ -57,7 +61,8 @@
     "isChild": true,
     "parentId": "5b7c365c-7097-4453-938d-b2de1d9fd405",
     "img": "",
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "8505c00d-3d2f-45ee-b44f-85c9bdfda819",
@@ -69,7 +74,8 @@
     "isChild": true,
     "parentId": "5b7c365c-7097-4453-938d-b2de1d9fd405",
     "img": "",
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "262e376f-edf3-4818-9b36-7ff523356583",
@@ -81,7 +87,8 @@
     "isChild": true,
     "parentId": "5b7c365c-7097-4453-938d-b2de1d9fd405",
     "img": "",
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "05a227c5-4bc0-49c7-a0ec-05fa6ee5ce74",
@@ -93,7 +100,8 @@
     "isChild": true,
     "parentId": "5b7c365c-7097-4453-938d-b2de1d9fd405",
     "img": "",
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "d843244a-c268-472d-bf43-0c1e294562ce",
@@ -105,7 +113,8 @@
     "isChild": false,
     "parentId": "",
     "img": "",
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9",
@@ -117,7 +126,8 @@
     "isChild": false,
     "parentId": "",
     "img": "",
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9A",
@@ -129,7 +139,8 @@
     "isChild": false,
     "parentId": "",
     "img": "",
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9B",
@@ -141,7 +152,8 @@
     "isChild": false,
     "parentId": "",
     "img": "",
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9C",
@@ -153,7 +165,8 @@
     "isChild": false,
     "parentId": "",
     "img": "",
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9D",
@@ -165,7 +178,8 @@
     "isChild": false,
     "parentId": "",
     "img": "",
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9E",
@@ -177,7 +191,8 @@
     "isChild": false,
     "parentId": "",
     "img": "",
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9F",
@@ -189,7 +204,8 @@
     "isChild": false,
     "parentId": "",
     "img": "",
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9G",
@@ -201,7 +217,8 @@
     "isChild": false,
     "parentId": "",
     "img": "",
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9H",
@@ -213,7 +230,8 @@
     "isChild": false,
     "parentId": "",
     "img": "",
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9I",
@@ -225,7 +243,8 @@
     "isChild": false,
     "parentId": "",
     "img": "",
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9J",
@@ -237,6 +256,7 @@
     "isChild": false,
     "parentId": "",
     "img": "",
-    "video": ""
+    "video": "",
+    "chat": ""
   }
 ]

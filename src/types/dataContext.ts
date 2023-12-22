@@ -36,6 +36,7 @@ export type GlobalDataContextTopic = {
   parentId: string;
   timer: number;
   video: string;
+  chat: string;
 };
 
 export type GlobalDataContextTicker = {

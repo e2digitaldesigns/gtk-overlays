@@ -9,7 +9,8 @@
     "order": 1,
     "parentId": "",
     "timer": 0,
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "002",
@@ -21,7 +22,8 @@
     "order": 2,
     "parentId": "",
     "timer": 0,
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "003",
@@ -33,7 +35,8 @@
     "order": 3,
     "parentId": "",
     "timer": 0,
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "004",
@@ -45,7 +48,8 @@
     "order": 4,
     "parentId": "",
     "timer": 0,
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "005",
@@ -57,7 +61,8 @@
     "order": 5,
     "parentId": "",
     "timer": 0,
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "006",
@@ -69,7 +74,8 @@
     "order": 6,
     "parentId": "005",
     "timer": 0,
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "007",
@@ -81,7 +87,8 @@
     "order": 7,
     "parentId": "005",
     "timer": 0,
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "008",
@@ -93,7 +100,8 @@
     "order": 8,
     "parentId": "005",
     "timer": 0,
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "009",
@@ -105,7 +113,8 @@
     "order": 9,
     "parentId": "005",
     "timer": 0,
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "010",
@@ -117,7 +126,8 @@
     "order": 10,
     "parentId": "005",
     "timer": 0,
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "011",
@@ -129,7 +139,8 @@
     "order": 11,
     "parentId": "005",
     "timer": 0,
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "012",
@@ -141,7 +152,8 @@
     "order": 12,
     "parentId": "005",
     "timer": 0,
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "013",
@@ -153,7 +165,8 @@
     "order": 13,
     "parentId": "",
     "timer": 0,
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "014",
@@ -165,7 +178,8 @@
     "order": 14,
     "parentId": "",
     "timer": 0,
-    "video": ""
+    "video": "",
+    "chat": ""
   },
   {
     "_id": "015",
@@ -177,6 +191,7 @@
     "order": 15,
     "parentId": "",
     "timer": 0,
-    "video": ""
+    "video": "",
+    "chat": ""
   }
 ]

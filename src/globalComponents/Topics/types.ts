@@ -17,6 +17,7 @@ export interface IntTopic {
   parentId: string;
   img: string;
   video: string;
+  chat: string;
 }
 
 export interface IntCss {

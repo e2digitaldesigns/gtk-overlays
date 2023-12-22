@@ -2,6 +2,8 @@ import { create, StoreApi } from "zustand";
 import { IntTopic } from "../../globalComponents/TopicChild/types";
 import { setStorageData } from "./setStorageData";
 import useVotingDataStore from "../useVotingDataStore/useVotingDataStore";
+import { RequestType } from "../../types";
+import axios from "axios";
 
 export interface ITopicsDataStore {
   currentTopic: IntTopic;
@@ -16,6 +18,7 @@ export interface ITopicsDataStore {
   topicPrev: () => void;
   timerResume: () => void;
   timerPause: () => void;
+  logTopic: (chat: string) => void;
 }
 
 const useTopicsDataStore = create<ITopicsDataStore>(
@@ -55,8 +58,10 @@ const useTopicsDataStore = create<ITopicsDataStore>(
             isTimerPaused: true
           });
 
-          setStorageData(topics[nextIndex]._id);
-          useVotingDataStore.getState().setTopicId(topics[nextIndex]._id);
+          const theTopic = topics[nextIndex];
+          setStorageData(theTopic._id);
+          useVotingDataStore.getState().setTopicId(theTopic._id);
+          get().logTopic(theTopic.chat);
         }
       },
 
@@ -72,8 +77,10 @@ const useTopicsDataStore = create<ITopicsDataStore>(
             isTimerPaused: true
           });
 
-          setStorageData(topics[prevIndex]._id);
-          useVotingDataStore.getState().setTopicId(topics[prevIndex]._id);
+          const theTopic = topics[prevIndex];
+          setStorageData(theTopic._id);
+          useVotingDataStore.getState().setTopicId(theTopic._id);
+          get().logTopic(theTopic.chat);
         }
       },
 
@@ -83,6 +90,24 @@ const useTopicsDataStore = create<ITopicsDataStore>(
 
       timerPause: () => {
         set({ isTimerPaused: true });
+      },
+
+      logTopic: async (chat: string) => {
+        const queryParams = new URLSearchParams(window.location.search);
+        const userId = queryParams.get(RequestType.UserId);
+        const templateId = queryParams.get(RequestType.Template);
+
+        if (!userId || !templateId) return;
+
+        try {
+          await axios.post(`${process.env.REACT_APP_REST_SERVICE}topicLog`, {
+            chat: chat || "",
+            templateId,
+            userId
+          });
+        } catch (error) {
+          console.error(error);
+        }
       }
     };
   }
