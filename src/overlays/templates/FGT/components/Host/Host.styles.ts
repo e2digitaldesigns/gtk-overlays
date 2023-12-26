@@ -30,8 +30,7 @@ export const HostWrapper = styled.div<HostWrapperProps>`
 
 export const NameTag = styled.div`
   width: 340px;
-  height: 40px;
-  font-size: 1.25rem;
+  height: 50px;
   text-transform: uppercase;
   padding: 0 0.625rem;
   background-color: ${props => props.theme.colors.bg1};
@@ -46,11 +45,15 @@ export const NameTag = styled.div`
   align-items: center;
 `;
 
+export const NameTagText = styled.div`
+  font-size: 1.75rem;
+`;
+
 export const VoteCount = styled.div`
   width: 65px;
-  height: 40px;
+  height: 50px;
 
-  font-size: 1.25rem;
+  font-size: 1.75rem;
 
   display: flex;
   align-items: center;

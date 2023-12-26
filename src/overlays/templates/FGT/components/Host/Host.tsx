@@ -49,7 +49,7 @@ const HostFGT: React.FC = () => {
                 transition="fade"
               >
                 {host?.ticker?.map((ticker: string, tIndex: number) => (
-                  <div key={tIndex}>{ticker}</div>
+                  <Styled.NameTagText key={tIndex}>{ticker}</Styled.NameTagText>
                 ))}
               </Scroller>
             </Styled.NameTag>

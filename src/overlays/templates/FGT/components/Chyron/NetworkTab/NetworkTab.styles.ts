@@ -12,5 +12,5 @@ export const NetworkTab = styled.div`
   align-items: center;
   font-size: 1.75rem;
   text-transform: uppercase;
-  padding: 0.25rem 0.625rem;
+  padding: 0.25rem 0.625rem 0 0.625rem;
 `;

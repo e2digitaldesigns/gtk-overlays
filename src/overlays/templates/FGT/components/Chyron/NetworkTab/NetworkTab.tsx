@@ -4,7 +4,7 @@ import { useSimpleTopic } from "../../../../../../hooks";
 
 const NetworkTab: React.FC = () => {
   const { topic } = useSimpleTopic();
-  return <Styled.NetworkTab>{topic?._id || ""}</Styled.NetworkTab>;
+  return <Styled.NetworkTab>{topic?.name || ""}</Styled.NetworkTab>;
 };
 
 export default NetworkTab;

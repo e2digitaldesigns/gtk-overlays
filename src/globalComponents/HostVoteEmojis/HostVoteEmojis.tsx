@@ -1,6 +1,7 @@
 import React from "react";
 import * as Styled from "./HostVoteEmojis.style";
 import { useVotingStore } from "../../dataStores";
+import _range from "lodash/range";
 
 interface IHostVoteEmojis {
   fontSize?: string;
@@ -9,27 +10,41 @@ interface IHostVoteEmojis {
 }
 
 const HostVoteEmojis: React.FC<IHostVoteEmojis> = ({
-  fontSize = "18px",
+  fontSize = "22px",
   seatNum,
   speed = 4
 }) => {
   const votes = useVotingStore(state => state.votes);
 
-  let hostVote = votes.filter(
+  const hostVote = votes.filter(
     vote =>
       vote.host === String(seatNum) &&
       new Date(vote.createdAt) > new Date(Date.now() - 10000)
   );
 
+  const parsedHostVotes = hostVote.flatMap(vote => {
+    if (vote.action === "super") {
+      const votes = _range(8).map(index => ({
+        ...vote,
+        _id: `${index}_${vote._id}`
+      }));
+
+      return votes;
+    }
+
+    return vote;
+  });
+
   return (
     <>
-      {hostVote.map(vote => (
+      {parsedHostVotes.map((vote, index: number) => (
         <Styled.VoteFloat
           key={vote._id}
           fontSize={fontSize}
           numberStr={numberFromId(vote._id)}
           speed={speed}
           type={vote.action}
+          delay={index ? numberFromId(vote._id) * 0.3 : 0}
         >
           {emojiParser(vote._id, vote.action)}
         </Styled.VoteFloat>
@@ -42,8 +57,8 @@ export default HostVoteEmojis;
 
 const numberFromId = (_id: string) => {
   const numbersArray = _id.match(/\d+/g);
-  let numbers = numbersArray?.map(Number) || [1];
-  let number = String(numbers[0])[0];
+  const numbers = numbersArray?.map(Number) || [1];
+  const number = String(numbers[0])[0];
   return Number(number);
 };
 

@@ -1,34 +1,38 @@
 import styled, { Keyframes, keyframes } from "styled-components";
 
 const upAndAway = (start: number, type: string): Keyframes => {
-  start = start > 5 ? start * 2 : 0 - start * 2;
+  start = start > 5 ? start * 2.5 : 0 - start * 2.5;
+  const baseNum = 20;
 
   return keyframes`
  0% {
   opacity:0;
-  right: ${20 - start}px;
+  
   }
 
   10% {
     opacity:1;
+    right: ${baseNum - start}px;
   }
 
   25% {
-    right: ${20 + start}px;
+    right: ${baseNum + start}px;
   }
 
   50%{
-    right: ${20 - start}px;
+    right: ${baseNum - start}px;
+    font-size: 1em;
   }
 
   75%{
-    right: ${20 + start}px;
+    right: ${baseNum + start}px;  
   }
 
   100% {
-    bottom: ${type === "remove" ? "-200px" : "400px"};
+    bottom: ${type === "remove" ? "-200px" : "300px"};
     opacity: 0;
     right: 20px;
+    font-size: .11em;
   }
 `;
 };
@@ -38,13 +42,10 @@ interface VoteFloatProps {
   numberStr: number;
   speed: number;
   type: string;
+  delay: number;
 }
 export const VoteFloat = styled.div<VoteFloatProps>`
-  width: 65px;
-  height: 40px;
-
   font-size: ${props => props.fontSize};
-  font-weight: ${props => props.numberStr};
 
   display: flex;
   align-items: center;
@@ -54,9 +55,10 @@ export const VoteFloat = styled.div<VoteFloatProps>`
   position: absolute;
   bottom: 20px;
   right: 20px;
-  z-index: 150;
+  z-index: 0;
 
   animation: ${props => upAndAway(props.numberStr, props.type)}
     ${props => `${props.speed}s`} ease-in-out;
   animation-fill-mode: forwards;
+  animation-delay: ${props => `${props.delay}s`};
 `;
