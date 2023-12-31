@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const TimingWrapper = styled.div`
-  height: 45px;
+  height: 60px;
   width: 105px;
   position: absolute;
   top: 0;
@@ -12,7 +12,6 @@ export const TimingWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.75rem;
   text-transform: uppercase;
   padding: 0.25rem 0.625rem;
 `;

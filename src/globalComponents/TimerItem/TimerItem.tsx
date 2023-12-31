@@ -1,7 +1,11 @@
 import React from "react";
 import { useSimpleTopic } from "../../hooks";
 
-const GTKTimerItem: React.FC = () => {
+interface GTKTimerItemProps {
+  fontSize: string;
+}
+
+const GTKTimerItem: React.FC<GTKTimerItemProps> = ({ fontSize }) => {
   const [counter, setCounter] = React.useState<number>(0);
   const { isTimerPaused, topic } = useSimpleTopic();
 
@@ -27,7 +31,9 @@ const GTKTimerItem: React.FC = () => {
     };
   }, [counter, isTimerPaused]);
 
-  return topic?.timer ? <span>{timeConvert(counter)}</span> : null;
+  return topic?.timer ? (
+    <span style={{ fontSize: fontSize }}>{timeConvert(counter)}</span>
+  ) : null;
 };
 
 function timeConvert(seconds: number) {

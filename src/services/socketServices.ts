@@ -8,71 +8,94 @@ import {
 } from "../types";
 const socket = io(process.env.REACT_APP_PUSH_SERVICE || "");
 
+enum SocketServicesEvents {
+  GTK_APPLICATION_ACTION = "gtkApplicationAction",
+  GTK_OVERLAY_ACTION = "gtkOverlayAction",
+  GTK_VOTING = "gtkVoting",
+  GTK_CHAT_DISPLAY = "gtkChatDisplay",
+  GTK_OVERLAY_EMOJIS = "gtkOverlayEmojis",
+  GTK_OVERLAY_CHAT_RANKS = "gtkOverlayChatRanks",
+  GTK_OVERLAY_VIDEO_PLAYER = "gtkOverlayVideoPlayer"
+}
+
 const socketServices = {
   subscribeApplicationActions(
     cb: (err: unknown, data: SocketServicesData) => void
   ) {
-    socket.on("gtkApplicationAction", (data: SocketServicesData) =>
-      cb(null, data)
+    socket.on(
+      SocketServicesEvents.GTK_APPLICATION_ACTION,
+      (data: SocketServicesData) => cb(null, data)
     );
   },
 
   unSubscribeApplicationActions() {
-    socket.removeAllListeners("gtkApplicationAction");
+    socket.removeAllListeners(SocketServicesEvents.GTK_APPLICATION_ACTION);
   },
 
   subscribeOverlayActions(
     cb: (err: unknown, data: SocketServicesData) => void
   ) {
-    socket.on("gtkOverlayAction", (data: SocketServicesData) => cb(null, data));
+    socket.on(
+      SocketServicesEvents.GTK_OVERLAY_ACTION,
+      (data: SocketServicesData) => cb(null, data)
+    );
   },
 
   unSubscribeOverlayActions() {
-    socket.removeAllListeners("gtkOverlayAction");
+    socket.removeAllListeners(SocketServicesEvents.GTK_OVERLAY_ACTION);
   },
 
   subscribeHostVoting(cb: (err: unknown, data: IVotes) => void) {
-    socket.on("gtkVoting", (data: IVotes) => cb(null, data));
+    socket.on(SocketServicesEvents.GTK_VOTING, (data: IVotes) =>
+      cb(null, data)
+    );
   },
 
   unSubscribeHostVoting() {
-    socket.removeAllListeners("gtkVoting");
+    socket.removeAllListeners(SocketServicesEvents.GTK_VOTING);
   },
 
   subscribeChatDisplay(cb: (err: unknown, data: ChatMessgeReturn) => void) {
-    socket.on("gtkChatDisplay", (data: ChatMessgeReturn) => cb(null, data));
+    socket.on(SocketServicesEvents.GTK_CHAT_DISPLAY, (data: ChatMessgeReturn) =>
+      cb(null, data)
+    );
   },
 
   unSubscribeChatDisplay() {
-    socket.removeAllListeners("gtkChatDisplay");
+    socket.removeAllListeners(SocketServicesEvents.GTK_CHAT_DISPLAY);
   },
 
   subscribeOverlaysEmojis(cb: (err: unknown, data: IEmojiReturn) => void) {
-    socket.on("gtkOverlayEmojis", (data: IEmojiReturn) => cb(null, data));
+    socket.on(SocketServicesEvents.GTK_OVERLAY_EMOJIS, (data: IEmojiReturn) =>
+      cb(null, data)
+    );
   },
 
   unSubscribeOverlaysEmojis() {
-    socket.removeAllListeners("gtkOverlayEmojis");
+    socket.removeAllListeners(SocketServicesEvents.GTK_OVERLAY_EMOJIS);
   },
 
   subscribeOverlaysChatRanks(cb: (err: unknown, data: ChatRanker) => void) {
-    socket.on("gtkOverlayChatRanks", (data: ChatRanker) => cb(null, data));
+    socket.on(SocketServicesEvents.GTK_OVERLAY_CHAT_RANKS, (data: ChatRanker) =>
+      cb(null, data)
+    );
   },
 
   unSubscribeOverlaysChatRanks() {
-    socket.removeAllListeners("gtkOverlayChatRanks");
+    socket.removeAllListeners(SocketServicesEvents.GTK_OVERLAY_CHAT_RANKS);
   },
 
   subscribeOverlaysVideoPlayer(
     cb: (err: unknown, data: SocketServicesData) => void
   ) {
-    socket.on("gtkOverlayVideoPlayer", (data: SocketServicesData) =>
-      cb(null, data)
+    socket.on(
+      SocketServicesEvents.GTK_OVERLAY_VIDEO_PLAYER,
+      (data: SocketServicesData) => cb(null, data)
     );
   },
 
   unSubscribeOverlaysVideoPlayer() {
-    socket.removeAllListeners("gtkOverlayVideoPlayer");
+    socket.removeAllListeners(SocketServicesEvents.GTK_OVERLAY_VIDEO_PLAYER);
   }
 };
 

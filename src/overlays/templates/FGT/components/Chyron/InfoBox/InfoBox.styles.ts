@@ -3,9 +3,9 @@ import styled from "styled-components";
 export const InfoBox = styled.div`
   box-sizing: border-box;
   width: 1580px;
-  height: 125px;
+  height: 140px;
   position: absolute;
-  top: 45px;
+  top: 60px;
   left: 0px;
   background-color: ${props => props.theme.colors.bg3};
   border-left: 0.125rem solid ${props => props.theme.colors.accent1};
@@ -51,8 +51,8 @@ export const TopicGrid = styled.div<ITopicGrid>`
   transition-property: all;
   transition-duration: 1s;
   transition-timing-function: ease-in-out;
-  font-size: 32px;
-  line-height: 36px;
+  font-size: 40px;
+  line-height: 40px;
 
   white-space: pre-wrap;
   text-transform: uppercase;

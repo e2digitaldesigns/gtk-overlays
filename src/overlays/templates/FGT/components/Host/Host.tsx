@@ -21,8 +21,6 @@ const HostFGT: React.FC = () => {
     4: showSection(SectionsFGT.Host4)
   };
 
-  // const leader = leadingSeat?.includes(String(seat));
-
   return (
     <>
       {data.map(host => {
@@ -43,7 +41,12 @@ const HostFGT: React.FC = () => {
               ))}
             </>
 
+            <HostVoteEmojis seatNum={host.seatNum} right={390} />
+
             <Styled.NameTag>
+              <Styled.VoteCountWrapper>
+                <Styled.VoteCount>{votingState[host.seatNum]}</Styled.VoteCount>
+              </Styled.VoteCountWrapper>
               <Scroller
                 timer={CONFIG.scrollTimers.hostLabels}
                 transition="fade"
@@ -53,9 +56,6 @@ const HostFGT: React.FC = () => {
                 ))}
               </Scroller>
             </Styled.NameTag>
-
-            <HostVoteEmojis seatNum={host.seatNum} />
-            <Styled.VoteCount>{votingState[host.seatNum]}</Styled.VoteCount>
           </Styled.HostWrapper>
         );
       })}

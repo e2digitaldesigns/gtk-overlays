@@ -55,7 +55,6 @@ interface IListItem {
 }
 
 const ListItemCommon = styled.li<IListItem>`
-  font-size: ${props => (props.fontSize ? props.fontSize + "px" : "inherit")};
   width: 100% !important;
   height: 100%;
   margin: 0;
@@ -76,6 +75,7 @@ const ListItemCommon = styled.li<IListItem>`
 `;
 
 export const ListItem = styled(ListItemCommon)<IListItem>`
+  font-size: ${props => (props.fontSize ? props.fontSize + "px" : "inherit")};
   animation-name: ${props =>
     props.state === TickerStatus.active
       ? props.transition === "scroll"

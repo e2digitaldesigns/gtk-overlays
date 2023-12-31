@@ -9,7 +9,6 @@ export const NewsFeed = styled.div`
   padding-left: 90px;
   background-color: ${props => props.theme.colors.bg3};
   border-left: 0.125rem solid ${props => props.theme.colors.accent1};
-  font-size: 22px;
   text-transform: uppercase;
 
   :before {

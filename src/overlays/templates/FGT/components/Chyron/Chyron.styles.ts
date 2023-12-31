@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const ChyronWrapper = styled.div`
   width: 1890px;
-  height: 215px;
+  height: 245px;
 
   position: absolute;
   bottom: 15px;

@@ -5,16 +5,18 @@ import { useSimpleTopic } from "../../hooks";
 
 interface TimerOrTimeProps {
   scrollerTimer?: number;
+  fontSize?: string;
 }
 
 const GTK_TimerOrTime: React.FC<TimerOrTimeProps> = ({
-  scrollerTimer = 35
+  scrollerTimer = 35,
+  fontSize = "1rem"
 }) => {
   const { topic } = useSimpleTopic();
   return (
     <>
       {topic?.timer ? (
-        <TimerItem />
+        <TimerItem fontSize={fontSize} />
       ) : (
         <Scroller timer={scrollerTimer}>
           <TimeItem hour={0} zone="est" />

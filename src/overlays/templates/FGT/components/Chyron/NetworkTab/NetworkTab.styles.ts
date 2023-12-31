@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const NetworkTab = styled.div`
-  height: 45px;
+  height: 60px;
   width: 745px;
   position: absolute;
   top: 0;
@@ -10,7 +10,7 @@ export const NetworkTab = styled.div`
 
   display: flex;
   align-items: center;
-  font-size: 1.75rem;
+  font-size: 2rem;
   text-transform: uppercase;
   padding: 0.25rem 0.625rem 0 0.625rem;
 `;

@@ -12,6 +12,7 @@ const NewsFeed: React.FC = () => {
     <Styled.NewsFeed>
       <Scroller
         data={data}
+        fontSize={24}
         timer={CONFIG.scrollTimers.newsFeed}
         sx={{
           title: { padding: "0 .25rem" }

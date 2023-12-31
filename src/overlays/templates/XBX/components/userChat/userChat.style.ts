@@ -4,7 +4,7 @@ export const ShowChatWrapper = styled.div`
   overflow: hidden;
   white-space: pre-wrap;
 
-  width: 870px;
+  width: 900px;
   height: 230px;
   left: 505px;
   top: 740px;

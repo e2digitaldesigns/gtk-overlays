@@ -12,14 +12,15 @@ interface HostWrapperProps {
   leader?: boolean;
 }
 
+//655
+const wrapperHeight = 595;
+
 export const HostWrapper = styled.div<HostWrapperProps>`
   position: absolute;
   width: 465px;
-  height: 500px; /* animation top: 491px */
-  height: 655px; /* animation top: 646px */
+  height: ${wrapperHeight}px; /* animation top = -9*/
   left: ${props => seatingPosition[props.seat]};
-  /* top: 335px; */
-  bottom: 245px;
+  bottom: 290px;
 
   border: 5px solid
     ${props =>
@@ -29,43 +30,44 @@ export const HostWrapper = styled.div<HostWrapperProps>`
 `;
 
 export const NameTag = styled.div`
-  width: 340px;
+  width: 435px;
   height: 50px;
   text-transform: uppercase;
-  padding: 0 0.625rem;
+  padding: 0 0.625rem 0 0;
   background-color: ${props => props.theme.colors.bg1};
-  border-left: 3px solid ${props => props.theme.colors.accent1};
+  /* border-top: 3px solid ${props => props.theme.colors.accent1}; */
 
   position: absolute;
   bottom: 10px;
   left: 10px;
   z-index: 50;
 
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-gap: 10px;
   align-items: center;
 `;
 
 export const NameTagText = styled.div`
-  font-size: 1.75rem;
+  font-size: 2rem;
+`;
+
+export const VoteCountWrapper = styled.div`
+  width: 65px;
+  height: 100%;
+  border-right: 3px solid ${props => props.theme.colors.accent1};
 `;
 
 export const VoteCount = styled.div`
   width: 65px;
-  height: 50px;
-
-  font-size: 1.75rem;
+  height: 100%;
+  font-size: 2rem;
 
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0 0.625rem;
-  background-color: ${props => props.theme.colors.bg1};
-  border-right: 3px solid ${props => props.theme.colors.accent1};
-
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  z-index: 50;
+  /* background-color: ${props => props.theme.colors.bg1}; */
 `;
 
 const fadeOutAnimation = keyframes`
@@ -73,9 +75,9 @@ const fadeOutAnimation = keyframes`
   13% { width: 12px;}
   25% { left: 456px; top: -4px; width: 3px; height: 3px;}
   38% { height: 12px;}
-  50% { left: 456px; top: 646px; width: 3px; height: 3px;}
+  50% { left: 456px; top: ${wrapperHeight - 9}px; width: 3px; height: 3px;}
   63% { width: 12px;}
-  75% { left: -4px; top: 646px; width: 3px; height: 3px;}
+  75% { left: -4px; top: ${wrapperHeight - 9}px; width: 3px; height: 3px;}
   88% { height: 12px;}
   100% { left: -4px; top: -4px; width: 3px; height: 3px;}
 `;
@@ -83,6 +85,7 @@ const fadeOutAnimation = keyframes`
 interface ScrollDotProps {
   delay: number;
 }
+
 export const ScrollDot = styled.div<ScrollDotProps>`
   width: 3px;
   height: 3px;

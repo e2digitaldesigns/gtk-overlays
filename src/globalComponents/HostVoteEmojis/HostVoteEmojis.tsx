@@ -7,12 +7,14 @@ interface IHostVoteEmojis {
   fontSize?: string;
   seatNum: number;
   speed?: number;
+  right?: number;
 }
 
 const HostVoteEmojis: React.FC<IHostVoteEmojis> = ({
   fontSize = "22px",
   seatNum,
-  speed = 4
+  speed = 4,
+  right = 20
 }) => {
   const votes = useVotingStore(state => state.votes);
 
@@ -45,6 +47,7 @@ const HostVoteEmojis: React.FC<IHostVoteEmojis> = ({
           speed={speed}
           type={vote.action}
           delay={index ? numberFromId(vote._id) * 0.3 : 0}
+          right={right}
         >
           {emojiParser(vote._id, vote.action)}
         </Styled.VoteFloat>

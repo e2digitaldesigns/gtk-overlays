@@ -5,7 +5,7 @@ import { TimerOrTime } from "../../../../../../globalComponents";
 export const Timing: React.FC = () => {
   return (
     <Styled.TimingWrapper>
-      <TimerOrTime />
+      <TimerOrTime fontSize="2rem" />
     </Styled.TimingWrapper>
   );
 };
