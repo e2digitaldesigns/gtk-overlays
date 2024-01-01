@@ -5,9 +5,9 @@ export const SponsorsWrapper = styled.div`
   border-left: 0.125rem solid ${props => props.theme.colors.accent1};
 
   width: 300px;
-  height: 125px;
+  height: 140px;
   right: 0;
-  top: 45px;
+  top: 60px;
   position: absolute;
   z-index: 1;
 
