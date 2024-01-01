@@ -4,8 +4,13 @@ import moment from "moment";
 interface IntTimeItem {
   hour: number;
   zone: string;
+  fontSize?: string;
 }
-const GTK_TimeItem: React.FC<IntTimeItem> = ({ hour, zone }) => {
+const GTK_TimeItem: React.FC<IntTimeItem> = ({
+  fontSize = "inherit",
+  hour,
+  zone
+}) => {
   const [time, setTime] = React.useState(() =>
     moment().subtract(hour, "hours").format("h:mm A")
   );
@@ -20,7 +25,7 @@ const GTK_TimeItem: React.FC<IntTimeItem> = ({ hour, zone }) => {
   }, []);
 
   return (
-    <div style={{ width: "100%" }}>
+    <div style={{ width: "100%", fontSize: fontSize }}>
       {time} {zone}
     </div>
   );

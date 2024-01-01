@@ -19,10 +19,10 @@ const GTK_TimerOrTime: React.FC<TimerOrTimeProps> = ({
         <TimerItem fontSize={fontSize} />
       ) : (
         <Scroller timer={scrollerTimer}>
-          <TimeItem hour={0} zone="est" />
-          <TimeItem hour={1} zone="ct" />
-          <TimeItem hour={2} zone="mt" />
-          <TimeItem hour={3} zone="pt" />
+          <TimeItem fontSize={fontSize} hour={0} zone="est" />
+          <TimeItem fontSize={fontSize} hour={1} zone="ct" />
+          <TimeItem fontSize={fontSize} hour={2} zone="mt" />
+          <TimeItem fontSize={fontSize} hour={3} zone="pt" />
         </Scroller>
       )}
     </>
