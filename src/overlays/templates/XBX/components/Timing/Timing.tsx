@@ -3,8 +3,14 @@ import * as Styled from "./Timing.styles";
 import { TimeItem } from "../../../../../globalComponents";
 import { Scroller } from "../../../../../globalComponents";
 import CONFIG from "../../config.json";
+import { SectionsXBX } from "../../../../../types";
+import { useParams } from "../../../../../hooks";
 
 export const TimingXBX: React.FC = () => {
+  const { showSection } = useParams();
+
+  if (!showSection(SectionsXBX.Clock)) return null;
+
   return (
     <Styled.TimingWrapper>
       <Scroller timer={CONFIG.scrollTimers.timing} transition="scroll">

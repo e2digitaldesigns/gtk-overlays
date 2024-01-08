@@ -46,6 +46,10 @@
       "param": "chyron"
     },
     {
+      "name": "Clock",
+      "param": "clock"
+    },
+    {
       "name": "Description",
       "param": "description"
     },

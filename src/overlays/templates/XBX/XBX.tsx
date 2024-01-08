@@ -9,7 +9,7 @@ import { TopicsXBX } from "./components/topics/topics";
 import HostXBX from "./components/host/hosts";
 import ChatRankingsXBX from "./components/ChatRankings/ChatRakings";
 import VideoXBX from "./components/video/video";
-// import { TimingXBX } from "./components/Timing/Timing";
+import { TimingXBX } from "./components/Timing/Timing";
 import { ShowChatXBX } from "./components/userChat/userChat";
 
 const OverlayXBX: React.FC = () => {
@@ -18,7 +18,7 @@ const OverlayXBX: React.FC = () => {
       <ThemeProvider theme={theme}>
         <Styled.GlobalStyle />
         <Styled.Container>
-          {/* <TimingXBX /> */}
+          <TimingXBX />
 
           <HostXBX />
 

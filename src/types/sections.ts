@@ -67,6 +67,7 @@ export enum SectionsXBX {
   ChatMessage = "chat_message",
   ChatRank = "chat_rank",
   Chyron = "chyron",
+  Clock = "clock",
   Description = "description",
 
   Host_1_Up = "host_1_up",
