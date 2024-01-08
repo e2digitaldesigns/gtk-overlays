@@ -6,11 +6,12 @@ export const trueFalseVoterParser = (
   if (!string) return "";
 
   let replacedString = string.replace(
-    /{{true}}/g,
+    /{{(?:true|yes|2)}}/g,
     trueCount ? String(trueCount) : "0"
   );
+
   replacedString = replacedString.replace(
-    /{{false}}/g,
+    /{{(?:false|no|1)}}/g,
     falseCount ? String(falseCount) : "0"
   );
 
