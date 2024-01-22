@@ -1,18 +1,20 @@
-import {
-  IVotes,
-  IVoteStreaks,
-  IVotingState,
-  TopicVotesParsed
-} from "../../types";
+import { IVotes, IVoteStreaks, IVotingState } from "../../types";
 
 import { useTopicsStore, useVotingStore } from "../../dataStores";
+
+export type TrueVotesParsed = {
+  trueCount: number;
+  trueCountPercentage: string;
+  falseCount: number;
+  falseCountPercentage: string;
+};
 
 interface IUseVotingHook {
   votes: IVotes[];
   votingState: IVotingState;
   votingStreak: IVoteStreaks;
   leadingSeat: string[];
-  trueOrFalseVotes: Partial<TopicVotesParsed>;
+  trueOrFalseVotes: Partial<TrueVotesParsed>;
 }
 
 const useVotingHook = (): IUseVotingHook => {
@@ -26,13 +28,16 @@ const useVotingHook = (): IUseVotingHook => {
     const topicVotes = votingDataStore.topicVotingState[currentTopicId];
     if (!topicVotes) return;
 
+    const totalVotes = Object.values(topicVotes).length;
+    const trueVotes = Object.values(topicVotes).filter(value => value).length;
+    const falseVotes = Object.values(topicVotes).filter(value => !value).length;
+
     return {
-      trueCount: topicVotes
-        ? Object.values(topicVotes).filter(value => value).length
-        : 0,
-      falseCount: topicVotes
-        ? Object.values(topicVotes)?.filter(value => !value).length
-        : 0
+      trueCount: trueVotes,
+      trueCountPercentage: ((trueVotes / totalVotes) * 100).toFixed(2),
+
+      falseCount: falseVotes,
+      falseCountPercentage: ((falseVotes / totalVotes) * 100).toFixed(2)
     };
   };
 

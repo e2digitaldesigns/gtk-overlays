@@ -9,6 +9,7 @@ import OverlayCHL from "./CHL/CHL";
 import OverlayXBX from "./XBX/XBX";
 import OverlayFGT from "./FGT/FGT";
 import { useGlobalVotingInit, useGlobalTopicsInit } from "../../hooks";
+import OverlayNS5 from "./NEWS5/NEWS5";
 
 interface OverlayTemplateParserProps {}
 
@@ -20,7 +21,8 @@ const templateMap: { [key: string]: JSX.Element } = {
   "642b676a3d3324192e538f6b": <OverlaySAS />,
   "6487a695656d253edcdca8db": <OverlayCHL />,
   "653679760a308f6ed2f75217": <OverlayXBX />,
-  "655ffc71a7fd7ac529acd46e": <OverlayFGT />
+  "655ffc71a7fd7ac529acd46e": <OverlayFGT />,
+  "65a90a1a02aae02cdba1910d": <OverlayNS5 />
 };
 
 const OverlayTemplateParser: React.FC<OverlayTemplateParserProps> = () => {

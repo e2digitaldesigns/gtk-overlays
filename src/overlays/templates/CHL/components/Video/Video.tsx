@@ -15,8 +15,8 @@ const VideoCHL: React.FC = () => {
 
   if (!showSection(SectionsCHL.Video)) return null;
 
-  const handleVideoCallBack = (isVideoVisible: boolean) => {
-    setIsScrollBgVisible(isVideoVisible);
+  const handleVideoCallBack = (data: any) => {
+    setIsScrollBgVisible(data.isFullscreen);
   };
 
   return (

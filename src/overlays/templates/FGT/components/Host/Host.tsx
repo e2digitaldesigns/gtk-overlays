@@ -4,7 +4,7 @@ import { HostVoteEmojis, Scroller } from "../../../../../globalComponents";
 import { useParams, useVoting } from "../../../../../hooks";
 import { useDataContext } from "../../../../../context";
 import { SectionsFGT } from "../../../../../types";
-import CONFIG from "../../config.json";
+import CONFIG from "../../../FGT/config.json";
 
 const scrollDotArray = new Array(6).fill(0);
 

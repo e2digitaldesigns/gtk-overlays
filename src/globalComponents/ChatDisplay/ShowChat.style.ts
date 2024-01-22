@@ -92,6 +92,7 @@ export const MessageName = styled.span<IMessageNameProps>`
   color: ${props => props.color};
   font-size: ${props => props.fontSize};
   font-weight: ${props => props.weight};
+  line-height: ${props => props.fontSize};
 `;
 
 interface IMessageTextProps {
@@ -105,6 +106,7 @@ export const MessageText = styled.span<IMessageTextProps>`
   font-size: ${props => props.fontSize};
   font-weight: ${props => props.weight};
   word-break: break-word;
+  line-height: ${props => props.fontSize};
 
   img {
     height: 1.5rem;

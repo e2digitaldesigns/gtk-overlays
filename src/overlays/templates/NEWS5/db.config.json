@@ -1,0 +1,57 @@
+{
+  "_id": {
+    "$oid": "65a90a1a02aae02cdba1910d"
+  },
+  "name": "CNN App",
+  "urlKey": "CNNA",
+  "maxHosts": 4,
+  "thumbnail": "https://mg-show-assets.s3.us-east-1.amazonaws.com/images/template-images/fgt.jpg",
+  "tickerConfig": {
+    "hasTitle": false
+  },
+  "topicConfig": {
+    "allowNesting": false,
+    "hasImage": false,
+    "hasVideo": true
+  },
+  "hasSponsor": true,
+  "images": {
+    "logo": {
+      "maxAmount": 0,
+      "height": 0,
+      "width": 0
+    },
+    "sponsors": {
+      "maxAmount": 99,
+      "height": 210,
+      "width": 610
+    },
+    "topic": {
+      "maxAmount": 0,
+      "height": 0,
+      "width": 0
+    }
+  },
+  "linkArray": [
+    {
+      "name": "Chat Message",
+      "param": "chat_message"
+    },
+    {
+      "name": "Description",
+      "param": "desc"
+    },
+    {
+      "name": "News Feed",
+      "param": "news_feed"
+    },
+    {
+      "name": "Up Next Topics",
+      "param": "up_next"
+    },
+    {
+      "name": "Video Player",
+      "param": "video"
+    }
+  ]
+}

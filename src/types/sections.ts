@@ -92,10 +92,16 @@ export enum SectionsFGT {
   Video = "video"
 }
 
+export enum SectionsCNN2 {
+  ChatMessage = "chat_message",
+  Video = "video"
+}
+
 export type OverlaySections =
   | SectionsBNN
   | SectionsCHL
   | SectionsCNN
+  | SectionsCNN2
   | SectionsPTI
   | SectionsSAS
   | SectionsXBX

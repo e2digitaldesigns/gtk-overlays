@@ -17,3 +17,19 @@ export const trueFalseVoterParser = (
 
   return replacedString;
 };
+
+export const hasTrueFalseVoting = (string: string | undefined): boolean => {
+  if (!string) return false;
+
+  return (
+    /{{(?:true|yes|2)}}/g.test(string) && /{{(?:false|no|1)}}/g.test(string)
+  );
+};
+
+export const trueFalseVoterLabels = (string: string | undefined) => {
+  return {
+    no: string?.match(/{{(?:false|no|1)}}/g)?.[0].replace(/{{|}}/g, "") || "no",
+    yes:
+      string?.match(/{{(?:true|yes|2)}}/g)?.[0].replace(/{{|}}/g, "") || "yes"
+  };
+};

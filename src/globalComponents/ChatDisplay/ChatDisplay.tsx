@@ -34,6 +34,7 @@ interface ShowChatProps {
   imageShape?: "circle" | "square";
   imageSize?: string;
   imageBorder?: string;
+  imageShow?: boolean;
 
   font?: string;
 
@@ -59,6 +60,7 @@ const ChatDisplay: React.FC<ShowChatProps> = ({
   imageShape = "circle",
   imageSize = "3rem",
   imageBorder = "none",
+  imageShow = true,
 
   font = `"Roboto", sans-serif`,
 
@@ -176,13 +178,15 @@ const ChatDisplay: React.FC<ShowChatProps> = ({
             bgColor={bgColor}
             borderBottom={borderBottom}
           >
-            <Styled.ShowChatImage
-              border={imageBorder}
-              shape={imageShape}
-              size={imageSize}
-            >
-              {message?.url && <img src={message.url} alt="users" />}
-            </Styled.ShowChatImage>
+            {imageShow && !messageInline && (
+              <Styled.ShowChatImage
+                border={imageBorder}
+                shape={imageShape}
+                size={imageSize}
+              >
+                {message?.url && <img src={message.url} alt="users" />}
+              </Styled.ShowChatImage>
+            )}
 
             <Styled.MessageWrapper font={font} inline={messageInline}>
               <Styled.MessageName

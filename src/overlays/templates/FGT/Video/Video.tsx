@@ -15,8 +15,8 @@ export const VideoFGT: React.FC = () => {
 
   if (!showSection(SectionsFGT.Video)) return null;
 
-  const handleVideoCallBack = (isVideoVisible: boolean) => {
-    setIsScrollBgVisible(isVideoVisible);
+  const handleVideoCallBack = (data: any) => {
+    setIsScrollBgVisible(data.isFullscreen);
   };
 
   return (

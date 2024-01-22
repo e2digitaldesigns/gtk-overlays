@@ -3,31 +3,19 @@ import * as Styled from "./VideoPlayer.styles";
 import socketServices from "../../services/socketServices";
 import { RequestType, SocketServicesData } from "../../types";
 import { useSimpleTopic } from "../../hooks";
-
-type Dimensions = {
-  top: string;
-  left: string;
-  width: string;
-  height: string;
-};
-
-interface IntVideoProps {
-  videoBorder?: string;
-  videoShadow?: boolean;
-
-  dimensions: Dimensions;
-  bgColor?: string;
-
-  allowSmallScreen?: boolean;
-  smallScreenDimensions?: Dimensions;
-
-  allowFullScreen?: boolean;
-  fullScreenDimensions?: Dimensions;
-
-  callBack?: (isVideoVisible: boolean) => void;
-}
+import {
+  CallBackData,
+  Dimensions,
+  IntVideoProps,
+  VideoAction
+} from "./VideoPlayer.types";
+import {
+  decreaseVolumeWithDelay,
+  increaseVolumeWithDelay
+} from "./Utils/Volume";
 
 const GTK_VideoComponent: React.FC<IntVideoProps> = ({
+  defaultSize = "normal",
   dimensions,
   bgColor = "black",
   allowSmallScreen = false,
@@ -37,7 +25,8 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
 
   videoBorder = "none",
   videoShadow = false,
-  callBack
+  callBack,
+  hideVideoOnChange = false
 }) => {
   const { topic, topicId } = useSimpleTopic();
   const videoUrl = topic?.video;
@@ -46,76 +35,52 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
   const videoPlayerRef = React.useRef<HTMLVideoElement>(null);
   const isMutedRef = React.useRef(false);
   const mutedVolumeRef = React.useRef(0);
-  const showVideoRef = React.useRef(true);
+
   const [isFullscreen, setIsFullscreen] = React.useState(false);
 
+  const [videoSize, setVideoSize] = React.useState<string>(defaultSize);
+  const [showVideo, setShowVideo] = React.useState<boolean>(true);
+  const [isVideoPlaying, setIsVideoPlaying] = React.useState<boolean>(false);
+
   React.useEffect(() => {
-    callBack && callBack(false);
-    if (!videoPlayerRef.current || !videoPlayerWrapperRef.current) return;
-    videoPlayerRef.current?.pause();
-    videoPlayerWrapperRef.current.style.opacity = "0";
-    videoPlayerRef.current.style.opacity = "0";
-    videoPlayerRef.current.currentTime = 0;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [topicId]);
+    const data: CallBackData = {
+      videoSize,
+      isFullscreen: videoSize === "fullscreen",
+      isVideoVisible: showVideo
+    };
+
+    callBack && callBack(data);
+  }, [videoSize, showVideo, callBack, topicId]);
 
   React.useEffect(
     () => {
-      if (videoPlayerRef.current && videoUrl) {
+      if (videoPlayerWrapperRef.current && videoPlayerRef.current && videoUrl) {
         videoPlayerRef.current.src = videoUrl;
         videoPlayerRef.current.load();
+
+        if (!hideVideoOnChange) {
+          videoPlayerRef.current.currentTime = 2;
+          videoPlayerRef.current.style.opacity = "1";
+          videoPlayerWrapperRef.current.style.opacity = "1";
+          setShowVideo(true);
+          if (isVideoPlaying) {
+            videoPlayerRef.current.play();
+          }
+        } else {
+          setShowVideo(false);
+          setIsVideoPlaying(false);
+          videoPlayerRef.current.style.opacity = "0";
+          videoPlayerWrapperRef.current.style.opacity = "0";
+        }
+      } else {
+        setShowVideo(false);
+        setIsVideoPlaying(false);
       }
     },
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [topicId, videoUrl]
   );
-
-  function increaseVolumeWithDelay(
-    vidPlayerRef: React.RefObject<HTMLVideoElement>,
-    targetVolume: number
-  ) {
-    if (!vidPlayerRef.current) return;
-
-    let currentVolume = vidPlayerRef.current.volume;
-    const increment = 0.1;
-    const delay = 100;
-
-    function increaseVolume() {
-      if (currentVolume < targetVolume) {
-        currentVolume += increment;
-        if (vidPlayerRef.current) vidPlayerRef.current.volume = currentVolume;
-        setTimeout(increaseVolume, delay);
-      }
-    }
-
-    increaseVolume();
-  }
-
-  function decreaseVolumeWithDelay(
-    vidPlayerRef: React.RefObject<HTMLVideoElement>
-  ) {
-    if (!vidPlayerRef.current) return;
-    let currentVolume = vidPlayerRef.current.volume;
-    const targetVolume = 0;
-    const decrement = 0.1;
-    const delay = 50;
-
-    function decreaseVolume() {
-      if (currentVolume > targetVolume) {
-        currentVolume -= decrement;
-        if (currentVolume < 0) {
-          currentVolume = 0;
-        }
-        if (vidPlayerRef.current) {
-          vidPlayerRef.current.volume = currentVolume > 0 ? currentVolume : 0;
-        }
-        setTimeout(decreaseVolume, delay);
-      }
-    }
-
-    decreaseVolume();
-  }
 
   React.useEffect(() => {
     socketServices.subscribeOverlaysVideoPlayer(
@@ -127,26 +92,29 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
         if (!videoPlayerRef?.current || !videoPlayerWrapperRef.current) return;
 
         switch (data.action) {
-          case "video-play":
-            callBack && callBack(true);
+          case VideoAction.PLAY:
             videoPlayerWrapperRef.current.style.opacity = "1";
             videoPlayerRef.current.style.opacity = "1";
-            videoPlayerRef.current?.play();
+            videoPlayerRef.current?.play().then(() => {
+              setShowVideo(true);
+              setIsVideoPlaying(true);
+            });
             break;
 
-          case "video-pause":
-            videoPlayerRef.current?.pause();
+          case VideoAction.PAUSE:
+            videoPlayerRef.current.pause();
+            setIsVideoPlaying(false);
             break;
 
-          case "video-stop":
-            callBack && callBack(false);
+          case VideoAction.STOP:
+            setShowVideo(false);
             videoPlayerRef.current?.pause();
             videoPlayerWrapperRef.current.style.opacity = "0";
             videoPlayerRef.current.style.opacity = "0";
             videoPlayerRef.current.currentTime = 0;
             break;
 
-          case "video-volume-down":
+          case VideoAction.VOLUME_DOWN:
             if (videoPlayerRef.current?.volume !== undefined) {
               let newVolumeDown = videoPlayerRef.current.volume - 0.1;
               isMutedRef.current = false;
@@ -155,7 +123,7 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
             }
             break;
 
-          case "video-volume-up":
+          case VideoAction.VOLUME_UP:
             if (videoPlayerRef.current?.volume !== undefined) {
               let newVolumeUp = videoPlayerRef.current.volume + 0.1;
               videoPlayerRef.current.volume = newVolumeUp > 1 ? 1 : newVolumeUp;
@@ -163,7 +131,7 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
             }
             break;
 
-          case "video-volume-mute":
+          case VideoAction.VOLUME_MUTE:
             if (isMutedRef.current === false) {
               isMutedRef.current = true;
               mutedVolumeRef.current = videoPlayerRef.current.volume;
@@ -176,30 +144,33 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
             }
             break;
 
-          case "video-seek-forward":
+          case VideoAction.SEEK_FORWARD:
             if (videoPlayerRef.current?.currentTime !== undefined) {
               videoPlayerRef.current.currentTime += 10;
             }
             break;
 
-          case "video-seek-backward":
+          case VideoAction.SEEK_BACKWARD:
             if (videoPlayerRef.current?.currentTime !== undefined) {
               videoPlayerRef.current.currentTime -= 10;
             }
             break;
 
-          case "video-show-hide":
-            showVideoRef.current = !showVideoRef.current;
-            const newOpacity = showVideoRef.current ? "1" : "0";
+          case VideoAction.VIEW_TOGGLE:
+            const showVideoNow = !showVideo;
+
+            const newOpacity = showVideoNow ? "1" : "0";
             videoPlayerRef.current.style.opacity = newOpacity;
             videoPlayerWrapperRef.current.style.opacity = newOpacity;
+            setShowVideo(showVideoNow);
 
-            callBack && callBack(showVideoRef.current);
             break;
 
-          case "video-size-small":
+          case VideoAction.SIZE_SMALL:
             if (!allowSmallScreen || !smallScreenDimensions) return;
             setIsFullscreen(false);
+            setVideoSize("small");
+
             videoPlayerWrapperRef.current.style.top = smallScreenDimensions.top;
             videoPlayerWrapperRef.current.style.left =
               smallScreenDimensions.left;
@@ -209,17 +180,21 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
               smallScreenDimensions.height;
             break;
 
-          case "video-size-normal":
+          case VideoAction.SIZE_NORMAL:
             setIsFullscreen(false);
+            setVideoSize("normal");
+
             videoPlayerWrapperRef.current.style.top = dimensions.top;
             videoPlayerWrapperRef.current.style.left = dimensions.left;
             videoPlayerWrapperRef.current.style.width = dimensions.width;
             videoPlayerWrapperRef.current.style.height = dimensions.height;
             break;
 
-          case "video-size-fullscreen":
-            setIsFullscreen(true);
+          case VideoAction.SIZE_FULLSCREEN:
             if (!allowFullScreen || !fullScreenDimensions) return;
+            setIsFullscreen(true);
+            setVideoSize("fullscreen");
+
             videoPlayerWrapperRef.current.style.top = fullScreenDimensions.top;
             videoPlayerWrapperRef.current.style.left =
               fullScreenDimensions.left;
@@ -242,14 +217,21 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const starterDimensions: Dimensions =
+    videoSize === "small" && smallScreenDimensions
+      ? smallScreenDimensions
+      : videoSize === "fullscreen" && fullScreenDimensions
+      ? fullScreenDimensions
+      : dimensions;
+
   return videoUrl ? (
     <Styled.VideoPlayerWrapper
       ref={videoPlayerWrapperRef}
       bgColor={bgColor}
-      top={dimensions.top}
-      left={dimensions.left}
-      width={dimensions.width}
-      height={dimensions.height}
+      top={starterDimensions.top}
+      left={starterDimensions.left}
+      width={starterDimensions.width}
+      height={starterDimensions.height}
       border={videoBorder}
       shadow={videoShadow}
       isFullscreen={isFullscreen}
