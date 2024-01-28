@@ -3,7 +3,6 @@ import * as Styled from "./ShowChatCNN.style";
 import { ChatDisplay } from "../../../../../globalComponents";
 import { SectionsCNN2 } from "../../../../../types";
 
-import { theme } from "../../Theme/GlobalTheme";
 import { useParams } from "../../../../../hooks";
 
 export const ShowChatCNN: React.FC = () => {

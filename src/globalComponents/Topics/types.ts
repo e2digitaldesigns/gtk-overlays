@@ -6,6 +6,11 @@ export enum TopicStates {
   Timer = "timer"
 }
 
+export interface IntTopicVotingOptions {
+  label: string;
+  value: boolean;
+}
+
 export interface IntTopic {
   _id: string;
   order: number;
@@ -18,6 +23,7 @@ export interface IntTopic {
   img: string;
   video: string;
   chat: string;
+  votingOptions: IntTopicVotingOptions[];
 }
 
 export interface IntCss {

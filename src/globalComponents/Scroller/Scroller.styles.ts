@@ -52,6 +52,7 @@ interface IListItem {
   fontSize?: number;
   isChildren?: boolean;
   transition?: string;
+  transitionTime: string;
 }
 
 const ListItemCommon = styled.li<IListItem>`
@@ -68,7 +69,7 @@ const ListItemCommon = styled.li<IListItem>`
   display: ${props => (props.state === TickerStatus.hidden ? "none" : "grid")};
   grid-template-columns: ${props => (props.isChildren ? "1fr" : "auto 1fr")};
 
-  animation-duration: 1s;
+  animation-duration: ${props => props.transitionTime};
   animation-timing-function: ease-in-out;
   animation-fill-mode: forwards;
   opacity: 1;

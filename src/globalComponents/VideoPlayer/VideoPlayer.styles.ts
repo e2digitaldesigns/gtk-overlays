@@ -10,6 +10,7 @@ interface VideoPlayerProps {
   border: string;
   shadow: boolean;
   isFullscreen: boolean;
+  transitionOnMove: boolean;
 }
 
 export const VideoPlayerWrapper = styled.div<VideoPlayerProps>`
@@ -22,9 +23,14 @@ export const VideoPlayerWrapper = styled.div<VideoPlayerProps>`
   width: ${props => props.width};
   height: ${props => props.height};
   background-color: ${props => props.bgColor};
-  transition: opacity, top, left, width, height, 0.5s ease-in-out;
+  /* transition: opacity, top, left, width, height, 0.5s ease-in-out; */
   z-index: 9999;
   opacity: 0;
+
+  transition: ${props =>
+    props.transitionOnMove
+      ? "opacity, top, left, width, height, 0.25s ease-in-out"
+      : " opacity 0.25s ease-in-out "};
 
   box-shadow: ${props =>
     props.shadow ? "0px 0px 20px 0px rgba(0,0,0,0.75)" : "none"};

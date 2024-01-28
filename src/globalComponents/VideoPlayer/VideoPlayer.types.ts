@@ -5,12 +5,6 @@ export type Dimensions = {
   height: string;
 };
 
-export type CallBackData = {
-  isFullscreen: boolean;
-  videoSize: string;
-  isVideoVisible: boolean;
-};
-
 export interface IntVideoProps {
   videoBorder?: string;
   videoShadow?: boolean;
@@ -25,8 +19,8 @@ export interface IntVideoProps {
   allowFullScreen?: boolean;
   fullScreenDimensions?: Dimensions;
 
-  callBack?: (videoData: CallBackData) => void;
   hideVideoOnChange?: boolean;
+  transitionOnMove?: boolean;
 }
 
 export enum VideoAction {

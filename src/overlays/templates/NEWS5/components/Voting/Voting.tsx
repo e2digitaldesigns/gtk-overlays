@@ -10,7 +10,10 @@ export const VotingCNN: React.FC = () => {
   const { topic: activeTopic } = useSimpleTopic();
   const { trueOrFalseVotes } = useVoting();
 
-  const hasVoting = hasTrueFalseVoting(activeTopic?.desc);
+  console.log("activeTopic", activeTopic);
+
+  const hasLabelVoting = activeTopic?.votingOptions?.length === 2;
+  const hasVoting = hasLabelVoting || hasTrueFalseVoting(activeTopic?.desc);
 
   const falseCount = trueOrFalseVotes?.falseCount || 0;
   const trueCount = trueOrFalseVotes?.trueCount || 0;
@@ -19,14 +22,20 @@ export const VotingCNN: React.FC = () => {
 
   return (
     <Styled.VotingWrapper isVisible={hasVoting}>
-      <Styled.LabelTabLeft>{labels.no}</Styled.LabelTabLeft>
-      <Styled.LabelTabRight>{labels.yes}</Styled.LabelTabRight>
+      <Styled.LabelTabLeft>
+        {hasLabelVoting ? activeTopic.votingOptions[0].label : labels.yes}
+      </Styled.LabelTabLeft>
+
       <Styled.VotingContentLeft isWinning={falseCount > trueCount}>
-        {falseCount}
+        {trueCount}
       </Styled.VotingContentLeft>
 
+      <Styled.LabelTabRight>
+        {hasLabelVoting ? activeTopic.votingOptions[1].label : labels.no}
+      </Styled.LabelTabRight>
+
       <Styled.VotingContentRight isWinning={falseCount < trueCount}>
-        {trueCount}
+        {falseCount}
       </Styled.VotingContentRight>
     </Styled.VotingWrapper>
   );

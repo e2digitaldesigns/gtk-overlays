@@ -10,7 +10,8 @@
     "parentId": "",
     "img": "80207845-a10a-4f61-8f50-f9689ec574e2.jpg",
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "d6fa9e56-9ed7-47bc-a995-bebaf91533f6",
@@ -23,7 +24,8 @@
     "parentId": "30dcde66-8784-46d6-9458-d33a9fd6a3f4",
     "img": "abcdddddd.jpg",
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "b151ae05-0842-4424-b1cd-7c37a5f7defd",
@@ -36,7 +38,8 @@
     "parentId": "",
     "img": "",
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "5b7c365c-7097-4453-938d-b2de1d9fd405",
@@ -49,7 +52,8 @@
     "parentId": "",
     "img": "",
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "dfd3143d-bd1a-4afa-a0c6-20f179546556",
@@ -62,7 +66,8 @@
     "parentId": "5b7c365c-7097-4453-938d-b2de1d9fd405",
     "img": "",
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "8505c00d-3d2f-45ee-b44f-85c9bdfda819",
@@ -75,7 +80,8 @@
     "parentId": "5b7c365c-7097-4453-938d-b2de1d9fd405",
     "img": "",
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "262e376f-edf3-4818-9b36-7ff523356583",
@@ -88,7 +94,8 @@
     "parentId": "5b7c365c-7097-4453-938d-b2de1d9fd405",
     "img": "",
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "05a227c5-4bc0-49c7-a0ec-05fa6ee5ce74",
@@ -101,7 +108,8 @@
     "parentId": "5b7c365c-7097-4453-938d-b2de1d9fd405",
     "img": "",
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "d843244a-c268-472d-bf43-0c1e294562ce",
@@ -114,7 +122,8 @@
     "parentId": "",
     "img": "",
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9",
@@ -127,7 +136,8 @@
     "parentId": "",
     "img": "",
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9A",
@@ -140,7 +150,8 @@
     "parentId": "",
     "img": "",
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9B",
@@ -153,7 +164,8 @@
     "parentId": "",
     "img": "",
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9C",
@@ -166,7 +178,8 @@
     "parentId": "",
     "img": "",
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9D",
@@ -179,7 +192,8 @@
     "parentId": "",
     "img": "",
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9E",
@@ -192,7 +206,8 @@
     "parentId": "",
     "img": "",
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9F",
@@ -205,7 +220,8 @@
     "parentId": "",
     "img": "",
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9G",
@@ -218,7 +234,8 @@
     "parentId": "",
     "img": "",
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9H",
@@ -231,7 +248,8 @@
     "parentId": "",
     "img": "",
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9I",
@@ -244,7 +262,8 @@
     "parentId": "",
     "img": "",
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "3661506e-287a-4dfe-91a0-f43aaa0bd9c9J",
@@ -257,6 +276,7 @@
     "parentId": "",
     "img": "",
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   }
 ]

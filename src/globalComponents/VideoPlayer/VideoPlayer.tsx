@@ -3,16 +3,12 @@ import * as Styled from "./VideoPlayer.styles";
 import socketServices from "../../services/socketServices";
 import { RequestType, SocketServicesData } from "../../types";
 import { useSimpleTopic } from "../../hooks";
-import {
-  CallBackData,
-  Dimensions,
-  IntVideoProps,
-  VideoAction
-} from "./VideoPlayer.types";
+import { Dimensions, IntVideoProps, VideoAction } from "./VideoPlayer.types";
 import {
   decreaseVolumeWithDelay,
   increaseVolumeWithDelay
 } from "./Utils/Volume";
+import useVideoPlayerDataStore from "../../dataStores/useVideoPlayerDataStore/useVideoPlayerDataStore";
 
 const GTK_VideoComponent: React.FC<IntVideoProps> = ({
   defaultSize = "normal",
@@ -25,8 +21,8 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
 
   videoBorder = "none",
   videoShadow = false,
-  callBack,
-  hideVideoOnChange = false
+  hideVideoOnChange = false,
+  transitionOnMove = true
 }) => {
   const { topic, topicId } = useSimpleTopic();
   const videoUrl = topic?.video;
@@ -36,21 +32,34 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
   const isMutedRef = React.useRef(false);
   const mutedVolumeRef = React.useRef(0);
 
-  const [isFullscreen, setIsFullscreen] = React.useState(false);
+  const { setVideoPlayerProperty } = useVideoPlayerDataStore(state => state);
 
   const [videoSize, setVideoSize] = React.useState<string>(defaultSize);
-  const [showVideo, setShowVideo] = React.useState<boolean>(true);
+  const [showVideo, setShowVideo] = React.useState<boolean>(false);
   const [isVideoPlaying, setIsVideoPlaying] = React.useState<boolean>(false);
 
   React.useEffect(() => {
-    const data: CallBackData = {
-      videoSize,
-      isFullscreen: videoSize === "fullscreen",
-      isVideoVisible: showVideo
-    };
+    setVideoPlayerProperty("topicId", topicId);
+    setVideoPlayerProperty("videoUrl", videoUrl);
+    setVideoPlayerProperty("videoSize", videoSize);
+    setVideoPlayerProperty("isVideoPlaying", isVideoPlaying);
+    setVideoPlayerProperty("isVideoViewable", showVideo);
+  }, [
+    topicId,
+    videoUrl,
+    videoSize,
+    isVideoPlaying,
+    showVideo,
 
-    callBack && callBack(data);
-  }, [videoSize, showVideo, callBack, topicId]);
+    setVideoPlayerProperty
+  ]);
+
+  React.useEffect(() => {
+    if (!videoPlayerRef?.current || !videoPlayerWrapperRef.current) return;
+    const opacity = showVideo ? "1" : "0";
+    videoPlayerRef.current.style.opacity = opacity;
+    videoPlayerWrapperRef.current.style.opacity = opacity;
+  }, [showVideo]);
 
   React.useEffect(
     () => {
@@ -60,8 +69,6 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
 
         if (!hideVideoOnChange) {
           videoPlayerRef.current.currentTime = 2;
-          videoPlayerRef.current.style.opacity = "1";
-          videoPlayerWrapperRef.current.style.opacity = "1";
           setShowVideo(true);
           if (isVideoPlaying) {
             videoPlayerRef.current.play();
@@ -69,8 +76,6 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
         } else {
           setShowVideo(false);
           setIsVideoPlaying(false);
-          videoPlayerRef.current.style.opacity = "0";
-          videoPlayerWrapperRef.current.style.opacity = "0";
         }
       } else {
         setShowVideo(false);
@@ -93,8 +98,6 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
 
         switch (data.action) {
           case VideoAction.PLAY:
-            videoPlayerWrapperRef.current.style.opacity = "1";
-            videoPlayerRef.current.style.opacity = "1";
             videoPlayerRef.current?.play().then(() => {
               setShowVideo(true);
               setIsVideoPlaying(true);
@@ -107,11 +110,10 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
             break;
 
           case VideoAction.STOP:
-            setShowVideo(false);
             videoPlayerRef.current?.pause();
-            videoPlayerWrapperRef.current.style.opacity = "0";
-            videoPlayerRef.current.style.opacity = "0";
             videoPlayerRef.current.currentTime = 0;
+            setShowVideo(false);
+            setIsVideoPlaying(false);
             break;
 
           case VideoAction.VOLUME_DOWN:
@@ -120,6 +122,11 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
               isMutedRef.current = false;
               videoPlayerRef.current.volume =
                 newVolumeDown < 0 ? 0 : newVolumeDown;
+
+              setVideoPlayerProperty(
+                "videoVolume",
+                String(videoPlayerRef.current.volume)
+              );
             }
             break;
 
@@ -128,6 +135,10 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
               let newVolumeUp = videoPlayerRef.current.volume + 0.1;
               videoPlayerRef.current.volume = newVolumeUp > 1 ? 1 : newVolumeUp;
               isMutedRef.current = false;
+              setVideoPlayerProperty(
+                "videoVolume",
+                String(videoPlayerRef.current.volume)
+              );
             }
             break;
 
@@ -142,6 +153,8 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
               increaseVolumeWithDelay(videoPlayerRef, mutedVolumeRef.current);
               mutedVolumeRef.current = 0;
             }
+
+            setVideoPlayerProperty("isVideoMuted", isMutedRef.current);
             break;
 
           case VideoAction.SEEK_FORWARD:
@@ -157,18 +170,12 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
             break;
 
           case VideoAction.VIEW_TOGGLE:
-            const showVideoNow = !showVideo;
-
-            const newOpacity = showVideoNow ? "1" : "0";
-            videoPlayerRef.current.style.opacity = newOpacity;
-            videoPlayerWrapperRef.current.style.opacity = newOpacity;
-            setShowVideo(showVideoNow);
+            setShowVideo(prev => !prev);
 
             break;
 
           case VideoAction.SIZE_SMALL:
             if (!allowSmallScreen || !smallScreenDimensions) return;
-            setIsFullscreen(false);
             setVideoSize("small");
 
             videoPlayerWrapperRef.current.style.top = smallScreenDimensions.top;
@@ -181,7 +188,6 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
             break;
 
           case VideoAction.SIZE_NORMAL:
-            setIsFullscreen(false);
             setVideoSize("normal");
 
             videoPlayerWrapperRef.current.style.top = dimensions.top;
@@ -192,7 +198,6 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
 
           case VideoAction.SIZE_FULLSCREEN:
             if (!allowFullScreen || !fullScreenDimensions) return;
-            setIsFullscreen(true);
             setVideoSize("fullscreen");
 
             videoPlayerWrapperRef.current.style.top = fullScreenDimensions.top;
@@ -217,24 +222,24 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const starterDimensions: Dimensions =
-    videoSize === "small" && smallScreenDimensions
-      ? smallScreenDimensions
-      : videoSize === "fullscreen" && fullScreenDimensions
-      ? fullScreenDimensions
-      : dimensions;
+  const theVideoSize: { [key: string]: Dimensions } = {
+    small: smallScreenDimensions || dimensions,
+    normal: dimensions,
+    fullscreen: fullScreenDimensions || dimensions
+  };
 
   return videoUrl ? (
     <Styled.VideoPlayerWrapper
       ref={videoPlayerWrapperRef}
       bgColor={bgColor}
-      top={starterDimensions.top}
-      left={starterDimensions.left}
-      width={starterDimensions.width}
-      height={starterDimensions.height}
+      top={theVideoSize[videoSize].top}
+      left={theVideoSize[videoSize].left}
+      width={theVideoSize[videoSize].width}
+      height={theVideoSize[videoSize].height}
       border={videoBorder}
       shadow={videoShadow}
-      isFullscreen={isFullscreen}
+      isFullscreen={videoSize === "fullscreen"}
+      transitionOnMove={transitionOnMove}
     >
       <Styled.VideoPlayer ref={videoPlayerRef} />
     </Styled.VideoPlayerWrapper>

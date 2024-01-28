@@ -17,19 +17,19 @@
   "hasSponsor": true,
   "images": {
     "logo": {
-      "maxAmount": 0,
-      "height": 0,
-      "width": 0
+      "maxAmount": 1,
+      "height": 240,
+      "width": 360
     },
     "sponsors": {
       "maxAmount": 99,
       "height": 210,
-      "width": 610
+      "width": 110
     },
     "topic": {
-      "maxAmount": 0,
-      "height": 0,
-      "width": 0
+      "maxAmount": 1,
+      "height": 240,
+      "width": 360
     }
   },
   "linkArray": [

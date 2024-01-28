@@ -6,18 +6,20 @@ import { VideoPlayer, BGTextScroll } from "../../../../../globalComponents";
 
 import { theme } from "../../Theme/GlobalTheme";
 import { useDataContext } from "../../../../../context";
+import useVideoPlayerDataStore from "../../../../../dataStores/useVideoPlayerDataStore/useVideoPlayerDataStore";
 
 const VideoCHL: React.FC = () => {
   const { showSection } = useParams();
   const data = useDataContext();
 
   const [isScrollBgVisible, setIsScrollBgVisible] = React.useState(false);
+  const { videoSize } = useVideoPlayerDataStore(state => state);
+
+  React.useEffect(() => {
+    setIsScrollBgVisible(videoSize === "fullscreen");
+  }, [videoSize]);
 
   if (!showSection(SectionsCHL.Video)) return null;
-
-  const handleVideoCallBack = (data: any) => {
-    setIsScrollBgVisible(data.isFullscreen);
-  };
 
   return (
     <>
@@ -38,7 +40,6 @@ const VideoCHL: React.FC = () => {
           }}
           videoBorder={`10px solid ${theme.colors.accent1}`}
           videoShadow={true}
-          callBack={handleVideoCallBack}
         />
 
         <BGTextScroll

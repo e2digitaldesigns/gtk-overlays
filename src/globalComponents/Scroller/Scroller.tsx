@@ -31,6 +31,7 @@ interface IntScrollerProps {
   showTitle?: boolean;
 
   transition?: "scroll" | "fade";
+  transitionTime?: string;
 }
 
 enum TickerStatus {
@@ -51,7 +52,8 @@ const GTK_Scroller: React.FC<IntScrollerProps> = ({
   sx,
   showTitle = true,
   callBack,
-  transition = "scroll"
+  transition = "scroll",
+  transitionTime = "1s"
 }) => {
   const [activeIndex, setActiveIndex] = React.useState<number>(-1);
   const [oldIndex, setOldIndex] = React.useState<number>(-1);
@@ -118,7 +120,7 @@ const GTK_Scroller: React.FC<IntScrollerProps> = ({
                 state={setClassName(index)}
                 key={index}
                 fontSize={fontSize}
-                transition={transition}
+                transitionTime={transitionTime}
               >
                 <>
                   {m.title && showTitle && (
@@ -148,6 +150,7 @@ const GTK_Scroller: React.FC<IntScrollerProps> = ({
                 data-testid={`children-list-item-${setClassName(index)}`}
                 isChildren={true}
                 transition={transition}
+                transitionTime={transitionTime}
               >
                 <Styled.ListItemDivText
                   sx={sx?.childWrapper}

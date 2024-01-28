@@ -10,7 +10,8 @@
     "parentId": "",
     "timer": 0,
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "002",
@@ -23,7 +24,8 @@
     "parentId": "",
     "timer": 0,
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "003",
@@ -36,7 +38,8 @@
     "parentId": "",
     "timer": 0,
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "004",
@@ -49,7 +52,8 @@
     "parentId": "",
     "timer": 0,
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "005",
@@ -62,7 +66,8 @@
     "parentId": "",
     "timer": 0,
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "006",
@@ -75,7 +80,8 @@
     "parentId": "005",
     "timer": 0,
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "007",
@@ -88,7 +94,8 @@
     "parentId": "005",
     "timer": 0,
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "008",
@@ -101,7 +108,8 @@
     "parentId": "005",
     "timer": 0,
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "009",
@@ -114,7 +122,8 @@
     "parentId": "005",
     "timer": 0,
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "010",
@@ -127,7 +136,8 @@
     "parentId": "005",
     "timer": 0,
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "011",
@@ -140,7 +150,8 @@
     "parentId": "005",
     "timer": 0,
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "012",
@@ -153,7 +164,8 @@
     "parentId": "005",
     "timer": 0,
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "013",
@@ -166,7 +178,8 @@
     "parentId": "",
     "timer": 0,
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "014",
@@ -179,7 +192,8 @@
     "parentId": "",
     "timer": 0,
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   },
   {
     "_id": "015",
@@ -192,6 +206,7 @@
     "parentId": "",
     "timer": 0,
     "video": "",
-    "chat": ""
+    "chat": "",
+    "votingOptions": []
   }
 ]

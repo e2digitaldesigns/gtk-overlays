@@ -23,6 +23,11 @@ export type GlobalDataContextSocials = {
   username: string;
 };
 
+export type GlobalDataContextTopicVotingOptions = {
+  label: string;
+  value: boolean;
+};
+
 export type GlobalDataContextTopic = {
   _id: string;
   articles: string;
@@ -37,6 +42,7 @@ export type GlobalDataContextTopic = {
   timer: number;
   video: string;
   chat: string;
+  votingOptions: GlobalDataContextTopicVotingOptions[];
 };
 
 export type GlobalDataContextTicker = {

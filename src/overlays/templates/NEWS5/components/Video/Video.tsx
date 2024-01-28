@@ -7,6 +7,7 @@ import { SectionsCNN2 } from "../../../../../types";
 import { VideoPlayer } from "../../../../../globalComponents";
 
 import { BsYoutube } from "react-icons/bs";
+import useVideoPlayerDataStore from "../../../../../dataStores/useVideoPlayerDataStore/useVideoPlayerDataStore";
 
 export const VideoCNN: React.FC = () => {
   const { showSection } = useParams();
@@ -14,13 +15,13 @@ export const VideoCNN: React.FC = () => {
 
   const [showTopic, setShowTopic] = React.useState(false);
 
-  const handleVideoCallBack = (data: any) => {
-    if (data.videoSize === "small" && data.isVideoVisible) {
-      setShowTopic(true);
-    } else {
-      setShowTopic(false);
-    }
-  };
+  const { isVideoViewable, videoSize } = useVideoPlayerDataStore(
+    state => state
+  );
+
+  React.useEffect(() => {
+    setShowTopic(videoSize === "small" && isVideoViewable);
+  }, [videoSize, isVideoViewable]);
 
   if (!showSection(SectionsCNN2.Video)) return null;
 
@@ -31,7 +32,6 @@ export const VideoCNN: React.FC = () => {
         videoBorder="1px solid black"
         allowFullScreen={true}
         allowSmallScreen={true}
-        callBack={handleVideoCallBack}
         dimensions={{
           top: "10px",
           left: "630px",

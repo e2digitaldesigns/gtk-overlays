@@ -9,6 +9,7 @@ export const NewsWrapper = styled.div`
   left: 0px;
   z-index: 10;
 
+  text-transform: uppercase;
   background-color: ${props => props.theme.colors.accent1};
 
   display: grid;

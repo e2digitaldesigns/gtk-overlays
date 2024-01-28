@@ -9,6 +9,7 @@ export const ShowChatWrapper = styled.div`
   width: 1210px;
   overflow: hidden;
 
+  text-transform: uppercase;
   z-index: 1;
   background-color: ${props => props.theme.colors.accent1};
 `;

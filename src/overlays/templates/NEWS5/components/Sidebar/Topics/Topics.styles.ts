@@ -5,19 +5,40 @@ export const TopicsWrapper = styled.div`
   top: 175px;
   left: 0px;
   width: 610px;
-  height: 600px;
+  height: 700px;
+  overflow: hidden;
+`;
+
+export const TopicsWrapperNormal = styled.div<{ showMenu: boolean }>`
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 610px;
+  height: 700px;
+  overflow: hidden;
+
+  opacity: ${props => (props.showMenu ? 1 : 0)};
+  /* transition: opacity 0.25s ease-in-out; */
+  z-index: 2;
+`;
+
+export const TopicsWrapperSmall = styled.div<{ showMenu: boolean }>`
+  position: absolute;
+  left: 0px;
+  top: 300px;
+  width: 610px;
+  height: 400px;
+  overflow: hidden;
+
+  opacity: ${props => (props.showMenu ? 1 : 0)};
+  /* transition: opacity 0.25s ease-in-out; */
+  z-index: 3;
 `;
 
 export const TopicsInnerWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   height: 100%;
-
   overflow: hidden;
   scroll-snap-type: y mandatory;
-
-  position: relative;
 `;
 
 interface TopicUlProps {
@@ -33,8 +54,6 @@ export const TopicUl = styled.ul<TopicUlProps>`
   transition: top 0.5s ease-in-out;
 
   scroll-snap-align: top;
-
-  display: grid;
 `;
 
 interface TopicLiProps {
@@ -42,10 +61,11 @@ interface TopicLiProps {
   liHeight: number;
   clicked: boolean;
   active: boolean;
+  hasImage: boolean;
 }
 
 export const TopicLi = styled.li<TopicLiProps>`
-  height: 100px;
+  height: ${props => props.liHeight}px;
   width: 610px;
   border-bottom: 5px solid ${props => props.theme.colors.accent2};
   border-left: 5px solid;
@@ -67,25 +87,49 @@ export const TopicLi = styled.li<TopicLiProps>`
     opacity: ${props => (props.clicked ? 0.5 : 1)};
     transition: all 0.5s ease-in-out;
   }
+
+  display: grid;
+  grid-template-columns: ${props => (props.hasImage ? "130px 1fr" : "1fr")};
+  align-items: center;
+  grid-gap: 5px;
+`;
+
+export const TopicLiImage = styled.div`
+  height: 80px;
+  width: 120px;
+
+  margin-left: 10px;
+  background-color: ${props => props.theme.colors.bg1};
+  border: 2px solid ${props => props.theme.colors.accent2};
+  overflow: hidden;
+  > img {
+    height: 80px;
+    width: 120px;
+  }
 `;
 
 interface TopicLiInnerProps {
   active: boolean;
+  hasImage: boolean;
 }
 
 export const TopicLiName = styled.div<TopicLiInnerProps>`
-  position: absolute;
-  height: 100%;
-  width: 100%;
-
-  padding: 0px 20px;
+  height: 92px;
+  width: ${props => (props.hasImage ? "465px" : "600px")};
+  padding-left: 10px;
+  margin-top: 8px;
 
   display: flex;
   align-items: center;
 
+  white-space: pre-wrap;
+
   text-transform: uppercase;
   font-size: 1.25rem;
   font-weight: 400;
+  line-height: 1.45rem;
+
+  overflow: hidden;
 `;
 
 interface TopicLiLiveProps {
@@ -95,7 +139,7 @@ interface TopicLiLiveProps {
 export const TopicLiLive = styled.div<TopicLiLiveProps>`
   position: absolute;
   right: 10px;
-  top: 0px;
+  top: -2px;
   color: ${props => props.theme.colors.accent3};
   font-style: italic;
   text-align: right;
@@ -112,7 +156,7 @@ interface TopicLiNextProps {
 export const TopicLiNext = styled.div<TopicLiNextProps>`
   position: absolute;
   right: 10px;
-  top: 0px;
+  top: -2px;
   color: ${props => props.theme.colors.font2};
   font-style: italic;
   text-align: right;

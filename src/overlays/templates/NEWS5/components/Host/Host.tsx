@@ -21,33 +21,48 @@ export const HostCNN: React.FC = () => {
   };
 
   return (
-    <Styled.HostWrapper>
-      <Styled.VoteDisplay>{votingState[1]}</Styled.VoteDisplay>
-      <Styled.EmojiPlacement>
-        <HostVoteEmojis seatNum={1} fontSize="24px" />
-      </Styled.EmojiPlacement>
+    <>
+      <Styled.HostWrapperGlow />
+      <Styled.HostWrapper>
+        <Styled.VoteDisplay>{votingState[1]}</Styled.VoteDisplay>
+        <Styled.EmojiPlacement>
+          <HostVoteEmojis seatNum={1} fontSize="24px" />
+        </Styled.EmojiPlacement>
 
-      <Styled.HostNameWrapper>
-        <Scroller timer={CONFIG.scrollTimers.hostLabels} transition="fade">
-          {data?.[0]?.ticker?.map((ticker: string, index: number) => (
-            <Styled.HostNameWrapperName key={index}>
-              {ticker}
-            </Styled.HostNameWrapperName>
+        <Styled.HostNameWrapper>
+          <Scroller timer={CONFIG.scrollTimers.hostLabels} transition="fade">
+            {data?.[0]?.ticker?.map((ticker: string, index: number) => (
+              <Styled.HostNameWrapperName key={index}>
+                {ticker}
+              </Styled.HostNameWrapperName>
+            ))}
+          </Scroller>
+        </Styled.HostNameWrapper>
+
+        <Styled.TopicDescriptionWrapper>
+          {topics.map((topic: IntTopic, index: number) => (
+            <Styled.TopicGrid
+              key={topic._id}
+              linkState={setLiState(index)}
+              hasImage={!!topic?.img}
+            >
+              {!!topic?.img && (
+                <Styled.TopicImage>
+                  <img src={topic.img} alt={topic.name} />
+                </Styled.TopicImage>
+              )}
+
+              <Styled.TopicDescription hasImage={!!topic?.img}>
+                {trueFalseVoterParser(
+                  topic.desc,
+                  trueOrFalseVotes?.trueCount,
+                  trueOrFalseVotes?.falseCount
+                )}
+              </Styled.TopicDescription>
+            </Styled.TopicGrid>
           ))}
-        </Scroller>
-      </Styled.HostNameWrapper>
-
-      <Styled.TopicDescription>
-        {topics.map((topic: IntTopic, index: number) => (
-          <Styled.TopicGrid key={topic._id} linkState={setLiState(index)}>
-            {trueFalseVoterParser(
-              topic.desc,
-              trueOrFalseVotes?.trueCount,
-              trueOrFalseVotes?.falseCount
-            )}
-          </Styled.TopicGrid>
-        ))}
-      </Styled.TopicDescription>
-    </Styled.HostWrapper>
+        </Styled.TopicDescriptionWrapper>
+      </Styled.HostWrapper>
+    </>
   );
 };

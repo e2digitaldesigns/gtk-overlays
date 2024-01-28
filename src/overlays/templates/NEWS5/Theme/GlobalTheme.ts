@@ -20,6 +20,7 @@ export const theme = {
     accent1: black2,
     accent2: black5,
     accent3: red,
+    accent4: "purple",
 
     border1: "#0c0c0c",
     border2: "#414141"

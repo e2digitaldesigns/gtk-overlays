@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const HostWrapper = styled.div`
   width: 1280px;
@@ -12,23 +12,19 @@ export const HostWrapper = styled.div`
   border: 5px solid ${props => props.theme.colors.accent1};
 `;
 
-export const TopicDescription = styled.div`
+export const TopicDescriptionWrapper = styled.div`
   width: 1090px;
   height: 100px;
+  overflow: hidden;
 
   position: absolute;
   top: 485px;
   left: 15px;
   z-index: 10;
-  overflow: hidden;
 
   background-color: ${props => props.theme.colors.bg1};
   border-left: 5px solid ${props => props.theme.colors.accent3};
 `;
-
-interface ITopicGrid {
-  linkState: string;
-}
 
 const topicStateProps = (linkState: string) => {
   let style;
@@ -53,23 +49,56 @@ const topicStateProps = (linkState: string) => {
   return style;
 };
 
+interface ITopicGrid {
+  linkState: string;
+  hasImage: boolean;
+}
+
 export const TopicGrid = styled.div<ITopicGrid>`
   position: absolute;
   width: 100%;
   height: 100%;
-  color: white;
-  padding: 10px;
   transition-property: all;
   transition-duration: 1s;
   transition-timing-function: ease-in-out;
-  font-size: 28px;
-  line-height: 28px;
+
+  overflow: hidden;
+
+  display: grid;
+  grid-template-columns: ${props => (props.hasImage ? "140px 1fr" : "1fr")};
+  /* grid-gap: 5px; */
+
+  ${props => topicStateProps(props.linkState)}
+`;
+
+export const TopicImage = styled.div`
+  height: 90px;
+  width: 135px;
+
+  margin: 5px 0 0 5px;
+  background-color: ${props => props.theme.colors.bg1};
+  border: 2px solid ${props => props.theme.colors.accent2};
+  overflow: hidden;
+  > img {
+    height: 90px;
+    width: 135px;
+  }
+
+  border-bottom: 2px solid ${props => props.theme.colors.accent2};
+`;
+
+export const TopicDescription = styled.div<{ hasImage: boolean }>`
+  width: ${props => (props.hasImage ? "940px" : "1085px")};
+  height: 100px;
+  margin-left: 5px;
+
+  font-size: 1.75rem;
 
   white-space: pre-wrap;
   text-transform: uppercase;
-  overflow: hidden;
 
-  ${props => topicStateProps(props.linkState)};
+  text-overflow: "ellipsis";
+  overflow: hidden;
 `;
 
 export const VoteDisplay = styled.div`
@@ -124,4 +153,36 @@ export const HostNameWrapper = styled.div`
 export const HostNameWrapperName = styled.div`
   text-transform: uppercase;
   font-size: 1.25rem;
+`;
+
+const animationOut = keyframes`
+  0% {
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+`;
+
+export const HostWrapperGlow = styled.div`
+  width: 1280px;
+  height: 630px;
+
+  position: absolute;
+  top: 10px;
+  left: 630px;
+  z-index: 12;
+
+  border: 5px solid ${props => props.theme.colors.accent3};
+
+  animation-name: ${animationOut};
+  animation-duration: 30s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 `;

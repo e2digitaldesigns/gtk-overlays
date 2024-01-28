@@ -16,7 +16,11 @@ export const SponsorsCNN: React.FC = () => {
 
   return (
     <Styled.SponsorWrapper>
-      <Scroller timer={CONFIG.scrollTimers.sponsors} transition="fade">
+      <Scroller
+        timer={CONFIG.scrollTimers.sponsors}
+        transition="fade"
+        transitionTime="1.5s"
+      >
         {sponsorImages.map((image: string) => (
           <div key={image}>
             <img src={image} alt="sponsors" />
