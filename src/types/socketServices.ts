@@ -27,3 +27,13 @@ export type ChatMessgeReturn = {
   tid?: string;
   message: string;
 };
+
+export type ChatRelayData = {
+  uid: string;
+  _id: string;
+  broadcasterName: string;
+  name: string;
+  msg: string;
+  url: string;
+  fontColor: string;
+};

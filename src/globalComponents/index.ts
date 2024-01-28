@@ -15,3 +15,5 @@ export { default as HostVoteEmojis } from "./HostVoteEmojis/HostVoteEmojis";
 export { default as UpNext } from "./UpNext/UpNext";
 
 export { default as TimerOrTime } from "./TimerOrTime/TimerOrTime";
+
+export { default as ChatRelay } from "./ChatRelay/ChatRelay";

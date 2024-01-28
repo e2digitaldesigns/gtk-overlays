@@ -2,6 +2,7 @@ import io from "socket.io-client";
 import {
   ChatMessgeReturn,
   ChatRanker,
+  ChatRelayData,
   IEmojiReturn,
   SocketServicesData,
   IVotes
@@ -13,6 +14,7 @@ enum SocketServicesEvents {
   GTK_OVERLAY_ACTION = "gtkOverlayAction",
   GTK_VOTING = "gtkVoting",
   GTK_CHAT_DISPLAY = "gtkChatDisplay",
+  GTK_CHAT_RELAY = "gtkChatRelay",
   GTK_OVERLAY_EMOJIS = "gtkOverlayEmojis",
   GTK_OVERLAY_CHAT_RANKS = "gtkOverlayChatRanks",
   GTK_OVERLAY_VIDEO_PLAYER = "gtkOverlayVideoPlayer"
@@ -96,6 +98,16 @@ const socketServices = {
 
   unSubscribeOverlaysVideoPlayer() {
     socket.removeAllListeners(SocketServicesEvents.GTK_OVERLAY_VIDEO_PLAYER);
+  },
+
+  subscribeChatRelay(cb: (err: unknown, data: ChatRelayData) => void) {
+    socket.on(SocketServicesEvents.GTK_CHAT_RELAY, (data: ChatRelayData) =>
+      cb(null, data)
+    );
+  },
+
+  unSubscribeChatRelay() {
+    socket.removeAllListeners(SocketServicesEvents.GTK_CHAT_RELAY);
   }
 };
 

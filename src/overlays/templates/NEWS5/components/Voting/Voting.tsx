@@ -10,8 +10,6 @@ export const VotingCNN: React.FC = () => {
   const { topic: activeTopic } = useSimpleTopic();
   const { trueOrFalseVotes } = useVoting();
 
-  console.log("activeTopic", activeTopic);
-
   const hasLabelVoting = activeTopic?.votingOptions?.length === 2;
   const hasVoting = hasLabelVoting || hasTrueFalseVoting(activeTopic?.desc);
 

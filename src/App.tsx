@@ -9,14 +9,12 @@ import { DataContextProvider } from "./context/useDataContext/dataContextProvide
 
 const App: React.FC = () => {
   return (
-    <>
-      <DataContextProvider>
-        <ApplicationSocket />
-        <div className="main-stage">
-          <OverlayTemplateParser />
-        </div>
-      </DataContextProvider>
-    </>
+    <DataContextProvider>
+      <ApplicationSocket />
+      <div className="main-stage">
+        <OverlayTemplateParser />
+      </div>
+    </DataContextProvider>
   );
 };
 
