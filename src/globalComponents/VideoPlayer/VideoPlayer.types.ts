@@ -21,6 +21,8 @@ export interface IntVideoProps {
 
   hideVideoOnChange?: boolean;
   transitionOnMove?: boolean;
+
+  showVideoOnLoad?: boolean;
 }
 
 export enum VideoAction {

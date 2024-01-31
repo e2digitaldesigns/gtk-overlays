@@ -2,7 +2,7 @@ import React from "react";
 import * as Styled from "./Video.styles";
 
 import { useParams, useSimpleTopic } from "../../../../../hooks";
-import { SectionsCNN2 } from "../../../../../types";
+import { SectionsCNN } from "../../../../../types";
 
 import { VideoPlayer } from "../../../../../globalComponents";
 
@@ -23,7 +23,7 @@ export const VideoCNN: React.FC = () => {
     setShowTopic(videoSize === "small" && isVideoViewable);
   }, [videoSize, isVideoViewable]);
 
-  if (!showSection(SectionsCNN2.Video)) return null;
+  if (!showSection(SectionsCNN.Video)) return null;
 
   return (
     <>

@@ -1,6 +1,6 @@
 import React from "react";
 import * as Styled from "./Host.styles";
-import { useSimpleTopic, useVoting } from "../../../../../hooks";
+import { useParams, useSimpleTopic, useVoting } from "../../../../../hooks";
 import { IntTopic } from "../../../../../globalComponents/Topics/types";
 
 import { trueFalseVoterParser } from "../../../../../_utils/trueFalseVoterParser";
@@ -8,6 +8,7 @@ import { HostVoteEmojis, Scroller } from "../../../../../globalComponents";
 import { useDataContext } from "../../../../../context";
 
 import CONFIG from "../../config.json";
+import { SectionsCNN } from "../../../../../types";
 
 export const HostCNN: React.FC = () => {
   const { topicIndex: currentTopicIndex, topics } = useSimpleTopic();
@@ -19,6 +20,9 @@ export const HostCNN: React.FC = () => {
     if (index === currentTopicIndex) return "active";
     return "unvisited";
   };
+
+  const { showSection } = useParams();
+  if (!showSection(SectionsCNN.Host)) return null;
 
   return (
     <>

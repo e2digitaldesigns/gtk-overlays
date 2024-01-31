@@ -1,9 +1,12 @@
 {
   "scrollTimers": {
-    "clock": 30,
-    "headerTab": 15,
-    "networkTab": 3,
-    "newsFeed": 20,
-    "socialNetworks": 30
-  }
+    "headerTab": 45,
+    "networkTab": 65,
+    "newsFeed": 30,
+    "hostLabels": 25,
+    "sponsors": 23,
+    "timing": 29
+  },
+  "fireHostCount": 15,
+  "freezeHostCount": 5
 }

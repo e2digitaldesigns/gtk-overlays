@@ -1,14 +1,13 @@
 import React from "react";
 import * as Styled from "./ShowChatCNN.style";
 import { ChatDisplay } from "../../../../../globalComponents";
-import { SectionsCNN2 } from "../../../../../types";
+import { SectionsCNN } from "../../../../../types";
 
 import { useParams } from "../../../../../hooks";
 
 export const ShowChatCNN: React.FC = () => {
   const { showSection } = useParams();
-
-  if (!showSection(SectionsCNN2.ChatMessage)) return null;
+  if (!showSection(SectionsCNN.ChatMessage)) return null;
 
   return (
     <>
@@ -21,11 +20,11 @@ export const ShowChatCNN: React.FC = () => {
           imageShape="square"
           imageSize="6rem"
           imageShow={false}
-          msgFontSize="1.25rem"
+          msgFontSize="1.5rem"
           msgFontColor="#ccc"
           messageInline={true}
           nameFontColor="#ffffff"
-          nameFontSize="1.25rem"
+          nameFontSize="1.5rem"
           nameFontWeight="normal"
           borderBottom={"0"}
           transitionTime={750}

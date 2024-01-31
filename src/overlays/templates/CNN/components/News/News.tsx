@@ -17,6 +17,7 @@ export const NewsCNN: React.FC = () => {
         data={data}
         fontSize={26}
         timer={CONFIG.scrollTimers.newsFeed}
+        transition="fade"
         sx={{
           text: { color: theme.colors.font2, padding: "0 .5rem" }
         }}

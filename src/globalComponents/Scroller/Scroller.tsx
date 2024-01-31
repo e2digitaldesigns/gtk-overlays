@@ -120,6 +120,7 @@ const GTK_Scroller: React.FC<IntScrollerProps> = ({
                 state={setClassName(index)}
                 key={index}
                 fontSize={fontSize}
+                transition={transition}
                 transitionTime={transitionTime}
               >
                 <>

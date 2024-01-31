@@ -15,22 +15,6 @@ export enum SectionsBNN {
   Host_2_video_1 = "host_2_video_1"
 }
 
-export enum SectionsCNN {
-  Header = "header",
-
-  Host_2_1 = "host_2_1",
-  Host_2_2 = "host_2_2",
-  Host_3_1 = "host_3_1",
-  Host_3_2 = "host_3_2",
-  Host_3_3 = "host_3_3",
-
-  Chyron = "chyron",
-
-  ContentBox1 = "contentBox1",
-  ContentBox2 = "contentBox2",
-  ContentBox3 = "contentBox3"
-}
-
 export enum SectionsPTI {
   ChatRank = "chat_rank",
   Chyron = "chyron",
@@ -92,8 +76,11 @@ export enum SectionsFGT {
   Video = "video"
 }
 
-export enum SectionsCNN2 {
+export enum SectionsCNN {
+  Sidebar = "sidebar",
+  Host = "host",
   ChatMessage = "chat_message",
+  ChatDisplay = "chat_display",
   Video = "video"
 }
 
@@ -101,7 +88,6 @@ export type OverlaySections =
   | SectionsBNN
   | SectionsCHL
   | SectionsCNN
-  | SectionsCNN2
   | SectionsPTI
   | SectionsSAS
   | SectionsXBX

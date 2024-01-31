@@ -18,8 +18,6 @@ export const SmallHostCNN: React.FC = () => {
 
   const showHost = isVideoViewable && videoSize === "normal";
 
-  console.log({ isVideoViewable, showHost });
-
   return (
     <Styled.SmallHostWrapper showHost={showHost}>
       <Styled.VoteDisplay>{votingState[1]}</Styled.VoteDisplay>

@@ -168,13 +168,12 @@ const ChatDisplay: React.FC<ShowChatProps> = ({
     <>
       <Styled.ShowChatWrapper>
         <Styled.ShowChatInner
-          data-testid="chat-display-xxxxx"
+          data-testid="chat-display"
           isActive={isActive}
           transition={message?.transition || defaultTransition}
           transitionTime={transitionTime}
         >
           <Styled.EntireChatWrapper
-            data-testid="YYYYY"
             bgColor={bgColor}
             borderBottom={borderBottom}
           >

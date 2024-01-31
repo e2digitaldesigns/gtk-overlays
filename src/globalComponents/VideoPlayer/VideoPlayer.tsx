@@ -22,7 +22,9 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
   videoBorder = "none",
   videoShadow = false,
   hideVideoOnChange = false,
-  transitionOnMove = true
+  transitionOnMove = true,
+
+  showVideoOnLoad = false
 }) => {
   const { topic, topicId } = useSimpleTopic();
   const videoUrl = topic?.video;
@@ -69,8 +71,9 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
 
         if (!hideVideoOnChange) {
           videoPlayerRef.current.currentTime = 2;
-          setShowVideo(true);
+          showVideoOnLoad && setShowVideo(true);
           if (isVideoPlaying) {
+            setShowVideo(true);
             videoPlayerRef.current.play();
           }
         } else {
