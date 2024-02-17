@@ -2,7 +2,7 @@
   "_id": {
     "$oid": "65a90a1a02aae02cdba1910d"
   },
-  "name": "CNN App",
+  "name": "CNN: App",
   "urlKey": "CNN",
   "maxHosts": 1,
   "thumbnail": "https://mg-show-assets.s3.us-east-1.amazonaws.com/images/template-images/fgt.jpg",
@@ -44,6 +44,11 @@
     {
       "name": "Chat Message",
       "param": "chat_message"
+    },
+
+    {
+      "name": "Description",
+      "param": "description"
     },
 
     {

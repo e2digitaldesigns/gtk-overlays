@@ -5,24 +5,25 @@ import { SectionsCNN } from "../../../../../types";
 
 import { useParams } from "../../../../../hooks";
 
+import { theme } from "../../Theme/GlobalTheme";
+
 export const ShowChatCNN: React.FC = () => {
   const { showSection } = useParams();
   if (!showSection(SectionsCNN.ChatMessage)) return null;
 
   return (
     <>
-      <Styled.ShowChatStarter> </Styled.ShowChatStarter>
       <Styled.ShowChatWrapper>
         <ChatDisplay
-          bgColor={"transparent"}
+          bgColor={theme.colors.accent1}
           defaultTransition="TopToBottom"
           font="Poppins"
           imageShape="square"
-          imageSize="6rem"
-          imageShow={false}
+          imageSize="5rem"
+          imageShow={true}
           msgFontSize="1.5rem"
           msgFontColor="#ccc"
-          messageInline={true}
+          messageInline={false}
           nameFontColor="#ffffff"
           nameFontSize="1.5rem"
           nameFontWeight="normal"

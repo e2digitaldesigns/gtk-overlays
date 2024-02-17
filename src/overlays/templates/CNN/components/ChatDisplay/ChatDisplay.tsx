@@ -9,15 +9,12 @@ export const ChatDisplayCNN: React.FC = () => {
   if (!showSection(SectionsCNN.ChatDisplay)) return null;
 
   return (
-    <Styled.ChatBox>
-      <ChatRelay fontSize="1.25rem" maxMessages={5} />
-    </Styled.ChatBox>
+    <>
+      <Styled.ChatBox>
+        <ChatRelay fontSize="1.25rem" maxMessages={5} />
+      </Styled.ChatBox>
 
-    // <Styled.BoxGrid>
-    //   <Styled.ChatBox>
-    //     <ChatRelay fontSize="1.25rem" maxMessages={5} />
-    //   </Styled.ChatBox>
-    //   <Styled.Box></Styled.Box>
-    // </Styled.BoxGrid>
+      <Styled.Box />
+    </>
   );
 };

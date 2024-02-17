@@ -1,9 +1,7 @@
 import React from "react";
 import * as Styled from "./Host.styles";
-import { useParams, useSimpleTopic, useVoting } from "../../../../../hooks";
-import { IntTopic } from "../../../../../globalComponents/Topics/types";
+import { useParams, useVoting } from "../../../../../hooks";
 
-import { trueFalseVoterParser } from "../../../../../_utils/trueFalseVoterParser";
 import { HostVoteEmojis, Scroller } from "../../../../../globalComponents";
 import { useDataContext } from "../../../../../context";
 
@@ -11,15 +9,8 @@ import CONFIG from "../../config.json";
 import { SectionsCNN } from "../../../../../types";
 
 export const HostCNN: React.FC = () => {
-  const { topicIndex: currentTopicIndex, topics } = useSimpleTopic();
-  const { trueOrFalseVotes, votingState } = useVoting();
+  const { votingState } = useVoting();
   const { hosts: data } = useDataContext();
-
-  const setLiState = (index: number) => {
-    if (index < currentTopicIndex) return "visited";
-    if (index === currentTopicIndex) return "active";
-    return "unvisited";
-  };
 
   const { showSection } = useParams();
   if (!showSection(SectionsCNN.Host)) return null;
@@ -42,30 +33,6 @@ export const HostCNN: React.FC = () => {
             ))}
           </Scroller>
         </Styled.HostNameWrapper>
-
-        <Styled.TopicDescriptionWrapper>
-          {topics.map((topic: IntTopic, index: number) => (
-            <Styled.TopicGrid
-              key={topic._id}
-              linkState={setLiState(index)}
-              hasImage={!!topic?.img}
-            >
-              {!!topic?.img && (
-                <Styled.TopicImage>
-                  <img src={topic.img} alt={topic.name} />
-                </Styled.TopicImage>
-              )}
-
-              <Styled.TopicDescription hasImage={!!topic?.img}>
-                {trueFalseVoterParser(
-                  topic.desc,
-                  trueOrFalseVotes?.trueCount,
-                  trueOrFalseVotes?.falseCount
-                )}
-              </Styled.TopicDescription>
-            </Styled.TopicGrid>
-          ))}
-        </Styled.TopicDescriptionWrapper>
       </Styled.HostWrapper>
     </>
   );

@@ -80,6 +80,7 @@ export enum SectionsCNN {
   Sidebar = "sidebar",
   Host = "host",
   ChatMessage = "chat_message",
+  Description = "description",
   ChatDisplay = "chat_display",
   Video = "video"
 }
