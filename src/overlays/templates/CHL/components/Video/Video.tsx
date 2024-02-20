@@ -13,11 +13,11 @@ const VideoCHL: React.FC = () => {
   const data = useDataContext();
 
   const [isScrollBgVisible, setIsScrollBgVisible] = React.useState(false);
-  const { videoSize } = useVideoPlayerDataStore(state => state);
+  const { videoSize, isVideoViewable } = useVideoPlayerDataStore();
 
   React.useEffect(() => {
-    setIsScrollBgVisible(videoSize === "fullscreen");
-  }, [videoSize]);
+    setIsScrollBgVisible(videoSize !== "fullscreen" && isVideoViewable);
+  }, [videoSize, isVideoViewable]);
 
   if (!showSection(SectionsCHL.Video)) return null;
 
