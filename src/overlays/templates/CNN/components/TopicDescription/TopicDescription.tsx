@@ -3,13 +3,13 @@ import * as Styled from "./TopicDescription.styles";
 import { useParams, useSimpleTopic, useVoting } from "../../../../../hooks";
 import { IntTopic } from "../../../../../globalComponents/Topics/types";
 
-import { trueFalseVoterParser } from "../../../../../_utils/trueFalseVoterParser";
+import { topicVoterParser } from "../../../../../_utils/trueFalseVoterParser";
 
 import { SectionsCNN } from "../../../../../types";
 
 export const TopicDescriptionCNN: React.FC = () => {
   const { topicIndex: currentTopicIndex, topics } = useSimpleTopic();
-  const { trueOrFalseVotes } = useVoting();
+  const { topicVotes } = useVoting();
 
   const setLiState = (index: number) => {
     if (index < currentTopicIndex) return "visited";
@@ -37,11 +37,7 @@ export const TopicDescriptionCNN: React.FC = () => {
             )}
 
             <Styled.TopicDescription hasImage={!!topic?.img}>
-              {trueFalseVoterParser(
-                topic.desc,
-                trueOrFalseVotes?.trueCount,
-                trueOrFalseVotes?.falseCount
-              )}
+              {topicVoterParser(topic.desc, topicVotes)}
             </Styled.TopicDescription>
           </Styled.TopicGrid>
         ))}

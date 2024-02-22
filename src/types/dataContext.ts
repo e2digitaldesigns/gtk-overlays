@@ -25,7 +25,7 @@ export type GlobalDataContextSocials = {
 
 export type GlobalDataContextTopicVotingOptions = {
   label: string;
-  value: boolean;
+  value: string;
 };
 
 export type GlobalDataContextTopic = {

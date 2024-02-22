@@ -2,11 +2,13 @@ import { IVotes, IVoteStreaks, IVotingState } from "../../types";
 
 import { useTopicsStore, useVotingStore } from "../../dataStores";
 
-export type TrueVotesParsed = {
+export type TopicVotesParsed = {
   trueCount: number;
-  trueCountPercentage: string;
   falseCount: number;
-  falseCountPercentage: string;
+  oneCount: number;
+  twoCount: number;
+  yesCount: number;
+  noCount: number;
 };
 
 interface IUseVotingHook {
@@ -14,38 +16,42 @@ interface IUseVotingHook {
   votingState: IVotingState;
   votingStreak: IVoteStreaks;
   leadingSeat: string[];
-  trueOrFalseVotes: Partial<TrueVotesParsed>;
+  topicVotes: TopicVotesParsed;
 }
 
 const useVotingHook = (): IUseVotingHook => {
   const votingDataStore = useVotingStore(state => state);
   const topicsDataStore = useTopicsStore(state => state);
 
-  const trueOrFalseVotesParser = () => {
+  const topicVotesParser = () => {
     const currentTopicId = topicsDataStore?.currentTopicId;
     if (!currentTopicId) return;
 
     const topicVotes = votingDataStore.topicVotingState[currentTopicId];
     if (!topicVotes) return;
 
-    const totalVotes = Object.values(topicVotes).length;
-    const trueVotes = Object.values(topicVotes).filter(value => value).length;
-    const falseVotes = Object.values(topicVotes).filter(value => !value).length;
+    const objectValues = Object.values(topicVotes);
 
     return {
-      trueCount: trueVotes,
-      trueCountPercentage: ((trueVotes / totalVotes) * 100).toFixed(2),
-
-      falseCount: falseVotes,
-      falseCountPercentage: ((falseVotes / totalVotes) * 100).toFixed(2)
+      trueCount: objectValues.filter(value => value === "true").length,
+      falseCount: objectValues.filter(value => value === "false").length,
+      oneCount: objectValues.filter(value => value === "one").length,
+      twoCount: objectValues.filter(value => value === "two").length,
+      yesCount: objectValues.filter(value => value === "yes").length,
+      noCount: objectValues.filter(value => value === "no").length
     };
   };
 
-  trueOrFalseVotesParser();
-
   return {
     ...votingDataStore,
-    trueOrFalseVotes: trueOrFalseVotesParser() || {}
+    topicVotes: topicVotesParser() || {
+      trueCount: 0,
+      falseCount: 0,
+      oneCount: 0,
+      twoCount: 0,
+      yesCount: 0,
+      noCount: 0
+    }
   };
 };
 

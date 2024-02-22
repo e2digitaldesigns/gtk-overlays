@@ -8,7 +8,7 @@ export enum TopicStates {
 
 export interface IntTopicVotingOptions {
   label: string;
-  value: boolean;
+  value: string;
 }
 
 export interface IntTopic {

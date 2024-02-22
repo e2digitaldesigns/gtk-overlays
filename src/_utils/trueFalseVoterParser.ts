@@ -1,35 +1,39 @@
-export const trueFalseVoterParser = (
+import { TopicVotesParsed } from "../hooks/useVotingHook/useVotingHook";
+
+export const topicVoterParser = (
   string: string | undefined,
-  trueCount: number | undefined,
-  falseCount: number | undefined
-): string => {
+  votes: TopicVotesParsed
+) => {
   if (!string) return "";
 
-  let replacedString = string.replace(
-    /{{(?:true|yes|2)}}/g,
-    trueCount ? String(trueCount) : "0"
-  );
+  const votingMap = {
+    "{{true}}": votes.trueCount,
+    "{{false}}": votes.falseCount,
+    "{{1}}": votes.oneCount,
+    "{{2}}": votes.twoCount,
+    "{{yes}}": votes.yesCount,
+    "{{no}}": votes.noCount
+  };
 
-  replacedString = replacedString.replace(
-    /{{(?:false|no|1)}}/g,
-    falseCount ? String(falseCount) : "0"
+  let replacedString = Object.entries(votingMap).reduce(
+    (str, [placeholder, count]) => str.replace(placeholder, count.toString()),
+    string
   );
 
   return replacedString;
 };
 
-export const hasTrueFalseVoting = (string: string | undefined): boolean => {
+export const hasTopicVoting = (string: string | undefined): boolean => {
   if (!string) return false;
 
-  return (
-    /{{(?:true|yes|2)}}/g.test(string) && /{{(?:false|no|1)}}/g.test(string)
-  );
+  return /{{(?:true|yes|2|false|no|1)}}/g.test(string);
 };
 
-export const trueFalseVoterLabels = (string: string | undefined) => {
+export const topicVotingLabels = (string: string | undefined) => {
   return {
-    no: string?.match(/{{(?:false|no|1)}}/g)?.[0].replace(/{{|}}/g, "") || "no",
-    yes:
+    label_01:
+      string?.match(/{{(?:false|no|1)}}/g)?.[0].replace(/{{|}}/g, "") || "no",
+    label_02:
       string?.match(/{{(?:true|yes|2)}}/g)?.[0].replace(/{{|}}/g, "") || "yes"
   };
 };

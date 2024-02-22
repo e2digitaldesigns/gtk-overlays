@@ -3,6 +3,10 @@ export interface IVotingState {
 }
 
 export enum IVoteAction {
+  Yes = "yes",
+  No = "no",
+  One = "one",
+  Two = "two",
   Add = "add",
   Remove = "remove",
   True = "true",
@@ -23,13 +27,17 @@ export interface IVotes {
   createdAt: Date;
 }
 
-export type TopicVotes = { [key: string]: boolean };
+export type TopicVotes = { [key: string]: string };
 export type TopicVotesObj = { [key: string]: TopicVotes };
 
 export type TopicVotesParsed = {
   fullVotes: TopicVotes;
   trueCount: number;
   falseCount: number;
+  oneCount: number;
+  twoCount: number;
+  yesCount: number;
+  noCount: number;
 };
 
 export interface IVoteStreaks {

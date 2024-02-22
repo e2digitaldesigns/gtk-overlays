@@ -50,7 +50,11 @@ const useVotingDataStore = create(
         topicVotingParsed: {
           fullVotes: {},
           trueCount: 0,
-          falseCount: 0
+          falseCount: 0,
+          oneCount: 0,
+          twoCount: 0,
+          yesCount: 0,
+          noCount: 0
         },
         superVoteLog: {},
 
@@ -70,11 +74,11 @@ const useVotingDataStore = create(
         logTopicVote: (data: IVotes) => {
           const currentTopic = get().topicId;
 
-          const newState = _cloneDeep(get().topicVotingState);
+          const newState = structuredClone(get().topicVotingState);
 
           newState[currentTopic] = {
             ...(newState?.[currentTopic] || {}),
-            [data.username]: data.action === "true" ? true : false
+            [data.username]: data.action
           };
 
           set({
@@ -167,7 +171,15 @@ const useVotingDataStore = create(
         clearTopicVotes: () => {
           set({
             topicVotingState: {},
-            topicVotingParsed: { fullVotes: {}, trueCount: 0, falseCount: 0 }
+            topicVotingParsed: {
+              fullVotes: {},
+              trueCount: 0,
+              falseCount: 0,
+              oneCount: 0,
+              twoCount: 0,
+              yesCount: 0,
+              noCount: 0
+            }
           });
         }
       };

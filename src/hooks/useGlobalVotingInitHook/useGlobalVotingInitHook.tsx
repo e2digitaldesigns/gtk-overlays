@@ -15,6 +15,10 @@ const useGlobalVotingInitHook = () => {
       switch (data.action) {
         case IVoteAction.True:
         case IVoteAction.False:
+        case IVoteAction.One:
+        case IVoteAction.Two:
+        case IVoteAction.Yes:
+        case IVoteAction.No:
           votingDataStore.logTopicVote(data);
           break;
 
