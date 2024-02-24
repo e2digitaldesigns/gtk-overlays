@@ -34,6 +34,7 @@ export type ChatRelayData = {
   broadcasterName: string;
   name: string;
   msg: string;
+  msgEmotes: string;
   url: string;
   fontColor: string;
 };

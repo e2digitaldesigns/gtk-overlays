@@ -90,7 +90,7 @@ const ChatRelayComponent: React.FC<ChatRelayComponentProps> = ({
               >
                 <Styled.ChatMessage color={textColor}>
                   <ShowMessages
-                    message={message.msg}
+                    message={message.msgEmotes}
                     name={message.name}
                     twitchNameColor={message.fontColor}
                     defaultNameColor={defaultNameColor}
