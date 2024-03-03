@@ -16,10 +16,13 @@ const VideoCHL: React.FC = () => {
   const { videoSize, isVideoViewable } = useVideoPlayerDataStore();
 
   React.useEffect(() => {
-    setIsScrollBgVisible(videoSize !== "fullscreen" && isVideoViewable);
+    setIsScrollBgVisible(isVideoViewable);
   }, [videoSize, isVideoViewable]);
 
   if (!showSection(SectionsCHL.Video)) return null;
+
+  const videoBorder =
+    videoSize !== "fullscreen" ? `5px solid ${theme.colors.accent1}` : "none";
 
   return (
     <>
@@ -33,12 +36,12 @@ const VideoCHL: React.FC = () => {
           }}
           allowFullScreen={true}
           fullScreenDimensions={{
-            top: "-10px",
-            left: "-10px",
+            top: "0px",
+            left: "0px",
             width: "1920px",
             height: "1080px"
           }}
-          videoBorder={`10px solid ${theme.colors.accent1}`}
+          videoBorder={videoBorder}
           videoShadow={true}
         />
 

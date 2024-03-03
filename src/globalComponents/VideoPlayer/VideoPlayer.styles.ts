@@ -14,16 +14,13 @@ interface VideoPlayerProps {
 }
 
 export const VideoPlayerWrapper = styled.div<VideoPlayerProps>`
-  border: ${props => (props.isFullscreen ? "0" : props.border)};
-  /* box-sizing: content-box !important; */
-
+  border: ${props => props.border};
   position: absolute;
   top: ${props => props.top};
   left: ${props => props.left};
   width: ${props => props.width};
   height: ${props => props.height};
   background-color: ${props => props.bgColor};
-  /* transition: opacity, top, left, width, height, 0.5s ease-in-out; */
   z-index: 9999;
   opacity: 0;
 
