@@ -15,17 +15,17 @@ export const ShowChatCHL: React.FC = () => {
     <Styled.ShowChatWrapper>
       <ChatDisplay
         bgColor={theme.colors.bg1}
+        borderBottom={`.25rem solid ${theme.colors.accent1}`}
         defaultTransition="LeftToRight"
         imageBorder={`1px solid ${theme.colors.accent1}`}
         imageShape="square"
         imageSize="6rem"
-        msgFontSize="1.75rem"
-        msgFontColor="#ccc"
         messageInline={true}
+        msgFontColor="#ccc"
+        msgFontSize="1.75rem"
         nameFontColor="#ffffff"
         nameFontSize="1.75rem"
         nameFontWeight="normal"
-        borderBottom={`.25rem solid ${theme.colors.accent1}`}
       />
     </Styled.ShowChatWrapper>
   );

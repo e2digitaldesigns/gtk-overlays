@@ -11,4 +11,6 @@ export const ShowChatWrapper = styled.div`
 
   text-transform: uppercase;
   z-index: 1;
+
+  border-left: 0.3125rem solid ${props => props.theme.colors.accent3};
 `;

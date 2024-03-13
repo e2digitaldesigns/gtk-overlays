@@ -177,7 +177,7 @@ const ChatDisplay: React.FC<ShowChatProps> = ({
             bgColor={bgColor}
             borderBottom={borderBottom}
           >
-            {imageShow && !messageInline && (
+            {imageShow && (
               <Styled.ShowChatImage
                 border={imageBorder}
                 shape={imageShape}
