@@ -5,12 +5,21 @@ export type Dimensions = {
   height: string;
 };
 
+export enum VideoSize {
+  SMALL = "small",
+  NORMAL = "normal",
+  FULLSCREEN = "fullscreen",
+  CUSTOM_1 = "custom1",
+  CUSTOM_2 = "custom2",
+  CUSTOM_3 = "custom3"
+}
+
 export interface IntVideoProps {
   videoBorder?: string;
   videoShadow?: boolean;
 
   dimensions: Dimensions;
-  defaultSize?: "small" | "normal" | "fullscreen";
+  defaultSize?: VideoSize;
   bgColor?: string;
 
   allowSmallScreen?: boolean;
@@ -18,6 +27,10 @@ export interface IntVideoProps {
 
   allowFullScreen?: boolean;
   fullScreenDimensions?: Dimensions;
+
+  customDimensions1?: Dimensions;
+  customDimensions2?: Dimensions;
+  customDimensions3?: Dimensions;
 
   hideVideoOnChange?: boolean;
   transitionOnMove?: boolean;
@@ -37,5 +50,8 @@ export enum VideoAction {
   VIEW_TOGGLE = "video-show-hide",
   SIZE_SMALL = "video-size-small",
   SIZE_NORMAL = "video-size-normal",
-  SIZE_FULLSCREEN = "video-size-fullscreen"
+  SIZE_FULLSCREEN = "video-size-fullscreen",
+  SIZE_CUSTOM_1 = "video-size-custom-1",
+  SIZE_CUSTOM_2 = "video-size-custom-2",
+  SIZE_CUSTOM_3 = "video-size-custom-3"
 }

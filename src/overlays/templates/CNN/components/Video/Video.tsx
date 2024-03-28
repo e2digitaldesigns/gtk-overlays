@@ -8,6 +8,7 @@ import { VideoPlayer } from "../../../../../globalComponents";
 
 import { BsYoutube } from "react-icons/bs";
 import useVideoPlayerDataStore from "../../../../../dataStores/useVideoPlayerDataStore/useVideoPlayerDataStore";
+import { VideoSize } from "../../../../../globalComponents/VideoPlayer/VideoPlayer.types";
 
 export const VideoCNN: React.FC = () => {
   const { showSection } = useParams();
@@ -28,7 +29,7 @@ export const VideoCNN: React.FC = () => {
   return (
     <>
       <VideoPlayer
-        defaultSize="small"
+        defaultSize={VideoSize.SMALL}
         videoBorder="1px solid black"
         allowFullScreen={true}
         allowSmallScreen={true}

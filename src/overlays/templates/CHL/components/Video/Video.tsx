@@ -7,6 +7,7 @@ import { VideoPlayer, BGTextScroll } from "../../../../../globalComponents";
 import { theme } from "../../Theme/GlobalTheme";
 import { useDataContext } from "../../../../../context";
 import useVideoPlayerDataStore from "../../../../../dataStores/useVideoPlayerDataStore/useVideoPlayerDataStore";
+import { VideoSize } from "../../../../../globalComponents/VideoPlayer/VideoPlayer.types";
 
 const VideoCHL: React.FC = () => {
   const { showSection } = useParams();
@@ -16,7 +17,8 @@ const VideoCHL: React.FC = () => {
   const { videoSize, isVideoViewable } = useVideoPlayerDataStore();
 
   React.useEffect(() => {
-    setIsScrollBgVisible(isVideoViewable);
+    const showBG = videoSize === "normal" || videoSize === "fullscreen";
+    setIsScrollBgVisible(showBG && isVideoViewable);
   }, [videoSize, isVideoViewable]);
 
   if (!showSection(SectionsCHL.Video)) return null;
@@ -28,6 +30,7 @@ const VideoCHL: React.FC = () => {
     <>
       <div style={{ position: "absolute", zIndex: 99999 }}>
         <VideoPlayer
+          defaultSize={VideoSize.CUSTOM_2}
           dimensions={{
             top: "170px",
             left: "310px",
@@ -43,6 +46,18 @@ const VideoCHL: React.FC = () => {
           }}
           videoBorder={videoBorder}
           videoShadow={true}
+          customDimensions1={{
+            top: "225px",
+            left: "40px",
+            width: "1218px",
+            height: "545px"
+          }}
+          customDimensions2={{
+            top: "225px",
+            left: "663px",
+            width: "1218px",
+            height: "545px"
+          }}
         />
 
         <BGTextScroll

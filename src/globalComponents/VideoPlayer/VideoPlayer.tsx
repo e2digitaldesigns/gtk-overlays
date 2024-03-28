@@ -3,7 +3,12 @@ import * as Styled from "./VideoPlayer.styles";
 import socketServices from "../../services/socketServices";
 import { RequestType, SocketServicesData } from "../../types";
 import { useSimpleTopic } from "../../hooks";
-import { Dimensions, IntVideoProps, VideoAction } from "./VideoPlayer.types";
+import {
+  Dimensions,
+  IntVideoProps,
+  VideoAction,
+  VideoSize
+} from "./VideoPlayer.types";
 import {
   decreaseVolumeWithDelay,
   increaseVolumeWithDelay
@@ -11,13 +16,17 @@ import {
 import useVideoPlayerDataStore from "../../dataStores/useVideoPlayerDataStore/useVideoPlayerDataStore";
 
 const GTK_VideoComponent: React.FC<IntVideoProps> = ({
-  defaultSize = "normal",
+  defaultSize = VideoSize.NORMAL,
   dimensions,
   bgColor = "black",
   allowSmallScreen = false,
   smallScreenDimensions,
   allowFullScreen = false,
   fullScreenDimensions,
+
+  customDimensions1,
+  customDimensions2,
+  customDimensions3,
 
   videoBorder = "none",
   videoShadow = false,
@@ -95,8 +104,11 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
       (err: unknown, data: SocketServicesData) => {
         if (err) return;
 
+        console.clear();
+        console.log(data);
+
         if (data?.uid !== queryParams.get(RequestType.UserId)) return;
-        if (data?.tid !== queryParams.get(RequestType.Template)) return;
+        // if (data?.tid !== queryParams.get(RequestType.Template)) return;
         if (!videoPlayerRef?.current || !videoPlayerWrapperRef.current) return;
 
         switch (data.action) {
@@ -179,7 +191,7 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
 
           case VideoAction.SIZE_SMALL:
             if (!allowSmallScreen || !smallScreenDimensions) return;
-            setVideoSize("small");
+            setVideoSize(VideoSize.SMALL);
 
             videoPlayerWrapperRef.current.style.top = smallScreenDimensions.top;
             videoPlayerWrapperRef.current.style.left =
@@ -191,7 +203,7 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
             break;
 
           case VideoAction.SIZE_NORMAL:
-            setVideoSize("normal");
+            setVideoSize(VideoSize.NORMAL);
 
             videoPlayerWrapperRef.current.style.top = dimensions.top;
             videoPlayerWrapperRef.current.style.left = dimensions.left;
@@ -201,7 +213,7 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
 
           case VideoAction.SIZE_FULLSCREEN:
             if (!allowFullScreen || !fullScreenDimensions) return;
-            setVideoSize("fullscreen");
+            setVideoSize(VideoSize.FULLSCREEN);
 
             videoPlayerWrapperRef.current.style.top = fullScreenDimensions.top;
             videoPlayerWrapperRef.current.style.left =
@@ -210,6 +222,31 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
               fullScreenDimensions.width;
             videoPlayerWrapperRef.current.style.height =
               fullScreenDimensions.height;
+            break;
+
+          case VideoAction.SIZE_CUSTOM_1:
+          case VideoAction.SIZE_CUSTOM_2:
+          case VideoAction.SIZE_CUSTOM_3:
+            const customDimensions = {
+              [VideoAction.SIZE_CUSTOM_1]: customDimensions1,
+              [VideoAction.SIZE_CUSTOM_2]: customDimensions2,
+              [VideoAction.SIZE_CUSTOM_3]: customDimensions3
+            };
+
+            const customDimension = customDimensions[data.action];
+            if (!customDimension) return;
+
+            const videoSizeKey =
+              data.action.split("-")[2].toUpperCase() +
+              "_" +
+              data.action.split("-")[3];
+
+            setVideoSize(VideoSize[videoSizeKey as keyof typeof VideoSize]);
+
+            videoPlayerWrapperRef.current.style.top = customDimension.top;
+            videoPlayerWrapperRef.current.style.left = customDimension.left;
+            videoPlayerWrapperRef.current.style.width = customDimension.width;
+            videoPlayerWrapperRef.current.style.height = customDimension.height;
             break;
 
           default:
@@ -228,7 +265,10 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
   const theVideoSize: { [key: string]: Dimensions } = {
     small: smallScreenDimensions || dimensions,
     normal: dimensions,
-    fullscreen: fullScreenDimensions || dimensions
+    fullscreen: fullScreenDimensions || dimensions,
+    custom1: customDimensions1 || dimensions,
+    custom2: customDimensions2 || dimensions,
+    custom3: customDimensions3 || dimensions
   };
 
   return videoUrl ? (

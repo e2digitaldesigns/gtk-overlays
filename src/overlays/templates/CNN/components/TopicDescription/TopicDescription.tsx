@@ -21,27 +21,24 @@ export const TopicDescriptionCNN: React.FC = () => {
   if (!showSection(SectionsCNN.Description)) return null;
 
   return (
-    <>
-      <h1>Topic Description</h1>
-      <Styled.TopicDescriptionWrapper>
-        {topics.map((topic: IntTopic, index: number) => (
-          <Styled.TopicGrid
-            key={topic._id}
-            linkState={setLiState(index)}
-            hasImage={!!topic?.img}
-          >
-            {!!topic?.img && (
-              <Styled.TopicImage>
-                <img src={topic.img} alt={topic.name} />
-              </Styled.TopicImage>
-            )}
+    <Styled.TopicDescriptionWrapper>
+      {topics.map((topic: IntTopic, index: number) => (
+        <Styled.TopicGrid
+          key={topic._id}
+          linkState={setLiState(index)}
+          hasImage={!!topic?.img}
+        >
+          {!!topic?.img && (
+            <Styled.TopicImage>
+              <img src={topic.img} alt={topic.name} />
+            </Styled.TopicImage>
+          )}
 
-            <Styled.TopicDescription hasImage={!!topic?.img}>
-              {topicVoterParser(topic.desc, topicVotes)}
-            </Styled.TopicDescription>
-          </Styled.TopicGrid>
-        ))}
-      </Styled.TopicDescriptionWrapper>
-    </>
+          <Styled.TopicDescription hasImage={!!topic?.img}>
+            {topicVoterParser(topic.desc, topicVotes)}
+          </Styled.TopicDescription>
+        </Styled.TopicGrid>
+      ))}
+    </Styled.TopicDescriptionWrapper>
   );
 };
