@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as Styled from "./NetworkTab.styles";
+import { MdOndemandVideo } from "react-icons/md";
 import { useSimpleTopic } from "../../../../../../hooks";
 import { IntTopic } from "../../../../../../globalComponents/Topics/types";
 
@@ -16,6 +17,9 @@ const NetworkTab: React.FC = () => {
     <Styled.NetworkTab>
       {topics.map((topic: IntTopic, index: number) => (
         <Styled.TopicGrid key={topic._id} linkState={setLiState(index)}>
+          {topic.name && (
+            <MdOndemandVideo size={36} style={{ padding: "0px 5px 0 0" }} />
+          )}
           {topic.name}
         </Styled.TopicGrid>
       ))}

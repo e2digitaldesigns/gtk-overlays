@@ -45,6 +45,7 @@ interface ITopicGrid {
 }
 
 export const TopicGrid = styled.div<ITopicGrid>`
+  display: flex;
   position: absolute;
   width: 100%;
   height: 100%;
