@@ -50,7 +50,7 @@ export const TopicsNormalCNN: React.FC = () => {
               </Styled.TopicLiName>
 
               <Styled.TopicLiLive active={index === activeTopicIndex}>
-                Live Now
+                {topic.video && <span>*</span>} Live Now
               </Styled.TopicLiLive>
 
               <Styled.TopicLiNext isNext={index === activeTopicIndex + 1}>

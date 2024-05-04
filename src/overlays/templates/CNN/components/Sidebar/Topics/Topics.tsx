@@ -6,7 +6,8 @@ import { TopicsSmallCNN } from "./TopicSmall";
 export const TopicsCNN: React.FC = () => {
   return (
     <Styled.TopicsWrapper>
-      <TopicsSmallCNN /> <TopicsNormalCNN />
+      <TopicsSmallCNN />
+      <TopicsNormalCNN />
     </Styled.TopicsWrapper>
   );
 };
