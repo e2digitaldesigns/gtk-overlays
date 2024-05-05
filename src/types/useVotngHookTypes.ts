@@ -5,8 +5,8 @@ export interface IVotingState {
 export enum IVoteAction {
   Yes = "yes",
   No = "no",
-  One = "one",
-  Two = "two",
+  One = "1",
+  Two = "2",
   Add = "add",
   Remove = "remove",
   True = "true",

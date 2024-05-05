@@ -15,9 +15,11 @@ import {
 } from "../../types";
 
 import { getKeyWithHighestValue } from "../../_utils/getKeyWithHighestValue";
+import { IntTopic } from "../../globalComponents/Topics/types";
 
 export interface IVotingDataStore {
   topicId: string;
+  votingOptions: string[];
   votes: IVotes[];
   votingState: IVotingState;
   votingStreak: IVoteStreaks;
@@ -26,7 +28,7 @@ export interface IVotingDataStore {
   topicVotingParsed: TopicVotesParsed;
   superVoteLog: { [key: string]: string[] };
 
-  setTopicId: (topicId: string) => void;
+  setTopicId: (topic: IntTopic) => void;
   logTopicVote: (data: IVotes) => void;
   handleHostVoting: (vote: IVotes, type: "add" | "remove" | "super") => void;
   handleHostVotingSuper: (data: IVotes) => void;
@@ -42,6 +44,7 @@ const useVotingDataStore = create(
     ) => {
       return {
         topicId: "",
+        votingOptions: [],
         votes: [],
         votingState: initVotingState,
         votingStreak: initVotingStreakState,
@@ -58,8 +61,9 @@ const useVotingDataStore = create(
         },
         superVoteLog: {},
 
-        setTopicId: (topicId: string) => {
-          set({ topicId });
+        setTopicId: (topic: IntTopic) => {
+          const topicId = topic._id;
+          set({ topicId: topicId });
 
           const superVoteLog = _cloneDeep(get().superVoteLog);
           const newSuperVoteLog = { ...superVoteLog };
@@ -69,15 +73,23 @@ const useVotingDataStore = create(
           }
 
           set({ superVoteLog: newSuperVoteLog });
+
+          if (topic.votingOptions.length) {
+            set({ votingOptions: topic.votingOptions.map(opt => opt.value) });
+          } else {
+            set({ votingOptions: [] });
+          }
         },
 
         logTopicVote: (data: IVotes) => {
-          const currentTopic = get().topicId;
+          const votingOptions = get().votingOptions;
+          if (!votingOptions.includes(data.action)) return;
 
+          const currentTopicId = get().topicId;
           const newState = structuredClone(get().topicVotingState);
 
-          newState[currentTopic] = {
-            ...(newState?.[currentTopic] || {}),
+          newState[currentTopicId] = {
+            ...(newState?.[currentTopicId] || {}),
             [data.username]: data.action
           };
 

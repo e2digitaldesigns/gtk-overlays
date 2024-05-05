@@ -35,8 +35,8 @@ const useVotingHook = (): IUseVotingHook => {
     return {
       trueCount: objectValues.filter(value => value === "true").length,
       falseCount: objectValues.filter(value => value === "false").length,
-      oneCount: objectValues.filter(value => value === "one").length,
-      twoCount: objectValues.filter(value => value === "two").length,
+      oneCount: objectValues.filter(value => value === "1").length,
+      twoCount: objectValues.filter(value => value === "2").length,
       yesCount: objectValues.filter(value => value === "yes").length,
       noCount: objectValues.filter(value => value === "no").length
     };

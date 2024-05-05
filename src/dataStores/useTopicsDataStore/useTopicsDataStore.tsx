@@ -40,7 +40,7 @@ const useTopicsDataStore = create<ITopicsDataStore>(
         });
 
         setStorageData(data[0]?._id);
-        useVotingDataStore.getState().setTopicId(data[0]?._id);
+        useVotingDataStore.getState().setTopicId(data[0]);
       },
 
       topicNext: () => {
@@ -57,7 +57,7 @@ const useTopicsDataStore = create<ITopicsDataStore>(
 
           const theTopic = topics[nextIndex];
           setStorageData(theTopic._id);
-          useVotingDataStore.getState().setTopicId(theTopic._id);
+          useVotingDataStore.getState().setTopicId(theTopic);
         }
       },
 
@@ -75,7 +75,7 @@ const useTopicsDataStore = create<ITopicsDataStore>(
 
           const theTopic = topics[prevIndex];
           setStorageData(theTopic._id);
-          useVotingDataStore.getState().setTopicId(theTopic._id);
+          useVotingDataStore.getState().setTopicId(theTopic);
         }
       },
 
