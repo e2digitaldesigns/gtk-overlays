@@ -17,7 +17,7 @@ const NetworkTab: React.FC = () => {
     <Styled.NetworkTab>
       {topics.map((topic: IntTopic, index: number) => (
         <Styled.TopicGrid key={topic._id} linkState={setLiState(index)}>
-          {topic.name && (
+          {!!topic.video && (
             <MdOndemandVideo size={36} style={{ padding: "0px 5px 0 0" }} />
           )}
           {topic.name}
