@@ -18,8 +18,8 @@
   "images": {
     "logo": {
       "maxAmount": 1,
-      "width": 230,
-      "height": 135
+      "width": 940,
+      "height": 535
     },
     "sponsors": {
       "maxAmount": 0,
@@ -38,6 +38,10 @@
       "param": "header"
     },
     {
+      "name": "Chat Message",
+      "param": "chat_message"
+    },
+    {
       "name": "Chyron",
       "param": "chyron"
     },
@@ -52,6 +56,10 @@
     {
       "name": "Host 3",
       "param": "host_3"
+    },
+    {
+      "name": "Up Next",
+      "param": "up_next"
     },
     {
       "name": "Topic Image",
