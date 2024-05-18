@@ -25,7 +25,7 @@ export type ChatMessgeReturn = {
   action: "showChatMessage" | "hideChatMessage";
   uid: string;
   tid?: string;
-  message: string;
+  message: ChatMessage;
 };
 
 export type ChatRelayData = {
@@ -38,3 +38,22 @@ export type ChatRelayData = {
   url: string;
   fontColor: string;
 };
+
+type ChatMessage = {
+  _id: string;
+  broadcasterName: string;
+  name: string;
+  msg: string | React.ReactElement;
+  url: string;
+  fontColor: string;
+  showTime?: number;
+  transition?: TransitionDirection;
+};
+
+type TransitionDirection =
+  | "LeftToRight"
+  | "RightToLeft"
+  | "TopToBottom"
+  | "BottomToTop"
+  | "FadeIn"
+  | "ScaleIn";

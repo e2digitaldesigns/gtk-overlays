@@ -43,6 +43,7 @@ interface VoteFloatProps {
   type: string;
   delay: number;
   right: number;
+  bottom: number;
 }
 export const VoteFloat = styled.div<VoteFloatProps>`
   font-size: ${props => props.fontSize};
@@ -53,7 +54,7 @@ export const VoteFloat = styled.div<VoteFloatProps>`
   padding: 0 0.625rem;
 
   position: absolute;
-  bottom: 20px;
+  bottom: ${props => `${props.bottom}px`};
   right: ${props => `${props.right}px`};
   z-index: 0;
 

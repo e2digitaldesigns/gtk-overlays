@@ -132,7 +132,7 @@ const ChatDisplay: React.FC<ShowChatProps> = ({
 
         switch (data.action) {
           case "showChatMessage":
-            stillHere && setNextMessage(JSON.parse(data.message));
+            stillHere && setNextMessage(data.message);
             break;
 
           case "hideChatMessage":

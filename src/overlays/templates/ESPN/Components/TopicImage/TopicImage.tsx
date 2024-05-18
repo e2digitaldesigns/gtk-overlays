@@ -18,13 +18,15 @@ export const TopicImageESPN: React.FC = () => {
 
   return (
     <Styled.TopicImageWrapper>
-      <Styled.TopicImage>
+      <Styled.TopicImages>
         {topics.map((topic: IntTopic, index: number) => (
           <Styled.TopicImageLi key={topic._id} liState={setLiState(index)}>
-            <Styled.TopicImageImg src={topic.img} alt={topic.name} />
+            {!!topic?.img && (
+              <Styled.TopicImageImg src={topic.img} alt={topic.name} />
+            )}
           </Styled.TopicImageLi>
         ))}
-      </Styled.TopicImage>
+      </Styled.TopicImages>
     </Styled.TopicImageWrapper>
   );
 };

@@ -12,16 +12,18 @@ export const VideoESPN: React.FC = () => {
   if (!showSection(SectionsESPN.Video)) return null;
 
   const videoBorder =
-    videoSize !== "fullscreen" ? `2px solid ${theme.colors.accent1}` : "none";
+    videoSize !== "fullscreen" ? `5px solid ${theme.colors.accent2}` : "none";
+
+  const zIndex = videoSize === "fullscreen" ? 99999 : 10;
 
   return (
     <>
-      <div style={{ position: "absolute", zIndex: 99999 }}>
+      <div style={{ position: "absolute", zIndex }}>
         <VideoPlayer
           defaultSize={VideoSize.NORMAL}
           dimensions={{
             top: "180px",
-            left: "330px",
+            left: "320px",
             width: "940px",
             height: "535px"
           }}
@@ -33,6 +35,7 @@ export const VideoESPN: React.FC = () => {
             height: "1080px"
           }}
           videoBorder={videoBorder}
+          videoShadow={true}
         />
       </div>{" "}
     </>

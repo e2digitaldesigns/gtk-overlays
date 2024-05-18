@@ -10,6 +10,7 @@ import { HeaderTabESPN } from "./Components/HeaderTab/HeaderTab";
 import { HostsESPN } from "./Components/Hosts/Hosts";
 import { TopicImageESPN } from "./Components/TopicImage/TopicImage";
 import { VideoESPN } from "./Video/Video";
+import { TopicVotingESPN } from "./Components/Voting/Voting";
 
 const OverlayESPN: React.FC = () => {
   return (
@@ -17,10 +18,11 @@ const OverlayESPN: React.FC = () => {
       <ThemeProvider theme={theme}>
         <Styled.GlobalStyle />
         <Styled.Container>
+          <TopicVotingESPN />
           <UpNextESPN />
           <ShowChatESPN />
           <HeaderTabESPN />
-          {/* <VideoESPN /> */}
+          <VideoESPN />
 
           <TopicImageESPN />
 

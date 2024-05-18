@@ -7,7 +7,7 @@ export const TimingWrapper = styled.div`
   top: 0;
   left: 0;
   background-color: ${props => props.theme.colors.accent1};
-  border-right: 0.25rem solid ${props => props.theme.colors.accent2};
+  border-right: 0.25rem solid ${props => props.theme.colors.bg1};
 
   display: flex;
   align-items: center;
