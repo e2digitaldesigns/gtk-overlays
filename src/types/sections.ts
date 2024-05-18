@@ -85,6 +85,18 @@ export enum SectionsCNN {
   Video = "video"
 }
 
+export enum SectionsESPN {
+  ChatMessage = "chat_message",
+  Chyron = "chyron",
+  Header = "header",
+  Host1 = "host_1",
+  Host2 = "host_2",
+  Host3 = "host_3",
+  TopicImage = "topic_image",
+  UpNext = "up_next",
+  Video = "video"
+}
+
 export type OverlaySections =
   | SectionsBNN
   | SectionsCHL
@@ -92,4 +104,5 @@ export type OverlaySections =
   | SectionsPTI
   | SectionsSAS
   | SectionsXBX
-  | SectionsFGT;
+  | SectionsFGT
+  | SectionsESPN;

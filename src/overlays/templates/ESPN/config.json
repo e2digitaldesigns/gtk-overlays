@@ -1,0 +1,11 @@
+{
+  "scrollTimers": {
+    "clock": 40,
+    "headerTab": 45,
+    "networkTab": 60,
+    "newsFeed": 35,
+    "hostLabels": 30
+  },
+  "fireHostCount": 15,
+  "freezeHostCount": 5
+}
