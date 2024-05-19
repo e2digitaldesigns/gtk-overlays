@@ -15,7 +15,7 @@ export const ShowChatESPN: React.FC = () => {
     <Styled.ShowChatWrapper>
       <ChatDisplay
         bgColor={theme.colors.bg1}
-        borderBottom={`.25rem solid ${theme.colors.accent1}`}
+        borderBottom={`2px solid ${theme.colors.accent1}`}
         defaultTransition="LeftToRight"
         imageBorder={`1px solid ${theme.colors.accent1}`}
         imageShape="square"

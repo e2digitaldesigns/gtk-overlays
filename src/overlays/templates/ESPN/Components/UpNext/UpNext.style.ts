@@ -12,7 +12,7 @@ export const UpNextWrapper = styled.div`
   padding: 10px 20px;
 
   background-color: rgba(0, 0, 0, 0.97);
-  border-bottom: 0.25rem solid ${props => props.theme.colors.accent1};
+  border-bottom: 2px solid ${props => props.theme.colors.accent1};
 
   display: grid;
   grid-gap: 10px;
@@ -21,7 +21,7 @@ export const UpNextWrapper = styled.div`
 
 export const UpNextTitleDiv = styled.div`
   font-weight: 600;
-  font-size: 1.5rem;
+  font-size: 24px;
   text-align: right;
   border-right: 1px solid ${props => props.theme.colors.accent1};
   padding-right: 10px;

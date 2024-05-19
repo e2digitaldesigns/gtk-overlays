@@ -28,7 +28,7 @@ export const HostBox = styled.div`
   left: 0;
 
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.25);
-  border: 2px solid ${props => props.theme.colors.accent2};
+  border: 2px solid ${props => props.theme.colors.accent1};
   background-color: green;
 `;
 
