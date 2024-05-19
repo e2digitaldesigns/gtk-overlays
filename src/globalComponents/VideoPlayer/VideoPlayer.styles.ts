@@ -11,6 +11,7 @@ interface VideoPlayerProps {
   shadow: boolean;
   isFullscreen: boolean;
   transitionOnMove: boolean;
+  zIndex: number;
 }
 
 export const VideoPlayerWrapper = styled.div<VideoPlayerProps>`
@@ -21,7 +22,7 @@ export const VideoPlayerWrapper = styled.div<VideoPlayerProps>`
   width: ${props => props.width};
   height: ${props => props.height};
   background-color: ${props => props.bgColor};
-  z-index: 9999;
+  z-index: ${props => props.zIndex};
   opacity: 0;
 
   transition: ${props =>

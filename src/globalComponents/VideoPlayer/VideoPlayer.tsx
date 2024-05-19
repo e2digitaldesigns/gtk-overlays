@@ -30,10 +30,11 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
 
   videoBorder = "none",
   videoShadow = false,
-  hideVideoOnChange = false,
   transitionOnMove = true,
 
-  showVideoOnLoad = false
+  showVideoOnLoad = false,
+  playOnLoad = false,
+  zIndex = 9999
 }) => {
   const { topic, topicId } = useSimpleTopic();
   const videoUrl = topic?.video;
@@ -72,43 +73,36 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
     videoPlayerWrapperRef.current.style.opacity = opacity;
   }, [showVideo]);
 
-  React.useEffect(
-    () => {
-      if (videoPlayerWrapperRef.current && videoPlayerRef.current && videoUrl) {
-        videoPlayerRef.current.src = videoUrl;
-        videoPlayerRef.current.load();
+  React.useEffect(() => {
+    setShowVideo(false);
+    setIsVideoPlaying(false);
 
-        if (!hideVideoOnChange) {
-          videoPlayerRef.current.currentTime = 2;
-          showVideoOnLoad && setShowVideo(true);
-          if (isVideoPlaying) {
-            setShowVideo(true);
-            videoPlayerRef.current.play();
-          }
-        } else {
-          setShowVideo(false);
-          setIsVideoPlaying(false);
-        }
-      } else {
-        setShowVideo(false);
-        setIsVideoPlaying(false);
+    if (videoPlayerWrapperRef.current && videoPlayerRef.current && videoUrl) {
+      videoPlayerRef.current.src = videoUrl;
+      videoPlayerRef.current.load();
+      videoPlayerRef.current.currentTime = 1;
+
+      if (playOnLoad) {
+        videoPlayerRef.current.play();
+        setShowVideo(true);
+        setIsVideoPlaying(true);
+        return;
       }
-    },
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [topicId, videoUrl]
-  );
+      if (showVideoOnLoad) {
+        setShowVideo(true);
+        return;
+      }
+    }
+  }, [playOnLoad, showVideoOnLoad, topicId, videoUrl]);
 
   React.useEffect(() => {
     socketServices.subscribeOverlaysVideoPlayer(
       (err: unknown, data: SocketServicesData) => {
         if (err) return;
 
-        console.clear();
-        console.log(data);
-
         if (data?.uid !== queryParams.get(RequestType.UserId)) return;
-        // if (data?.tid !== queryParams.get(RequestType.Template)) return;
+        if (data?.tid !== queryParams.get(RequestType.Template)) return;
         if (!videoPlayerRef?.current || !videoPlayerWrapperRef.current) return;
 
         switch (data.action) {
@@ -283,6 +277,7 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
       shadow={videoShadow}
       isFullscreen={videoSize === "fullscreen"}
       transitionOnMove={transitionOnMove}
+      zIndex={zIndex}
     >
       <Styled.VideoPlayer ref={videoPlayerRef} />
     </Styled.VideoPlayerWrapper>

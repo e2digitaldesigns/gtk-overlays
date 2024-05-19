@@ -32,10 +32,11 @@ export interface IntVideoProps {
   customDimensions2?: Dimensions;
   customDimensions3?: Dimensions;
 
-  hideVideoOnChange?: boolean;
   transitionOnMove?: boolean;
 
   showVideoOnLoad?: boolean;
+  playOnLoad?: boolean;
+  zIndex?: number;
 }
 
 export enum VideoAction {

@@ -17,27 +17,31 @@ export const VideoESPN: React.FC = () => {
   const zIndex = videoSize === "fullscreen" ? 99999 : 10;
 
   return (
-    <>
-      <div style={{ position: "absolute", zIndex }}>
-        <VideoPlayer
-          defaultSize={VideoSize.NORMAL}
-          dimensions={{
-            top: "180px",
-            left: "320px",
-            width: "940px",
-            height: "535px"
-          }}
-          allowFullScreen={true}
-          fullScreenDimensions={{
-            top: "0px",
-            left: "0px",
-            width: "1920px",
-            height: "1080px"
-          }}
-          videoBorder={videoBorder}
-          videoShadow={true}
-        />
-      </div>{" "}
-    </>
+    <VideoPlayer
+      defaultSize={VideoSize.NORMAL}
+      allowSmallScreen={true}
+      smallScreenDimensions={{
+        top: "150px",
+        left: "10px",
+        width: "1210px",
+        height: "650px"
+      }}
+      dimensions={{
+        top: "180px",
+        left: "320px",
+        width: "940px",
+        height: "535px"
+      }}
+      allowFullScreen={true}
+      fullScreenDimensions={{
+        top: "0px",
+        left: "0px",
+        width: "1920px",
+        height: "1080px"
+      }}
+      videoBorder={videoBorder}
+      videoShadow={true}
+      zIndex={zIndex}
+    />
   );
 };
