@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-export const TopicImageWrapper = styled.div`
+interface ITopicImageWrapper {
+  hideTopicImage: boolean;
+}
+
+export const TopicImageWrapper = styled.div<ITopicImageWrapper>`
   box-sizing: border-box;
   width: 940px;
   height: 535px;
@@ -10,6 +14,7 @@ export const TopicImageWrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.9);
   border: 2px solid ${props => props.theme.colors.accent2};
   overflow: hidden;
+  display: ${props => (props.hideTopicImage ? "none" : "block")};
 `;
 
 export const TopicImages = styled.div`

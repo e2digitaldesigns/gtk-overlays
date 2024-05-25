@@ -4,21 +4,21 @@ export const VotingWrapper = styled.div<{ isVisible: boolean }>`
   position: absolute;
   right: ${props => (props.isVisible ? "10px" : "-620px")};
   bottom: 300px;
-  width: 680px;
+  width: 640px;
   height: 110px;
 
   background-color: ${props => props.theme.colors.bg1};
   opacity: ${props => (props.isVisible ? 1 : 0)};
   transition: all 1s ease-in-out;
   z-index: 15;
-  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.35);
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.65);
 `;
 
 const LabelTab = styled.div`
   position: absolute;
   top: 0px;
 
-  width: 45%;
+  width: calc(50% - 20px);
   height: 35px;
 
   display: flex;
@@ -35,18 +35,19 @@ const LabelTab = styled.div`
 export const LabelTabLeft = styled(LabelTab)`
   left: 0px;
   border-right: 2px solid ${props => props.theme.colors.accent1};
+  justify-content: right;
 `;
 
 export const LabelTabRight = styled(LabelTab)`
   right: 0px;
   border-left: 2px solid ${props => props.theme.colors.accent1};
-  justify-content: right;
+  justify-content: left;
 `;
 
 const VotingContent = styled.div<{ isWinning?: boolean }>`
   position: absolute;
   top: 35px;
-  width: 50%;
+  width: calc(50% - 20px);
   height: 70px;
   font-size: 3rem;
   display: flex;

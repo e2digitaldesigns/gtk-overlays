@@ -3,10 +3,14 @@ import * as Styled from "./TopicImage.sytle";
 import { IntTopic } from "../../../../../globalComponents/Topics/types";
 import { useParams, useSimpleTopic } from "../../../../../hooks";
 import { SectionsESPN } from "../../../../../types";
+import useVideoPlayerDataStore from "../../../../../dataStores/useVideoPlayerDataStore/useVideoPlayerDataStore";
 
 export const TopicImageESPN: React.FC = () => {
   const { topics, topicIndex } = useSimpleTopic();
   const { showSection } = useParams();
+  const { isVideoViewable, videoSize } = useVideoPlayerDataStore();
+
+  const hideTopicImage = isVideoViewable && videoSize === "small";
 
   const setLiState = (index: number) => {
     if (index < topicIndex) return "visited";
@@ -17,7 +21,7 @@ export const TopicImageESPN: React.FC = () => {
   if (!showSection(SectionsESPN.TopicImage)) return null;
 
   return (
-    <Styled.TopicImageWrapper>
+    <Styled.TopicImageWrapper hideTopicImage={hideTopicImage}>
       <Styled.TopicImages>
         {topics.map((topic: IntTopic, index: number) => (
           <Styled.TopicImageLi key={topic._id} liState={setLiState(index)}>

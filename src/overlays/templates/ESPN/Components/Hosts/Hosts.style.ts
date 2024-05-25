@@ -2,10 +2,11 @@ import styled from "styled-components";
 
 interface IntHostBoxWrapper {
   position: number;
+  hideHost1: boolean;
 }
 
-const hostBoxPosition = (position: number) => {
-  if (position === 1) return "left: 10px;";
+const hostBoxPosition = (hideHost1: boolean, position: number) => {
+  if (position === 1) return `left: 10px; z-index:${hideHost1 ? "0" : "20"};`;
   if (position === 2) return "left: 1230px;";
   if (position === 3) return "right: 10px;";
 };
@@ -16,7 +17,7 @@ export const HostBoxWrapper = styled.div<IntHostBoxWrapper>`
   width: 335px;
   height: 420px;
   z-index: 15;
-  ${props => hostBoxPosition(props.position)};
+  ${props => hostBoxPosition(props.hideHost1, props.position)};
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.35);
 `;
 

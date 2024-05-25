@@ -18,19 +18,19 @@ export const VideoESPN: React.FC = () => {
 
   return (
     <VideoPlayer
-      defaultSize={VideoSize.NORMAL}
+      defaultSize={VideoSize.SMALL}
       allowSmallScreen={true}
       smallScreenDimensions={{
-        top: "150px",
-        left: "10px",
-        width: "1210px",
-        height: "650px"
-      }}
-      dimensions={{
         top: "180px",
         left: "320px",
         width: "940px",
         height: "535px"
+      }}
+      dimensions={{
+        top: "150px",
+        left: "10px",
+        width: "1210px",
+        height: "650px"
       }}
       allowFullScreen={true}
       fullScreenDimensions={{
