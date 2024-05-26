@@ -17,3 +17,5 @@ export { default as UpNext } from "./UpNext/UpNext";
 export { default as TimerOrTime } from "./TimerOrTime/TimerOrTime";
 
 export { default as ChatRelay } from "./ChatRelay/ChatRelay";
+
+export { default as TopicVotingBlock } from "./TopicVoting/TopicVoting";
