@@ -29,18 +29,7 @@ export const UpNextFGT: React.FC = () => {
   if (!showSection(SectionsFGT.UpNext)) return null;
   return (
     <UpNextWrapper>
-      <UpNext
-        titleCss={{
-          color: "white",
-          fontSize: "1.5rem",
-          fontWeight: "normal",
-          textTransform: "uppercase"
-        }}
-        topicCss={{
-          fontSize: "1.75rem",
-          textTransform: "uppercase"
-        }}
-      />
+      <UpNext />
     </UpNextWrapper>
   );
 };

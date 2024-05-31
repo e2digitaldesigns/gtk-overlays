@@ -93,6 +93,7 @@ const ChatDisplay: React.FC<ShowChatProps> = ({
 
   React.useEffect(() => {
     if (!nextMessage) return;
+    const showTime = nextMessage.showTime || defaultShowTime;
 
     if (!message) {
       setMessage(nextMessage);
@@ -100,7 +101,7 @@ const ChatDisplay: React.FC<ShowChatProps> = ({
 
       timeoutId.current = setTimeout(() => {
         setIsActive(false);
-      }, nextMessage?.showTime || defaultShowTime);
+      }, showTime);
     }
 
     if (message) {
@@ -112,7 +113,7 @@ const ChatDisplay: React.FC<ShowChatProps> = ({
 
         timeoutId.current = setTimeout(() => {
           setIsActive(false);
-        }, nextMessage?.showTime || defaultShowTime);
+        }, showTime);
       }, transitionTime);
     }
 

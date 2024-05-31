@@ -30,7 +30,7 @@ interface IntScrollerProps {
   callBack?: (item: IntScrollerListItem) => void;
   showTitle?: boolean;
 
-  transition?: "scroll" | "fade";
+  transition?: "scroll" | "fade" | "scroll-left";
   transitionTime?: string;
 }
 
@@ -62,8 +62,8 @@ const GTK_Scroller: React.FC<IntScrollerProps> = ({
   const length = data
     ? data.length
     : children
-    ? React.Children.count(children)
-    : 0;
+      ? React.Children.count(children)
+      : 0;
 
   React.useEffect(() => {
     setOldIndex(activeIndex);
@@ -100,12 +100,12 @@ const GTK_Scroller: React.FC<IntScrollerProps> = ({
       length === 1
         ? TickerStatus.static
         : activeIndex === -1
-        ? TickerStatus.starter
-        : activeIndex === index
-        ? TickerStatus.active
-        : oldIndex === index
-        ? TickerStatus.inactive
-        : TickerStatus.hidden;
+          ? TickerStatus.starter
+          : activeIndex === index
+            ? TickerStatus.active
+            : oldIndex === index
+              ? TickerStatus.inactive
+              : TickerStatus.hidden;
 
     return classic;
   };
@@ -120,6 +120,7 @@ const GTK_Scroller: React.FC<IntScrollerProps> = ({
                 state={setClassName(index)}
                 key={index}
                 fontSize={fontSize}
+                showTitle={showTitle}
                 transition={transition}
                 transitionTime={transitionTime}
               >
@@ -134,7 +135,7 @@ const GTK_Scroller: React.FC<IntScrollerProps> = ({
                   )}
                   <Styled.ListItemDivText textStyle={textStyle} sx={sx?.text}>
                     {m?.text && m.text}
-                  </Styled.ListItemDivText>{" "}
+                  </Styled.ListItemDivText>
                 </>
               </Styled.ListItem>
             ))}

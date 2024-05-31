@@ -38,7 +38,6 @@ export const TopicWrapper = styled.div`
   font-weight: 600;
   overflow: hidden;
   scroll-snap-type: y mandatory;
-
   position: relative;
 `;
 

@@ -1,4 +1,5 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
+import * as Animations from "./ScrollerAnimations.styles";
 
 const cssParser = (object1: object) => {
   let str = "";
@@ -51,6 +52,7 @@ interface IListItem {
   state: TickerStatus;
   fontSize?: number;
   isChildren?: boolean;
+  showTitle?: boolean;
   transition?: string;
   transitionTime: string;
 }
@@ -67,7 +69,8 @@ const ListItemCommon = styled.li<IListItem>`
   top: 0;
 
   display: ${props => (props.state === TickerStatus.hidden ? "none" : "grid")};
-  grid-template-columns: ${props => (props.isChildren ? "1fr" : "auto 1fr")};
+  grid-template-columns: ${props =>
+    props.isChildren || !props.showTitle ? "1fr" : "auto 1fr"};
 
   animation-duration: ${props => props.transitionTime};
   animation-timing-function: ease-in-out;
@@ -80,57 +83,17 @@ export const ListItem = styled(ListItemCommon)<IListItem>`
   animation-name: ${props =>
     props.state === TickerStatus.active
       ? props.transition === "scroll"
-        ? animationIn
-        : animationFadeIn
+        ? Animations.scrollDownIn
+        : props.transition === "scroll-left"
+          ? Animations.scrollLeftIn
+          : Animations.fadeIn
       : props.state === TickerStatus.inactive
-      ? props.transition === "scroll"
-        ? animationOut
-        : animationFadeOut
-      : "none"};
-`;
-
-const animationIn = keyframes`
- 0% {
-    top:-100%;
-    opacity: 1;
-  }
-
-  100% {
-    top:0px;
-    opacity: 1;
-  }
-`;
-
-const animationOut = keyframes`
-  0% {
-    top:0px;
-    opacity: 1;
-  }
-
-  100% {
-    top:100%;
-    opacity: 1;
-  }
-`;
-
-const animationFadeIn = keyframes`
- 0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-`;
-
-const animationFadeOut = keyframes`
-  0% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-  }
+        ? props.transition === "scroll"
+          ? Animations.scrollDownOut
+          : props.transition === "scroll-left"
+            ? Animations.scrollLeftOut
+            : Animations.fadeOut
+        : "none"};
 `;
 
 interface IListItemDiv {
@@ -161,6 +124,7 @@ export const ListItemDivTitle = styled(ListItemDiv)<IListItemDiv>`
 `;
 
 export const ListItemDivText = styled(ListItemDiv)<IListItemDiv>`
+  width: 100%;
   color: ${props =>
     props?.textStyle?.color ? props.textStyle.color : "inherit"};
 

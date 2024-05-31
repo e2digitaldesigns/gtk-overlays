@@ -40,9 +40,7 @@ export const ShowMessages: React.FC<ShowMessagesProps> = ({
 
   return (
     <>
-      <span style={{ fontWeight: 500, color: useThisNameColor }}>
-        {name}: &nbsp;{" "}
-      </span>
+      <span style={{ fontWeight: 500, color: useThisNameColor }}>{name}: </span>
       {renderedContent}
     </>
   );

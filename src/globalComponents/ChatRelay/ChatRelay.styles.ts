@@ -26,7 +26,7 @@ interface IChatRelayWrapperProps {
 export const ChatMessageWrapper = styled.div<IChatRelayWrapperProps>`
   height: 100%;
   width: 100%;
-  background-color: #202124;
+  background-color: ${props => props.bgColor};
   ${props => props?.sxWrapper && cssParser(props.sxWrapper)}
 `;
 

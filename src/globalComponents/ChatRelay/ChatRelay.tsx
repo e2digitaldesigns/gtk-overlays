@@ -7,32 +7,29 @@ import { STORAGE_KEY } from "./../../types";
 import _cloneDeep from "lodash/cloneDeep";
 
 interface ChatRelayComponentProps {
-  direction?: "top" | "bottom";
-  sxWrapper?: object;
   bgColor?: string;
-  sxGrid?: object;
   borderBottomColor?: string;
-  fontSize?: string;
-
   defaultNameColor?: string;
-  useTwitchNameColor?: boolean;
-  textColor?: string;
+  direction?: "top" | "bottom";
+  fontSize?: string;
   maxMessages?: number;
+  sxGrid?: object;
+  sxWrapper?: object;
+  textColor?: string;
+  useTwitchNameColor?: boolean;
 }
 
 const ChatRelayComponent: React.FC<ChatRelayComponentProps> = ({
-  direction = "bottom",
   bgColor = "transparent",
+  borderBottomColor = "#3a3a3a;",
+  defaultNameColor = "#fff",
+  direction = "bottom",
+  fontSize = "0.875rem",
+  maxMessages = 20,
   sxGrid = {},
   sxWrapper = {},
-  borderBottomColor = "#3a3a3a;",
-  fontSize = "0.875rem",
-
-  defaultNameColor = "#fff",
-  useTwitchNameColor = true,
   textColor = "#fff",
-
-  maxMessages = 20
+  useTwitchNameColor = true
 }) => {
   const queryParams = new URLSearchParams(window.location.search);
   const [chatMessages, setChatMessages] = React.useState<ChatRelayData[]>([]);
@@ -60,8 +57,23 @@ const ChatRelayComponent: React.FC<ChatRelayComponentProps> = ({
     socketServices.subscribeChatRelay((err: unknown, data: ChatRelayData) => {
       if (data?.uid !== queryParams.get(RequestType.UserId)) return;
 
-      setChatMessages(prev => [...prev, data]);
-      return;
+      switch (data.action) {
+        case "clear-chat-messages":
+          setChatMessages([]);
+          window.localStorage.removeItem(STORAGE_KEY.CHAT_MESSAGES_OVERLAY);
+          break;
+
+        case "new-chat-message":
+          setChatMessages(prev => [...prev, data]);
+          break;
+
+        case "remove-last-message":
+          setChatMessages(prev => prev.slice(0, -1));
+          break;
+
+        default:
+          break;
+      }
     });
 
     return () => {
@@ -90,10 +102,10 @@ const ChatRelayComponent: React.FC<ChatRelayComponentProps> = ({
               >
                 <Styled.ChatMessage color={textColor}>
                   <ShowMessages
+                    defaultNameColor={defaultNameColor}
                     message={message.msgEmotes}
                     name={message.name}
                     twitchNameColor={message.fontColor}
-                    defaultNameColor={defaultNameColor}
                     useTwitchNameColor={useTwitchNameColor}
                   />
                 </Styled.ChatMessage>

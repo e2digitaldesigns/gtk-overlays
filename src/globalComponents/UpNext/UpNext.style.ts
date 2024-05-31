@@ -1,17 +1,33 @@
-import styled, { CSSObject } from "styled-components";
+import styled from "styled-components";
+
+export const UpNextWrapper = styled.div<{
+  borderColor: string;
+  fontColor: string;
+}>`
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  padding: 10px 20px;
+
+  background-color: rgba(0, 0, 0, 0.97);
+  border-bottom: 0.25rem solid ${props => props.borderColor};
+
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 115px 1fr;
+  color: ${props => props.fontColor};
+`;
 
 interface UpNextTitleDivProps {
-  titleCss: CSSObject;
+  borderColor: string;
 }
 export const UpNextTitleDiv = styled.div<UpNextTitleDivProps>`
   font-weight: 600;
   font-size: 1.5rem;
   text-align: right;
-  border-right: 1px solid ${props => props.theme.colors.accent1};
+  border-right: 1px solid ${props => props.borderColor};
   padding-right: 10px;
   text-transform: uppercase;
-
-  ${props => props.titleCss}
 `;
 
 export const TopicWrapper = styled.div`
@@ -20,9 +36,10 @@ export const TopicWrapper = styled.div`
   justify-content: space-between;
   height: 100%;
   text-transform: uppercase;
+  font-size: 1.5rem;
+  font-weight: 600;
   overflow: hidden;
   scroll-snap-type: y mandatory;
-
   position: relative;
 `;
 
@@ -41,17 +58,13 @@ export const TopicUl = styled.ul<TopicUlProps>`
 interface TopicLiProps {
   liPosition: number;
   liHeight: number;
-  topicCss: CSSObject;
 }
 
 export const TopicLi = styled.li<TopicLiProps>`
   height: ${props => props.liHeight}px;
-  border-bottom: 1px solid black;
 
   color: ${props =>
     props.liPosition === 1 ? "#aaa" : props.liPosition === 2 ? "#777" : "#444"};
 
   transition: color 0.5s ease-in-out;
-
-  ${props => props.topicCss}
 `;

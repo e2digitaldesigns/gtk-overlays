@@ -105,6 +105,8 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
         if (data?.tid !== queryParams.get(RequestType.Template)) return;
         if (!videoPlayerRef?.current || !videoPlayerWrapperRef.current) return;
 
+        console.log("data.action", data.action);
+
         switch (data.action) {
           case VideoAction.PLAY:
             videoPlayerRef.current?.play().then(() => {

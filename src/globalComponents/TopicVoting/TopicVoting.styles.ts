@@ -2,9 +2,11 @@ import styled from "styled-components";
 
 export const VotingWrapper = styled.div<{
   bgColor: string;
+  fontColor: string;
   isVisible: boolean;
 }>`
   position: absolute;
+  color: ${props => props.fontColor};
   left: ${props => (props.isVisible ? "0px" : "100%")};
   bottom: 0px;
   width: 100%;

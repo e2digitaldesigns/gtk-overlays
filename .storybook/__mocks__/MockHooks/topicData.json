@@ -1,0 +1,44 @@
+{
+  "topics": [
+    {
+      "_id": "12",
+      "order": 0,
+      "name": "name",
+      "desc": "",
+      "timer": 0,
+      "isParent": false,
+      "isChild": false,
+      "parentId": "",
+      "img": "",
+      "video": "https://mg-show-assets.s3.us-east-1.amazonaws.com/videos/user-videos/650322ed74eb9d0a9e9844b9_ea8234ce-abdc-48cf-a06d-1a00d83521bd.mp4",
+      "chat": "",
+      "voting": true,
+      "votingOptions": [
+        { "label": "Paul", "value": "1" },
+        { "label": "Jin", "value": "2" }
+      ]
+    }
+  ],
+  "topic": {
+    "_id": "12",
+    "order": 0,
+    "name": "name",
+    "desc": "",
+    "timer": 0,
+    "isParent": false,
+    "isChild": false,
+    "parentId": "",
+    "img": "",
+    "video": "https://mg-show-assets.s3.us-east-1.amazonaws.com/videos/user-videos/66485e8f094c8f2c9fdd30ec_a9eb648f-ffd0-4008-aa3a-54eec3b1c57c.mp4",
+    "chat": "",
+    "voting": true,
+    "votingOptions": [
+      { "label": "Paul", "value": "1" },
+      { "label": "Jin", "value": "2" }
+    ]
+  },
+  "topicId": "12",
+  "topicIndex": 0,
+  "index": 0,
+  "isTimerPaused": false
+}

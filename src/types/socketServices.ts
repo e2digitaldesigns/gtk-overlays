@@ -29,6 +29,7 @@ export type ChatMessgeReturn = {
 };
 
 export type ChatRelayData = {
+  action: string;
   uid: string;
   _id: string;
   broadcasterName: string;

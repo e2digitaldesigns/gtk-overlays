@@ -2,16 +2,16 @@ import React from "react";
 import * as Styled from "./TopicVoting.styles";
 import { useSimpleTopic, useVoting } from "../../hooks";
 
-// props.theme.colors.bg1
-
 interface TopicVotingProps {
   accentColor?: string;
   bgColor?: string;
+  fontColor?: string;
 }
 
 const TopicVotingBlock: React.FC<TopicVotingProps> = ({
-  accentColor = "white",
-  bgColor = "black"
+  accentColor = "blue",
+  bgColor = "red",
+  fontColor = "white"
 }) => {
   const { topic: activeTopic } = useSimpleTopic();
   const { topicVotes } = useVoting();
@@ -31,7 +31,11 @@ const TopicVotingBlock: React.FC<TopicVotingProps> = ({
   const voteCount2 = votesMap?.[activeTopic?.votingOptions?.[1]?.value] || 0;
 
   return (
-    <Styled.VotingWrapper bgColor={bgColor} isVisible={topicHasVoting}>
+    <Styled.VotingWrapper
+      bgColor={bgColor}
+      fontColor={fontColor}
+      isVisible={topicHasVoting}
+    >
       <Styled.LabelTabLeft accentColor={accentColor}>
         {activeTopic?.votingOptions?.[0]?.label}
       </Styled.LabelTabLeft>
