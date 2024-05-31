@@ -30,9 +30,6 @@ export const VideoCNN: React.FC = () => {
     <>
       <VideoPlayer
         defaultSize={VideoSize.SMALL}
-        videoBorder="1px solid black"
-        allowFullScreen={true}
-        allowSmallScreen={true}
         dimensions={{
           top: "10px",
           left: "630px",
@@ -51,6 +48,7 @@ export const VideoCNN: React.FC = () => {
           width: "610px",
           height: "345px"
         }}
+        videoBorder="1px solid black"
       />
 
       <Styled.VideoBorderTop isVisible={showTopic} />

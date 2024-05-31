@@ -11,7 +11,7 @@ const meta = {
       <>
         <div
           style={{
-            width: "600px",
+            width: "400px",
             height: "250px",
             position: "relative",
             overflow: "hidden",
@@ -29,11 +29,11 @@ const meta = {
             gap: "10px"
           }}
         >
-          <Button onClick={sendMessage}>Add new message!</Button>
+          <Button onClick={sendMessage}>New Message!</Button>
 
-          <Button onClick={clearChat}>Clear messages</Button>
+          <Button onClick={clearChat}>Clear</Button>
 
-          <Button onClick={removeLastMessage}>Remove last message</Button>
+          <Button onClick={removeLastMessage}>Remove Last Message</Button>
         </div>
       </>
     )

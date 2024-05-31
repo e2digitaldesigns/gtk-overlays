@@ -31,7 +31,6 @@ export const VideoFGT: React.FC = () => {
             width: "1280px",
             height: "720px"
           }}
-          allowFullScreen={true}
           fullScreenDimensions={{
             top: "-10px",
             left: "-10px",

@@ -7,7 +7,7 @@ import {
 } from "./mockChatMessage";
 
 const meta = {
-  title: "Global Components/ChatDisplay",
+  title: "Global Components/Chat Display",
   component: Component,
   decorators: [
     Story => (

@@ -11,9 +11,6 @@ const VideoXBX: React.FC = () => {
 
   return (
     <VideoPlayer
-      videoBorder="1px solid black"
-      allowFullScreen={true}
-      allowSmallScreen={true}
       dimensions={{
         top: "20px",
         left: "105px",
@@ -32,6 +29,7 @@ const VideoXBX: React.FC = () => {
         width: "390px",
         height: "230px"
       }}
+      videoBorder="1px solid black"
     />
   );
 };

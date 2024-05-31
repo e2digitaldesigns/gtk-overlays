@@ -38,7 +38,7 @@ const meta = {
                 margin: "5px",
                 width: "970px",
                 height: "550px",
-                background: "#31aafd",
+                background: "#444",
                 position: "relative"
               }}
             >
@@ -102,8 +102,6 @@ export const Primary: Story = {
       width: "960px",
       height: "540px"
     },
-    allowFullScreen: true,
-    allowSmallScreen: true,
     showVideoOnLoad: true,
     videoShadow: true
   }

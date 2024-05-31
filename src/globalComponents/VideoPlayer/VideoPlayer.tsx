@@ -17,13 +17,12 @@ import useVideoPlayerDataStore from "../../dataStores/useVideoPlayerDataStore/us
 
 const GTK_VideoComponent: React.FC<IntVideoProps> = ({
   defaultSize = VideoSize.NORMAL,
-  dimensions,
-  bgColor = "black",
-  allowSmallScreen = false,
-  smallScreenDimensions,
-  allowFullScreen = false,
-  fullScreenDimensions,
 
+  bgColor = "black",
+
+  dimensions,
+  smallScreenDimensions,
+  fullScreenDimensions,
   customDimensions1,
   customDimensions2,
   customDimensions3,
@@ -186,7 +185,7 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
             break;
 
           case VideoAction.SIZE_SMALL:
-            if (!allowSmallScreen || !smallScreenDimensions) return;
+            if (!smallScreenDimensions) return;
             setVideoSize(VideoSize.SMALL);
 
             videoPlayerWrapperRef.current.style.top = smallScreenDimensions.top;
@@ -208,7 +207,7 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
             break;
 
           case VideoAction.SIZE_FULLSCREEN:
-            if (!allowFullScreen || !fullScreenDimensions) return;
+            if (!fullScreenDimensions) return;
             setVideoSize(VideoSize.FULLSCREEN);
 
             videoPlayerWrapperRef.current.style.top = fullScreenDimensions.top;

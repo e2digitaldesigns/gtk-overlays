@@ -30,22 +30,6 @@ const VideoCHL: React.FC = () => {
     <>
       <div style={{ position: "absolute", zIndex: 99999 }}>
         <VideoPlayer
-          defaultSize={VideoSize.CUSTOM_2}
-          dimensions={{
-            top: "170px",
-            left: "310px",
-            width: "1280px",
-            height: "720px"
-          }}
-          allowFullScreen={true}
-          fullScreenDimensions={{
-            top: "0px",
-            left: "0px",
-            width: "1920px",
-            height: "1080px"
-          }}
-          videoBorder={videoBorder}
-          videoShadow={true}
           customDimensions1={{
             top: "225px",
             left: "40px",
@@ -58,6 +42,21 @@ const VideoCHL: React.FC = () => {
             width: "1218px",
             height: "545px"
           }}
+          defaultSize={VideoSize.CUSTOM_2}
+          dimensions={{
+            top: "170px",
+            left: "310px",
+            width: "1280px",
+            height: "720px"
+          }}
+          fullScreenDimensions={{
+            top: "0px",
+            left: "0px",
+            width: "1920px",
+            height: "1080px"
+          }}
+          videoBorder={videoBorder}
+          videoShadow={true}
         />
 
         <BGTextScroll

@@ -36,7 +36,9 @@ export function increaseVolumeWithDelay(
   function increaseVolume() {
     if (currentVolume < targetVolume) {
       currentVolume += increment;
-      if (vidPlayerRef.current) vidPlayerRef.current.volume = currentVolume;
+
+      if (vidPlayerRef.current)
+        vidPlayerRef.current.volume = currentVolume > 1 ? 1 : currentVolume;
       setTimeout(increaseVolume, delay);
     }
   }

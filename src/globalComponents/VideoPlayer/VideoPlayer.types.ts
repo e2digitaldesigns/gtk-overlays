@@ -18,16 +18,12 @@ export interface IntVideoProps {
   videoBorder?: string;
   videoShadow?: boolean;
 
-  dimensions: Dimensions;
   defaultSize?: VideoSize;
   bgColor?: string;
 
-  allowSmallScreen?: boolean;
+  dimensions: Dimensions;
   smallScreenDimensions?: Dimensions;
-
-  allowFullScreen?: boolean;
   fullScreenDimensions?: Dimensions;
-
   customDimensions1?: Dimensions;
   customDimensions2?: Dimensions;
   customDimensions3?: Dimensions;

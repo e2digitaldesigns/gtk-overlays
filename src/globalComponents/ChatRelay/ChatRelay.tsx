@@ -44,14 +44,16 @@ const ChatRelayComponent: React.FC<ChatRelayComponentProps> = ({
   }, []);
 
   React.useEffect(() => {
-    innerRef.current?.scrollTo(0, innerRef.current.scrollHeight);
+    if (direction === "bottom") {
+      innerRef.current?.scrollTo(0, innerRef.current.scrollHeight);
+    }
 
     chatMessages.length &&
       window.localStorage.setItem(
         STORAGE_KEY.CHAT_MESSAGES_OVERLAY,
         JSON.stringify(chatMessages.slice(-20))
       );
-  }, [chatMessages]);
+  }, [chatMessages, direction]);
 
   React.useEffect(() => {
     socketServices.subscribeChatRelay((err: unknown, data: ChatRelayData) => {
@@ -83,9 +85,7 @@ const ChatRelayComponent: React.FC<ChatRelayComponentProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  let messages = _cloneDeep(chatMessages);
-
-  messages = messages.slice(-maxMessages);
+  let messages = _cloneDeep(chatMessages).slice(-maxMessages);
   direction === "top" && messages.reverse();
 
   return (

@@ -11,8 +11,6 @@ const VideoPTI: React.FC = () => {
 
   return (
     <VideoPlayer
-      allowFullScreen={true}
-      allowSmallScreen={true}
       dimensions={{
         top: "0px",
         left: "0px",
