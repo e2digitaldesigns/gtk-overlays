@@ -8,16 +8,12 @@ interface IEmoji {
 }
 
 const Emoji: React.FC<IEmoji> = ({ emoji }) => {
-  const padding = 3,
-    leftMax = 97,
-    speedMin = 5,
-    speedMax = 8;
-
-  const left = Math.floor(Math.random() * (leftMax - padding) + padding) + "%";
-  const speed = Math.random() * (speedMax - speedMin) + speedMin + "s";
+  const left = Math.random() * 80 + 10 + "%";
+  const speed = Math.random() * 4 + 2 + "s";
+  const fontSize = Math.random() * 1.5 + 1.5 + "rem";
 
   return (
-    <Styled.EmojiDiv left={left} speed={speed}>
+    <Styled.EmojiDiv fontSize={fontSize} left={left} speed={speed}>
       {emoji}
     </Styled.EmojiDiv>
   );
@@ -25,13 +21,8 @@ const Emoji: React.FC<IEmoji> = ({ emoji }) => {
 
 const MemoizedEmoji = React.memo(Emoji);
 
-interface IEmojiWrapper {
-  isDemo?: boolean;
-}
-
-const EmojiWrapper: React.FC<IEmojiWrapper> = ({ isDemo = false }) => {
+const EmojiWrapper: React.FC = () => {
   const [emojiState, setEmojiState] = React.useState<IEmojiData[]>([]);
-  const emojiArr = ["🤣", "😁", "🙌", "❤️", "😍", "👌", "💕", "😘", "😒", "👍"];
   const MAX_TIME = 10;
 
   React.useEffect(() => {
@@ -64,24 +55,8 @@ const EmojiWrapper: React.FC<IEmojiWrapper> = ({ isDemo = false }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleAddEmoji = () => {
-    const obj = {
-      _id: Math.random().toString(),
-      date: new Date(),
-      emoji: emojiArr[Math.floor(Math.random() * emojiArr.length)]
-    };
-    setEmojiState(prev => [...prev, ...[obj]]);
-  };
-
   return (
     <Styled.EmojiWrapper>
-      {isDemo && (
-        <>
-          <h1>Total Emojis: {emojiState.length}</h1>
-          <button onClick={handleAddEmoji}>Add Emoji</button>
-        </>
-      )}
-
       {emojiState.map((data: IEmojiData, index: number) => (
         <MemoizedEmoji key={data._id} emoji={data.emoji} />
       ))}
