@@ -1,8 +1,8 @@
 import * as React from "react";
 import * as Styled from "./InfoBox.styles";
-import { IntTopic } from "../../../../../../globalComponents/Topics/types";
 import { topicVoterParser } from "../../../../../../_utils/trueFalseVoterParser";
 import { useVoting, useSimpleTopic } from "../../../../../../hooks";
+import { IntTopic } from "../../../../../../types";
 
 const InfoBox: React.FC = () => {
   const { topicIndex: currentTopicIndex, topics } = useSimpleTopic();

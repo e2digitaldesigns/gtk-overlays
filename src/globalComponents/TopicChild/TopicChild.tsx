@@ -2,11 +2,15 @@ import React from "react";
 import TimeClock from "./TimeClock/TimeClock";
 import TimerCount from "./TimeCount/TimeCount";
 import * as Styled from "./Topic.styles";
-import { IntTopic } from "./types";
 
 import { setTopicLiState } from "./Utils/setTopicLiState";
 import socketServices from "../../services/socketServices";
-import { RequestType, SocketServicesData, TopicActions } from "../../types";
+import {
+  IntTopic,
+  RequestType,
+  SocketServicesData,
+  TopicActions
+} from "../../types";
 import TopicImage from "./Utils/imageParser";
 
 interface IntTopicsProps {

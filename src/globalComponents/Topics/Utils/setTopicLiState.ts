@@ -1,4 +1,4 @@
-import { TopicStates, IntTopic } from "../types";
+import { IntTopic, TopicStates } from "../../../types";
 
 export const setTopicLiState = (
   activeChildIndex: number,

@@ -11,7 +11,7 @@ const meta = {
       <>
         <div
           style={{
-            width: "400px",
+            width: "600px",
             height: "250px",
             position: "relative",
             overflow: "hidden",

@@ -23,7 +23,7 @@ const meta = {
         </div>
 
         <div style={{ display: "flex", gap: "10px", marginTop: "20px" }}>
-          <Button onClick={addEmoji}>Add</Button>
+          <Button onClick={addEmoji}>Add Emoji</Button>
         </div>
       </>
     )

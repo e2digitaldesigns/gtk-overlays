@@ -39,3 +39,9 @@ export const VideoPlayer = styled.video`
   height: 100%;
   object-fit: cover;
 `;
+
+export const ImagePlayer = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;

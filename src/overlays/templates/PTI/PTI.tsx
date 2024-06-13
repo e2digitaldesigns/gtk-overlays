@@ -11,7 +11,7 @@ import { ShowChatPTI } from "./ShowChatPTI/ShowChatPTI";
 import { EmojiPTI } from "./emoji/Emoji";
 import ChatRankingsPTI from "./ChatRankings/ChatRakings";
 import VideoPTI from "./video/video";
-import { IntTopic } from "../../../globalComponents/Topics/types";
+import { IntTopic } from "../../../types";
 
 const OverlayPTI: React.FC = () => {
   const [topicState, setTopicState] = React.useState<IntTopic>();

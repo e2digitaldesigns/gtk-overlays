@@ -3,9 +3,7 @@ import * as Styled from "./topics.style";
 import { useDataContext } from "../../../../context";
 import { Topics } from "../../../../globalComponents";
 import { useParams } from "../../../../hooks";
-import { SectionsPTI } from "../../../../types";
-
-import { IntTopic } from "../../../../globalComponents/Topics/types";
+import { IntTopic, SectionsPTI } from "../../../../types";
 
 interface TopicsProps {
   setTopicState: React.Dispatch<React.SetStateAction<IntTopic | undefined>>;

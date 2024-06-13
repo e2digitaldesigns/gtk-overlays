@@ -1,8 +1,7 @@
 import React from "react";
 import * as Styled from "./description.style";
-import { SectionsXBX } from "../../../../../types";
+import { IntTopic, SectionsXBX } from "../../../../../types";
 import { useParams, useSimpleTopic, useTopicImage } from "../../../../../hooks";
-import { IntTopic } from "../../../../../globalComponents/Topics/types";
 
 const DescriptionXBX: React.FC = () => {
   const { topics, topicIndex: currentTopicIndex } = useSimpleTopic();

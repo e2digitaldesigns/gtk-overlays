@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { TopicStates } from "./types";
+import { TopicStates } from "../../types";
 
 const cssParser = (object1: object) => {
   let str = "";

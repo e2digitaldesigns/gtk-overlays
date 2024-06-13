@@ -1,11 +1,10 @@
 import React from "react";
 import * as Styled from "./TopicDescription.styles";
 import { useParams, useSimpleTopic, useVoting } from "../../../../../hooks";
-import { IntTopic } from "../../../../../globalComponents/Topics/types";
 
 import { topicVoterParser } from "../../../../../_utils/trueFalseVoterParser";
 
-import { SectionsCNN } from "../../../../../types";
+import { IntTopic, SectionsCNN } from "../../../../../types";
 
 export const TopicDescriptionCNN: React.FC = () => {
   const { topicIndex: currentTopicIndex, topics } = useSimpleTopic();

@@ -1,7 +1,7 @@
 import { create, StoreApi } from "zustand";
-import { IntTopic } from "../../globalComponents/TopicChild/types";
 import { setStorageData } from "./setStorageData";
 import useVotingDataStore from "../useVotingDataStore/useVotingDataStore";
+import { IntTopic } from "../../types";
 
 export interface ITopicsDataStore {
   currentTopic: IntTopic;

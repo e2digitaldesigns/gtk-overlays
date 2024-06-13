@@ -52,3 +52,10 @@ export enum VideoAction {
   SIZE_CUSTOM_2 = "video-size-custom-2",
   SIZE_CUSTOM_3 = "video-size-custom-3"
 }
+
+export type DimensionMapEntry = {
+  videoSize: VideoSize;
+  dimensions: Dimensions | undefined;
+};
+
+export type DimensionMap = Partial<Record<VideoAction, DimensionMapEntry>>;

@@ -1,4 +1,4 @@
-import { IntTopic, TopicStates } from "../types";
+import { IntTopic, TopicStates } from "../../../types";
 
 export const setTopicLiState = (
   topics: IntTopic[],

@@ -1,6 +1,6 @@
 import React from "react";
 import { useDataContext } from "../../../../../context";
-import { IntTopic } from "../../../../../globalComponents/Topics/types";
+import { IntTopic } from "../../../../../types";
 import { useSimpleTopic } from "../../../../../hooks";
 import * as Styled from "./Topics.style";
 

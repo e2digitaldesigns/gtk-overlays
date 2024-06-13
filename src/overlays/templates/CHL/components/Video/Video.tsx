@@ -42,7 +42,7 @@ const VideoCHL: React.FC = () => {
             width: "1218px",
             height: "545px"
           }}
-          defaultSize={VideoSize.CUSTOM_2}
+          defaultSize={VideoSize.NORMAL}
           dimensions={{
             top: "170px",
             left: "310px",

@@ -1,7 +1,7 @@
 import React from "react";
-import { IntTopic } from "../../../../../globalComponents/Topics/types";
 import { useSimpleTopic } from "../../../../../hooks";
 import * as Styled from "./Topics.style";
+import { IntTopic } from "../../../../../types";
 
 const TopicsWM: React.FC = () => {
   const { topics, topic: currentTopic } = useSimpleTopic();

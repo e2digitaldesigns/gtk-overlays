@@ -2,7 +2,7 @@ import * as React from "react";
 import * as Styled from "./NetworkTab.styles";
 import { MdOndemandVideo } from "react-icons/md";
 import { useSimpleTopic } from "../../../../../../hooks";
-import { IntTopic } from "../../../../../../globalComponents/Topics/types";
+import { IntTopic } from "../../../../../../types";
 
 const NetworkTab: React.FC = () => {
   const { topics, topicIndex } = useSimpleTopic();

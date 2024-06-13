@@ -1,5 +1,5 @@
 import React from "react";
-import { IntTopic } from "../types";
+import { IntTopic } from "../../../types";
 
 interface IntTopicImageProps {
   imageShow: boolean;

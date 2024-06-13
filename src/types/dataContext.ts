@@ -28,6 +28,11 @@ export type GlobalDataContextTopicVotingOptions = {
   value: string;
 };
 
+export type GlobalDataContextTopicContent = {
+  type: string | null;
+  file: string;
+};
+
 export type GlobalDataContextTopic = {
   _id: string;
   articles: string;
@@ -43,6 +48,7 @@ export type GlobalDataContextTopic = {
   video: string;
   chat: string;
   votingOptions: GlobalDataContextTopicVotingOptions[];
+  content: GlobalDataContextTopicContent;
 };
 
 export type GlobalDataContextTicker = {

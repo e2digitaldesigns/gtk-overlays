@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { TopicStates } from "./types";
+import { TopicStates } from "../../types";
 
 const cssParser = (object1: object) => {
   let str = "";
@@ -171,7 +171,9 @@ export const TopicListItem = styled(Li)<IntTopicLi>`
   }
 
   transition: background-color 0.5s ease-in-out;
-  transition: background-color 0.5s ease-in-out, height 0.5s ease-in-out;
+  transition:
+    background-color 0.5s ease-in-out,
+    height 0.5s ease-in-out;
 `;
 
 const gradientParser = (value: string) => {

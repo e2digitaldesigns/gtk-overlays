@@ -1,30 +1,24 @@
 import React from "react";
 import * as Styled from "./TopChat.styles";
 import _sortBy from "lodash/sortBy";
-import _cloneDeep from "lodash/cloneDeep";
 import socketServices from "../../services/socketServices";
 import { ChatRanker, RequestType } from "../../types";
 import axios from "axios";
 
 interface ITopChatProps {
-  isDemo?: boolean;
   count?: number;
-
   borderBottomColor?: string;
-
   rankBgColor?: string;
   rankFontColor?: string;
   rankFontSize?: string;
-
   userBgColor?: string;
   userFontColor?: string;
   userFontSize?: string;
-
   countBgColor?: string;
   countFontColor?: string;
   countFontSize?: string;
-
   topSpotFontSize?: string;
+  topSpotCountFontSize?: string;
   showTopSpotImage?: boolean;
   topSpotHeight?: number;
 }
@@ -35,43 +29,31 @@ interface IUserState {
   image: string;
 }
 
-const defaultState: IUserState[] = [
-  { username: "iCON33", messageCount: 4, image: "" },
-  { username: "jscGoat", messageCount: 3, image: "" },
-  { username: "cmdrtibtib", messageCount: 2, image: "" },
-  { username: "CodexHere", messageCount: 1, image: "" }
-];
-
 const TopChat: React.FC<ITopChatProps> = ({
-  isDemo = false,
   count = 3,
-
   borderBottomColor = "#a0941c",
-
   rankBgColor = "#562154",
   rankFontColor = "white",
-  rankFontSize = "48px",
-
+  rankFontSize = "24px",
   userBgColor = "#24082e",
   userFontColor = "white",
-  userFontSize = "32px",
-
+  userFontSize = "24px",
   countBgColor = "#24082e",
   countFontColor = "white",
   countFontSize = "24px",
-
-  topSpotFontSize = "54px",
+  topSpotFontSize = "36px",
+  topSpotCountFontSize = "24px",
   showTopSpotImage = true,
-  topSpotHeight = 145
+  topSpotHeight = 100
 }) => {
+  const MIN_COUNT = 3;
   const MAX_COUNT = 10;
+  count = count < MIN_COUNT ? MIN_COUNT : count;
   count = count > MAX_COUNT ? MAX_COUNT : count;
-  const [userState, setUserState] = React.useState<IUserState[]>(
-    isDemo ? defaultState : []
-  );
+  const [userState, setUserState] = React.useState<IUserState[]>([]);
   const [tabHeight, setTabHeight] = React.useState<number>(0);
 
-  const wrapperRef = React.useRef<any>(null);
+  const wrapperRef = React.useRef<HTMLDivElement>(null);
 
   const queryParams = React.useMemo(() => {
     const queryParams = new URLSearchParams(window.location.search);
@@ -84,7 +66,6 @@ const TopChat: React.FC<ITopChatProps> = ({
         process.env.REACT_APP_REST_SERVICE
       }chatlog/${queryParams.get(RequestType.UserId)}`;
       const { data } = await axios.get(api);
-
       setUserState(data);
     };
 
@@ -93,7 +74,10 @@ const TopChat: React.FC<ITopChatProps> = ({
   }, []);
 
   React.useLayoutEffect(() => {
-    if (wrapperRef?.current?.parentNode?.style?.height) {
+    if (
+      wrapperRef?.current?.parentNode instanceof HTMLElement &&
+      wrapperRef.current.parentNode.style.height
+    ) {
       const parentHeight = parseInt(wrapperRef.current.parentNode.style.height);
       const runnerUps = (parentHeight - topSpotHeight) / (count - 1);
       setTabHeight(runnerUps);
@@ -128,53 +112,38 @@ const TopChat: React.FC<ITopChatProps> = ({
 
   const sortedData = _sortBy(userState, ["messageCount"]).reverse();
 
-  const getRank = (username: string) =>
-    sortedData.findIndex((user: IUserState) => user.username === username);
-
-  const testing = (username: string) => {
-    const newState = _cloneDeep(userState);
-
-    const index = newState.findIndex(
-      (user: IUserState) => user.username === username
-    );
-
-    newState[index].messageCount = newState[index].messageCount + 1;
-    setUserState(newState);
-  };
-
   const setTabTop = (rank: number) => {
     if (rank === 0) return 0;
     if (rank === 1) return topSpotHeight;
     return topSpotHeight + tabHeight * (rank - 1);
   };
 
-  const userEntries = userState.map((userData: IUserState) => {
-    const rank = getRank(userData.username);
-    const theTabHeight = rank === 0 ? topSpotHeight : tabHeight;
+  const userEntries = sortedData.map((userData: IUserState, index: number) => {
+    const theTabHeight = index === 0 ? topSpotHeight : tabHeight;
 
     return (
       <Styled.TopChatterGrid
         borderBottomColor={borderBottomColor}
         key={userData.username}
         height={`${theTabHeight}px`}
-        top={`${setTabTop(rank)}px`}
+        top={`${setTabTop(index)}px`}
       >
         <Styled.RankDiv
           rankBgColor={rankBgColor}
           rankFontColor={rankFontColor}
-          rankFontSize={rankFontSize}
+          rankFontSize={index ? rankFontSize : topSpotCountFontSize}
         >
-          {showTopSpotImage && rank === 0 ? (
+          {userData.image && showTopSpotImage && index === 0 ? (
             <img src={userData.image} alt="profile" />
           ) : (
-            rank + 1
+            index + 1
           )}
         </Styled.RankDiv>
 
         <Styled.UserDiv
           userBgColor={userBgColor}
           userFontColor={userFontColor}
-          userFontSize={rank ? userFontSize : topSpotFontSize}
+          userFontSize={index ? userFontSize : topSpotFontSize}
         >
           <div>{userData.username}</div>
         </Styled.UserDiv>
@@ -190,23 +159,11 @@ const TopChat: React.FC<ITopChatProps> = ({
     );
   });
 
-  const demoOutput = !isDemo ? null : (
-    <Styled.DemoButtonWrapper>
-      {defaultState.map((user: IUserState) => (
-        <button key={user.username} onClick={() => testing(user.username)}>
-          {user.username}
-        </button>
-      ))}
-    </Styled.DemoButtonWrapper>
-  );
-
   return (
     <>
       <Styled.TopChatWrapper ref={wrapperRef}>
         {userEntries}
       </Styled.TopChatWrapper>
-
-      {demoOutput}
     </>
   );
 };

@@ -11,11 +11,11 @@ import {
   IVoteStreaks,
   IVotingState,
   TopicVotesParsed,
-  TopicVotesObj
+  TopicVotesObj,
+  IntTopic
 } from "../../types";
 
 import { getKeyWithHighestValue } from "../../_utils/getKeyWithHighestValue";
-import { IntTopic } from "../../globalComponents/Topics/types";
 
 export interface IVotingDataStore {
   topicId: string;
@@ -111,8 +111,8 @@ const useVotingDataStore = create(
             type === "add"
               ? newVoting[hostNum] + 1
               : type === "super"
-              ? newVoting[hostNum] + 5
-              : newVoting[hostNum] - 1;
+                ? newVoting[hostNum] + 5
+                : newVoting[hostNum] - 1;
 
           //Streak
           if (vote.action === "add") {

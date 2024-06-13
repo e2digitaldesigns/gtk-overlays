@@ -1,8 +1,8 @@
 import * as React from "react";
 import * as Styled from "./TopicImage.sytle";
-import { IntTopic } from "../../../../../globalComponents/Topics/types";
+
 import { useParams, useSimpleTopic } from "../../../../../hooks";
-import { SectionsESPN } from "../../../../../types";
+import { IntTopic, SectionsESPN } from "../../../../../types";
 import useVideoPlayerDataStore from "../../../../../dataStores/useVideoPlayerDataStore/useVideoPlayerDataStore";
 
 export const TopicImageESPN: React.FC = () => {
