@@ -29,14 +29,10 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
   zIndex = 9999
 }) => {
   const { topic, topicId } = useSimpleTopic();
-  const videoUrl = topic?.video;
+  const contentFile = topic.content?.file;
   const queryParams = new URLSearchParams(window.location.search);
   const videoPlayerWrapperRef = React.useRef<HTMLDivElement>(null);
-  const { contentType, setVideoSizing, volumeDecrease, volumeIncrease } =
-    useVideoActions();
-
-  const { isImage, isVideo } = contentType(videoUrl || "");
-  // console.log(topic.content);
+  const { setVideoSizing, volumeDecrease, volumeIncrease } = useVideoActions();
 
   const isMutedRef = React.useRef(false);
   const mutedVolumeRef = React.useRef(0);
@@ -79,13 +75,13 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
 
   React.useEffect(() => {
     setVideoPlayerProperty("topicId", topicId);
-    setVideoPlayerProperty("videoUrl", videoUrl);
+    setVideoPlayerProperty("videoUrl", contentFile);
     setVideoPlayerProperty("videoSize", videoSize);
     setVideoPlayerProperty("isVideoPlaying", isVideoPlaying);
     setVideoPlayerProperty("isVideoViewable", showVideo);
   }, [
     topicId,
-    videoUrl,
+    contentFile,
     videoSize,
     isVideoPlaying,
     showVideo,
@@ -104,8 +100,12 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
     setShowVideo(false);
     setIsVideoPlaying(false);
 
-    if (videoPlayerWrapperRef.current && videoPlayerRef.current && videoUrl) {
-      videoPlayerRef.current.src = videoUrl;
+    if (
+      videoPlayerWrapperRef.current &&
+      videoPlayerRef.current &&
+      contentFile
+    ) {
+      videoPlayerRef.current.src = contentFile;
       videoPlayerRef.current.load();
       videoPlayerRef.current.currentTime = 1;
 
@@ -121,7 +121,17 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
         return;
       }
     }
-  }, [playOnLoad, showVideoOnLoad, topicId, videoUrl]);
+
+    if (
+      videoPlayerWrapperRef.current &&
+      imageViewerRef.current &&
+      contentFile &&
+      showVideoOnLoad
+    ) {
+      setShowVideo(true);
+      videoPlayerWrapperRef.current.style.opacity = "1";
+    }
+  }, [playOnLoad, showVideoOnLoad, topicId, contentFile]);
 
   React.useEffect(() => {
     socketServices.subscribeOverlaysVideoPlayer(
@@ -272,7 +282,7 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
     Object.values(dimensionMap).find(value => value.videoSize === videoSize)
       ?.dimensions || dimensions;
 
-  if (isVideo) {
+  if (topic.content.type === "video") {
     return (
       <Styled.VideoPlayerWrapper
         ref={videoPlayerWrapperRef}
@@ -292,11 +302,11 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
     );
   }
 
-  if (isImage) {
+  if (topic.content.type === "image") {
     return (
       <Styled.VideoPlayerWrapper
         ref={videoPlayerWrapperRef}
-        bgColor={"pink"}
+        bgColor={bgColor}
         top={playerDimensions.top}
         left={playerDimensions.left}
         width={playerDimensions.width}
@@ -307,7 +317,7 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
         transitionOnMove={transitionOnMove}
         zIndex={zIndex}
       >
-        <Styled.ImagePlayer ref={imageViewerRef} src={videoUrl} />
+        <Styled.ImagePlayer ref={imageViewerRef} src={contentFile} />
       </Styled.VideoPlayerWrapper>
     );
   }

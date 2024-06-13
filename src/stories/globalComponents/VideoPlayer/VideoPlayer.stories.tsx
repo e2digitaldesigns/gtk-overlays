@@ -1,12 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { VideoPlayer as Component } from "../../../globalComponents";
 import mockSocket from "../../../../.storybook/__mocks__/mockSocketIoClient";
+import { createMock } from "storybook-addon-module-mock";
 import { Button } from "../../storybookAssets/Button/Button";
-
+import { topics } from "./../../../../.storybook/topicData";
 import {
   VideoAction,
   VideoSize
 } from "../../../globalComponents/VideoPlayer/VideoPlayer.types";
+import * as hooks from "../../../hooks";
 
 const socket = mockSocket();
 
@@ -20,6 +22,29 @@ const meta = {
       control: "inline-radio",
       options: ["small", "normal", "fullscreen"]
     }
+  },
+  args: {
+    defaultSize: VideoSize.NORMAL,
+    dimensions: {
+      top: "77.5px",
+      left: "120px",
+      width: "720px",
+      height: "405px"
+    },
+    smallScreenDimensions: {
+      top: "137.5px",
+      left: "242.5px",
+      width: "485px",
+      height: "275px"
+    },
+    fullScreenDimensions: {
+      top: "5px",
+      left: "5px",
+      width: "960px",
+      height: "540px"
+    },
+    showVideoOnLoad: true,
+    videoShadow: true
   },
   decorators: [
     Story => {
@@ -81,28 +106,25 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
-  args: {
-    defaultSize: VideoSize.NORMAL,
-    dimensions: {
-      top: "77.5px",
-      left: "120px",
-      width: "720px",
-      height: "405px"
-    },
-    smallScreenDimensions: {
-      top: "137.5px",
-      left: "242.5px",
-      width: "485px",
-      height: "275px"
-    },
-    fullScreenDimensions: {
-      top: "5px",
-      left: "5px",
-      width: "960px",
-      height: "540px"
-    },
-    showVideoOnLoad: true,
-    videoShadow: true
+export const VideoPlayer: Story = {};
+
+export const ImageViewer: Story = {
+  parameters: {
+    moduleMock: {
+      mock: () => {
+        const index = 2;
+        const useSimpleTopicMock = createMock(hooks, "useSimpleTopic");
+        useSimpleTopicMock.mockReturnValue({
+          topics,
+          topic: topics[index],
+          topicId: topics[index]._id,
+          topicIndex: index,
+          index: index,
+          isTimerPaused: false
+        });
+
+        return [useSimpleTopicMock];
+      }
+    }
   }
 };

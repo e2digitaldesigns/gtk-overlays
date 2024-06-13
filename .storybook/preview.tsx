@@ -3,7 +3,7 @@ import type { Preview } from "@storybook/react";
 import { createMock } from "storybook-addon-module-mock";
 import "../src/scss/styles.scss";
 import * as hooks from "../src/hooks";
-import data from "./topicData.json";
+import { topics } from "./topicData";
 import topicVotingData from "./topicVotingData.json";
 
 const preview: Preview = {
@@ -22,7 +22,14 @@ const preview: Preview = {
     moduleMock: {
       mock: () => {
         const useSimpleTopicMock = createMock(hooks, "useSimpleTopic");
-        useSimpleTopicMock.mockReturnValue(data);
+        useSimpleTopicMock.mockReturnValue({
+          topics,
+          topic: topics[0],
+          topicId: topics[0]._id,
+          topicIndex: 0,
+          index: 0,
+          isTimerPaused: false
+        });
 
         const useVotingMock = createMock(hooks, "useVoting");
         useVotingMock.mockReturnValue(topicVotingData);

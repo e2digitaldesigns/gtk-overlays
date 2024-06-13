@@ -2,21 +2,6 @@ import React from "react";
 import { DimensionMap, Dimensions } from "../VideoPlayer.types";
 
 export const useVideoActions = () => {
-  const contentType = (content: string) => {
-    const imageExtenstions = ["jpg", "jpeg", "png", "gif", "svg", "webp"];
-    const videoExtenstions = ["mp4", "webm", "ogg"];
-
-    const ext = content.split(".").pop();
-
-    const isImage = imageExtenstions.includes(ext as string);
-    const isVideo = videoExtenstions.includes(ext as string);
-
-    return {
-      isImage,
-      isVideo
-    };
-  };
-
   const setVideoSizing = (
     wrapper: React.RefObject<HTMLDivElement>,
     key: keyof DimensionMap,
@@ -82,7 +67,6 @@ export const useVideoActions = () => {
   };
 
   return {
-    contentType,
     setVideoSizing,
     volumeDecrease,
     volumeIncrease
