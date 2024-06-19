@@ -22,7 +22,7 @@ interface UpNextTitleDivProps {
   borderColor: string;
 }
 export const UpNextTitleDiv = styled.div<UpNextTitleDivProps>`
-  font-weight: 600;
+  /* font-weight: 600; */
   font-size: 1.5rem;
   text-align: right;
   border-right: 1px solid ${props => props.borderColor};
@@ -37,7 +37,7 @@ export const TopicWrapper = styled.div`
   height: 100%;
   text-transform: uppercase;
   font-size: 1.5rem;
-  font-weight: 600;
+  /* font-weight: 600; */
   overflow: hidden;
   scroll-snap-type: y mandatory;
   position: relative;

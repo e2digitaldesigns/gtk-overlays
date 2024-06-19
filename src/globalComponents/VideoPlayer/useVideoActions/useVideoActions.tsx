@@ -1,5 +1,5 @@
 import React from "react";
-import { DimensionMap, Dimensions } from "../VideoPlayer.types";
+import { DimensionMap } from "../VideoPlayer.types";
 
 export const useVideoActions = () => {
   const setVideoSizing = (

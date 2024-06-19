@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-export const ChatBox = styled.div`
+export const Box = styled.div`
   position: absolute;
   top: 760px;
-  left: 630px;
-  width: 845px;
+  left: 1485px;
+  width: 425px;
   height: 245px;
 
   padding: 0.5rem;

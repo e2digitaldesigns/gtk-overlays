@@ -14,7 +14,7 @@ export const HostsESPN: React.FC = () => {
   const { hosts: data } = useDataContext();
   const { votingState } = useVoting();
   const { videoSize, isVideoViewable } = useVideoPlayerDataStore();
-  const hideHost1 = isVideoViewable && videoSize === "small";
+  const hideHost1 = isVideoViewable && videoSize === "custom1";
 
   const showHosts: { [key: string]: boolean } = {
     1: showSection(SectionsESPN.Host1),

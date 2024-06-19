@@ -23,8 +23,8 @@
     },
     "sponsors": {
       "maxAmount": 99,
-      "height": 210,
-      "width": 110
+      "height": 110,
+      "width": 210
     },
     "topic": {
       "maxAmount": 1,
@@ -45,12 +45,10 @@
       "name": "Chat Message",
       "param": "chat_message"
     },
-
     {
       "name": "Description",
       "param": "description"
     },
-
     {
       "name": "Chat Display",
       "param": "chat_display"
@@ -59,10 +57,13 @@
       "name": "News Feed",
       "param": "news_feed"
     },
-
     {
       "name": "Video Player",
       "param": "video"
+    },
+    {
+      "name": "Sponsors",
+      "param": "sponsors"
     }
   ]
 }

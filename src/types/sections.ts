@@ -70,11 +70,12 @@ export enum SectionsFGT {
 }
 
 export enum SectionsCNN {
-  Sidebar = "sidebar",
-  Host = "host",
+  ChatDisplay = "chat_display",
   ChatMessage = "chat_message",
   Description = "description",
-  ChatDisplay = "chat_display",
+  Host = "host",
+  Sidebar = "sidebar",
+  Sponsors = "sponsors",
   Video = "video"
 }
 

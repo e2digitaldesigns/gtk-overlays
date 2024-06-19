@@ -3,24 +3,16 @@ import styled from "styled-components";
 import { UpNext } from "../../../../../globalComponents";
 import { SectionsFGT } from "../../../../../types";
 import { useParams } from "../../../../../hooks";
+import { theme } from "../../Theme/GlobalTheme";
 
 const UpNextWrapper = styled.div`
   position: absolute;
-
   left: 15px;
-  top: 40px;
-
+  top: 15px;
   height: 125px;
-  width: 940px;
+  width: 1890px;
   overflow: hidden;
-  padding: 10px 20px;
-
-  background-color: ${props => props.theme.colors.bg3};
-  border-bottom: 0.25rem solid ${props => props.theme.colors.accent1};
-
-  display: grid;
-  grid-gap: 10px;
-  grid-template-columns: 115px 1fr;
+  background-color: "green";
 `;
 
 export const UpNextFGT: React.FC = () => {
@@ -29,7 +21,7 @@ export const UpNextFGT: React.FC = () => {
   if (!showSection(SectionsFGT.UpNext)) return null;
   return (
     <UpNextWrapper>
-      <UpNext />
+      <UpNext borderColor={theme.colors.accent1} />
     </UpNextWrapper>
   );
 };

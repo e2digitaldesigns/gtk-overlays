@@ -13,11 +13,13 @@ export const VideoFGT: React.FC = () => {
   const data = useDataContext();
 
   const [isScrollBgVisible, setIsScrollBgVisible] = React.useState(false);
-  const { videoSize } = useVideoPlayerDataStore(state => state);
+  const { isVideoViewable, videoSize } = useVideoPlayerDataStore(
+    state => state
+  );
 
   React.useEffect(() => {
-    setIsScrollBgVisible(videoSize === "fullscreen");
-  }, [videoSize]);
+    setIsScrollBgVisible(isVideoViewable && videoSize !== "fullscreen");
+  }, [isVideoViewable, videoSize]);
 
   if (!showSection(SectionsFGT.Video)) return null;
 
@@ -32,12 +34,12 @@ export const VideoFGT: React.FC = () => {
             height: "720px"
           }}
           fullScreenDimensions={{
-            top: "-10px",
-            left: "-10px",
-            width: "1920px",
-            height: "1080px"
+            top: "-1px",
+            left: "-1px",
+            width: "1922px",
+            height: "1082px"
           }}
-          videoBorder={`10px solid ${theme.colors.accent1}`}
+          videoBorder={`2px solid ${theme.colors.accent1}`}
           videoShadow={true}
         />
 

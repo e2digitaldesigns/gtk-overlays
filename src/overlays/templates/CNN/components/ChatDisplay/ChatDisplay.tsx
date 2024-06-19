@@ -13,8 +13,6 @@ export const ChatDisplayCNN: React.FC = () => {
       <Styled.ChatBox>
         <ChatRelay fontSize="1.25rem" maxMessages={5} />
       </Styled.ChatBox>
-
-      <Styled.Box />
     </>
   );
 };

@@ -14,7 +14,13 @@ export interface IVideoPlayerDataStore {
   topicId: string;
   videoUrl: string;
   videoOpacity: string;
-  videoSize: "small" | "normal" | "fullscreen";
+  videoSize:
+    | "custom1"
+    | "custom2"
+    | "custom3"
+    | "small"
+    | "normal"
+    | "fullscreen";
   videoVolume: number;
   isVideoMuted: boolean;
   isVideoPlaying: boolean;

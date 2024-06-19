@@ -105,7 +105,7 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
       videoPlayerRef.current &&
       contentFile
     ) {
-      videoPlayerRef.current.src = contentFile;
+      videoPlayerRef.current.src = `${contentFile}?nocache=${new Date().getTime()}`;
       videoPlayerRef.current.load();
       videoPlayerRef.current.currentTime = 1;
 
