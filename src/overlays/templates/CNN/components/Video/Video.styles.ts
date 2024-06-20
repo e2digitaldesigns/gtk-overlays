@@ -16,7 +16,7 @@ export const VideoBorderTop = styled.div<{ isVisible: boolean }>`
 
 export const VideoTopic = styled.div<{ isVisible: boolean }>`
   position: absolute;
-  top: ${props => (props.isVisible ? 530 : 630)}px;
+  top: ${props => (props.isVisible ? 530 : 530)}px;
   left: 10px;
   height: 55px;
   width: 610px;
@@ -39,7 +39,7 @@ export const VideoTopic = styled.div<{ isVisible: boolean }>`
   font-weight: 400;
 
   opacity: ${props => (props.isVisible ? 1 : 0)};
-  transition: all 0.5s ease-in-out;
+  /* transition: all 0.5s ease-in-out; */
   transition-delay: ${props => (props.isVisible ? "0s" : 0)};
 
   z-index: 4;

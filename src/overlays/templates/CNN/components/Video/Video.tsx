@@ -29,6 +29,7 @@ export const VideoCNN: React.FC = () => {
   return (
     <>
       <VideoPlayer
+        bgColor="black"
         defaultSize={VideoSize.SMALL}
         dimensions={{
           top: "10px",

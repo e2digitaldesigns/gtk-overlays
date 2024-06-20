@@ -10,6 +10,7 @@ import { SidebarCNN } from "./components/Sidebar/Sidebar";
 import { VideoCNN } from "./components/Video/Video";
 import { VotingCNN } from "./components/Voting/Voting";
 import { TopicDescriptionCNN } from "./components/TopicDescription/TopicDescription";
+import { VideoFlashBackCNN } from "./components/Video/VideoFlashBack";
 
 const OverlayCNN: React.FC = () => {
   return (
@@ -17,6 +18,7 @@ const OverlayCNN: React.FC = () => {
       <Styled.GlobalStyle />
 
       <Styled.Container>
+        <VideoFlashBackCNN />
         <VotingCNN />
         <VideoCNN />
         <SidebarCNN />
