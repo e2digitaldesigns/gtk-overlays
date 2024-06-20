@@ -146,6 +146,10 @@ export const TopicLiLive = styled.div<TopicLiLiveProps>`
   padding: 5px 10px 0 0;
   transition: all 0.5s ease-in-out;
 
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
   opacity: ${props => (props.active ? 1 : 0)};
 `;
 

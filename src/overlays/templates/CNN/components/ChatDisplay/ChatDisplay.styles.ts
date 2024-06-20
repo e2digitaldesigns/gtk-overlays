@@ -4,7 +4,7 @@ export const ChatBox = styled.div`
   position: absolute;
   top: 760px;
   left: 630px;
-  width: 845px;
+  width: 1280px;
   height: 245px;
 
   padding: 0.5rem;

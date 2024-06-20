@@ -2,6 +2,7 @@ import React from "react";
 import * as Styled from "./Topics.styles";
 import { useSimpleTopic } from "../../../../../../hooks";
 import useVideoPlayerDataStore from "../../../../../../dataStores/useVideoPlayerDataStore/useVideoPlayerDataStore";
+import { BsYoutube } from "react-icons/bs";
 
 export const TopicsNormalCNN: React.FC = () => {
   const { topic: activeTopic, topics } = useSimpleTopic();
@@ -50,7 +51,8 @@ export const TopicsNormalCNN: React.FC = () => {
               </Styled.TopicLiName>
 
               <Styled.TopicLiLive active={index === activeTopicIndex}>
-                {topic.video && <span>*</span>} Live Now
+                {topic.video && <BsYoutube size={16} color="white" />}
+                <span>Live Now</span>
               </Styled.TopicLiLive>
 
               <Styled.TopicLiNext isNext={index === activeTopicIndex + 1}>

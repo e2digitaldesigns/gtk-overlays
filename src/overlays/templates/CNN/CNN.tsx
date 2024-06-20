@@ -10,7 +10,6 @@ import { SidebarCNN } from "./components/Sidebar/Sidebar";
 import { VideoCNN } from "./components/Video/Video";
 import { VotingCNN } from "./components/Voting/Voting";
 import { TopicDescriptionCNN } from "./components/TopicDescription/TopicDescription";
-import { SponsorsCNN } from "./components/Sponsors/Sponsors";
 
 const OverlayCNN: React.FC = () => {
   return (
@@ -26,7 +25,6 @@ const OverlayCNN: React.FC = () => {
         <TopicDescriptionCNN />
         <ChatDisplayCNN />
         <NewsCNN />
-        <SponsorsCNN />
       </Styled.Container>
     </ThemeProvider>
   );
