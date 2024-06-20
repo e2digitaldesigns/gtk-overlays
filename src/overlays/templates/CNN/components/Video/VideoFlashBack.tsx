@@ -13,7 +13,7 @@ export const VideoFlashBackCNN: React.FC = () => {
         top: "185px",
         left: "10px",
         width: "610px",
-        height: "345px",
+        height: "445px",
         transition: "opacity 1s ease-in-out"
       }}
     ></div>

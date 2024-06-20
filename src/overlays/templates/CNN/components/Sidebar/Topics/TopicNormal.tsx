@@ -6,6 +6,7 @@ import { BsYoutube } from "react-icons/bs";
 
 export const TopicsNormalCNN: React.FC = () => {
   const { topic: activeTopic, topics } = useSimpleTopic();
+  const [showTopicCount, setShowTopicCount] = React.useState(7);
 
   const wrapperRef = React.useRef<HTMLDivElement>(null);
   const topicUlRef = React.useRef<HTMLUListElement>(null);
@@ -13,19 +14,27 @@ export const TopicsNormalCNN: React.FC = () => {
   const topicLiHeight = 100;
 
   const { isVideoViewable } = useVideoPlayerDataStore(state => state);
+  const showVideo = isVideoViewable && !!activeTopic?.content?.file;
+
+  React.useEffect(() => {
+    setShowTopicCount(isVideoViewable ? 4 : 7);
+  }, [isVideoViewable]);
 
   React.useEffect(() => {
     const activeTopicsIndex = topics.indexOf(activeTopic);
-    const showTopicCount = 7;
-    const newTopp = topicLiHeight * activeTopicsIndex * -1;
-    if (activeTopicsIndex > topics.length - showTopicCount) return;
+    let newTopp = topicLiHeight * activeTopicsIndex * -1;
+
+    if (activeTopicsIndex > topics.length - showTopicCount) {
+      newTopp = topicLiHeight * (topics.length - showTopicCount) * -1;
+    }
+
     setUlTop(newTopp);
-  }, [activeTopic, topics, activeTopic.video]);
+  }, [activeTopic, topics, activeTopic.video, showTopicCount]);
 
   const activeTopicIndex = topics.indexOf(activeTopic);
 
   return (
-    <Styled.TopicsWrapperNormal showMenu={!isVideoViewable}>
+    <Styled.TopicsWrapperNormal showVideo={showVideo}>
       <Styled.TopicsInnerWrapper ref={wrapperRef}>
         <Styled.TopicUl ref={topicUlRef} ulTop={ulTop}>
           {topics.map((topic, index) => (
@@ -51,7 +60,7 @@ export const TopicsNormalCNN: React.FC = () => {
               </Styled.TopicLiName>
 
               <Styled.TopicLiLive active={index === activeTopicIndex}>
-                {topic.video && <BsYoutube size={16} color="white" />}
+                {topic.content.file && <BsYoutube size={16} color="white" />}
                 <span>Live Now</span>
               </Styled.TopicLiLive>
 

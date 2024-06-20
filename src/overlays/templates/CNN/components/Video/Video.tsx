@@ -54,10 +54,12 @@ export const VideoCNN: React.FC = () => {
 
       <Styled.VideoBorderTop isVisible={showTopic} />
 
-      <Styled.VideoTopic isVisible={showTopic}>
-        <BsYoutube size={36} color="white" />
-        <div>{activeTopic?.name}</div>
-      </Styled.VideoTopic>
+      <Styled.VideoTopicWrapper>
+        <Styled.VideoTopicInner isVisible={showTopic}>
+          <BsYoutube size={36} color="white" />
+          <div>{activeTopic?.name}</div>
+        </Styled.VideoTopicInner>
+      </Styled.VideoTopicWrapper>
     </>
   );
 };

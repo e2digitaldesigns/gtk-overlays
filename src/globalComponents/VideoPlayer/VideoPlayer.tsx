@@ -90,10 +90,17 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
   ]);
 
   React.useEffect(() => {
-    if (!videoPlayerRef?.current || !videoPlayerWrapperRef.current) return;
     const opacity = showVideo ? "1" : "0";
-    videoPlayerRef.current.style.opacity = opacity;
-    videoPlayerWrapperRef.current.style.opacity = opacity;
+
+    if (videoPlayerRef?.current && videoPlayerWrapperRef.current) {
+      videoPlayerRef.current.style.opacity = opacity;
+      videoPlayerWrapperRef.current.style.opacity = opacity;
+    }
+
+    if (videoPlayerWrapperRef.current && imageViewerRef.current) {
+      imageViewerRef.current.style.opacity = opacity;
+      videoPlayerWrapperRef.current.style.opacity = opacity;
+    }
   }, [showVideo]);
 
   React.useEffect(() => {
@@ -114,9 +121,7 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
         setShowVideo(true);
         setIsVideoPlaying(true);
         return;
-      }
-
-      if (showVideoOnLoad) {
+      } else if (showVideoOnLoad) {
         setShowVideo(true);
         return;
       }
@@ -128,6 +133,7 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
       contentFile &&
       showVideoOnLoad
     ) {
+      console.log(129);
       setShowVideo(true);
       videoPlayerWrapperRef.current.style.opacity = "1";
     }

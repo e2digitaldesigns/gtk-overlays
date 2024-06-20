@@ -9,17 +9,16 @@ export const TopicsWrapper = styled.div`
   overflow: hidden;
 `;
 
-export const TopicsWrapperNormal = styled.div<{ showMenu: boolean }>`
+export const TopicsWrapperNormal = styled.div<{ showVideo: boolean }>`
   position: absolute;
   left: 0px;
-  top: 0px;
+  top: ${props => (props.showVideo ? "300" : "0")}px;
   width: 610px;
-  height: 700px;
+  height: ${props => (props.showVideo ? "400" : "700")}px;
   overflow: hidden;
 
-  opacity: ${props => (props.showMenu ? 1 : 0)};
-  /* transition: opacity 0.25s ease-in-out; */
-  z-index: 2;
+  transition: top 0.5s ease-in-out;
+  z-index: 5;
 `;
 
 export const TopicsWrapperSmall = styled.div<{ showMenu: boolean }>`
@@ -31,7 +30,7 @@ export const TopicsWrapperSmall = styled.div<{ showMenu: boolean }>`
   overflow: hidden;
 
   opacity: ${props => (props.showMenu ? 1 : 0)};
-  /* transition: opacity 0.25s ease-in-out; */
+  transition: opacity 0.25s ease-in-out;
   z-index: 3;
 `;
 
