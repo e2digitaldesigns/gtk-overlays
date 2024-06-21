@@ -16,6 +16,13 @@ export enum IVoteAction {
   ClearTopicVotes = "clear-topic-votes"
 }
 
+export interface IVoteEmojis {
+  _id: string;
+  action: string;
+  date: Date;
+  emoji: string;
+  start: number;
+}
 export interface IVotes {
   _id: string;
   action: string | IVoteAction;
@@ -25,6 +32,7 @@ export interface IVotes {
   tid: string;
   uid: string;
   createdAt: Date;
+  emojis: IVoteEmojis[];
 }
 
 export type TopicVotes = { [key: string]: string };

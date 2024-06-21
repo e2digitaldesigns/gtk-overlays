@@ -1,7 +1,7 @@
 import React from "react";
 import * as Styled from "./HostVoteEmojis.style";
 import { useVotingStore } from "../../dataStores";
-import _range from "lodash/range";
+import { IVoteEmojis } from "../../types";
 
 interface IHostVoteEmojis {
   fontSize?: string;
@@ -20,39 +20,36 @@ const HostVoteEmojis: React.FC<IHostVoteEmojis> = ({
 }) => {
   const votes = useVotingStore(state => state.votes);
 
-  const hostVote = votes.filter(
-    vote =>
-      vote.host === String(seatNum) &&
-      new Date(vote.createdAt) > new Date(Date.now() - 10000)
-  );
+  const emojiArray: IVoteEmojis[] = React.useMemo(() => {
+    let emojis: IVoteEmojis[] = [];
+    const tenSecondsAgo = Date.now() - 10000;
+    const validVotes = votes.filter(
+      vote =>
+        vote.host === String(seatNum) &&
+        new Date(vote.createdAt).getTime() > tenSecondsAgo
+    );
 
-  const parsedHostVotes = hostVote.flatMap(vote => {
-    if (vote.action === "super") {
-      const votes = _range(8).map(index => ({
-        ...vote,
-        _id: `${index}_${vote._id}`
-      }));
-
-      return votes;
+    for (let i = 0; i < validVotes.length; i++) {
+      emojis = emojis.concat(validVotes[i].emojis);
     }
 
-    return vote;
-  });
+    return emojis;
+  }, [votes, seatNum]);
 
   return (
     <>
-      {parsedHostVotes.map((vote, index: number) => (
+      {emojiArray.map((emoji, index: number) => (
         <Styled.VoteFloat
-          key={vote._id}
+          key={emoji._id}
           bottom={bottom}
-          delay={index ? numberFromId(vote._id) * 0.3 : 0}
+          delay={index * 0.1}
           fontSize={fontSize}
-          numberStr={numberFromId(vote._id)}
+          start={emoji.start}
           right={right}
           speed={speed}
-          type={vote.action}
+          type={emoji.action}
         >
-          {emojiParser(vote._id, vote.action)}
+          {emoji.emoji}
         </Styled.VoteFloat>
       ))}
     </>
@@ -60,34 +57,3 @@ const HostVoteEmojis: React.FC<IHostVoteEmojis> = ({
 };
 
 export default HostVoteEmojis;
-
-const numberFromId = (_id: string) => {
-  const numbersArray = _id.match(/\d+/g);
-  const numbers = numbersArray?.map(Number) || [1];
-  const number = String(numbers[0])[0];
-  return Number(number);
-};
-
-const emojiParser = (_id: string, action: string) => {
-  const number = String(numberFromId(_id));
-
-  type EmojiSet = {
-    [key: string]: { [key: string]: string };
-  };
-
-  const emojiSet: EmojiSet = {
-    "0": { add: "👍", remove: "👎", super: "❤️‍🔥" },
-    "1": { add: "😂", remove: "😵", super: "❤️‍🔥" },
-    "2": { add: "💕", remove: "🤢", super: "❤️‍🔥" },
-    "3": { add: "🫠", remove: "😒", super: "❤️‍🔥" },
-    "4": { add: "🔥", remove: "🤮", super: "❤️‍🔥" },
-    "5": { add: "🥳", remove: "🤐", super: "♨️" },
-    "6": { add: "🙌", remove: "🧊", super: "♨️" },
-    "7": { add: "😘", remove: "🤬", super: "♨️" },
-    "8": { add: "😍", remove: "👿", super: "♨️" },
-    "9": { add: "🥰", remove: "👺", super: "♨️" }
-  };
-
-  const emoji = emojiSet[number][action];
-  return emoji;
-};
