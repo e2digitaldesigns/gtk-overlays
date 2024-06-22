@@ -17,6 +17,11 @@ import {
 
 import { getKeyWithHighestValue } from "../../_utils/getKeyWithHighestValue";
 
+export interface SuperVote {
+  host: string;
+  voter: string;
+}
+
 export interface IVotingDataStore {
   topicId: string;
   votingOptions: string[];
@@ -26,7 +31,7 @@ export interface IVotingDataStore {
   leadingSeat: string[];
   topicVotingState: TopicVotesObj;
   topicVotingParsed: TopicVotesParsed;
-  superVoteLog: { [key: string]: string[] };
+  superVoteLog: { [key: string]: SuperVote[] };
 
   setTopicId: (topic: IntTopic) => void;
   logTopicVote: (data: IVotes) => void;
@@ -104,7 +109,6 @@ const useVotingDataStore = create(
           const newStreak = _cloneDeep(get().votingStreak);
           const hostNum = vote.host as keyof IVotingState;
 
-          //Votes
           newVotes.push(vote);
 
           newVoting[hostNum] =
@@ -164,9 +168,20 @@ const useVotingDataStore = create(
             newSuperVoteLog[currentTopic] = [];
           }
 
-          if (_includes(newSuperVoteLog[currentTopic], data.username)) return;
+          const superVote = {
+            host: data.host,
+            voter: data.username
+          };
 
-          newSuperVoteLog[currentTopic].push(data.username);
+          if (
+            newSuperVoteLog[currentTopic].some(
+              sv => sv.host === superVote.host && sv.voter === superVote.voter
+            )
+          ) {
+            return;
+          }
+
+          newSuperVoteLog[currentTopic].push(superVote);
           set({ superVoteLog: newSuperVoteLog });
           get().handleHostVoting(data, "super");
         },

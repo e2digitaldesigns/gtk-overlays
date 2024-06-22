@@ -288,7 +288,7 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
     Object.values(dimensionMap).find(value => value.videoSize === videoSize)
       ?.dimensions || dimensions;
 
-  if (topic.content.type === "video") {
+  if (topic?.content?.type === "video") {
     return (
       <Styled.VideoPlayerWrapper
         ref={videoPlayerWrapperRef}
@@ -308,7 +308,7 @@ const GTK_VideoComponent: React.FC<IntVideoProps> = ({
     );
   }
 
-  if (topic.content.type === "image") {
+  if (topic?.content?.type === "image") {
     return (
       <Styled.VideoPlayerWrapper
         ref={videoPlayerWrapperRef}

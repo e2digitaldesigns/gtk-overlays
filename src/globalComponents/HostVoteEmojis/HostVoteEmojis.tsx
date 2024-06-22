@@ -41,13 +41,13 @@ const HostVoteEmojis: React.FC<IHostVoteEmojis> = ({
       {emojiArray.map((emoji, index: number) => (
         <Styled.VoteFloat
           key={emoji._id}
+          action={emoji.action}
           bottom={bottom}
           delay={index * 0.1}
           fontSize={fontSize}
           start={emoji.start}
           right={right}
           speed={speed}
-          type={emoji.action}
         >
           {emoji.emoji}
         </Styled.VoteFloat>

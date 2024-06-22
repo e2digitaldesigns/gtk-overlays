@@ -1,6 +1,6 @@
 import styled, { Keyframes, keyframes } from "styled-components";
 
-const upAndAway = (start: number, type: string): Keyframes => {
+const upAndAway = (start: number, action: string): Keyframes => {
   const dirArray =
     Math.floor(start) % 2
       ? ["+", "-", "+", "-", "+"]
@@ -27,39 +27,40 @@ const upAndAway = (start: number, type: string): Keyframes => {
   }
 
   20% {
-    transform: translateX(${dirArray[1]}${start}px) translateY(${yT[20][type]});
+    transform: translateX(${dirArray[1]}${start}px) translateY(${yT[20][action]});
   }
 
   40% {
-    transform: translateX(${dirArray[2]}${start}px) translateY(${yT[40][type]});
+    transform: translateX(${dirArray[2]}${start}px) translateY(${yT[40][action]});
     font-size: 1em;
   }
 
   60% {
-    transform: translateX(${dirArray[3]}${start}px) translateY(${yT[60][type]});
+    transform: translateX(${dirArray[3]}${start}px) translateY(${yT[60][action]});
   }
 
   80% {
-    transform: translateX(${dirArray[4]}${start}px) translateY(${yT[80][type]});
+    transform: translateX(${dirArray[4]}${start}px) translateY(${yT[80][action]});
   }
 
   100% {
     opacity: 0;
-      transform: translateX(0) translateY(${yT[100][type]});
-      font-size: .11em;
+    transform: translateX(0) translateY(${yT[100][action]});
+    font-size: .11em;
   }
 `;
 };
 
 interface VoteFloatProps {
+  action: string;
   bottom: number;
   delay: number;
   fontSize: string;
   right: number;
   speed: number;
   start: number;
-  type: string;
 }
+
 export const VoteFloat = styled.div<VoteFloatProps>`
   font-size: ${props => props.fontSize};
 
@@ -73,7 +74,7 @@ export const VoteFloat = styled.div<VoteFloatProps>`
   right: ${props => `${props.right}px`};
   z-index: 1;
 
-  animation: ${props => upAndAway(props.start, props.type)}
+  animation: ${props => upAndAway(props.start, props.action)}
     ${props => `${props.speed}s`} ease-in-out;
 
   animation-fill-mode: forwards;
