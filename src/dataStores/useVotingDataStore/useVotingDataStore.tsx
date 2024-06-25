@@ -1,7 +1,6 @@
 import { create, StoreApi } from "zustand";
 import { persist } from "zustand/middleware";
 import _cloneDeep from "lodash/cloneDeep";
-import _includes from "lodash/includes";
 
 import {
   STORAGE_KEY,
@@ -12,7 +11,8 @@ import {
   IVotingState,
   TopicVotesParsed,
   TopicVotesObj,
-  IntTopic
+  IntTopic,
+  VotingTypes
 } from "../../types";
 
 import { getKeyWithHighestValue } from "../../_utils/getKeyWithHighestValue";
@@ -32,11 +32,13 @@ export interface IVotingDataStore {
   topicVotingState: TopicVotesObj;
   topicVotingParsed: TopicVotesParsed;
   superVoteLog: { [key: string]: SuperVote[] };
+  winVoteLog: { [key: string]: string[] };
 
   setTopicId: (topic: IntTopic) => void;
   logTopicVote: (data: IVotes) => void;
-  handleHostVoting: (vote: IVotes, type: "add" | "remove" | "super") => void;
+  handleHostVoting: (vote: IVotes, type: VotingTypes) => void;
   handleHostVotingSuper: (data: IVotes) => void;
+  handleHostVotingWin: (data: IVotes) => void;
   clearHostVotes: () => void;
   clearTopicVotes: () => void;
 }
@@ -65,6 +67,7 @@ const useVotingDataStore = create(
           noCount: 0
         },
         superVoteLog: {},
+        winVoteLog: {},
 
         setTopicId: (topic: IntTopic) => {
           const topicId = topic._id;
@@ -103,7 +106,7 @@ const useVotingDataStore = create(
           });
         },
 
-        handleHostVoting: (vote: IVotes, type: "add" | "remove" | "super") => {
+        handleHostVoting: (vote: IVotes, type: VotingTypes) => {
           const newVotes = _cloneDeep(get().votes);
           const newVoting = _cloneDeep(get().votingState);
           const newStreak = _cloneDeep(get().votingStreak);
@@ -111,35 +114,26 @@ const useVotingDataStore = create(
 
           newVotes.push(vote);
 
-          newVoting[hostNum] =
-            type === "add"
-              ? newVoting[hostNum] + 1
-              : type === "super"
-                ? newVoting[hostNum] + 5
-                : newVoting[hostNum] - 1;
+          const voteCountObj: { [key: string]: number } = {
+            add: 1,
+            remove: -1,
+            super: 5,
+            win: 25
+          };
 
-          //Streak
-          if (vote.action === "add") {
+          newVoting[hostNum] = voteCountObj[type] + newVoting[hostNum];
+
+          if ((vote.action as string) !== (VotingTypes.Remove as string)) {
             Object.keys(newStreak).forEach(key => {
               newStreak[key].add =
-                key === vote.host ? newStreak[key].add + 1 : 0;
+                key === vote.host ? newStreak[key].add + voteCountObj[type] : 0;
               if (key === vote.host) {
                 newStreak[key].remove = 0;
               }
             });
           }
 
-          if (vote.action === "super") {
-            Object.keys(newStreak).forEach(key => {
-              newStreak[key].add =
-                key === vote.host ? newStreak[key].add + 5 : 0;
-              if (key === vote.host) {
-                newStreak[key].remove = 0;
-              }
-            });
-          }
-
-          if (vote.action === "remove") {
+          if ((vote.action as string) === (VotingTypes.Remove as string)) {
             Object.keys(newStreak).forEach(key => {
               newStreak[key].remove =
                 key === vote.host ? newStreak[key].remove + 1 : 0;
@@ -183,7 +177,26 @@ const useVotingDataStore = create(
 
           newSuperVoteLog[currentTopic].push(superVote);
           set({ superVoteLog: newSuperVoteLog });
-          get().handleHostVoting(data, "super");
+          get().handleHostVoting(data, VotingTypes.Super);
+        },
+
+        handleHostVotingWin: (data: IVotes) => {
+          const currentTopic = get().topicId;
+          const newWinVoteLog = _cloneDeep(get().winVoteLog);
+
+          if (!currentTopic) return;
+
+          if (!newWinVoteLog[currentTopic]) {
+            newWinVoteLog[currentTopic] = [];
+          }
+
+          if (newWinVoteLog[currentTopic].includes(data.username)) {
+            return;
+          }
+
+          newWinVoteLog[currentTopic].push(data.username);
+          set({ winVoteLog: newWinVoteLog }); //    !win1
+          get().handleHostVoting(data, VotingTypes.Win);
         },
 
         clearHostVotes: () => {
@@ -191,7 +204,8 @@ const useVotingDataStore = create(
             votes: [],
             votingState: initVotingState,
             votingStreak: initVotingStreakState,
-            superVoteLog: {}
+            superVoteLog: {},
+            winVoteLog: {}
           });
         },
 

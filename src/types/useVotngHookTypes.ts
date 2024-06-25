@@ -12,10 +12,17 @@ export enum IVoteAction {
   True = "true",
   False = "false",
   Super = "super",
+  Win = "win",
   ClearHostVotes = "clear-host-votes",
   ClearTopicVotes = "clear-topic-votes"
 }
 
+export enum VotingTypes {
+  Add = "add",
+  Remove = "remove",
+  Super = "super",
+  Win = "win"
+}
 export interface IVoteEmojis {
   _id: string;
   action: string;

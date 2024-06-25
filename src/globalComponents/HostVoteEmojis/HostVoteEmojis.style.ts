@@ -9,11 +9,11 @@ const upAndAway = (start: number, action: string): Keyframes => {
   start = start * 2.5;
 
   const yT: { [key: number]: { [key: string]: string } } = {
-    20: { add: "-75px", remove: "50px", super: "-150px" },
-    40: { add: "-125px", remove: "100px", super: "-50px" },
-    60: { add: "-175px", remove: "75px", super: "-250px" },
-    80: { add: "-125px", remove: "125px", super: "-350px" },
-    100: { add: "-275px", remove: "200px", super: "-450px" }
+    20: { add: "-75px", remove: "50px", super: "-150px", win: "-200px" },
+    40: { add: "-125px", remove: "100px", super: "-50px", win: "-100px" },
+    60: { add: "-175px", remove: "75px", super: "-250px", win: "-300px" },
+    80: { add: "-125px", remove: "125px", super: "-350px", win: "-400px" },
+    100: { add: "-275px", remove: "200px", super: "-450px", win: "-500px" }
   };
 
   return keyframes`

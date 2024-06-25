@@ -1,6 +1,6 @@
 import React from "react";
 import socketServices from "../../services/socketServices";
-import { IVotes, RequestType, IVoteAction } from "../../types";
+import { IVotes, RequestType, IVoteAction, VotingTypes } from "../../types";
 import { useVotingStore } from "../../dataStores";
 
 const useGlobalVotingInitHook = () => {
@@ -23,15 +23,19 @@ const useGlobalVotingInitHook = () => {
           break;
 
         case IVoteAction.Add:
-          votingDataStore.handleHostVoting(data, "add");
+          votingDataStore.handleHostVoting(data, VotingTypes.Add);
           break;
 
         case IVoteAction.Super:
           votingDataStore.handleHostVotingSuper(data);
           break;
 
+        case IVoteAction.Win:
+          votingDataStore.handleHostVotingWin(data);
+          break;
+
         case IVoteAction.Remove:
-          votingDataStore.handleHostVoting(data, "remove");
+          votingDataStore.handleHostVoting(data, VotingTypes.Remove);
           break;
 
         case IVoteAction.ClearHostVotes:
