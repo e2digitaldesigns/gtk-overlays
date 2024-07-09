@@ -45,10 +45,7 @@ export interface IVotingDataStore {
 
 const useVotingDataStore = create(
   persist<IVotingDataStore>(
-    (
-      set: StoreApi<IVotingDataStore>["setState"],
-      get: StoreApi<IVotingDataStore>["getState"]
-    ) => {
+    (set: StoreApi<IVotingDataStore>["setState"], get: StoreApi<IVotingDataStore>["getState"]) => {
       return {
         topicId: "",
         votingOptions: [],
@@ -118,15 +115,14 @@ const useVotingDataStore = create(
             add: 1,
             remove: -1,
             super: 5,
-            win: 25
+            win: 10
           };
 
           newVoting[hostNum] = voteCountObj[type] + newVoting[hostNum];
 
           if ((vote.action as string) !== (VotingTypes.Remove as string)) {
             Object.keys(newStreak).forEach(key => {
-              newStreak[key].add =
-                key === vote.host ? newStreak[key].add + voteCountObj[type] : 0;
+              newStreak[key].add = key === vote.host ? newStreak[key].add + voteCountObj[type] : 0;
               if (key === vote.host) {
                 newStreak[key].remove = 0;
               }
@@ -135,8 +131,7 @@ const useVotingDataStore = create(
 
           if ((vote.action as string) === (VotingTypes.Remove as string)) {
             Object.keys(newStreak).forEach(key => {
-              newStreak[key].remove =
-                key === vote.host ? newStreak[key].remove + 1 : 0;
+              newStreak[key].remove = key === vote.host ? newStreak[key].remove + 1 : 0;
               if (key === vote.host) {
                 newStreak[key].add = 0;
               }
