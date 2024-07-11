@@ -1,0 +1,78 @@
+{
+  "_id": {
+    "$oid": "669058fba7e42fa757369978"
+  },
+  "name": "ACT: Action News",
+  "urlKey": "act-action-news",
+  "maxHosts": 4,
+  "thumbnail": "https://mg-show-assets.s3.us-east-1.amazonaws.com/images/template-images/001.gif",
+  "tickerConfig": {
+    "hasTitle": false
+  },
+  "topicConfig": {
+    "allowNesting": true,
+    "hasImage": false,
+    "hasVideo": true
+  },
+  "hasSponsor": false,
+  "images": {
+    "logo": {
+      "maxAmount": 1,
+      "width": 230,
+      "height": 135
+    },
+    "sponsors": {
+      "maxAmount": 0,
+      "width": 0,
+      "height": 0
+    },
+    "topic": {
+      "maxAmount": 0,
+      "width": 0,
+      "height": 0
+    }
+  },
+  "linkArray": [
+    {
+      "name": "Chat Message",
+      "param": "chat_message"
+    },
+    {
+      "name": "Chyron",
+      "param": "chyron"
+    },
+    {
+      "name": "Emojis",
+      "param": "emojis"
+    },
+    {
+      "name": "Header",
+      "param": "header"
+    },
+    {
+      "name": "Host 1",
+      "param": "host_1"
+    },
+    {
+      "name": "Host 2",
+      "param": "host_2"
+    },
+    {
+      "name": "Host 3",
+      "param": "host_3"
+    },
+    {
+      "name": "Host 4",
+      "param": "host_4"
+    },
+
+    {
+      "name": "Up Next",
+      "param": "up_next"
+    },
+    {
+      "name": "Video",
+      "param": "video"
+    }
+  ]
+}

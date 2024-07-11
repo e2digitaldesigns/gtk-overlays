@@ -10,6 +10,7 @@ import OverlayFGT from "./FGT/FGT";
 import { useGlobalVotingInit, useGlobalTopicsInit } from "../../hooks";
 import OverlayCNN from "./CNN/CNN";
 import OverlayESPN from "./ESPN/ESPN";
+import OverlayACT from "./ACT/ACT";
 
 interface OverlayTemplateParserProps {}
 
@@ -22,7 +23,8 @@ const templateMap: { [key: string]: JSX.Element } = {
   "653679760a308f6ed2f75217": <OverlayXBX />,
   "655ffc71a7fd7ac529acd46e": <OverlayFGT />,
   "65a90a1a02aae02cdba1910d": <OverlayCNN />,
-  "6647f6f64a90eaac951773c6": <OverlayESPN />
+  "6647f6f64a90eaac951773c6": <OverlayESPN />,
+  "669058fba7e42fa757369978": <OverlayACT />
 };
 
 const OverlayTemplateParser: React.FC<OverlayTemplateParserProps> = () => {

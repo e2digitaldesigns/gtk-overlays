@@ -1,3 +1,16 @@
+export enum SectionsACT {
+  ChatMessage = "chat_message",
+  Chyron = "chyron",
+  Emojis = "emojis",
+  Header = "header",
+  Host1 = "host_1",
+  Host2 = "host_2",
+  Host3 = "host_3",
+  Host4 = "host_4",
+  UpNext = "up_next",
+  Video = "video"
+}
+
 export enum SectionsBNN {
   Chyron = "chyron",
   Emojis = "emojis",
@@ -92,6 +105,7 @@ export enum SectionsESPN {
 }
 
 export type OverlaySections =
+  | SectionsACT
   | SectionsBNN
   | SectionsCHL
   | SectionsCNN

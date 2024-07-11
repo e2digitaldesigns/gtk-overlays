@@ -22,7 +22,7 @@ export const ScrollContainer = styled.div<ContainerProps>`
 
   text-transform: uppercase;
   opacity: ${props => (props.isVisible ? "1" : "0")};
-  transition: opacity, 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
 `;
 
 export const SampleWord = styled.div<{ fontSize: string }>`

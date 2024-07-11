@@ -8,10 +8,7 @@ interface TimerOrTimeProps {
   fontSize?: string;
 }
 
-const GTK_TimerOrTime: React.FC<TimerOrTimeProps> = ({
-  scrollerTimer = 35,
-  fontSize = "1rem"
-}) => {
+const GTK_TimerOrTime: React.FC<TimerOrTimeProps> = ({ scrollerTimer = 35, fontSize = "1rem" }) => {
   const { topic } = useSimpleTopic();
   return (
     <>

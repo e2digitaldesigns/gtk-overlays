@@ -6,14 +6,8 @@ interface IntTimeItem {
   zone: string;
   fontSize?: string;
 }
-const GTK_TimeItem: React.FC<IntTimeItem> = ({
-  fontSize = "inherit",
-  hour,
-  zone
-}) => {
-  const [time, setTime] = React.useState(() =>
-    moment().subtract(hour, "hours").format("h:mm A")
-  );
+const GTK_TimeItem: React.FC<IntTimeItem> = ({ fontSize = "inherit", hour, zone }) => {
+  const [time, setTime] = React.useState(() => moment().subtract(hour, "hours").format("h:mm A"));
 
   React.useEffect(() => {
     setInterval(() => {

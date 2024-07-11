@@ -18,10 +18,7 @@ const GTKTimerItem: React.FC<GTKTimerItemProps> = ({ fontSize }) => {
     let theTimer: number;
 
     if (counter > 0) {
-      theTimer = window.setInterval(
-        () => setCounter(counter - pausedAmount),
-        1000
-      );
+      theTimer = window.setInterval(() => setCounter(counter - pausedAmount), 1000);
     }
 
     return () => {
@@ -31,9 +28,7 @@ const GTKTimerItem: React.FC<GTKTimerItemProps> = ({ fontSize }) => {
     };
   }, [counter, isTimerPaused]);
 
-  return topic?.timer ? (
-    <span style={{ fontSize: fontSize }}>{timeConvert(counter)}</span>
-  ) : null;
+  return topic?.timer ? <span style={{ fontSize: fontSize }}>{timeConvert(counter)}</span> : null;
 };
 
 function timeConvert(seconds: number) {
@@ -41,9 +36,7 @@ function timeConvert(seconds: number) {
   seconds -= h * 3600;
   var m = Math.floor(seconds / 60); //Get remaining minutes
   seconds -= m * 60;
-  return (
-    (m < 10 ? "0" + m : m) + ":" + (seconds < 10 ? "0" + seconds : seconds)
-  );
+  return (m < 10 ? "0" + m : m) + ":" + (seconds < 10 ? "0" + seconds : seconds);
 }
 
 export default GTKTimerItem;
