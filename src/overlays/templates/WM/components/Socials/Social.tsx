@@ -8,6 +8,7 @@ import {
   BsDiscord,
   BsFacebook,
   BsInstagram,
+  BsPerson,
   BsSnapchat,
   BsTiktok,
   BsTwitch,
@@ -25,6 +26,7 @@ export interface IntDisplayIcon {
 type IColors = { [key: string]: string };
 
 const colors: IColors = {
+  aka: "white",
   discord: "#7289DA",
   facebook: "#3B5998",
   instagram: "#c42b8f",
@@ -38,6 +40,7 @@ const colors: IColors = {
 type IconMapType = { [key: string]: IconType };
 
 const IconMap: IconMapType = {
+  aka: BsPerson,
   discord: BsDiscord,
   facebook: BsFacebook,
   instagram: BsInstagram,
@@ -50,15 +53,11 @@ const IconMap: IconMapType = {
 
 const Socials: React.FC = () => {
   const { socialNetworks } = useDataContext();
-  const [socialNetworkIcon, setSocialNetworkIcon] =
-    React.useState<string>("discord");
+  const [socialNetworkIcon, setSocialNetworkIcon] = React.useState<string>("discord");
 
   const [bgColor, setBgColor] = React.useState<string>("black");
 
-  const data = React.useMemo(
-    () => socialToScroller(socialNetworks, true),
-    [socialNetworks]
-  );
+  const data = React.useMemo(() => socialToScroller(socialNetworks, true), [socialNetworks]);
 
   const handleCallBack = (data: { title?: string }) => {
     if (!data?.title) return;
