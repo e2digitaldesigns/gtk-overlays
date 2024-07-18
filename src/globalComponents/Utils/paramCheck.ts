@@ -1,23 +1,23 @@
 import React from "react";
-import { ChatVoteData, RequestType } from "../../types";
+import { RequestType } from "../../types";
 
-type Data = ChatVoteData;
+type IsValid<T> = (data: T) => boolean;
 
-type IsValid = (data: Data) => boolean;
-
-type ParamCheck = () => {
-  isValid: IsValid;
+type ParamCheck<T> = {
+  isValid: IsValid<T>;
 };
 
-export const useParamCheck: ParamCheck = () => {
+export const useParamCheck = <T>(): ParamCheck<T> => {
   const queryParams = React.useMemo(() => {
     const queryParams = new URLSearchParams(window.location.search);
     return queryParams;
   }, []);
 
-  const isValid: IsValid = data => {
-    if (data?.uid !== queryParams.get(RequestType.UserId)) return false;
-    if (data?.tid && data.tid !== queryParams.get(RequestType.Template)) return false;
+  const isValid: IsValid<T> = (data: T) => {
+    const { uid, tid } = data as unknown as { uid: string; tid?: string };
+
+    if (uid !== queryParams.get(RequestType.UserId)) return false;
+    if (tid && tid !== queryParams.get(RequestType.Template)) return false;
 
     return true;
   };

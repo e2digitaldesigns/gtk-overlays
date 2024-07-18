@@ -1,9 +1,10 @@
 import React from "react";
 import socketServices from "../../services/socketServices";
-import { ChatVoteData, RequestType } from "../../types";
+import { ChatVoteData } from "../../types";
 import { useChatVotingStore } from "../../dataStores";
 import * as Styled from "./ChatVote.styles";
 import _cloneDeep from "lodash/cloneDeep";
+import { useParamCheck } from "../Utils/paramCheck";
 
 interface ChatVoteProps {
   chatters?: number;
@@ -28,16 +29,12 @@ const ChatVote: React.FC<ChatVoteProps> = ({
   const chatDataStore = useChatVotingStore(state => state);
   const wrapperRef = React.useRef<HTMLDivElement>(null);
 
-  const queryParams = React.useMemo(() => {
-    const queryParams = new URLSearchParams(window.location.search);
-    return queryParams;
-  }, []);
+  const { isValid } = useParamCheck<ChatVoteData>();
 
   React.useEffect(() => {
     const wrapperHeight = wrapperRef.current?.clientHeight || 0;
     setItemHeight(wrapperHeight / chatters);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [chatters]);
 
   const rankParser = (username: string, type: "top" | "zIndex"): number => {
     const newArr = _cloneDeep(chatDataStore.votes).sort((a, b) => b.votes - a.votes);
@@ -53,8 +50,7 @@ const ChatVote: React.FC<ChatVoteProps> = ({
 
   React.useEffect(() => {
     socketServices.subscribeChatVote((err: unknown, data: ChatVoteData) => {
-      if (data?.uid !== queryParams.get(RequestType.UserId)) return;
-      if (data?.tid && data.tid !== queryParams.get(RequestType.Template)) return;
+      if (!isValid(data)) return;
 
       switch (data.action) {
         case "vote":

@@ -55,10 +55,7 @@ const mockSocket: MockSocket = {
   }),
 
   triggerEvent: (event: string, ...args: any[]) => {
-    console.log(
-      `socket.triggerEvent called with event: ${event} and args:`,
-      args
-    );
+    console.log(`socket.triggerEvent called with event: ${event} and args:`, args);
     if (eventListeners[event]) {
       eventListeners[event].forEach(callback => callback(...args));
     }
