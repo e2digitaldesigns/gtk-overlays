@@ -21,6 +21,17 @@ export interface IEmojiReturn {
   uid: string;
 }
 
+export type ChatVoteData = {
+  action: string;
+  uid: string;
+  tid?: string;
+  data: {
+    _id: string;
+    username: string;
+    votes: number;
+  };
+};
+
 export type ChatMessgeReturn = {
   action: "showChatMessage" | "hideChatMessage";
   uid: string;

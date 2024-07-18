@@ -19,3 +19,5 @@ export { default as TimerOrTime } from "./TimerOrTime/TimerOrTime";
 export { default as ChatRelay } from "./ChatRelay/ChatRelay";
 
 export { default as TopicVotingBlock } from "./TopicVoting/TopicVoting";
+
+export { default as ChatVote } from "./ChatVote/ChatVote";
