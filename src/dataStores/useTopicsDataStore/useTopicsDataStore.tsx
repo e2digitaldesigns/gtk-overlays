@@ -12,6 +12,7 @@ export interface ITopicsDataStore {
 
   hydrate: (data: IntTopic[]) => void;
 
+  topicSetter: (topicId: string) => void;
   topicNext: () => void;
   topicPrev: () => void;
   timerResume: () => void;
@@ -19,10 +20,7 @@ export interface ITopicsDataStore {
 }
 
 const useTopicsDataStore = create<ITopicsDataStore>(
-  (
-    set: StoreApi<ITopicsDataStore>["setState"],
-    get: StoreApi<ITopicsDataStore>["getState"]
-  ) => {
+  (set: StoreApi<ITopicsDataStore>["setState"], get: StoreApi<ITopicsDataStore>["getState"]) => {
     return {
       currentTopic: {} as IntTopic,
       currentTopicId: "",
@@ -41,6 +39,24 @@ const useTopicsDataStore = create<ITopicsDataStore>(
 
         setStorageData(data[0]?._id);
         useVotingDataStore.getState().setTopicId(data[0]);
+      },
+
+      topicSetter: (topicId: string) => {
+        const { topics } = get();
+        const theTopic = topics.find(topic => topic._id === topicId);
+
+        if (theTopic) {
+          const topicIndex = topics.findIndex(topic => topic._id === topicId);
+          set({
+            currentTopic: theTopic,
+            currentTopicId: theTopic._id,
+            currentTopicIndex: topicIndex,
+            isTimerPaused: true
+          });
+
+          setStorageData(theTopic._id);
+          useVotingDataStore.getState().setTopicId(theTopic);
+        }
       },
 
       topicNext: () => {

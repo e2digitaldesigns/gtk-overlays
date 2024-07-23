@@ -2,6 +2,7 @@ export interface SocketServicesData {
   action: string;
   uid: string;
   tid: string;
+  data: Record<string, string>;
 }
 
 export interface IEmojiData {

@@ -5,6 +5,7 @@ import { ChatRelayData, RequestType } from "../../types";
 import { ShowMessages } from "./ShowMessage";
 import { STORAGE_KEY } from "./../../types";
 import _cloneDeep from "lodash/cloneDeep";
+import axios from "axios";
 
 interface ChatRelayComponentProps {
   bgColor?: string;
@@ -34,25 +35,26 @@ const ChatRelayComponent: React.FC<ChatRelayComponentProps> = ({
   const queryParams = new URLSearchParams(window.location.search);
   const [chatMessages, setChatMessages] = React.useState<ChatRelayData[]>([]);
   const innerRef = React.useRef<HTMLDivElement>(null);
+  const userId = queryParams.get(RequestType.UserId);
 
   React.useEffect(() => {
-    const data = window.localStorage.getItem(STORAGE_KEY.CHAT_MESSAGES_OVERLAY);
-    const storedData = data && JSON.parse(data);
-    if (storedData) {
-      setChatMessages(storedData);
-    }
-  }, []);
+    if (!userId) return;
+
+    const fetchMessages = async () => {
+      const { data } = await axios.get(
+        process.env.REACT_APP_REST_SERVICE + `chatlog/messages/${userId}`
+      );
+
+      data && setChatMessages(data.messages);
+    };
+
+    fetchMessages();
+  }, [userId]);
 
   React.useEffect(() => {
     if (direction === "bottom") {
       innerRef.current?.scrollTo(0, innerRef.current.scrollHeight);
     }
-
-    chatMessages.length &&
-      window.localStorage.setItem(
-        STORAGE_KEY.CHAT_MESSAGES_OVERLAY,
-        JSON.stringify(chatMessages.slice(-20))
-      );
   }, [chatMessages, direction]);
 
   React.useEffect(() => {
@@ -71,6 +73,10 @@ const ChatRelayComponent: React.FC<ChatRelayComponentProps> = ({
 
         case "remove-last-message":
           setChatMessages(prev => prev.slice(0, -1));
+          break;
+
+        case "delete-message-by-id":
+          setChatMessages(prev => prev.filter(msg => msg._id !== data._id));
           break;
 
         default:

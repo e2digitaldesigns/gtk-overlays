@@ -8,34 +8,37 @@ const useGlobalTopicsInitHook = () => {
   const topicsDataStore = useTopicsStore();
 
   React.useEffect(() => {
-    socketServices.subscribeOverlayActions(
-      (err: unknown, data: SocketServicesData) => {
-        if (data?.uid !== queryParams.get(RequestType.UserId)) return;
-        if (data?.tid && data.tid !== queryParams.get(RequestType.Template))
-          return;
+    socketServices.subscribeOverlayActions((err: unknown, data: SocketServicesData) => {
+      console.log(data);
 
-        switch (data.action) {
-          case TopicActions.TopicPrevious:
-            topicsDataStore.topicPrev();
-            break;
+      if (data?.uid !== queryParams.get(RequestType.UserId)) return;
+      if (data?.tid && data.tid !== queryParams.get(RequestType.Template)) return;
 
-          case TopicActions.TopicNext:
-            topicsDataStore.topicNext();
-            break;
+      switch (data.action) {
+        case TopicActions.TopicSet:
+          topicsDataStore.topicSetter(data.data.topicId);
+          break;
 
-          case TopicActions.TimerResume:
-            topicsDataStore.timerResume();
-            break;
+        case TopicActions.TopicPrevious:
+          topicsDataStore.topicPrev();
+          break;
 
-          case TopicActions.TimerPause:
-            topicsDataStore.timerPause();
-            break;
+        case TopicActions.TopicNext:
+          topicsDataStore.topicNext();
+          break;
 
-          default:
-            break;
-        }
+        case TopicActions.TimerResume:
+          topicsDataStore.timerResume();
+          break;
+
+        case TopicActions.TimerPause:
+          topicsDataStore.timerPause();
+          break;
+
+        default:
+          break;
       }
-    );
+    });
 
     return () => {
       socketServices.unSubscribeOverlayActions();
