@@ -9,6 +9,7 @@ const useGlobalVotingInitHook = () => {
 
   React.useEffect(() => {
     socketServices.subscribeHostVoting((err: unknown, data: IVotes) => {
+      console.log(data);
       if (data?.uid !== queryParams.get(RequestType.UserId)) return;
       if (data?.tid !== queryParams.get(RequestType.Template)) return;
 
