@@ -50,6 +50,7 @@ const ChatVote: React.FC<ChatVoteProps> = ({
 
   React.useEffect(() => {
     socketServices.subscribeChatVote((err: unknown, data: ChatVoteData) => {
+      console.log(53, data);
       if (!isValid(data)) return;
 
       switch (data.action) {
@@ -85,7 +86,7 @@ const ChatVote: React.FC<ChatVoteProps> = ({
           zIndex={rankParser(vote.username, "zIndex")}
         >
           <Styled.VoteItemName bgColor={nameBgColor} color={nameColor}>
-            {vote.username}
+            <div> {vote.username} </div>
           </Styled.VoteItemName>
           <Styled.VoteItemVotes bgColor={voteBgColor} color={voteColor}>
             {vote.votes}

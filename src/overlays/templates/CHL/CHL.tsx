@@ -10,6 +10,7 @@ import { EmojiCHL } from "./components/emoji/Emoji";
 
 import VideoCHL from "./components/Video/Video";
 import { UpNextCHL } from "./components/UpNext/UpNext";
+import { ChatterVoteCHL } from "./components/ChatterVote/ChatterVote";
 
 const OverlayCHL: React.FC = () => {
   return (
@@ -21,7 +22,8 @@ const OverlayCHL: React.FC = () => {
         <Styled.Container>
           <UpNextCHL />
           <ShowChatCHL />
-          <HeaderTab />
+          {/* <HeaderTab /> */}
+          <ChatterVoteCHL />
           <Host />
 
           <Chyron />

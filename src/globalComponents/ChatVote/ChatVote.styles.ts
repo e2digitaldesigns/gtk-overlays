@@ -19,7 +19,7 @@ interface IVoteItemProps {
 export const VoteItem = styled.div<IVoteItemProps>`
   border-bottom: ${props => props.borderBottom};
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 4rem;
   height: ${props => props.height}px;
   padding: 0;
   position: absolute;
@@ -28,7 +28,6 @@ export const VoteItem = styled.div<IVoteItemProps>`
   width: 100%;
   z-index: ${props => props.zIndex};
   font-size: ${props => props.fontSize};
-
   align-items: center;
 `;
 
@@ -45,6 +44,12 @@ export const VoteItemName = styled.div<IVoteItemChildProps>`
   height: 100%;
   padding-left: 0.5rem;
   text-align: left;
+  overflow: hidden;
+  > div {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `;
 
 export const VoteItemVotes = styled.div<IVoteItemChildProps>`
@@ -52,7 +57,6 @@ export const VoteItemVotes = styled.div<IVoteItemChildProps>`
   color: ${props => props.color};
   display: flex;
   align-items: center;
-  justify-content: right;
+  justify-content: center;
   height: 100%;
-  padding-right: 0.5rem;
 `;
