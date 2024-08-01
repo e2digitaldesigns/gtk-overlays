@@ -30,6 +30,7 @@ export type ChatVoteData = {
     _id: string;
     username: string;
     votes: number;
+    image: string;
   };
 };
 
