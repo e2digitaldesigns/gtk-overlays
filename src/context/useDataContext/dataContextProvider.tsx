@@ -16,9 +16,7 @@ interface IDataContextProvider {
   children: React.ReactNode;
 }
 
-export const DataContextProvider: React.FC<IDataContextProvider> = ({
-  children
-}) => {
+export const DataContextProvider: React.FC<IDataContextProvider> = ({ children }) => {
   const [state, setState] = React.useState<GlobalDataContext | null>(null);
   const [isError, setIsError] = React.useState(false);
   const dataContextValue = React.useMemo(() => state, [state]);
@@ -34,6 +32,14 @@ export const DataContextProvider: React.FC<IDataContextProvider> = ({
         const tid = queryParams.get(RequestType.Template);
         const uid = queryParams.get(RequestType.UserId);
 
+        if (!uid) {
+          throw new Error("User ID not found");
+        }
+
+        if (!eid && !tid) {
+          throw new Error("Episode ID or Template ID not found");
+        }
+
         const suffix: string = eid
           ? `${Suffix.Episode}/${uid}/${eid}`
           : `${Suffix.Template}/${uid}/${tid}`;
@@ -42,6 +48,7 @@ export const DataContextProvider: React.FC<IDataContextProvider> = ({
 
         const { data } = await axios.get(urlString);
         if (data && stillHere) {
+          console.log(43, data);
           setState(data);
           useTopicsData.hydrate(data.topics);
         }
@@ -67,9 +74,7 @@ export const DataContextProvider: React.FC<IDataContextProvider> = ({
   }
 
   return dataContextValue ? (
-    <DataContext.Provider value={dataContextValue}>
-      {children}
-    </DataContext.Provider>
+    <DataContext.Provider value={dataContextValue}>{children}</DataContext.Provider>
   ) : (
     <Loader bgColor="#222" />
   );
