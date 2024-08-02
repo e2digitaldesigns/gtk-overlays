@@ -12,7 +12,6 @@ export const ChatterVoteCHL: React.FC = () => {
   if (!showSection(SectionsCHL.Header)) return null;
 
   const callBackFn = (data: IChatterVoteState[]) => {
-    console.log(data);
     setShowVotes(!!data.length);
   };
 
