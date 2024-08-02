@@ -92,20 +92,7 @@ const ChatVote: React.FC<ChatVoteProps> = ({
 
       switch (data.action) {
         case "logChatterVote":
-          setChatterVoteState(prevState => {
-            const newVotes = _cloneDeep(prevState);
-            const existingVoteIndex = newVotes.findIndex(
-              vote => vote.username === data.data.username
-            );
-
-            if (existingVoteIndex !== -1) {
-              newVotes[existingVoteIndex].votes += data.data.votes;
-            } else {
-              newVotes.push(data.data);
-            }
-
-            return newVotes;
-          });
+          setChatterVoteState(data.data);
           break;
         case "clearChatterVotes":
           setChatterVoteState([]);

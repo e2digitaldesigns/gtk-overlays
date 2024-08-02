@@ -41,9 +41,7 @@ const ChatRelayComponent: React.FC<ChatRelayComponentProps> = ({
     if (!userId) return;
 
     const fetchMessages = async () => {
-      const { data } = await axios.get(
-        process.env.REACT_APP_REST_SERVICE + `chatlog/messages/${userId}`
-      );
+      const { data } = await axios.get(process.env.REACT_APP_REST_SERVICE + `chatRelay/${userId}`);
 
       data && setChatMessages(data.messages);
     };

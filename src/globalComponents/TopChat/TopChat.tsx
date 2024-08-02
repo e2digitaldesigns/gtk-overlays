@@ -64,7 +64,7 @@ const TopChat: React.FC<ITopChatProps> = ({
     const fetchData = async () => {
       const api = `${
         process.env.REACT_APP_REST_SERVICE
-      }chatlog/${queryParams.get(RequestType.UserId)}`;
+      }chatRank/${queryParams.get(RequestType.UserId)}`;
       const { data } = await axios.get(api);
       setUserState(data);
     };
@@ -87,20 +87,22 @@ const TopChat: React.FC<ITopChatProps> = ({
   React.useEffect(() => {
     let stillHere = true;
 
-    socketServices.subscribeOverlaysChatRanks(
-      (err: unknown, data: ChatRanker) => {
-        if (err) return;
+    socketServices.subscribeOverlaysChatRanks((err: unknown, data: ChatRanker) => {
+      if (err) return;
 
-        if (data?.uid !== queryParams.get(RequestType.UserId)) return;
-        if (data?.tid !== queryParams.get(RequestType.Template)) return;
+      if (data?.uid !== queryParams.get(RequestType.UserId)) return;
+      if (data?.tid !== queryParams.get(RequestType.Template)) return;
 
-        switch (data.action) {
-          case "chatRankUpdate":
-            stillHere && setUserState(data.messages);
-            break;
-        }
+      switch (data.action) {
+        case "chatRankUpdate":
+          stillHere && setUserState(data.messages);
+          break;
+
+        case "clearChatRank":
+          stillHere && setUserState([]);
+          break;
       }
-    );
+    });
 
     return () => {
       stillHere = false;
@@ -161,9 +163,7 @@ const TopChat: React.FC<ITopChatProps> = ({
 
   return (
     <>
-      <Styled.TopChatWrapper ref={wrapperRef}>
-        {userEntries}
-      </Styled.TopChatWrapper>
+      <Styled.TopChatWrapper ref={wrapperRef}>{userEntries}</Styled.TopChatWrapper>
     </>
   );
 };

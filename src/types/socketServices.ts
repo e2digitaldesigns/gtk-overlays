@@ -31,7 +31,7 @@ export type ChatVoteData = {
     username: string;
     votes: number;
     image: string;
-  };
+  }[];
 };
 
 export type ChatMessgeReturn = {
