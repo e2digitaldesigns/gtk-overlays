@@ -48,7 +48,6 @@ export const DataContextProvider: React.FC<IDataContextProvider> = ({ children }
 
         const { data } = await axios.get(urlString);
         if (data && stillHere) {
-          console.log(43, data);
           setState(data);
           useTopicsData.hydrate(data.topics);
         }

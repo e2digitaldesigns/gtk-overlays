@@ -14,12 +14,13 @@ interface IVoteItemProps {
   zIndex: number;
   nameColor: string;
   voteColor: string;
+  showIcon: boolean;
 }
 
 export const VoteItem = styled.div<IVoteItemProps>`
   border-bottom: ${props => props.borderBottom};
   display: grid;
-  grid-template-columns: 1fr 4rem;
+  grid-template-columns: ${props => props.showIcon && "2rem"} 1fr 4rem;
   height: ${props => props.height}px;
   padding: 0;
   position: absolute;
@@ -59,4 +60,17 @@ export const VoteItemVotes = styled.div<IVoteItemChildProps>`
   align-items: center;
   justify-content: center;
   height: 100%;
+`;
+
+export const VoteItemImage = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  > img {
+    border-radius: 50%;
+    height: 1.5rem;
+    width: 1.5rem;
+  }
 `;

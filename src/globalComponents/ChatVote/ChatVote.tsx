@@ -6,10 +6,10 @@ import _cloneDeep from "lodash/cloneDeep";
 import { useParamCheck } from "../Utils/paramCheck";
 import axios from "axios";
 
-interface IChatterVoteState {
+export interface IChatterVoteState {
+  image: string;
   username: string;
   votes: number;
-  image: string;
 }
 
 interface ChatVoteProps {
@@ -20,16 +20,20 @@ interface ChatVoteProps {
   voteColor?: string;
   voteBgColor?: string;
   borderBottom?: string;
+  showIcon?: boolean;
+  callBackFn?: (data: IChatterVoteState[]) => void;
 }
 
 const ChatVote: React.FC<ChatVoteProps> = ({
+  borderBottom = "1px solid #fff",
   chatters = 3,
   fontSize = "1.25rem",
-  nameColor = "white",
-  voteColor = "white",
-  voteBgColor = "black",
   nameBgColor = "black",
-  borderBottom = "1px solid #fff"
+  nameColor = "white",
+  showIcon = true,
+  voteBgColor = "black",
+  voteColor = "white",
+  callBackFn
 }) => {
   const [chatterVoteState, setChatterVoteState] = React.useState<IChatterVoteState[]>([]);
   const [itemHeight, setItemHeight] = React.useState(0);
@@ -40,6 +44,12 @@ const ChatVote: React.FC<ChatVoteProps> = ({
     const queryParams = new URLSearchParams(window.location.search);
     return queryParams;
   }, []);
+
+  React.useEffect(() => {
+    if (callBackFn) {
+      callBackFn(chatterVoteState);
+    }
+  }, [chatterVoteState, callBackFn]);
 
   React.useEffect(() => {
     let isMounted = true;
@@ -120,10 +130,16 @@ const ChatVote: React.FC<ChatVoteProps> = ({
           height={itemHeight}
           key={vote.username}
           nameColor={nameColor}
-          voteColor={voteColor}
+          showIcon={showIcon}
           top={rankParser(vote.username, "top")}
+          voteColor={voteColor}
           zIndex={rankParser(vote.username, "zIndex")}
         >
+          {showIcon && (
+            <Styled.VoteItemImage>
+              <img src={vote.image} alt={vote.username} />
+            </Styled.VoteItemImage>
+          )}
           <Styled.VoteItemName bgColor={nameBgColor} color={nameColor}>
             <div>{vote.username}</div>
           </Styled.VoteItemName>
