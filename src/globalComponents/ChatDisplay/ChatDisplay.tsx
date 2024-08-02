@@ -10,6 +10,7 @@ type ChatMessage = {
   broadcasterName: string;
   name: string;
   msg: string | React.ReactElement;
+  msgEmotes: string | React.ReactElement;
   url: string;
   fontColor: string;
   showTime?: number;
@@ -125,26 +126,23 @@ const ChatDisplay: React.FC<ShowChatProps> = ({
   React.useEffect(() => {
     let stillHere = true;
 
-    socketServices.subscribeChatDisplay(
-      (err: unknown, data: ChatMessgeReturn) => {
-        if (data?.uid !== queryParams.get(RequestType.UserId)) return;
-        if (data?.tid && data.tid !== queryParams.get(RequestType.Template))
-          return;
+    socketServices.subscribeChatDisplay((err: unknown, data: ChatMessgeReturn) => {
+      if (data?.uid !== queryParams.get(RequestType.UserId)) return;
+      if (data?.tid && data.tid !== queryParams.get(RequestType.Template)) return;
 
-        switch (data.action) {
-          case "showChatMessage":
-            stillHere && setNextMessage(data.message);
-            break;
+      switch (data.action) {
+        case "showChatMessage":
+          stillHere && setNextMessage(data.message);
+          break;
 
-          case "hideChatMessage":
-            setTimeout(() => {
-              stillHere && setIsActive(false);
-            }, transitionTime);
+        case "hideChatMessage":
+          setTimeout(() => {
+            stillHere && setIsActive(false);
+          }, transitionTime);
 
-            break;
-        }
+          break;
       }
-    );
+    });
 
     return () => {
       stillHere = false;
@@ -159,7 +157,8 @@ const ChatDisplay: React.FC<ShowChatProps> = ({
 
     return {
       ...message,
-      msg: <MessageParser message={message.msg as string} />
+      msg: <MessageParser message={message.msg as string} />,
+      msgEmotes: <MessageParser message={message.msgEmotes as string} />
     };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -174,16 +173,9 @@ const ChatDisplay: React.FC<ShowChatProps> = ({
           transition={message?.transition || defaultTransition}
           transitionTime={transitionTime}
         >
-          <Styled.EntireChatWrapper
-            bgColor={bgColor}
-            borderBottom={borderBottom}
-          >
+          <Styled.EntireChatWrapper bgColor={bgColor} borderBottom={borderBottom}>
             {imageShow && (
-              <Styled.ShowChatImage
-                border={imageBorder}
-                shape={imageShape}
-                size={imageSize}
-              >
+              <Styled.ShowChatImage border={imageBorder} shape={imageShape} size={imageSize}>
                 {message?.url && <img src={message.url} alt="users" />}
               </Styled.ShowChatImage>
             )}
@@ -202,7 +194,7 @@ const ChatDisplay: React.FC<ShowChatProps> = ({
                 fontSize={msgFontSize}
                 weight={msgFontWeight}
               >
-                {theMessage?.msg}
+                {theMessage?.msgEmotes}
               </Styled.MessageText>
             </Styled.MessageWrapper>
           </Styled.EntireChatWrapper>

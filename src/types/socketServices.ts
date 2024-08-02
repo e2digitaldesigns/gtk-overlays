@@ -58,6 +58,7 @@ type ChatMessage = {
   broadcasterName: string;
   name: string;
   msg: string | React.ReactElement;
+  msgEmotes: string | React.ReactElement;
   url: string;
   fontColor: string;
   showTime?: number;
