@@ -53,7 +53,7 @@ export const TopicGrid = styled.div<ITopicGrid>`
 
   display: grid;
   grid-template-columns: ${props => (props.hasImage ? "140px 1fr" : "1fr")};
-  gap: ${props => (props.hasImage ? "10px" : "0")};
+  gap: 0;
   padding-left: ${props => (props.hasImage ? "0" : "10px")};
 
   ${props => topicStateProps(props.linkState)}
@@ -76,14 +76,16 @@ export const TopicImage = styled.div`
 `;
 
 export const TopicDescription = styled.div<{ hasImage: boolean }>`
-  width: ${props => (props.hasImage ? "940px" : "1085px")};
+  width: ${props => (props.hasImage ? "1120px" : "1255px")};
   height: 100px;
+  padding-top: 5px;
 
-  font-size: 1.75rem;
+  font-size: 1.625rem;
+  line-height: 1.15;
 
   white-space: pre-wrap;
   text-transform: uppercase;
 
-  text-overflow: "ellipsis";
+  text-overflow: ellipsis;
   overflow: hidden;
 `;
