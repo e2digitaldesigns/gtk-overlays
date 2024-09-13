@@ -1,6 +1,6 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
-export const HostWrapper = styled.div`
+export const HostWrapper = styled.div<{ isVisible: boolean }>`
   width: 1280px;
   height: 630px;
 
@@ -10,6 +10,11 @@ export const HostWrapper = styled.div`
   z-index: 10;
 
   border: 5px solid ${props => props.theme.colors.accent1};
+
+  > div {
+    transition: opacity 1.5s;
+    opacity: ${props => (props.isVisible ? "0" : "1")};
+  }
 `;
 
 export const VoteDisplay = styled.div`
@@ -64,37 +69,4 @@ export const HostNameWrapper = styled.div`
 export const HostNameWrapperName = styled.div`
   text-transform: uppercase;
   font-size: 1.25rem;
-`;
-
-const animationOut = keyframes`
-  0% {
-    opacity: 0;
-  }
-
-  25% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0;
-  }
-`;
-
-export const HostWrapperGlow = styled.div`
-  width: 1280px;
-  height: 630px;
-  display: none;
-
-  position: absolute;
-  top: 10px;
-  left: 630px;
-  z-index: 12;
-
-  border: 5px solid ${props => props.theme.colors.accent3};
-
-  animation-name: ${animationOut};
-  animation-duration: 30s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
 `;

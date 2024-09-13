@@ -13,23 +13,15 @@ import { VideoSize } from "../../../../../globalComponents/VideoPlayer/VideoPlay
 export const VideoCNN: React.FC = () => {
   const { showSection } = useParams();
   const { topic: activeTopic } = useSimpleTopic();
-
-  const [showTopic, setShowTopic] = React.useState(false);
-
-  const { isVideoViewable, videoSize } = useVideoPlayerDataStore(
-    state => state
-  );
-
-  React.useEffect(() => {
-    setShowTopic(videoSize === "small" && isVideoViewable);
-  }, [videoSize, isVideoViewable]);
+  const { isVideoViewable, videoSize } = useVideoPlayerDataStore(state => state);
+  const showTopic = videoSize === VideoSize.SMALL && isVideoViewable;
 
   if (!showSection(SectionsCNN.Video)) return null;
 
   return (
     <>
       <VideoPlayer
-        bgColor="black"
+        bgColor={videoSize === VideoSize.NORMAL ? "transparent" : "black"}
         defaultSize={VideoSize.SMALL}
         dimensions={{
           top: "10px",
