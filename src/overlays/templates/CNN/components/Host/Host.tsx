@@ -15,13 +15,13 @@ export const HostCNN: React.FC = () => {
   const { votingState } = useVoting();
   const { hosts: data } = useDataContext();
   const { isVideoViewable, videoSize } = useVideoPlayerDataStore(state => state);
-  const hideHostName = videoSize === VideoSize.SMALL && isVideoViewable;
+  const hideHostName = videoSize === VideoSize.NORMAL && isVideoViewable;
 
   if (!showSection(SectionsCNN.Host)) return null;
 
   return (
     <>
-      <Styled.HostWrapper isVisible={!hideHostName}>
+      <Styled.HostWrapper hideHostName={hideHostName}>
         <Styled.VoteDisplay>{votingState[1]}</Styled.VoteDisplay>
         <Styled.EmojiPlacement>
           <HostVoteEmojis seatNum={1} fontSize="24px" />

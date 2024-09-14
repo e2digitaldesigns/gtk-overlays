@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const HostWrapper = styled.div<{ isVisible: boolean }>`
+export const HostWrapper = styled.div<{ hideHostName: boolean }>`
   width: 1280px;
   height: 630px;
 
@@ -13,7 +13,7 @@ export const HostWrapper = styled.div<{ isVisible: boolean }>`
 
   > div {
     transition: opacity 1.5s;
-    opacity: ${props => (props.isVisible ? "0" : "1")};
+    opacity: ${props => (props.hideHostName ? "0" : "1")};
   }
 `;
 
