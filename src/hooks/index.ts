@@ -1,9 +1,8 @@
+export { default as useQueryParams } from "./getQueryParamsHook/getQueryParamsHook";
 export { default as useColor } from "./useColorHook";
+export { default as useGlobalTopicsInit } from "./useGlobalTopicsInitHook";
+export { default as useGlobalVotingInit } from "./useGlobalVotingInitHook";
 export { default as useParams } from "./useParamsHook";
 export { default as useSimpleTopic } from "./useSimpleTopicHook";
 export { default as useTopicImage } from "./useTopicImageHook";
-
 export { default as useVoting } from "./useVotingHook";
-
-export { default as useGlobalVotingInit } from "./useGlobalVotingInitHook";
-export { default as useGlobalTopicsInit } from "./useGlobalTopicsInitHook";
