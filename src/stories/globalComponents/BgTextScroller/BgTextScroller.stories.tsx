@@ -29,9 +29,9 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    text: "Coding with Strangers",
+    text: "GAMER TOOL KIT",
     xSpacer: 60,
-    ySpacer: 1.5,
+    ySpacer: 4,
     fontSize: "24px"
   }
 };

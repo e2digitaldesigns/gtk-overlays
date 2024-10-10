@@ -9,15 +9,9 @@ export interface IntSocial {
   text: string;
 }
 
-type TSocialToScrollerUtil = (
-  data: IntSocialData[],
-  title?: boolean | string
-) => IntSocial[];
+type TSocialToScrollerUtil = (data: IntSocialData[], title?: boolean | string) => IntSocial[];
 
-export const socialToScrollerUtil: TSocialToScrollerUtil = (
-  data,
-  title = false
-) => {
+const socialToScrollerUtil: TSocialToScrollerUtil = (data, title = false) => {
   const socials: IntSocial[] = [];
 
   data.forEach((social: IntSocialData) => {
@@ -35,3 +29,5 @@ export const socialToScrollerUtil: TSocialToScrollerUtil = (
 
   return socials;
 };
+
+export default socialToScrollerUtil;
