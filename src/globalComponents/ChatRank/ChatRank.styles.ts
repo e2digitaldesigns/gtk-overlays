@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const TopChatWrapper = styled.div`
+export const ChatRankWrapper = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -8,25 +8,23 @@ export const TopChatWrapper = styled.div`
 `;
 
 interface ITopChatterGridProps {
+  backgroundColor: string;
   borderBottomColor: string;
   height: string;
   top: string;
 }
 
-export const TopChatterGrid = styled.div<ITopChatterGridProps>`
-  width: 100%;
-  height: ${props => props.height};
+export const ChatRankGrid = styled.div<ITopChatterGridProps>`
+  background-color: ${props => props.backgroundColor};
+  border-bottom: 1px solid ${props => props.borderBottomColor};
+  box-sizing: border-box;
   display: grid;
   grid-template-columns: ${props => props.height} 1fr 75px;
-  color: white;
-
-  box-sizing: border-box;
-
+  height: ${props => props.height};
   position: absolute;
   top: ${props => props.top};
-  z-index: 9999;
-  transition: all 0.5s ease-in-out;
-  border-bottom: 1px solid ${props => props.borderBottomColor};
+  transition: top 0.75s;
+  width: 100%;
 `;
 
 interface IRankDiv {

@@ -1,5 +1,5 @@
 import React from "react";
-import { TopChatRank } from "../../../../globalComponents";
+import { ChatRank } from "../../../../globalComponents";
 import { useParams } from "../../../../hooks";
 import { SectionsPTI } from "../../../../types";
 
@@ -19,7 +19,7 @@ const ChatRankingsPTI: React.FC = () => {
           width: "325px"
         }}
       >
-        <TopChatRank
+        <ChatRank
           count={7}
           borderBottomColor="#444"
           topSpotHeight={70}

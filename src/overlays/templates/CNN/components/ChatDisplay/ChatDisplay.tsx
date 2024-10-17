@@ -11,7 +11,7 @@ export const ChatDisplayCNN: React.FC = () => {
   return (
     <>
       <Styled.ChatBox>
-        <ChatRelay fontSize="1.25rem" maxMessages={5} />
+        <ChatRelay fontSize="1.25rem" direction="top" />
       </Styled.ChatBox>
     </>
   );

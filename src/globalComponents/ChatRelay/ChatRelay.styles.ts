@@ -31,8 +31,8 @@ export const ChatMessageWrapper = styled.div<IChatRelayWrapperProps>`
 `;
 
 export const ChatMessageWrapperInner = styled.div`
-  overflow: hidden !important;
   height: 100%;
+  overflow: hidden;
 `;
 
 interface IChatMessageGridProps {
@@ -45,21 +45,39 @@ export const ChatMessageGrid = styled.div<IChatMessageGridProps>`
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 0.25rem;
-  padding: 0.5rem;
+  padding: 0.5rem 0.625rem;
   border-bottom: 0.0625rem solid;
   border-bottom-color: ${props => props.borderBottomColor};
-  color: #ccc;
-  min-height: 1.5rem;
   font-size: ${props => props.fontSize};
   ${props => props?.sxGrid && cssParser(props.sxGrid)}
 `;
 
 interface IChatMessageProps {
   color: string;
+  showImage: boolean;
 }
 
+const imageSize = "1.5rem";
+
 export const ChatMessage = styled.div<IChatMessageProps>`
+  text-align: left;
   color: ${props => props.color};
   word-break: break-word;
   white-space: pre-wrap;
+
+  display: grid;
+  grid-template-columns: ${props => (props?.showImage ? `${imageSize} 1fr` : "1fr")};
+  gap: 0.5rem;
+`;
+
+export const ChatMessageImage = styled.div`
+  width: ${imageSize};
+  height: ${imageSize};
+  border-radius: 0.125rem;
+  overflow: hidden;
+  > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;

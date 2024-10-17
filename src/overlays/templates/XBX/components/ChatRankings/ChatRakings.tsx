@@ -1,5 +1,5 @@
 import React from "react";
-import { TopChatRank } from "../../../../../globalComponents";
+import { ChatRank } from "../../../../../globalComponents";
 import { useParams } from "../../../../../hooks";
 import { SectionsXBX } from "../../../../../types";
 
@@ -21,7 +21,7 @@ const ChatRankingsXBX: React.FC = () => {
           width: "325px"
         }}
       >
-        <TopChatRank
+        <ChatRank
           count={5}
           topSpotHeight={70}
           topSpotFontSize="28px"

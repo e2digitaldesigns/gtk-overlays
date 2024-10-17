@@ -1,124 +1,106 @@
-import React from "react";
+import React, { useEffect } from "react";
 import * as Styled from "./ChatRelay.styles";
-import socketServices from "../../services/socketServices";
-import { ChatRelayData, RequestType } from "../../types";
 import { ShowMessages } from "./ShowMessage";
-import { STORAGE_KEY } from "./../../types";
-import _cloneDeep from "lodash/cloneDeep";
-import axios from "axios";
+import { useQueryParams } from "../../hooks";
+import _sortBy from "lodash/sortBy";
 
-interface ChatRelayComponentProps {
+export type ChatMessage = {
+  _id: string;
+  channel: string;
+  date: string;
+  fontColor: string;
+  gtkUserId: string;
+  image: string;
+  isDeleted: boolean;
+  isRankReset: boolean;
+  message: string;
+  msgEmotes: string;
+  platform: string;
+  tagId: string;
+  userId: string;
+  username: string;
+};
+
+interface ChatRelayProps {
   bgColor?: string;
   borderBottomColor?: string;
   defaultNameColor?: string;
   direction?: "top" | "bottom";
   fontSize?: string;
   maxMessages?: number;
+  showImage?: boolean;
   sxGrid?: object;
   sxWrapper?: object;
   textColor?: string;
-  useTwitchNameColor?: boolean;
 }
 
-const ChatRelayComponent: React.FC<ChatRelayComponentProps> = ({
+const ChatRelayComponent: React.FC<ChatRelayProps> = ({
   bgColor = "transparent",
   borderBottomColor = "#3a3a3a;",
   defaultNameColor = "#fff",
   direction = "bottom",
   fontSize = "0.875rem",
-  maxMessages = 20,
+  showImage = true,
   sxGrid = {},
   sxWrapper = {},
-  textColor = "#fff",
-  useTwitchNameColor = true
+  textColor = "#fff"
 }) => {
-  const queryParams = new URLSearchParams(window.location.search);
-  const [chatMessages, setChatMessages] = React.useState<ChatRelayData[]>([]);
-  const innerRef = React.useRef<HTMLDivElement>(null);
-  const userId = queryParams.get(RequestType.UserId);
+  const [chatMessages, setChatMessages] = React.useState<ChatMessage[]>([]);
+  const { userId } = useQueryParams();
+  const chatInnerRef = React.useRef<HTMLDivElement>(null);
 
-  React.useEffect(() => {
-    if (!userId) return;
+  useEffect(() => {
+    let isMounted = true;
+    const eventSource = new EventSource(`http://localhost:8002/api/v1/chat-relay/events/${userId}`);
 
-    const fetchMessages = async () => {
-      const { data } = await axios.get(process.env.REACT_APP_REST_SERVICE + `chatRelay/${userId}`);
-
-      data && setChatMessages(data.messages);
-    };
-
-    fetchMessages();
-  }, [userId]);
-
-  React.useEffect(() => {
-    if (direction === "bottom") {
-      innerRef.current?.scrollTo(0, innerRef.current.scrollHeight);
-    }
-  }, [chatMessages, direction]);
-
-  React.useEffect(() => {
-    socketServices.subscribeChatRelay((err: unknown, data: ChatRelayData) => {
-      if (data?.uid !== queryParams.get(RequestType.UserId)) return;
-
-      switch (data.action) {
-        case "clear-chat-messages":
-          setChatMessages([]);
-          window.localStorage.removeItem(STORAGE_KEY.CHAT_MESSAGES_OVERLAY);
-          break;
-
-        case "new-chat-message":
-          setChatMessages(prev => [...prev, data]);
-          break;
-
-        case "remove-last-message":
-          setChatMessages(prev => prev.slice(0, -1));
-          break;
-
-        case "delete-message-by-id":
-          setChatMessages(prev => prev.filter(msg => msg._id !== data._id));
-          break;
-
-        default:
-          break;
-      }
+    eventSource.addEventListener("message", event => {
+      const parsedData = JSON.parse(event.data);
+      if (isMounted) setChatMessages(parsedData);
     });
 
     return () => {
-      socketServices.unSubscribeChatRelay();
+      isMounted = false;
+      eventSource.close();
     };
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  let messages = _cloneDeep(chatMessages).slice(-maxMessages);
-  direction === "top" && messages.reverse();
+  useEffect(() => {
+    if (chatInnerRef.current && direction === "bottom") {
+      chatInnerRef.current.scrollTop = chatInnerRef.current.scrollHeight;
+    }
+  }, [chatMessages, direction]);
+
+  const messages = direction === "bottom" ? _sortBy(chatMessages, "date") : chatMessages;
 
   return (
-    <>
-      <Styled.ChatRelayContainer>
-        <Styled.ChatMessageWrapper bgColor={bgColor} sxWrapper={sxWrapper}>
-          <Styled.ChatMessageWrapperInner ref={innerRef}>
-            {messages.map(message => (
-              <Styled.ChatMessageGrid
-                key={message._id}
-                borderBottomColor={borderBottomColor}
-                fontSize={fontSize}
-                sxGrid={sxGrid}
-              >
-                <Styled.ChatMessage color={textColor}>
-                  <ShowMessages
-                    defaultNameColor={defaultNameColor}
-                    message={message.msgEmotes}
-                    name={message.name}
-                    twitchNameColor={message.fontColor}
-                    useTwitchNameColor={useTwitchNameColor}
-                  />
-                </Styled.ChatMessage>
-              </Styled.ChatMessageGrid>
-            ))}
-          </Styled.ChatMessageWrapperInner>
-        </Styled.ChatMessageWrapper>
-      </Styled.ChatRelayContainer>
-    </>
+    <Styled.ChatRelayContainer>
+      <Styled.ChatMessageWrapper bgColor={bgColor} sxWrapper={sxWrapper}>
+        <Styled.ChatMessageWrapperInner ref={chatInnerRef}>
+          {messages.map((msg: ChatMessage) => (
+            <Styled.ChatMessageGrid
+              key={msg._id}
+              borderBottomColor={borderBottomColor}
+              fontSize={fontSize}
+              sxGrid={sxGrid}
+            >
+              <Styled.ChatMessage color={textColor} showImage={!!(showImage && !!msg.image)}>
+                {showImage && msg.image && (
+                  <Styled.ChatMessageImage>
+                    <img src={msg.image} alt={msg.username} />
+                  </Styled.ChatMessageImage>
+                )}
+                <ShowMessages
+                  message={msg.msgEmotes}
+                  name={msg.username}
+                  nameColor={defaultNameColor}
+                />
+              </Styled.ChatMessage>
+            </Styled.ChatMessageGrid>
+          ))}
+        </Styled.ChatMessageWrapperInner>
+      </Styled.ChatMessageWrapper>
+    </Styled.ChatRelayContainer>
   );
 };
 

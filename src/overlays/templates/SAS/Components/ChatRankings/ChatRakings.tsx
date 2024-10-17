@@ -1,5 +1,5 @@
 import React from "react";
-import { TopChatRank } from "../../../../../globalComponents";
+import { ChatRank } from "../../../../../globalComponents";
 import { useParams } from "../../../../../hooks";
 import { SectionsSAS } from "../../../../../types";
 
@@ -19,7 +19,7 @@ const ChatRankingsSAS: React.FC = () => {
           width: "325px"
         }}
       >
-        <TopChatRank
+        <ChatRank
           count={7}
           topSpotHeight={70}
           topSpotFontSize="28px"
