@@ -42,19 +42,6 @@ export interface IVotes {
   emojis: IVoteEmojis[];
 }
 
-export type TopicVotes = { [key: string]: string };
-export type TopicVotesObj = { [key: string]: TopicVotes };
-
-export type TopicVotesParsed = {
-  fullVotes: TopicVotes;
-  trueCount: number;
-  falseCount: number;
-  oneCount: number;
-  twoCount: number;
-  yesCount: number;
-  noCount: number;
-};
-
 export interface IVoteStreaks {
   [key: string]: {
     add: number;

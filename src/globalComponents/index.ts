@@ -10,7 +10,6 @@ export { default as TimerItem } from "./TimerItem/TimerItem";
 export { default as TimerOrTime } from "./TimerOrTime/TimerOrTime";
 export { default as TopChatRank } from "./TopChat/TopChat";
 export { default as Topics } from "./TopicChild/TopicChild";
-export { default as TopicVotingBlock } from "./TopicVoting/TopicVoting";
 export { default as UpNext } from "./UpNext/UpNext";
 export { default as VideoPlayer } from "./VideoPlayer/VideoPlayer";
 export { default as socialToScroller } from "./Utils/socailToScroller";

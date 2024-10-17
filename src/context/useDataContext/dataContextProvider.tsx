@@ -44,12 +44,12 @@ export const DataContextProvider: React.FC<IDataContextProvider> = ({ children }
           ? `${Suffix.Episode}/${uid}/${eid}`
           : `${Suffix.Template}/${uid}/${tid}`;
 
-        const urlString = `${process.env.REACT_APP_REST_SERVICE}shows/${suffix}`;
+        const urlString = `${process.env.REACT_APP_REST_SERVICE}episode-data/${suffix}`;
 
         const { data } = await axios.get(urlString);
-        if (data && stillHere) {
-          setState(data);
-          useTopicsData.hydrate(data.topics);
+        if (data.resultStatus.success && stillHere) {
+          setState(data.result.episodeData);
+          useTopicsData.hydrate(data.result.episodeData.topics);
         }
       } catch (error) {
         setIsError(true);

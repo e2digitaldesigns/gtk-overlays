@@ -1,14 +1,11 @@
 import React from "react";
 import * as Styled from "./TopicDescription.styles";
-import { useParams, useSimpleTopic, useVoting } from "../../../../../hooks";
-
-import { topicVoterParser } from "../../../../../_utils/trueFalseVoterParser";
+import { useParams, useSimpleTopic } from "../../../../../hooks";
 
 import { IntTopic, SectionsCNN } from "../../../../../types";
 
 export const TopicDescriptionCNN: React.FC = () => {
   const { topicIndex: currentTopicIndex, topics } = useSimpleTopic();
-  const { topicVotes } = useVoting();
 
   const setLiState = (index: number) => {
     if (index < currentTopicIndex) return "visited";
@@ -22,11 +19,7 @@ export const TopicDescriptionCNN: React.FC = () => {
   return (
     <Styled.TopicDescriptionWrapper>
       {topics.map((topic: IntTopic, index: number) => (
-        <Styled.TopicGrid
-          key={topic._id}
-          linkState={setLiState(index)}
-          hasImage={!!topic?.img}
-        >
+        <Styled.TopicGrid key={topic._id} linkState={setLiState(index)} hasImage={!!topic?.img}>
           {!!topic?.img && (
             <Styled.TopicImage>
               <img src={topic.img} alt={topic.name} />
@@ -34,7 +27,8 @@ export const TopicDescriptionCNN: React.FC = () => {
           )}
 
           <Styled.TopicDescription hasImage={!!topic?.img}>
-            {topicVoterParser(topic.desc, topicVotes)}
+            {topic.name}
+            {/* empty from vote removal */}
           </Styled.TopicDescription>
         </Styled.TopicGrid>
       ))}

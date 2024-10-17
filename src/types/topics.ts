@@ -15,11 +15,6 @@ export enum TopicStates {
   Timer = "timer"
 }
 
-export interface IntTopicVotingOptions {
-  label: string;
-  value: string;
-}
-
 export type TopicContent = {
   type: string | null;
   file: string;
@@ -37,7 +32,6 @@ export interface IntTopic {
   img: string;
   video: string;
   chat: string;
-  votingOptions: IntTopicVotingOptions[];
   content: TopicContent;
 }
 

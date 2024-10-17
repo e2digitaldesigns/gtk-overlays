@@ -9,20 +9,10 @@ const useGlobalVotingInitHook = () => {
 
   React.useEffect(() => {
     socketServices.subscribeHostVoting((err: unknown, data: IVotes) => {
-      console.log(data);
       if (data?.uid !== queryParams.get(RequestType.UserId)) return;
       if (data?.tid !== queryParams.get(RequestType.Template)) return;
 
       switch (data.action) {
-        case IVoteAction.True:
-        case IVoteAction.False:
-        case IVoteAction.One:
-        case IVoteAction.Two:
-        case IVoteAction.Yes:
-        case IVoteAction.No:
-          votingDataStore.logTopicVote(data);
-          break;
-
         case IVoteAction.Add:
           votingDataStore.handleHostVoting(data, VotingTypes.Add);
           break;
@@ -41,10 +31,6 @@ const useGlobalVotingInitHook = () => {
 
         case IVoteAction.ClearHostVotes:
           votingDataStore.clearHostVotes();
-          break;
-
-        case IVoteAction.ClearTopicVotes:
-          votingDataStore.clearTopicVotes();
           break;
       }
     });

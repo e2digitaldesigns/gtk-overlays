@@ -9,8 +9,6 @@ import {
   IVotes,
   IVoteStreaks,
   IVotingState,
-  TopicVotesParsed,
-  TopicVotesObj,
   IntTopic,
   VotingTypes
 } from "../../types";
@@ -24,23 +22,18 @@ export interface SuperVote {
 
 export interface IVotingDataStore {
   topicId: string;
-  votingOptions: string[];
   votes: IVotes[];
   votingState: IVotingState;
   votingStreak: IVoteStreaks;
   leadingSeat: string[];
-  topicVotingState: TopicVotesObj;
-  topicVotingParsed: TopicVotesParsed;
   superVoteLog: { [key: string]: SuperVote[] };
   winVoteLog: { [key: string]: string[] };
 
   setTopicId: (topic: IntTopic) => void;
-  logTopicVote: (data: IVotes) => void;
   handleHostVoting: (vote: IVotes, type: VotingTypes) => void;
   handleHostVotingSuper: (data: IVotes) => void;
   handleHostVotingWin: (data: IVotes) => void;
   clearHostVotes: () => void;
-  clearTopicVotes: () => void;
 }
 
 const useVotingDataStore = create(
@@ -76,31 +69,6 @@ const useVotingDataStore = create(
           if (!newSuperVoteLog[topicId]) {
             newSuperVoteLog[topicId] = [];
           }
-
-          set({ superVoteLog: newSuperVoteLog });
-
-          if (topic.votingOptions.length) {
-            set({ votingOptions: topic.votingOptions.map(opt => opt.value) });
-          } else {
-            set({ votingOptions: [] });
-          }
-        },
-
-        logTopicVote: (data: IVotes) => {
-          const votingOptions = get().votingOptions;
-          if (!votingOptions.includes(data.action)) return;
-
-          const currentTopicId = get().topicId;
-          const newState = structuredClone(get().topicVotingState);
-
-          newState[currentTopicId] = {
-            ...(newState?.[currentTopicId] || {}),
-            [data.username]: data.action
-          };
-
-          set({
-            topicVotingState: newState
-          });
         },
 
         handleHostVoting: (vote: IVotes, type: VotingTypes) => {
@@ -201,21 +169,6 @@ const useVotingDataStore = create(
             votingStreak: initVotingStreakState,
             superVoteLog: {},
             winVoteLog: {}
-          });
-        },
-
-        clearTopicVotes: () => {
-          set({
-            topicVotingState: {},
-            topicVotingParsed: {
-              fullVotes: {},
-              trueCount: 0,
-              falseCount: 0,
-              oneCount: 0,
-              twoCount: 0,
-              yesCount: 0,
-              noCount: 0
-            }
           });
         }
       };
