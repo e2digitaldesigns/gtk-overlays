@@ -50,14 +50,6 @@ const socketServices = {
     socket?.removeAllListeners(SocketServicesEvents.GTK_CHAT_DISPLAY);
   },
 
-  subscribeChatVote(cb: (err: unknown, data: ChatVoteData) => void) {
-    socket?.on(SocketServicesEvents.GTK_CHAT_VOTE, (data: ChatVoteData) => cb(null, data));
-  },
-
-  unSubscribeChatVote() {
-    socket?.removeAllListeners(SocketServicesEvents.GTK_CHAT_VOTE);
-  },
-
   subscribeOverlaysEmojis(cb: (err: unknown, data: IEmojiReturn) => void) {
     socket?.on(SocketServicesEvents.GTK_OVERLAY_EMOJIS, (data: IEmojiReturn) => cb(null, data));
   },

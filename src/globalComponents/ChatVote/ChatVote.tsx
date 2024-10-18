@@ -1,10 +1,7 @@
-import React from "react";
-import socketServices from "../../services/socketServices";
-import { ChatVoteData, RequestType } from "../../types";
+import React, { useEffect, useLayoutEffect } from "react";
 import * as Styled from "./ChatVote.styles";
 import _cloneDeep from "lodash/cloneDeep";
-import { useParamCheck } from "../Utils/paramCheck";
-import axios from "axios";
+import { useQueryParams } from "../../hooks";
 
 export interface IChatterVoteState {
   image: string;
@@ -36,40 +33,35 @@ const ChatVote: React.FC<ChatVoteProps> = ({
   callBackFn
 }) => {
   const [chatterVoteState, setChatterVoteState] = React.useState<IChatterVoteState[]>([]);
+  const { userId } = useQueryParams();
   const [itemHeight, setItemHeight] = React.useState(0);
   const wrapperRef = React.useRef<HTMLDivElement>(null);
-  const { isValid } = useParamCheck<ChatVoteData>();
 
-  const queryParams = React.useMemo(() => {
-    const queryParams = new URLSearchParams(window.location.search);
-    return queryParams;
+  useEffect(() => {
+    let isMounted = true;
+    const eventSource = new EventSource(
+      `http://localhost:8002/api/v1/chat-voting/events/${userId}`
+    );
+
+    eventSource.addEventListener("message", event => {
+      const parsedData = JSON.parse(event.data);
+      if (isMounted) setChatterVoteState(parsedData);
+    });
+
+    return () => {
+      isMounted = false;
+      eventSource.close();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (callBackFn) {
       callBackFn(chatterVoteState);
     }
   }, [chatterVoteState, callBackFn]);
 
-  React.useEffect(() => {
-    let isMounted = true;
-
-    const fetchData = async () => {
-      const api = `${process.env.REACT_APP_REST_SERVICE}chatLikes/${queryParams.get(RequestType.UserId)}`;
-      const { data } = await axios.get(api);
-      if (isMounted) {
-        setChatterVoteState(data);
-      }
-    };
-
-    fetchData();
-
-    return () => {
-      isMounted = false;
-    };
-  }, [queryParams]);
-
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     const wrapperHeight = wrapperRef.current?.clientHeight || 0;
     setItemHeight(wrapperHeight / chatters);
   }, [chatters]);
@@ -85,28 +77,6 @@ const ChatVote: React.FC<ChatVoteProps> = ({
       return index;
     }
   };
-
-  React.useEffect(() => {
-    socketServices.subscribeChatVote((err: unknown, data: ChatVoteData) => {
-      if (!isValid(data)) return;
-
-      switch (data.action) {
-        case "logChatterVote":
-          setChatterVoteState(data.data);
-          break;
-        case "clearChatterVotes":
-          setChatterVoteState([]);
-          break;
-        default:
-          break;
-      }
-    });
-
-    return () => {
-      socketServices.unSubscribeChatDisplay();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <Styled.VoteContainer ref={wrapperRef}>
